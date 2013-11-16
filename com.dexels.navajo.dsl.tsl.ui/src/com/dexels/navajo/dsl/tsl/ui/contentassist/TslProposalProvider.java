@@ -124,7 +124,13 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 	private void resolveMapName(Map m) {
 		if(m.getMapName()==null && m.getRef()!=null) {
 			Map parent = getMapParent (m.eContainer());
-			String mapName = resolveChildMapType(parent,m.getRef());
+			StringBuffer sb = new StringBuffer();
+			if(m.getRef()!=null) {
+				for (String s : m.getRef()) {
+					sb.append(s);
+				}
+			}
+			String mapName = resolveChildMapType(parent,sb.toString());
 			
 			// Do something more intelligent
 			if(mapName.endsWith("[]")) {
@@ -183,15 +189,6 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 	}
 
 	
-	
-	@Override
-	public void completeExpressionTag_Expression(EObject model,
-			Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeExpressionTag_Expression(model, assignment, context, acceptor);
-		ICompletionProposal completionProposal = createCompletionProposal("<![CDATA[\n]]>","<![CDATA tag", null, context);
-		acceptor.accept(completionProposal);
-	}
 
 	@Override
 	public void complete_Message(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -208,7 +205,7 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 		if(model instanceof Message) {
 			Message t = (Message)model;
 			if(t.isArray()) {
-				completionProposal = createCompletionProposal("<message name=\""+t.getName()+"\" type=\"array_element\">\n</message>", "Add element with name: "+t.getName(), null, context);
+				completionProposal = createCompletionProposal("<message name=\""+t.getNameAttribute()+"\" type=\"array_element\">\n</message>", "Add element with name: "+t.getNameAttribute(), null, context);
 				acceptor.accept(completionProposal);
 			}
 			if(t.isSplitTag() && !t.isClosedTag()) {
@@ -260,10 +257,10 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 //	}
 	
 	@Override
-	public void completePossibleExpression_Key(EObject model,
+	public void completeNonExpression_Key(EObject model,
 			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completePossibleExpression_Key(model, assignment, context, acceptor);
+		super.completeNonExpression_Key(model, assignment, context, acceptor);
 
 			Set<String> possibilities = null;
 			if(model instanceof Property) {
@@ -285,41 +282,37 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 			}
 
 	}
-
-	@Override
-	public void complete_ATTRIBUTESTRING(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-
-		super.complete_ATTRIBUTESTRING(model, ruleCall, context, acceptor);
-		if(model instanceof PossibleExpression ) {
-			PossibleExpression expr = (PossibleExpression)model;
-			String myKey = expr.getKey();			
-			List<String> possibilities = null;
-			if(model.eContainer() instanceof Property) {
-//				Property p = (Property)model.eContainer();
-				possibilities = getPropertyAttributes(myKey, expr.getValue(),"property");
-			}
-
-			if(model.eContainer() instanceof Message) {
-//				Message p = (Message)model.eContainer();
-				possibilities = getPropertyAttributes(myKey, expr.getValue(),"message");
-			}
-
-			if(model.eContainer() instanceof Tml) {
-//				Tml p = (Tml)model.eContainer();
-				possibilities = getPropertyAttributes(myKey, expr.getValue(),"navascript");
-			}
-
-			
-//			System.err.println("possi: "+possibilities);
-			if(possibilities!=null) {
-				for (String adapterProposal : possibilities) {
-					ICompletionProposal completionProposal = createCompletionProposal("\""+adapterProposal+"\"", adapterProposal, null, context);
-					acceptor.accept(completionProposal);
-				}
-			}
-		}
-	}
+//
+//	@Override
+//	public void complete_AttributeString(EObject model, RuleCall ruleCall,
+//			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+//
+//		super.complete_AttributeString(model, ruleCall, context, acceptor);
+//		if(model instanceof PossibleExpression ) {
+//			PossibleExpression expr = (PossibleExpression)model;
+//			String myKey = expr.getKey();			
+//			List<String> possibilities = null;
+//			if(model.eContainer() instanceof Property) {
+//				possibilities = getPropertyAttributes(myKey, expr.getValue(),"property");
+//			}
+//
+//			if(model.eContainer() instanceof Message) {
+//				possibilities = getPropertyAttributes(myKey, expr.getValue(),"message");
+//			}
+//
+//			if(model.eContainer() instanceof Tml) {
+//				possibilities = getPropertyAttributes(myKey, expr.getValue(),"navascript");
+//			}
+//
+//			
+//			if(possibilities!=null) {
+//				for (String adapterProposal : possibilities) {
+//					ICompletionProposal completionProposal = createCompletionProposal("\""+adapterProposal+"\"", adapterProposal, null, context);
+//					acceptor.accept(completionProposal);
+//				}
+//			}
+//		}
+//	}
 
 	private List<String> getPropertyAttributes(String myKey, String value, String category) {
 		java.util.Map<String, List<String>> propertyProposals = proposalRepository.get(category);
@@ -341,7 +334,7 @@ public class TslProposalProvider extends AbstractTslProposalProvider {
 
 	
 	@Override
-	public void complete_PossibleExpression(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void complete_NonExpression(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		EObject ee = model;
 		if(ee instanceof Element) {
 			List<String> allowedAttributes = getAllowedAttributesForElement((Element)ee);

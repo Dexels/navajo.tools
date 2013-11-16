@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import com.dexels.navajo.dsl.expression.ui.internal.NavajoExpressionActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class NavajoExpressionExecutableExtensionFactory extends AbstractGuiceAwa
 
 	@Override
 	protected Bundle getBundle() {
-		return com.dexels.navajo.dsl.expression.ui.internal.NavajoExpressionActivator.getInstance().getBundle();
+		return NavajoExpressionActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return com.dexels.navajo.dsl.expression.ui.internal.NavajoExpressionActivator.getInstance().getInjector("com.dexels.navajo.dsl.expression.NavajoExpression");
+		return NavajoExpressionActivator.getInstance().getInjector(NavajoExpressionActivator.COM_DEXELS_NAVAJO_DSL_EXPRESSION_NAVAJOEXPRESSION);
 	}
 	
 }

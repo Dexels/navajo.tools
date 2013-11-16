@@ -79,6 +79,11 @@ public abstract class AbstractTslRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper> bindIUnorderedGroupHelper() {
+		return org.eclipse.xtext.parser.antlr.UnorderedGroupHelper.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends com.dexels.navajo.dsl.tsl.validation.TslJavaValidator> bindTslJavaValidator() {
 		return com.dexels.navajo.dsl.tsl.validation.TslJavaValidator.class;
@@ -124,10 +129,10 @@ public abstract class AbstractTslRuntimeModule extends DefaultRuntimeModule {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
-//	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-//	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-//		return com.dexels.navajo.dsl.tsl.generator.TslGenerator.class;
-//	}
+	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
+	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
+		return com.dexels.navajo.dsl.tsl.generator.TslGenerator.class;
+	}
 
 	// contributed by org.eclipse.xtext.generator.formatting.FormatterFragment
 	public Class<? extends org.eclipse.xtext.formatting.IFormatter> bindIFormatter() {

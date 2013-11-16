@@ -6,14 +6,13 @@ package com.dexels.navajo.dsl.expression.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import com.dexels.navajo.dsl.expression.services.NavajoExpressionGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class NavajoExpressionParsetreeConstructor extends AbstractParseTreeConstructor {
+public class NavajoExpressionParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private NavajoExpressionGrammarAccess grammarAccess;

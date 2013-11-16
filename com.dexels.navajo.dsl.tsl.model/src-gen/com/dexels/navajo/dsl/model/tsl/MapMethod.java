@@ -7,6 +7,7 @@
 package com.dexels.navajo.dsl.model.tsl;
 
 import com.dexels.navajo.dsl.model.expression.TopLevel;
+import org.eclipse.emf.common.util.EList;
 
 
 /**

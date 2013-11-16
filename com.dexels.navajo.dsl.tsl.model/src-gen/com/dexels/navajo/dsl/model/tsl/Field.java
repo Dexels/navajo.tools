@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Field#getExpressionValue <em>Expression Value</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Field#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,31 @@ public interface Field extends Element {
 	 * @generated
 	 */
 	EList<ExpressionTag> getExpressionValue();
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see #setType(String)
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getField_Type()
+	 * @model
+	 * @generated
+	 */
+	String getType();
+
+	/**
+	 * Sets the value of the '{@link com.dexels.navajo.dsl.model.tsl.Field#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(String value);
 
 } // Field

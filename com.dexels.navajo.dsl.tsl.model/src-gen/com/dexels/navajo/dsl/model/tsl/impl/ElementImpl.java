@@ -6,6 +6,7 @@
  */
 package com.dexels.navajo.dsl.model.tsl.impl;
 
+import com.dexels.navajo.dsl.model.expression.TopLevel;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -38,6 +39,11 @@ import com.dexels.navajo.dsl.model.tsl.TslPackage;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getContent <em>Content</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#isSplitTag <em>Split Tag</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#isClosedTag <em>Closed Tag</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getFilter <em>Filter</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getNameAttribute <em>Name Attribute</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getComment <em>Comment</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,6 +131,76 @@ public class ElementImpl extends EObjectImpl implements Element {
 	protected boolean closedTag = CLOSED_TAG_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected TopLevel condition;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected TopLevel value;
+
+	/**
+	 * The cached value of the '{@link #getFilter() <em>Filter</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFilter()
+	 * @generated
+	 * @ordered
+	 */
+	protected TopLevel filter;
+
+	/**
+	 * The default value of the '{@link #getNameAttribute() <em>Name Attribute</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNameAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_ATTRIBUTE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getNameAttribute() <em>Name Attribute</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNameAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected String nameAttribute = NAME_ATTRIBUTE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comment = COMMENT_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -162,7 +238,7 @@ public class ElementImpl extends EObjectImpl implements Element {
 	 */
 	public Element getParent() {
 		if (eContainerFeatureID() != TslPackage.ELEMENT__PARENT) return null;
-		return (Element)eContainer();
+		return (Element)eInternalContainer();
 	}
 
 	/**
@@ -274,6 +350,177 @@ public class ElementImpl extends EObjectImpl implements Element {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TopLevel getCondition() {
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCondition(TopLevel newCondition, NotificationChain msgs) {
+		TopLevel oldCondition = condition;
+		condition = newCondition;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__CONDITION, oldCondition, newCondition);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCondition(TopLevel newCondition) {
+		if (newCondition != condition) {
+			NotificationChain msgs = null;
+			if (condition != null)
+				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__CONDITION, null, msgs);
+			if (newCondition != null)
+				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__CONDITION, null, msgs);
+			msgs = basicSetCondition(newCondition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__CONDITION, newCondition, newCondition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TopLevel getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetValue(TopLevel newValue, NotificationChain msgs) {
+		TopLevel oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__VALUE, oldValue, newValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(TopLevel newValue) {
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__VALUE, newValue, newValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TopLevel getFilter() {
+		return filter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFilter(TopLevel newFilter, NotificationChain msgs) {
+		TopLevel oldFilter = filter;
+		filter = newFilter;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__FILTER, oldFilter, newFilter);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFilter(TopLevel newFilter) {
+		if (newFilter != filter) {
+			NotificationChain msgs = null;
+			if (filter != null)
+				msgs = ((InternalEObject)filter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__FILTER, null, msgs);
+			if (newFilter != null)
+				msgs = ((InternalEObject)newFilter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TslPackage.ELEMENT__FILTER, null, msgs);
+			msgs = basicSetFilter(newFilter, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__FILTER, newFilter, newFilter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getNameAttribute() {
+		return nameAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNameAttribute(String newNameAttribute) {
+		String oldNameAttribute = nameAttribute;
+		nameAttribute = newNameAttribute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__NAME_ATTRIBUTE, oldNameAttribute, nameAttribute));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComment(String newComment) {
+		String oldComment = comment;
+		comment = newComment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__COMMENT, oldComment, comment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public int calculateDepth() {
@@ -317,6 +564,12 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return basicSetParent(null, msgs);
 			case TslPackage.ELEMENT__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+			case TslPackage.ELEMENT__CONDITION:
+				return basicSetCondition(null, msgs);
+			case TslPackage.ELEMENT__VALUE:
+				return basicSetValue(null, msgs);
+			case TslPackage.ELEMENT__FILTER:
+				return basicSetFilter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -355,6 +608,16 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return isSplitTag();
 			case TslPackage.ELEMENT__CLOSED_TAG:
 				return isClosedTag();
+			case TslPackage.ELEMENT__CONDITION:
+				return getCondition();
+			case TslPackage.ELEMENT__VALUE:
+				return getValue();
+			case TslPackage.ELEMENT__FILTER:
+				return getFilter();
+			case TslPackage.ELEMENT__NAME_ATTRIBUTE:
+				return getNameAttribute();
+			case TslPackage.ELEMENT__COMMENT:
+				return getComment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -388,6 +651,21 @@ public class ElementImpl extends EObjectImpl implements Element {
 			case TslPackage.ELEMENT__CLOSED_TAG:
 				setClosedTag((Boolean)newValue);
 				return;
+			case TslPackage.ELEMENT__CONDITION:
+				setCondition((TopLevel)newValue);
+				return;
+			case TslPackage.ELEMENT__VALUE:
+				setValue((TopLevel)newValue);
+				return;
+			case TslPackage.ELEMENT__FILTER:
+				setFilter((TopLevel)newValue);
+				return;
+			case TslPackage.ELEMENT__NAME_ATTRIBUTE:
+				setNameAttribute((String)newValue);
+				return;
+			case TslPackage.ELEMENT__COMMENT:
+				setComment((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -418,6 +696,21 @@ public class ElementImpl extends EObjectImpl implements Element {
 			case TslPackage.ELEMENT__CLOSED_TAG:
 				setClosedTag(CLOSED_TAG_EDEFAULT);
 				return;
+			case TslPackage.ELEMENT__CONDITION:
+				setCondition((TopLevel)null);
+				return;
+			case TslPackage.ELEMENT__VALUE:
+				setValue((TopLevel)null);
+				return;
+			case TslPackage.ELEMENT__FILTER:
+				setFilter((TopLevel)null);
+				return;
+			case TslPackage.ELEMENT__NAME_ATTRIBUTE:
+				setNameAttribute(NAME_ATTRIBUTE_EDEFAULT);
+				return;
+			case TslPackage.ELEMENT__COMMENT:
+				setComment(COMMENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -442,6 +735,16 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return splitTag != SPLIT_TAG_EDEFAULT;
 			case TslPackage.ELEMENT__CLOSED_TAG:
 				return closedTag != CLOSED_TAG_EDEFAULT;
+			case TslPackage.ELEMENT__CONDITION:
+				return condition != null;
+			case TslPackage.ELEMENT__VALUE:
+				return value != null;
+			case TslPackage.ELEMENT__FILTER:
+				return filter != null;
+			case TslPackage.ELEMENT__NAME_ATTRIBUTE:
+				return NAME_ATTRIBUTE_EDEFAULT == null ? nameAttribute != null : !NAME_ATTRIBUTE_EDEFAULT.equals(nameAttribute);
+			case TslPackage.ELEMENT__COMMENT:
+				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -462,6 +765,10 @@ public class ElementImpl extends EObjectImpl implements Element {
 		result.append(splitTag);
 		result.append(", closedTag: ");
 		result.append(closedTag);
+		result.append(", nameAttribute: ");
+		result.append(nameAttribute);
+		result.append(", comment: ");
+		result.append(comment);
 		result.append(')');
 		return result.toString();
 	}

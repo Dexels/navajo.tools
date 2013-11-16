@@ -1,5 +1,5 @@
 //grammar com.dexels.navajo.dsl.tsl.Tsl with org.eclipse.xtext.common.Terminals //with com.dexels.navajo.dsl.expression.NavajoExpression
-grammar com.dexels.navajo.dsl.tsl.Tsl with com.dexels.navajo.dsl.expression.NavajoExpression hidden(WS, XMLComment)
+grammar com.dexels.navajo.dsl.tsl.Tsl with com.dexels.navajo.dsl.expression.NavajoExpression hidden(WS, XMLCOMMENT)
 
 //import "platform:/resource/com.dexels.navajo.dsl.expression/src/com/dexels/navajo/dsl/expression/Navajo.ecore" as ncore
 //import "http://www.dexels.com/navajo/dsl/expression/NavajoExpression" as nexpr
@@ -7,16 +7,10 @@ import "platform:/resource/com.dexels.navajo.dsl.expression.model/model/Expressi
 import "platform:/resource/com.dexels.navajo.dsl.tsl.model/model/NavaScript.ecore" 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-//com.dexels.navajo.dsl.expression/src-gen/com/dexels.navajo/dsl/expression/NavajoExpression.ecore"
-//generate tsl "http://www.dexels.com/navajo/dsl/tsl/NavajoTsl"
-
-
-
-
 Tml :
 	{Tml}
-	XMLHead?
-	NAVASCRIPT_START  (attributes+=PossibleExpression)* 
+	XMLHEAD?
+	NAVASCRIPT_START  (attributes+=NonExpression)* 
 	(
 		(XML_TAG_END 
 			((children+=Message) | (children+=Map)| (children+=Param) | (methods += Methods) | (children+=DebugTag)| (children+=Include) | (children+=Validations) | (children+=Comment))*
@@ -27,12 +21,12 @@ Tml :
 		)
 	);
 
-terminal XMLHead: '<?' -> '?>';
-terminal XMLComment: '<!--' -> '-->';
-terminal QUOTEQ: '"=';	
-terminal SEMICOLONQUOTE: ';"';
 
-terminal DOT: '.';
+terminal XMLHEAD: '<?' -> '?>';
+terminal XMLCOMMENT: '<!--' -> '-->';
+//terminal QUOTEQ: '"=';	
+//terminal SEMICOLONQUOTE: ';"';
+
 
 
 terminal DEBUG_START_TAG:
@@ -44,14 +38,10 @@ terminal DEBUG_END_TAG:
 //terminal NAVASCRIPT_START:
 //	'<navascript';
 
-
-terminal EMPTYSTRING:
-	'""'
+terminal QUOTE:
+	'"'
 ;
 
-terminal ATTRIBUTESTRING	: 
-	('"' !('='|'"')* '"')
-;	
 
 terminal XML_START_ENDTAG:
 	'</'
@@ -205,19 +195,31 @@ terminal  NAVASCRIPT_END:
 	;
 	
 
+Garbage returns ecore::EString:
+	(ID|DOT|PARENT|DOLLAR|TML_SEPARATOR|NUMBER|","|SQBRACKET_OPEN|SQBRACKET_CLOSE|AT|COLON|"("|")"|TML_EXISTS)*
+	;
+
+	
 
 // might need to add a lot more kywords here 'message' | 'comment' 
 AttributeName:
 	ID ;
 
-PossibleExpression:
-	(namespace= ID ':')? key=AttributeName '='
+
+
+Expression returns PossibleExpression:
+	(namespace= ID COLON)? key=AttributeName '='
 	(
-		 QUOTEQ expressionValue=TopLevel endToken=SEMICOLONQUOTE
-		| value=ATTRIBUTESTRING
-		| value=EMPTYSTRING
+		 QUOTE expressionValue=TopLevel endToken=QUOTE
 	)
 	;
+	
+NonExpression returns PossibleExpression :
+	(namespace= ID COLON)? key=AttributeName '='
+	(
+		QUOTE value=Garbage QUOTE
+	)
+;
 
 Methods :
 	METHODS_START_TAG {Methods} 
@@ -230,7 +232,7 @@ Methods :
 	;
 	
 Method:
-	METHOD_START_TAG {Method}  (attributes+=PossibleExpression)* 
+	METHOD_START_TAG {Method}  (attributes+=NonExpression)* 
 	
 	((splitTag?=XML_TAG_END
 		(children+=Required)*
@@ -253,7 +255,7 @@ Validations :
 	;
 	
 Check:
-	CHECK_START_TAG {Check}  (attributes+=PossibleExpression)* 
+	CHECK_START_TAG {Check}  (attributes+=NonExpression)* 
 	
 	((splitTag?=XML_TAG_END
 		expression=TopLevel
@@ -266,7 +268,7 @@ Check:
 	
 	
 Comment:
-	COMMENT_START_TAG {Comment}  (attributes+=PossibleExpression)* 
+	COMMENT_START_TAG {Comment}  (attributes+=Expression)* 
 	
 	((splitTag ?= XML_TAG_END
 //		expression=TopLevel
@@ -278,7 +280,7 @@ Comment:
 	;	
 	
 Break:
-	BREAK_START_TAG {Break}  (attributes+=PossibleExpression)* 
+	BREAK_START_TAG {Break}  (attributes+=Expression)* 
 	 
 	((splitTag ?= XML_TAG_END
 //		expression=TopLevel
@@ -289,11 +291,13 @@ Break:
 	)
 	;	
 
+FilePath returns ecore::EString:
+	(TML_SEPARATOR | PARENT | DOT | ID)+
+;
 // create Include entity in Model
 Include returns Method:
 	INCLUDE_START_TAG {Method}  
-		(attributes+=PossibleExpression)* 
-
+		('script' '=' QUOTE (path+=PathElement)+ QUOTE )?
 		(( splitTag?=XML_TAG_END closedTag?=INCLUDE_END_TAG) |
 	XML_TAG_SINGLEEND)
 	;	
@@ -301,13 +305,13 @@ Include returns Method:
 
 
 Message:
-	MESSAGE_START_TAG {Message}  (attributes+=PossibleExpression)* 
+	MESSAGE_START_TAG {Message} (('count' '=' QUOTE count=NUMBER QUOTE)? & ('mode' '=' QUOTE mode=ID QUOTE)? & ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
 	
 	((splitTag?=XML_TAG_END
 		((children+=Message) | (children+=Property) | (children+=Param)  | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=Comment) | (children+=Break))*
 	closedTag ?= MESSAGE_END_TAG
 	)
-	|
+	| 
 	XML_TAG_SINGLEEND
 	)
 	;
@@ -315,10 +319,15 @@ Message:
 
 
 
-Map returns Map:
+Map returns Map: 
 	MAPSTARTKEYWORD {Map} (
-		(DOT mapName=MapId (attributes+=PossibleExpression)*)
-	|	(attributes+=PossibleExpression)*
+		(DOT mapName=MapId)? 
+		(
+			("ref" "=" QUOTE (ref+=PathElement)+ QUOTE )? 
+			& ('object' '=' QUOTE (object+=PathElement)+ QUOTE)? 
+			& ('name' '=' QUOTE nameAttribute=ID QUOTE)? 
+			& ('filter' '=' QUOTE filter=TopLevel QUOTE)?
+		) 	
 	) 
 	(
 			( XML_TAG_SINGLEEND
@@ -362,7 +371,7 @@ MapId:
 
 
 Required: 
-	REQUIRED_START_TAG {Required} (attributes+=PossibleExpression)*
+	REQUIRED_START_TAG {Required} (attributes+=NonExpression)*
 	(
 		(XML_TAG_SINGLEEND)
 	|
@@ -373,13 +382,13 @@ Required:
 	
 
 	
-	
 Property:
-	PROPERTY_START_TAG {Property} (attributes+=PossibleExpression)* 
+	PROPERTY_START_TAG {Property} (('length' '=' QUOTE length=NUMBER QUOTE)? & ('cardinality' '=' QUOTE cardinality=ID QUOTE)? & ('direction' '=' QUOTE direction=ID QUOTE)? & ('subtypes' '=' QUOTE subtypes=ID QUOTE)? & ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
+
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 	
+		( splitTag?=XML_TAG_END 	 
 			(
 				children += ExpressionOrOption
 				|
@@ -390,7 +399,7 @@ Property:
 	);
 
 Param returns Param:
-	PARAM_START_TAG {Param} (attributes+=PossibleExpression)* 
+	PARAM_START_TAG {Param} ( ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
 	(
 		(XML_TAG_SINGLEEND)
 	|
@@ -401,7 +410,7 @@ Param returns Param:
 	);
 
 MapMethod returns MapMethod:
-	MAP_METHOD_STARTTAG_START  mapName = ID DOT methodName= AttributeName (attributes+=PossibleExpression)* 
+	MAP_METHOD_STARTTAG_START  mapName = ID DOT methodName= AttributeName (attributes+=NonExpression)* 
 	(
 		(XML_TAG_SINGLEEND)
 	|
@@ -411,8 +420,9 @@ MapMethod returns MapMethod:
 		)
 	);
 	
-Field returns Field:
-	FIELD_START_TAG {Field} (attributes+=PossibleExpression)*  
+Field returns Field: 
+	FIELD_START_TAG {Field} ( ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('comment' '=' QUOTE comment= Garbage QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?  & ('filter' '=' QUOTE filter=TopLevel QUOTE)?) 
+
 	(
 	 XML_TAG_SINGLEEND
 	 |
@@ -424,7 +434,7 @@ Field returns Field:
 ;
 
 DebugTag returns DebugTag:
-	DEBUG_START_TAG {DebugTag} (attributes+=PossibleExpression)* 
+	DEBUG_START_TAG {DebugTag} (('value' '=' value = TopLevel)?  ('condition' '=' QUOTE condition=TopLevel QUOTE)?)
 	(
 		(XML_TAG_SINGLEEND)
 	|
@@ -446,20 +456,20 @@ ExpressionOrOption returns Element:
 
 ExpressionTag returns ExpressionTag:
 	
-	{ExpressionTag} (attributes+=PossibleExpression)* 
+	{ExpressionTag} (('value' '=' QUOTE (value = TopLevel)? QUOTE)?  & ('condition' '=' QUOTE (condition=TopLevel)? QUOTE)? & ('xml:space' '=' QUOTE 'preserve' QUOTE)?)
+
 	(
 		XML_TAG_SINGLEEND
 	|
 		( splitTag?=XML_TAG_END 	
-			expression=TopLevel
-			
+			content=Garbage
 		    closedTag ?= EXPRESSION_END_TAG
 		)
 	)	
 	;	
 	
 Option: 
-	 {Option} (attributes+=PossibleExpression)*
+	 {Option} (attributes+=NonExpression)*
 	(
 		XML_TAG_SINGLEEND
 	|

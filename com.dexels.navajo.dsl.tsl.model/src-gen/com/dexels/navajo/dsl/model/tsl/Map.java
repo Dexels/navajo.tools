@@ -6,6 +6,8 @@
  */
 package com.dexels.navajo.dsl.model.tsl;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +19,8 @@ package com.dexels.navajo.dsl.model.tsl;
  * <ul>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getMapName <em>Map Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getMapClosingName <em>Map Closing Name</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getObject <em>Object</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,11 +82,31 @@ public interface Map extends Element {
 	void setMapClosingName(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Object</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Object</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Object</em>' attribute list.
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getMap_Object()
+	 * @model
 	 * @generated
 	 */
-	String getRef();
+	EList<String> getObject();
+
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ref</em>' attribute list.
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getMap_Ref()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getRef();
 
 } // Map

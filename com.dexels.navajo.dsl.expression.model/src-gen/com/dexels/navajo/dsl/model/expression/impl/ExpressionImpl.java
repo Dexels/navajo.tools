@@ -173,7 +173,7 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	 */
 	public Expression getParent() {
 		if (eContainerFeatureID() != ExpressionPackage.EXPRESSION__PARENT) return null;
-		return (Expression)eContainer();
+		return (Expression)eInternalContainer();
 	}
 
 	/**

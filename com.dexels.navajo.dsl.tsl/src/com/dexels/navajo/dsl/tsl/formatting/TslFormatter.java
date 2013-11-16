@@ -37,15 +37,15 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 		c.setNoSpace().before(f.getMapIdRule());
 		c.setNoSpace().before(f.getXML_TAG_ENDRule());
 		c.setNoSpace().before(f.getXML_TAG_SINGLEENDRule());
-		c.setNoSpace().before(f.getATTRIBUTESTRINGRule());
-		c.setNoSpace().before(f.getQUOTEQRule());
-		c.setNoSpace().after(f.getQUOTEQRule());
-		c.setNoSpace().before(f.getSEMICOLONQUOTERule());
+//		c.setNoSpace().before(f.getATTRIBUTESTRINGRule());
+//		c.setNoSpace().before(f.getQUOTEQRule());
+//		c.setNoSpace().after(f.getQUOTEQRule());
+//		c.setNoSpace().before(f.getSEMICOLONQUOTERule());
 		
 		c.setNoSpace().before(f.getDOTRule());
 		c.setNoSpace().after(f.getDOTRule());
 
-		c.setLinewrap(1).after(f.getXMLHeadRule());
+		c.setLinewrap(1).after(f.getXMLHEADRule());
 
 		
 		c.setLinewrap(1).after(f.getXML_TAG_ENDRule());
@@ -145,7 +145,7 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 //		c.setIndentationDecrement().before(f.getNAVASCRIPT_ENDRule());
 //		c.setIndentationDecrement().before(f.getEXPRESSION_ENDRule());
 
-		c.setNoSpace().after(f.getQUOTEQRule());
+//		c.setNoSpace().after(f.getQUOTEQRule());
 		c.setNoSpace().after(f.getPathElementRule());
 		c.setNoSpace().after(f.getFunctionNameRule());
 		c.setNoSpace().after(f.getAttributeNameRule());

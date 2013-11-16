@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import com.dexels.navajo.dsl.tsl.ui.internal.TslActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class TslExecutableExtensionFactory extends AbstractGuiceAwareExecutableE
 
 	@Override
 	protected Bundle getBundle() {
-		return com.dexels.navajo.dsl.tsl.ui.internal.TslActivator.getInstance().getBundle();
+		return TslActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return com.dexels.navajo.dsl.tsl.ui.internal.TslActivator.getInstance().getInjector("com.dexels.navajo.dsl.tsl.Tsl");
+		return TslActivator.getInstance().getInjector(TslActivator.COM_DEXELS_NAVAJO_DSL_TSL_TSL);
 	}
 	
 }

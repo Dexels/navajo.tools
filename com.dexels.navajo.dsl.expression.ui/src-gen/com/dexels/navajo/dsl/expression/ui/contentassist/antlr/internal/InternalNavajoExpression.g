@@ -573,17 +573,21 @@ rule__PathElement__Alternatives
 )
 
     |(
-{ before(grammarAccess.getPathElementAccess().getFullStopKeyword_1()); }
-
-	'.' 
-
-{ after(grammarAccess.getPathElementAccess().getFullStopKeyword_1()); }
+{ before(grammarAccess.getPathElementAccess().getDOTTerminalRuleCall_1()); }
+	RULE_DOT
+{ after(grammarAccess.getPathElementAccess().getDOTTerminalRuleCall_1()); }
 )
 
     |(
 { before(grammarAccess.getPathElementAccess().getPARENTTerminalRuleCall_2()); }
 	RULE_PARENT
 { after(grammarAccess.getPathElementAccess().getPARENTTerminalRuleCall_2()); }
+)
+
+    |(
+{ before(grammarAccess.getPathElementAccess().getTML_SEPARATORTerminalRuleCall_3()); }
+	RULE_TML_SEPARATOR
+{ after(grammarAccess.getPathElementAccess().getTML_SEPARATORTerminalRuleCall_3()); }
 )
 
 ;
@@ -5132,9 +5136,11 @@ RULE_FORALL : 'FORALL';
 
 RULE_PARENT : '..';
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 RULE_AT : '@';
+
+RULE_DOT : '.';
+
+RULE_COLON : ':';
 
 RULE_LITERALSTRING : ('\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\''|'<![CDATA[' ( options {greedy=false;} : . )*']]>');
 
@@ -5147,5 +5153,7 @@ RULE_TML_SEPARATOR : '/';
 RULE_TML_EXISTS : '?';
 
 RULE_DOLLAR : '$';
+
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 

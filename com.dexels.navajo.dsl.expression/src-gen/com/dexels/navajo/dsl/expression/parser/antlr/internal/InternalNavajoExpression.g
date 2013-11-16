@@ -124,11 +124,12 @@ rulePathElement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
     newLeafNode(this_ID_0, grammarAccess.getPathElementAccess().getIDTerminalRuleCall_0()); 
     }
 
-    |
-	kw='.' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getPathElementAccess().getFullStopKeyword_1()); 
+    |    this_DOT_1=RULE_DOT    {
+		$current.merge(this_DOT_1);
+    }
+
+    { 
+    newLeafNode(this_DOT_1, grammarAccess.getPathElementAccess().getDOTTerminalRuleCall_1()); 
     }
 
     |    this_PARENT_2=RULE_PARENT    {
@@ -137,6 +138,14 @@ rulePathElement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
 
     { 
     newLeafNode(this_PARENT_2, grammarAccess.getPathElementAccess().getPARENTTerminalRuleCall_2()); 
+    }
+
+    |    this_TML_SEPARATOR_3=RULE_TML_SEPARATOR    {
+		$current.merge(this_TML_SEPARATOR_3);
+    }
+
+    { 
+    newLeafNode(this_TML_SEPARATOR_3, grammarAccess.getPathElementAccess().getTML_SEPARATORTerminalRuleCall_3()); 
     }
 )
     ;
@@ -1848,9 +1857,11 @@ RULE_FORALL : 'FORALL';
 
 RULE_PARENT : '..';
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 RULE_AT : '@';
+
+RULE_DOT : '.';
+
+RULE_COLON : ':';
 
 RULE_LITERALSTRING : ('\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\''|'<![CDATA[' ( options {greedy=false;} : . )*']]>');
 
@@ -1863,5 +1874,7 @@ RULE_TML_SEPARATOR : '/';
 RULE_TML_EXISTS : '?';
 
 RULE_DOLLAR : '$';
+
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 

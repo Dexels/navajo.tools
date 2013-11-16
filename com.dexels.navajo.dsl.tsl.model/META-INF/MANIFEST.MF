@@ -7,7 +7,9 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.dexels.navajo.dsl.model.tsl,com.dexels.navajo.dsl.model.tsl.impl,com.dexels.navajo.dsl.model.tsl.util
+Export-Package: com.dexels.navajo.dsl.model.tsl,
+ com.dexels.navajo.dsl.model.tsl.impl,
+ com.dexels.navajo.dsl.model.tsl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  com.dexels.navajo.dsl.expression.model;visibility:=reexport

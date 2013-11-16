@@ -7,12 +7,15 @@
 package com.dexels.navajo.dsl.model.tsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import com.dexels.navajo.dsl.model.tsl.Map;
 import com.dexels.navajo.dsl.model.tsl.PossibleExpression;
 import com.dexels.navajo.dsl.model.tsl.TslPackage;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +26,8 @@ import com.dexels.navajo.dsl.model.tsl.TslPackage;
  * <ul>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getMapName <em>Map Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getMapClosingName <em>Map Closing Name</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getObject <em>Object</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +73,26 @@ public class MapImpl extends ElementImpl implements Map {
 	 * @ordered
 	 */
 	protected String mapClosingName = MAP_CLOSING_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getObject() <em>Object</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getObject()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> object;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> ref;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,19 +158,28 @@ public class MapImpl extends ElementImpl implements Map {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public String getRef() {
-		for (PossibleExpression possibleExpression : getAttributes()) {
-			if("ref".equals(possibleExpression.getKey())) {
-				if(possibleExpression.getValue()!=null) {
-					return possibleExpression.getValue();
-				} else {
-					return null;
-				}
-			}
+	public EList<String> getObject() {
+		if (object == null) {
+			object = new EDataTypeUniqueEList<String>(String.class, this, TslPackage.MAP__OBJECT);
 		}
-		return null;	}
+		return object;
+	}
+
+
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getRef() {
+		if (ref == null) {
+			ref = new EDataTypeUniqueEList<String>(String.class, this, TslPackage.MAP__REF);
+		}
+		return ref;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,6 +193,10 @@ public class MapImpl extends ElementImpl implements Map {
 				return getMapName();
 			case TslPackage.MAP__MAP_CLOSING_NAME:
 				return getMapClosingName();
+			case TslPackage.MAP__OBJECT:
+				return getObject();
+			case TslPackage.MAP__REF:
+				return getRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -168,6 +206,7 @@ public class MapImpl extends ElementImpl implements Map {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -176,6 +215,14 @@ public class MapImpl extends ElementImpl implements Map {
 				return;
 			case TslPackage.MAP__MAP_CLOSING_NAME:
 				setMapClosingName((String)newValue);
+				return;
+			case TslPackage.MAP__OBJECT:
+				getObject().clear();
+				getObject().addAll((Collection<? extends String>)newValue);
+				return;
+			case TslPackage.MAP__REF:
+				getRef().clear();
+				getRef().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,6 +242,12 @@ public class MapImpl extends ElementImpl implements Map {
 			case TslPackage.MAP__MAP_CLOSING_NAME:
 				setMapClosingName(MAP_CLOSING_NAME_EDEFAULT);
 				return;
+			case TslPackage.MAP__OBJECT:
+				getObject().clear();
+				return;
+			case TslPackage.MAP__REF:
+				getRef().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -211,6 +264,10 @@ public class MapImpl extends ElementImpl implements Map {
 				return MAP_NAME_EDEFAULT == null ? mapName != null : !MAP_NAME_EDEFAULT.equals(mapName);
 			case TslPackage.MAP__MAP_CLOSING_NAME:
 				return MAP_CLOSING_NAME_EDEFAULT == null ? mapClosingName != null : !MAP_CLOSING_NAME_EDEFAULT.equals(mapClosingName);
+			case TslPackage.MAP__OBJECT:
+				return object != null && !object.isEmpty();
+			case TslPackage.MAP__REF:
+				return ref != null && !ref.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -229,6 +286,10 @@ public class MapImpl extends ElementImpl implements Map {
 		result.append(mapName);
 		result.append(", mapClosingName: ");
 		result.append(mapClosingName);
+		result.append(", object: ");
+		result.append(object);
+		result.append(", ref: ");
+		result.append(ref);
 		result.append(')');
 		return result.toString();
 	}

@@ -24,12 +24,12 @@ public class TslLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	String text(Property m) {
-		return m.getName();
+		return m.getNameAttribute();
 	}
 	
 	String text(Message m) {
 		
-		String name = m.getName();
+		String name = m.getNameAttribute();
 		if(m.isArray()) {
 			return name+"[]";
 		}

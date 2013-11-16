@@ -38,9 +38,10 @@ terminal NULL: 'null' | 'NULL';
 terminal TODAY: 'today' | 'TODAY';
 terminal FORALL: 'FORALL';
 terminal PARENT: "..";
-terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	
 terminal AT: '@';	
+terminal DOT: '.';
+terminal COLON: ':';
 
 
 
@@ -65,6 +66,8 @@ terminal TML_EXISTS:
 terminal DOLLAR:
 	'$';
 	
+terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
 
 // skipped url, image, points, datepattern, password
 
@@ -73,10 +76,11 @@ terminal DOLLAR:
 //terminal PATH_ELEMENT: ('.'|'..'|("a".. "z"| "A" .. "Z"|"_")("a".. "z"| "A" .. "Z"|"0" .. "9"|"_")*);
  	
 PathElement returns ecore::EString:
-	(ID|"."|PARENT)
+	(ID|DOT|PARENT|TML_SEPARATOR)
 	;
 	
-	
+
+
 TmlExpression returns TmlReference:
 	SQBRACKET_OPEN (absolute?=TML_SEPARATOR)? (param?=AT)? elements+=PathElement (TML_SEPARATOR elements+=PathElement)* SQBRACKET_CLOSE
 ;

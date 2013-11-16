@@ -8,13 +8,16 @@ package com.dexels.navajo.dsl.model.tsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import com.dexels.navajo.dsl.model.expression.TopLevel;
 import com.dexels.navajo.dsl.model.tsl.MapMethod;
 import com.dexels.navajo.dsl.model.tsl.TslPackage;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -311,6 +314,7 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

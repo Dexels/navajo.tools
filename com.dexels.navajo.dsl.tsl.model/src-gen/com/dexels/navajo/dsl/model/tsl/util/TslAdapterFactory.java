@@ -6,6 +6,7 @@
  */
 package com.dexels.navajo.dsl.model.tsl.util;
 
+import com.dexels.navajo.dsl.model.tsl.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;

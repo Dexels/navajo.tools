@@ -6,6 +6,7 @@
  */
 package com.dexels.navajo.dsl.model.expression.impl;
 
+import com.dexels.navajo.dsl.model.expression.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -40,7 +41,7 @@ public class ExpressionFactoryImpl extends EFactoryImpl implements ExpressionFac
 	 */
 	public static ExpressionFactory init() {
 		try {
-			ExpressionFactory theExpressionFactory = (ExpressionFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.dexels.com/expression/1.0"); 
+			ExpressionFactory theExpressionFactory = (ExpressionFactory)EPackage.Registry.INSTANCE.getEFactory(ExpressionPackage.eNS_URI);
 			if (theExpressionFactory != null) {
 				return theExpressionFactory;
 			}

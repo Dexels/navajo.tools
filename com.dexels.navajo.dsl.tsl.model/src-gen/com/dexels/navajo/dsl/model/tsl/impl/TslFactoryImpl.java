@@ -6,6 +6,7 @@
  */
 package com.dexels.navajo.dsl.model.tsl.impl;
 
+import com.dexels.navajo.dsl.model.tsl.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -49,7 +50,7 @@ public class TslFactoryImpl extends EFactoryImpl implements TslFactory {
 	 */
 	public static TslFactory init() {
 		try {
-			TslFactory theTslFactory = (TslFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.dexels.com/navajo/dsl/tsl/NavajoTsl"); 
+			TslFactory theTslFactory = (TslFactory)EPackage.Registry.INSTANCE.getEFactory(TslPackage.eNS_URI);
 			if (theTslFactory != null) {
 				return theTslFactory;
 			}
