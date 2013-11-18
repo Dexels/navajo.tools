@@ -21,45 +21,46 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_DOT", "RULE_PARENT", "RULE_TML_SEPARATOR", "RULE_SQBRACKET_OPEN", "RULE_AT", "RULE_SQBRACKET_CLOSE", "RULE_TML_EXISTS", "RULE_DOLLAR", "RULE_XML_LT", "RULE_XML_GT", "RULE_XML_LTEQ", "RULE_XML_GTEQ", "RULE_NUMBER", "RULE_LITERALSTRING", "RULE_FORALL", "RULE_NULL", "RULE_TODAY", "RULE_TRUE", "RULE_FALSE", "RULE_WS", "RULE_COLON", "'('", "','", "')'", "'OR'", "'AND'", "'=='", "'!='", "'+'", "'-'", "'*'", "'!'", "'#'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_DOT", "RULE_PARENT", "RULE_TML_SEPARATOR", "RULE_SQBRACKET_OPEN", "RULE_AT", "RULE_SQBRACKET_CLOSE", "RULE_TML_EXISTS", "RULE_BRACKET_OPEN", "RULE_COMMA", "RULE_BRACKET_CLOSE", "RULE_DOLLAR", "RULE_OR", "RULE_AND", "RULE_EQUALSEQUALS", "RULE_NEQUALS", "RULE_XML_LT", "RULE_XML_GT", "RULE_XML_LTEQ", "RULE_XML_GTEQ", "RULE_PLUS", "RULE_MINUS", "RULE_MULTIPLY", "RULE_NOT", "RULE_NUMBER", "RULE_HASH", "RULE_LITERALSTRING", "RULE_FORALL", "RULE_CURLYOPEN", "RULE_CURLYCLOSE", "RULE_NULL", "RULE_TODAY", "RULE_TRUE", "RULE_FALSE", "RULE_BADNUMBER", "RULE_WS", "RULE_COLON"
     };
     public static final int RULE_ID=4;
-    public static final int T__29=29;
-    public static final int T__28=28;
     public static final int RULE_PARENT=6;
-    public static final int T__27=27;
     public static final int RULE_SQBRACKET_OPEN=8;
-    public static final int T__26=26;
-    public static final int RULE_XML_LT=13;
-    public static final int RULE_LITERALSTRING=18;
-    public static final int RULE_XML_GTEQ=16;
+    public static final int RULE_XML_LT=20;
+    public static final int RULE_CURLYOPEN=32;
+    public static final int RULE_PLUS=24;
+    public static final int RULE_OR=16;
+    public static final int RULE_HASH=29;
+    public static final int RULE_COMMA=13;
+    public static final int RULE_LITERALSTRING=30;
+    public static final int RULE_BRACKET_CLOSE=14;
+    public static final int RULE_AND=17;
+    public static final int RULE_XML_GTEQ=23;
     public static final int RULE_TML_SEPARATOR=7;
+    public static final int RULE_CURLYCLOSE=33;
     public static final int EOF=-1;
-    public static final int RULE_NULL=20;
-    public static final int RULE_TRUE=22;
-    public static final int RULE_FORALL=19;
-    public static final int RULE_DOLLAR=12;
-    public static final int T__30=30;
-    public static final int RULE_COLON=25;
-    public static final int T__31=31;
-    public static final int RULE_FALSE=23;
+    public static final int RULE_NOT=27;
+    public static final int RULE_NULL=34;
+    public static final int RULE_TRUE=36;
+    public static final int RULE_NEQUALS=19;
+    public static final int RULE_BRACKET_OPEN=12;
+    public static final int RULE_FORALL=31;
+    public static final int RULE_DOLLAR=15;
+    public static final int RULE_COLON=40;
+    public static final int RULE_MINUS=25;
+    public static final int RULE_FALSE=37;
     public static final int RULE_TML_EXISTS=11;
-    public static final int T__32=32;
-    public static final int T__33=33;
     public static final int RULE_DOT=5;
-    public static final int T__34=34;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int RULE_NUMBER=17;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
-    public static final int RULE_TODAY=21;
+    public static final int RULE_NUMBER=28;
+    public static final int RULE_TODAY=35;
     public static final int RULE_SQBRACKET_CLOSE=10;
-    public static final int RULE_XML_LTEQ=15;
-    public static final int RULE_WS=24;
-    public static final int RULE_XML_GT=14;
+    public static final int RULE_MULTIPLY=26;
+    public static final int RULE_XML_LTEQ=22;
+    public static final int RULE_BADNUMBER=38;
+    public static final int RULE_WS=39;
+    public static final int RULE_XML_GT=21;
     public static final int RULE_AT=9;
+    public static final int RULE_EQUALSEQUALS=18;
 
     // delegates
     // delegators
@@ -198,7 +199,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRulePathElement"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:106:1: entryRulePathElement returns [String current=null] : iv_rulePathElement= rulePathElement EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:108:1: entryRulePathElement returns [String current=null] : iv_rulePathElement= rulePathElement EOF ;
     public final String entryRulePathElement() throws RecognitionException {
         String current = null;
 
@@ -206,17 +207,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:107:2: (iv_rulePathElement= rulePathElement EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:108:2: iv_rulePathElement= rulePathElement EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:109:2: (iv_rulePathElement= rulePathElement EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:110:2: iv_rulePathElement= rulePathElement EOF
             {
              newCompositeNode(grammarAccess.getPathElementRule()); 
-            pushFollow(FOLLOW_rulePathElement_in_entryRulePathElement166);
+            pushFollow(FOLLOW_rulePathElement_in_entryRulePathElement168);
             iv_rulePathElement=rulePathElement();
 
             state._fsp--;
 
              current =iv_rulePathElement.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePathElement177); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePathElement179); 
 
             }
 
@@ -234,7 +235,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "rulePathElement"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:115:1: rulePathElement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:117:1: rulePathElement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR ) ;
     public final AntlrDatatypeRuleToken rulePathElement() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -246,10 +247,10 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:118:28: ( (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:119:1: (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:120:28: ( (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:121:1: (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:119:1: (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:121:1: (this_ID_0= RULE_ID | this_DOT_1= RULE_DOT | this_PARENT_2= RULE_PARENT | this_TML_SEPARATOR_3= RULE_TML_SEPARATOR )
             int alt1=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -281,9 +282,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             switch (alt1) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:119:6: this_ID_0= RULE_ID
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:121:6: this_ID_0= RULE_ID
                     {
-                    this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePathElement217); 
+                    this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePathElement219); 
 
                     		current.merge(this_ID_0);
                         
@@ -294,9 +295,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:127:10: this_DOT_1= RULE_DOT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:129:10: this_DOT_1= RULE_DOT
                     {
-                    this_DOT_1=(Token)match(input,RULE_DOT,FOLLOW_RULE_DOT_in_rulePathElement243); 
+                    this_DOT_1=(Token)match(input,RULE_DOT,FOLLOW_RULE_DOT_in_rulePathElement245); 
 
                     		current.merge(this_DOT_1);
                         
@@ -307,9 +308,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:135:10: this_PARENT_2= RULE_PARENT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:137:10: this_PARENT_2= RULE_PARENT
                     {
-                    this_PARENT_2=(Token)match(input,RULE_PARENT,FOLLOW_RULE_PARENT_in_rulePathElement269); 
+                    this_PARENT_2=(Token)match(input,RULE_PARENT,FOLLOW_RULE_PARENT_in_rulePathElement271); 
 
                     		current.merge(this_PARENT_2);
                         
@@ -320,9 +321,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:143:10: this_TML_SEPARATOR_3= RULE_TML_SEPARATOR
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:145:10: this_TML_SEPARATOR_3= RULE_TML_SEPARATOR
                     {
-                    this_TML_SEPARATOR_3=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_rulePathElement295); 
+                    this_TML_SEPARATOR_3=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_rulePathElement297); 
 
                     		current.merge(this_TML_SEPARATOR_3);
                         
@@ -353,7 +354,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleTmlExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:158:1: entryRuleTmlExpression returns [EObject current=null] : iv_ruleTmlExpression= ruleTmlExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:160:1: entryRuleTmlExpression returns [EObject current=null] : iv_ruleTmlExpression= ruleTmlExpression EOF ;
     public final EObject entryRuleTmlExpression() throws RecognitionException {
         EObject current = null;
 
@@ -361,17 +362,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:159:2: (iv_ruleTmlExpression= ruleTmlExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:160:2: iv_ruleTmlExpression= ruleTmlExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:161:2: (iv_ruleTmlExpression= ruleTmlExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:162:2: iv_ruleTmlExpression= ruleTmlExpression EOF
             {
              newCompositeNode(grammarAccess.getTmlExpressionRule()); 
-            pushFollow(FOLLOW_ruleTmlExpression_in_entryRuleTmlExpression340);
+            pushFollow(FOLLOW_ruleTmlExpression_in_entryRuleTmlExpression342);
             iv_ruleTmlExpression=ruleTmlExpression();
 
             state._fsp--;
 
              current =iv_ruleTmlExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTmlExpression350); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTmlExpression352); 
 
             }
 
@@ -389,7 +390,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleTmlExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:167:1: ruleTmlExpression returns [EObject current=null] : (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:169:1: ruleTmlExpression returns [EObject current=null] : (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE ) ;
     public final EObject ruleTmlExpression() throws RecognitionException {
         EObject current = null;
 
@@ -406,27 +407,27 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:170:28: ( (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:171:1: (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:172:28: ( (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:173:1: (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:171:1: (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:171:2: this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:173:1: (this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:173:2: this_SQBRACKET_OPEN_0= RULE_SQBRACKET_OPEN ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )? ( (lv_param_2_0= RULE_AT ) )? ( (lv_elements_3_0= rulePathElement ) ) (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_6= RULE_SQBRACKET_CLOSE
             {
-            this_SQBRACKET_OPEN_0=(Token)match(input,RULE_SQBRACKET_OPEN,FOLLOW_RULE_SQBRACKET_OPEN_in_ruleTmlExpression386); 
+            this_SQBRACKET_OPEN_0=(Token)match(input,RULE_SQBRACKET_OPEN,FOLLOW_RULE_SQBRACKET_OPEN_in_ruleTmlExpression388); 
              
                 newLeafNode(this_SQBRACKET_OPEN_0, grammarAccess.getTmlExpressionAccess().getSQBRACKET_OPENTerminalRuleCall_0()); 
                 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:175:1: ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:177:1: ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )?
             int alt2=2;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:176:1: (lv_absolute_1_0= RULE_TML_SEPARATOR )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:178:1: (lv_absolute_1_0= RULE_TML_SEPARATOR )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:176:1: (lv_absolute_1_0= RULE_TML_SEPARATOR )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:177:3: lv_absolute_1_0= RULE_TML_SEPARATOR
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:178:1: (lv_absolute_1_0= RULE_TML_SEPARATOR )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:179:3: lv_absolute_1_0= RULE_TML_SEPARATOR
                     {
-                    lv_absolute_1_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression402); 
+                    lv_absolute_1_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression404); 
 
                     			newLeafNode(lv_absolute_1_0, grammarAccess.getTmlExpressionAccess().getAbsoluteTML_SEPARATORTerminalRuleCall_1_0()); 
                     		
@@ -449,7 +450,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:193:3: ( (lv_param_2_0= RULE_AT ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:195:3: ( (lv_param_2_0= RULE_AT ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -458,12 +459,12 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             }
             switch (alt3) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:194:1: (lv_param_2_0= RULE_AT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:196:1: (lv_param_2_0= RULE_AT )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:194:1: (lv_param_2_0= RULE_AT )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:195:3: lv_param_2_0= RULE_AT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:196:1: (lv_param_2_0= RULE_AT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:197:3: lv_param_2_0= RULE_AT
                     {
-                    lv_param_2_0=(Token)match(input,RULE_AT,FOLLOW_RULE_AT_in_ruleTmlExpression425); 
+                    lv_param_2_0=(Token)match(input,RULE_AT,FOLLOW_RULE_AT_in_ruleTmlExpression427); 
 
                     			newLeafNode(lv_param_2_0, grammarAccess.getTmlExpressionAccess().getParamATTerminalRuleCall_2_0()); 
                     		
@@ -486,16 +487,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:211:3: ( (lv_elements_3_0= rulePathElement ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:212:1: (lv_elements_3_0= rulePathElement )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:213:3: ( (lv_elements_3_0= rulePathElement ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:214:1: (lv_elements_3_0= rulePathElement )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:212:1: (lv_elements_3_0= rulePathElement )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:213:3: lv_elements_3_0= rulePathElement
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:214:1: (lv_elements_3_0= rulePathElement )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:215:3: lv_elements_3_0= rulePathElement
             {
              
             	        newCompositeNode(grammarAccess.getTmlExpressionAccess().getElementsPathElementParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_rulePathElement_in_ruleTmlExpression452);
+            pushFollow(FOLLOW_rulePathElement_in_ruleTmlExpression454);
             lv_elements_3_0=rulePathElement();
 
             state._fsp--;
@@ -517,7 +518,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:229:2: (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:231:2: (this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -530,22 +531,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                 switch (alt4) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:229:3: this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:231:3: this_TML_SEPARATOR_4= RULE_TML_SEPARATOR ( (lv_elements_5_0= rulePathElement ) )
             	    {
-            	    this_TML_SEPARATOR_4=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression464); 
+            	    this_TML_SEPARATOR_4=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression466); 
             	     
             	        newLeafNode(this_TML_SEPARATOR_4, grammarAccess.getTmlExpressionAccess().getTML_SEPARATORTerminalRuleCall_4_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:233:1: ( (lv_elements_5_0= rulePathElement ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:234:1: (lv_elements_5_0= rulePathElement )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:235:1: ( (lv_elements_5_0= rulePathElement ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:236:1: (lv_elements_5_0= rulePathElement )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:234:1: (lv_elements_5_0= rulePathElement )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:235:3: lv_elements_5_0= rulePathElement
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:236:1: (lv_elements_5_0= rulePathElement )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:237:3: lv_elements_5_0= rulePathElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTmlExpressionAccess().getElementsPathElementParserRuleCall_4_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePathElement_in_ruleTmlExpression484);
+            	    pushFollow(FOLLOW_rulePathElement_in_ruleTmlExpression486);
             	    lv_elements_5_0=rulePathElement();
 
             	    state._fsp--;
@@ -576,7 +577,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                 }
             } while (true);
 
-            this_SQBRACKET_CLOSE_6=(Token)match(input,RULE_SQBRACKET_CLOSE,FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleTmlExpression497); 
+            this_SQBRACKET_CLOSE_6=(Token)match(input,RULE_SQBRACKET_CLOSE,FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleTmlExpression499); 
              
                 newLeafNode(this_SQBRACKET_CLOSE_6, grammarAccess.getTmlExpressionAccess().getSQBRACKET_CLOSETerminalRuleCall_5()); 
                 
@@ -601,7 +602,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleExistsTmlExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:263:1: entryRuleExistsTmlExpression returns [EObject current=null] : iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:265:1: entryRuleExistsTmlExpression returns [EObject current=null] : iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF ;
     public final EObject entryRuleExistsTmlExpression() throws RecognitionException {
         EObject current = null;
 
@@ -609,17 +610,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:264:2: (iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:265:2: iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:266:2: (iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:267:2: iv_ruleExistsTmlExpression= ruleExistsTmlExpression EOF
             {
              newCompositeNode(grammarAccess.getExistsTmlExpressionRule()); 
-            pushFollow(FOLLOW_ruleExistsTmlExpression_in_entryRuleExistsTmlExpression532);
+            pushFollow(FOLLOW_ruleExistsTmlExpression_in_entryRuleExistsTmlExpression534);
             iv_ruleExistsTmlExpression=ruleExistsTmlExpression();
 
             state._fsp--;
 
              current =iv_ruleExistsTmlExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExistsTmlExpression542); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExistsTmlExpression544); 
 
             }
 
@@ -637,7 +638,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleExistsTmlExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:272:1: ruleExistsTmlExpression returns [EObject current=null] : (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:274:1: ruleExistsTmlExpression returns [EObject current=null] : (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE ) ;
     public final EObject ruleExistsTmlExpression() throws RecognitionException {
         EObject current = null;
 
@@ -655,31 +656,31 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:275:28: ( (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:276:1: (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:277:28: ( (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:278:1: (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:276:1: (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:276:2: this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:278:1: (this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:278:2: this_TML_EXISTS_0= RULE_TML_EXISTS this_SQBRACKET_OPEN_1= RULE_SQBRACKET_OPEN ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )? ( (lv_param_3_0= RULE_AT ) )? ( (lv_elements_4_0= rulePathElement ) ) (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )* this_SQBRACKET_CLOSE_7= RULE_SQBRACKET_CLOSE
             {
-            this_TML_EXISTS_0=(Token)match(input,RULE_TML_EXISTS,FOLLOW_RULE_TML_EXISTS_in_ruleExistsTmlExpression578); 
+            this_TML_EXISTS_0=(Token)match(input,RULE_TML_EXISTS,FOLLOW_RULE_TML_EXISTS_in_ruleExistsTmlExpression580); 
              
                 newLeafNode(this_TML_EXISTS_0, grammarAccess.getExistsTmlExpressionAccess().getTML_EXISTSTerminalRuleCall_0()); 
                 
-            this_SQBRACKET_OPEN_1=(Token)match(input,RULE_SQBRACKET_OPEN,FOLLOW_RULE_SQBRACKET_OPEN_in_ruleExistsTmlExpression588); 
+            this_SQBRACKET_OPEN_1=(Token)match(input,RULE_SQBRACKET_OPEN,FOLLOW_RULE_SQBRACKET_OPEN_in_ruleExistsTmlExpression590); 
              
                 newLeafNode(this_SQBRACKET_OPEN_1, grammarAccess.getExistsTmlExpressionAccess().getSQBRACKET_OPENTerminalRuleCall_1()); 
                 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:284:1: ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:286:1: ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )?
             int alt5=2;
             alt5 = dfa5.predict(input);
             switch (alt5) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:285:1: (lv_absolute_2_0= RULE_TML_SEPARATOR )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:287:1: (lv_absolute_2_0= RULE_TML_SEPARATOR )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:285:1: (lv_absolute_2_0= RULE_TML_SEPARATOR )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:286:3: lv_absolute_2_0= RULE_TML_SEPARATOR
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:287:1: (lv_absolute_2_0= RULE_TML_SEPARATOR )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:288:3: lv_absolute_2_0= RULE_TML_SEPARATOR
                     {
-                    lv_absolute_2_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression604); 
+                    lv_absolute_2_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression606); 
 
                     			newLeafNode(lv_absolute_2_0, grammarAccess.getExistsTmlExpressionAccess().getAbsoluteTML_SEPARATORTerminalRuleCall_2_0()); 
                     		
@@ -702,7 +703,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:302:3: ( (lv_param_3_0= RULE_AT ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:304:3: ( (lv_param_3_0= RULE_AT ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -711,12 +712,12 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             }
             switch (alt6) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:303:1: (lv_param_3_0= RULE_AT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:305:1: (lv_param_3_0= RULE_AT )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:303:1: (lv_param_3_0= RULE_AT )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:304:3: lv_param_3_0= RULE_AT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:305:1: (lv_param_3_0= RULE_AT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:306:3: lv_param_3_0= RULE_AT
                     {
-                    lv_param_3_0=(Token)match(input,RULE_AT,FOLLOW_RULE_AT_in_ruleExistsTmlExpression627); 
+                    lv_param_3_0=(Token)match(input,RULE_AT,FOLLOW_RULE_AT_in_ruleExistsTmlExpression629); 
 
                     			newLeafNode(lv_param_3_0, grammarAccess.getExistsTmlExpressionAccess().getParamATTerminalRuleCall_3_0()); 
                     		
@@ -739,16 +740,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:320:3: ( (lv_elements_4_0= rulePathElement ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:321:1: (lv_elements_4_0= rulePathElement )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:322:3: ( (lv_elements_4_0= rulePathElement ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:323:1: (lv_elements_4_0= rulePathElement )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:321:1: (lv_elements_4_0= rulePathElement )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:322:3: lv_elements_4_0= rulePathElement
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:323:1: (lv_elements_4_0= rulePathElement )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:324:3: lv_elements_4_0= rulePathElement
             {
              
             	        newCompositeNode(grammarAccess.getExistsTmlExpressionAccess().getElementsPathElementParserRuleCall_4_0()); 
             	    
-            pushFollow(FOLLOW_rulePathElement_in_ruleExistsTmlExpression654);
+            pushFollow(FOLLOW_rulePathElement_in_ruleExistsTmlExpression656);
             lv_elements_4_0=rulePathElement();
 
             state._fsp--;
@@ -770,7 +771,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:338:2: (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:340:2: (this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -783,22 +784,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                 switch (alt7) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:338:3: this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:340:3: this_TML_SEPARATOR_5= RULE_TML_SEPARATOR ( (lv_elements_6_0= rulePathElement ) )
             	    {
-            	    this_TML_SEPARATOR_5=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression666); 
+            	    this_TML_SEPARATOR_5=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression668); 
             	     
             	        newLeafNode(this_TML_SEPARATOR_5, grammarAccess.getExistsTmlExpressionAccess().getTML_SEPARATORTerminalRuleCall_5_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:342:1: ( (lv_elements_6_0= rulePathElement ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:343:1: (lv_elements_6_0= rulePathElement )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:344:1: ( (lv_elements_6_0= rulePathElement ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:345:1: (lv_elements_6_0= rulePathElement )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:343:1: (lv_elements_6_0= rulePathElement )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:344:3: lv_elements_6_0= rulePathElement
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:345:1: (lv_elements_6_0= rulePathElement )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:346:3: lv_elements_6_0= rulePathElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getExistsTmlExpressionAccess().getElementsPathElementParserRuleCall_5_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePathElement_in_ruleExistsTmlExpression686);
+            	    pushFollow(FOLLOW_rulePathElement_in_ruleExistsTmlExpression688);
             	    lv_elements_6_0=rulePathElement();
 
             	    state._fsp--;
@@ -829,7 +830,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                 }
             } while (true);
 
-            this_SQBRACKET_CLOSE_7=(Token)match(input,RULE_SQBRACKET_CLOSE,FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleExistsTmlExpression699); 
+            this_SQBRACKET_CLOSE_7=(Token)match(input,RULE_SQBRACKET_CLOSE,FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleExistsTmlExpression701); 
              
                 newLeafNode(this_SQBRACKET_CLOSE_7, grammarAccess.getExistsTmlExpressionAccess().getSQBRACKET_CLOSETerminalRuleCall_6()); 
                 
@@ -854,7 +855,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleMapReferenceParams"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:372:1: entryRuleMapReferenceParams returns [EObject current=null] : iv_ruleMapReferenceParams= ruleMapReferenceParams EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:374:1: entryRuleMapReferenceParams returns [EObject current=null] : iv_ruleMapReferenceParams= ruleMapReferenceParams EOF ;
     public final EObject entryRuleMapReferenceParams() throws RecognitionException {
         EObject current = null;
 
@@ -862,17 +863,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:373:2: (iv_ruleMapReferenceParams= ruleMapReferenceParams EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:374:2: iv_ruleMapReferenceParams= ruleMapReferenceParams EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:375:2: (iv_ruleMapReferenceParams= ruleMapReferenceParams EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:376:2: iv_ruleMapReferenceParams= ruleMapReferenceParams EOF
             {
              newCompositeNode(grammarAccess.getMapReferenceParamsRule()); 
-            pushFollow(FOLLOW_ruleMapReferenceParams_in_entryRuleMapReferenceParams734);
+            pushFollow(FOLLOW_ruleMapReferenceParams_in_entryRuleMapReferenceParams736);
             iv_ruleMapReferenceParams=ruleMapReferenceParams();
 
             state._fsp--;
 
              current =iv_ruleMapReferenceParams; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMapReferenceParams744); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMapReferenceParams746); 
 
             }
 
@@ -890,13 +891,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleMapReferenceParams"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:381:1: ruleMapReferenceParams returns [EObject current=null] : (otherlv_0= '(' ( (lv_getterParams_1_0= ruleLiteral ) ) (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )* otherlv_4= ')' ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:383:1: ruleMapReferenceParams returns [EObject current=null] : (this_BRACKET_OPEN_0= RULE_BRACKET_OPEN ( (lv_getterParams_1_0= ruleLiteral ) ) (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )* this_BRACKET_CLOSE_4= RULE_BRACKET_CLOSE ) ;
     public final EObject ruleMapReferenceParams() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_0=null;
-        Token otherlv_2=null;
-        Token otherlv_4=null;
+        Token this_BRACKET_OPEN_0=null;
+        Token this_COMMA_2=null;
+        Token this_BRACKET_CLOSE_4=null;
         EObject lv_getterParams_1_0 = null;
 
         EObject lv_getterParams_3_0 = null;
@@ -905,21 +906,21 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:384:28: ( (otherlv_0= '(' ( (lv_getterParams_1_0= ruleLiteral ) ) (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )* otherlv_4= ')' ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:385:1: (otherlv_0= '(' ( (lv_getterParams_1_0= ruleLiteral ) ) (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )* otherlv_4= ')' )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:386:28: ( (this_BRACKET_OPEN_0= RULE_BRACKET_OPEN ( (lv_getterParams_1_0= ruleLiteral ) ) (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )* this_BRACKET_CLOSE_4= RULE_BRACKET_CLOSE ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:387:1: (this_BRACKET_OPEN_0= RULE_BRACKET_OPEN ( (lv_getterParams_1_0= ruleLiteral ) ) (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )* this_BRACKET_CLOSE_4= RULE_BRACKET_CLOSE )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:385:1: (otherlv_0= '(' ( (lv_getterParams_1_0= ruleLiteral ) ) (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )* otherlv_4= ')' )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:385:3: otherlv_0= '(' ( (lv_getterParams_1_0= ruleLiteral ) ) (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )* otherlv_4= ')'
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:387:1: (this_BRACKET_OPEN_0= RULE_BRACKET_OPEN ( (lv_getterParams_1_0= ruleLiteral ) ) (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )* this_BRACKET_CLOSE_4= RULE_BRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:387:2: this_BRACKET_OPEN_0= RULE_BRACKET_OPEN ( (lv_getterParams_1_0= ruleLiteral ) ) (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )* this_BRACKET_CLOSE_4= RULE_BRACKET_CLOSE
             {
-            otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleMapReferenceParams781); 
-
-                	newLeafNode(otherlv_0, grammarAccess.getMapReferenceParamsAccess().getLeftParenthesisKeyword_0());
+            this_BRACKET_OPEN_0=(Token)match(input,RULE_BRACKET_OPEN,FOLLOW_RULE_BRACKET_OPEN_in_ruleMapReferenceParams782); 
+             
+                newLeafNode(this_BRACKET_OPEN_0, grammarAccess.getMapReferenceParamsAccess().getBRACKET_OPENTerminalRuleCall_0()); 
                 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:389:1: ( (lv_getterParams_1_0= ruleLiteral ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:390:1: (lv_getterParams_1_0= ruleLiteral )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:391:1: ( (lv_getterParams_1_0= ruleLiteral ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:392:1: (lv_getterParams_1_0= ruleLiteral )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:390:1: (lv_getterParams_1_0= ruleLiteral )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:391:3: lv_getterParams_1_0= ruleLiteral
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:392:1: (lv_getterParams_1_0= ruleLiteral )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:393:3: lv_getterParams_1_0= ruleLiteral
             {
              
             	        newCompositeNode(grammarAccess.getMapReferenceParamsAccess().getGetterParamsLiteralParserRuleCall_1_0()); 
@@ -946,35 +947,35 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:407:2: (otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:409:2: (this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) ) )*
             loop8:
             do {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==27) ) {
+                if ( (LA8_0==RULE_COMMA) ) {
                     alt8=1;
                 }
 
 
                 switch (alt8) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:407:4: otherlv_2= ',' ( (lv_getterParams_3_0= ruleLiteral ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:409:3: this_COMMA_2= RULE_COMMA ( (lv_getterParams_3_0= ruleLiteral ) )
             	    {
-            	    otherlv_2=(Token)match(input,27,FOLLOW_27_in_ruleMapReferenceParams815); 
-
-            	        	newLeafNode(otherlv_2, grammarAccess.getMapReferenceParamsAccess().getCommaKeyword_2_0());
+            	    this_COMMA_2=(Token)match(input,RULE_COMMA,FOLLOW_RULE_COMMA_in_ruleMapReferenceParams814); 
+            	     
+            	        newLeafNode(this_COMMA_2, grammarAccess.getMapReferenceParamsAccess().getCOMMATerminalRuleCall_2_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:411:1: ( (lv_getterParams_3_0= ruleLiteral ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:412:1: (lv_getterParams_3_0= ruleLiteral )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:413:1: ( (lv_getterParams_3_0= ruleLiteral ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:414:1: (lv_getterParams_3_0= ruleLiteral )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:412:1: (lv_getterParams_3_0= ruleLiteral )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:413:3: lv_getterParams_3_0= ruleLiteral
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:414:1: (lv_getterParams_3_0= ruleLiteral )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:415:3: lv_getterParams_3_0= ruleLiteral
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getMapReferenceParamsAccess().getGetterParamsLiteralParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLiteral_in_ruleMapReferenceParams836);
+            	    pushFollow(FOLLOW_ruleLiteral_in_ruleMapReferenceParams834);
             	    lv_getterParams_3_0=ruleLiteral();
 
             	    state._fsp--;
@@ -1005,9 +1006,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,28,FOLLOW_28_in_ruleMapReferenceParams850); 
-
-                	newLeafNode(otherlv_4, grammarAccess.getMapReferenceParamsAccess().getRightParenthesisKeyword_3());
+            this_BRACKET_CLOSE_4=(Token)match(input,RULE_BRACKET_CLOSE,FOLLOW_RULE_BRACKET_CLOSE_in_ruleMapReferenceParams847); 
+             
+                newLeafNode(this_BRACKET_CLOSE_4, grammarAccess.getMapReferenceParamsAccess().getBRACKET_CLOSETerminalRuleCall_3()); 
                 
 
             }
@@ -1030,7 +1031,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleMapGetReference"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:441:1: entryRuleMapGetReference returns [EObject current=null] : iv_ruleMapGetReference= ruleMapGetReference EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:443:1: entryRuleMapGetReference returns [EObject current=null] : iv_ruleMapGetReference= ruleMapGetReference EOF ;
     public final EObject entryRuleMapGetReference() throws RecognitionException {
         EObject current = null;
 
@@ -1038,17 +1039,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:442:2: (iv_ruleMapGetReference= ruleMapGetReference EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:443:2: iv_ruleMapGetReference= ruleMapGetReference EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:444:2: (iv_ruleMapGetReference= ruleMapGetReference EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:445:2: iv_ruleMapGetReference= ruleMapGetReference EOF
             {
              newCompositeNode(grammarAccess.getMapGetReferenceRule()); 
-            pushFollow(FOLLOW_ruleMapGetReference_in_entryRuleMapGetReference886);
+            pushFollow(FOLLOW_ruleMapGetReference_in_entryRuleMapGetReference882);
             iv_ruleMapGetReference=ruleMapGetReference();
 
             state._fsp--;
 
              current =iv_ruleMapGetReference; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMapGetReference896); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMapGetReference892); 
 
             }
 
@@ -1066,7 +1067,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleMapGetReference"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:450:1: ruleMapGetReference returns [EObject current=null] : ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:452:1: ruleMapGetReference returns [EObject current=null] : ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? ) ;
     public final EObject ruleMapGetReference() throws RecognitionException {
         EObject current = null;
 
@@ -1080,19 +1081,19 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:453:28: ( ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:454:1: ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:455:28: ( ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:456:1: ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:454:1: ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:454:2: ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:456:1: ( ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:456:2: ( (lv_operations_0_0= RULE_DOLLAR ) ) ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )* ( (lv_elements_3_0= RULE_ID ) ) ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )?
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:454:2: ( (lv_operations_0_0= RULE_DOLLAR ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:455:1: (lv_operations_0_0= RULE_DOLLAR )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:456:2: ( (lv_operations_0_0= RULE_DOLLAR ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:457:1: (lv_operations_0_0= RULE_DOLLAR )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:455:1: (lv_operations_0_0= RULE_DOLLAR )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:456:3: lv_operations_0_0= RULE_DOLLAR
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:457:1: (lv_operations_0_0= RULE_DOLLAR )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:458:3: lv_operations_0_0= RULE_DOLLAR
             {
-            lv_operations_0_0=(Token)match(input,RULE_DOLLAR,FOLLOW_RULE_DOLLAR_in_ruleMapGetReference938); 
+            lv_operations_0_0=(Token)match(input,RULE_DOLLAR,FOLLOW_RULE_DOLLAR_in_ruleMapGetReference934); 
 
             			newLeafNode(lv_operations_0_0, grammarAccess.getMapGetReferenceAccess().getOperationsDOLLARTerminalRuleCall_0_0()); 
             		
@@ -1112,7 +1113,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:472:2: ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:474:2: ( ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR )*
             loop9:
             do {
                 int alt9=2;
@@ -1125,15 +1126,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                 switch (alt9) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:472:3: ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:474:3: ( (lv_elements_1_0= RULE_PARENT ) ) this_TML_SEPARATOR_2= RULE_TML_SEPARATOR
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:472:3: ( (lv_elements_1_0= RULE_PARENT ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:473:1: (lv_elements_1_0= RULE_PARENT )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:474:3: ( (lv_elements_1_0= RULE_PARENT ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:475:1: (lv_elements_1_0= RULE_PARENT )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:473:1: (lv_elements_1_0= RULE_PARENT )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:474:3: lv_elements_1_0= RULE_PARENT
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:475:1: (lv_elements_1_0= RULE_PARENT )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:476:3: lv_elements_1_0= RULE_PARENT
             	    {
-            	    lv_elements_1_0=(Token)match(input,RULE_PARENT,FOLLOW_RULE_PARENT_in_ruleMapGetReference961); 
+            	    lv_elements_1_0=(Token)match(input,RULE_PARENT,FOLLOW_RULE_PARENT_in_ruleMapGetReference957); 
 
             	    			newLeafNode(lv_elements_1_0, grammarAccess.getMapGetReferenceAccess().getElementsPARENTTerminalRuleCall_1_0_0()); 
             	    		
@@ -1153,7 +1154,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    this_TML_SEPARATOR_2=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleMapGetReference977); 
+            	    this_TML_SEPARATOR_2=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleMapGetReference973); 
             	     
             	        newLeafNode(this_TML_SEPARATOR_2, grammarAccess.getMapGetReferenceAccess().getTML_SEPARATORTerminalRuleCall_1_1()); 
             	        
@@ -1166,13 +1167,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                 }
             } while (true);
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:494:3: ( (lv_elements_3_0= RULE_ID ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:495:1: (lv_elements_3_0= RULE_ID )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:496:3: ( (lv_elements_3_0= RULE_ID ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:497:1: (lv_elements_3_0= RULE_ID )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:495:1: (lv_elements_3_0= RULE_ID )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:496:3: lv_elements_3_0= RULE_ID
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:497:1: (lv_elements_3_0= RULE_ID )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:498:3: lv_elements_3_0= RULE_ID
             {
-            lv_elements_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapGetReference995); 
+            lv_elements_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapGetReference991); 
 
             			newLeafNode(lv_elements_3_0, grammarAccess.getMapGetReferenceAccess().getElementsIDTerminalRuleCall_2_0()); 
             		
@@ -1192,24 +1193,24 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:512:2: ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:514:2: ( (lv_referenceParams_4_0= ruleMapReferenceParams ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==26) ) {
+            if ( (LA10_0==RULE_BRACKET_OPEN) ) {
                 alt10=1;
             }
             switch (alt10) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:513:1: (lv_referenceParams_4_0= ruleMapReferenceParams )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:515:1: (lv_referenceParams_4_0= ruleMapReferenceParams )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:513:1: (lv_referenceParams_4_0= ruleMapReferenceParams )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:514:3: lv_referenceParams_4_0= ruleMapReferenceParams
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:515:1: (lv_referenceParams_4_0= ruleMapReferenceParams )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:516:3: lv_referenceParams_4_0= ruleMapReferenceParams
                     {
                      
                     	        newCompositeNode(grammarAccess.getMapGetReferenceAccess().getReferenceParamsMapReferenceParamsParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleMapReferenceParams_in_ruleMapGetReference1021);
+                    pushFollow(FOLLOW_ruleMapReferenceParams_in_ruleMapGetReference1017);
                     lv_referenceParams_4_0=ruleMapReferenceParams();
 
                     state._fsp--;
@@ -1255,7 +1256,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleOrExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:538:1: entryRuleOrExpression returns [EObject current=null] : iv_ruleOrExpression= ruleOrExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:540:1: entryRuleOrExpression returns [EObject current=null] : iv_ruleOrExpression= ruleOrExpression EOF ;
     public final EObject entryRuleOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1263,17 +1264,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:539:2: (iv_ruleOrExpression= ruleOrExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:540:2: iv_ruleOrExpression= ruleOrExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:541:2: (iv_ruleOrExpression= ruleOrExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:542:2: iv_ruleOrExpression= ruleOrExpression EOF
             {
              newCompositeNode(grammarAccess.getOrExpressionRule()); 
-            pushFollow(FOLLOW_ruleOrExpression_in_entryRuleOrExpression1058);
+            pushFollow(FOLLOW_ruleOrExpression_in_entryRuleOrExpression1054);
             iv_ruleOrExpression=ruleOrExpression();
 
             state._fsp--;
 
              current =iv_ruleOrExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOrExpression1068); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOrExpression1064); 
 
             }
 
@@ -1291,7 +1292,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleOrExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:547:1: ruleOrExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:549:1: ruleOrExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* ) ;
     public final EObject ruleOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1304,22 +1305,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:550:28: ( ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:551:1: ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:552:28: ( ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:553:1: ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:551:1: ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:551:2: ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:553:1: ( ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:553:2: ( (lv_parameters_0_0= ruleAndExpression ) ) ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )*
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:551:2: ( (lv_parameters_0_0= ruleAndExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:552:1: (lv_parameters_0_0= ruleAndExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:553:2: ( (lv_parameters_0_0= ruleAndExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:554:1: (lv_parameters_0_0= ruleAndExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:552:1: (lv_parameters_0_0= ruleAndExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:553:3: lv_parameters_0_0= ruleAndExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:554:1: (lv_parameters_0_0= ruleAndExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:555:3: lv_parameters_0_0= ruleAndExpression
             {
              
             	        newCompositeNode(grammarAccess.getOrExpressionAccess().getParametersAndExpressionParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleAndExpression_in_ruleOrExpression1114);
+            pushFollow(FOLLOW_ruleAndExpression_in_ruleOrExpression1110);
             lv_parameters_0_0=ruleAndExpression();
 
             state._fsp--;
@@ -1341,36 +1342,40 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:569:2: ( ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:571:2: ( ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) ) )*
             loop11:
             do {
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( (LA11_0==29) ) {
+                if ( (LA11_0==RULE_OR) ) {
                     alt11=1;
                 }
 
 
                 switch (alt11) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:569:3: ( (lv_operations_1_0= 'OR' ) ) ( (lv_parameters_2_0= ruleAndExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:571:3: ( (lv_operations_1_0= RULE_OR ) ) ( (lv_parameters_2_0= ruleAndExpression ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:569:3: ( (lv_operations_1_0= 'OR' ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:570:1: (lv_operations_1_0= 'OR' )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:571:3: ( (lv_operations_1_0= RULE_OR ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:572:1: (lv_operations_1_0= RULE_OR )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:570:1: (lv_operations_1_0= 'OR' )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:571:3: lv_operations_1_0= 'OR'
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:572:1: (lv_operations_1_0= RULE_OR )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:573:3: lv_operations_1_0= RULE_OR
             	    {
-            	    lv_operations_1_0=(Token)match(input,29,FOLLOW_29_in_ruleOrExpression1133); 
+            	    lv_operations_1_0=(Token)match(input,RULE_OR,FOLLOW_RULE_OR_in_ruleOrExpression1128); 
 
-            	            newLeafNode(lv_operations_1_0, grammarAccess.getOrExpressionAccess().getOperationsORKeyword_1_0_0());
-            	        
+            	    			newLeafNode(lv_operations_1_0, grammarAccess.getOrExpressionAccess().getOperationsORTerminalRuleCall_1_0_0()); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = createModelElement(grammarAccess.getOrExpressionRule());
             	    	        }
-            	           		addWithLastConsumed(current, "operations", lv_operations_1_0, "OR");
+            	           		addWithLastConsumed(
+            	           			current, 
+            	           			"operations",
+            	            		lv_operations_1_0, 
+            	            		"OR");
             	    	    
 
             	    }
@@ -1378,16 +1383,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:584:2: ( (lv_parameters_2_0= ruleAndExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:585:1: (lv_parameters_2_0= ruleAndExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:589:2: ( (lv_parameters_2_0= ruleAndExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:590:1: (lv_parameters_2_0= ruleAndExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:585:1: (lv_parameters_2_0= ruleAndExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:586:3: lv_parameters_2_0= ruleAndExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:590:1: (lv_parameters_2_0= ruleAndExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:591:3: lv_parameters_2_0= ruleAndExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getOrExpressionAccess().getParametersAndExpressionParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAndExpression_in_ruleOrExpression1167);
+            	    pushFollow(FOLLOW_ruleAndExpression_in_ruleOrExpression1154);
             	    lv_parameters_2_0=ruleAndExpression();
 
             	    state._fsp--;
@@ -1439,7 +1444,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleAndExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:610:1: entryRuleAndExpression returns [EObject current=null] : iv_ruleAndExpression= ruleAndExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:615:1: entryRuleAndExpression returns [EObject current=null] : iv_ruleAndExpression= ruleAndExpression EOF ;
     public final EObject entryRuleAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1447,17 +1452,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:611:2: (iv_ruleAndExpression= ruleAndExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:612:2: iv_ruleAndExpression= ruleAndExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:616:2: (iv_ruleAndExpression= ruleAndExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:617:2: iv_ruleAndExpression= ruleAndExpression EOF
             {
              newCompositeNode(grammarAccess.getAndExpressionRule()); 
-            pushFollow(FOLLOW_ruleAndExpression_in_entryRuleAndExpression1205);
+            pushFollow(FOLLOW_ruleAndExpression_in_entryRuleAndExpression1192);
             iv_ruleAndExpression=ruleAndExpression();
 
             state._fsp--;
 
              current =iv_ruleAndExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAndExpression1215); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAndExpression1202); 
 
             }
 
@@ -1475,7 +1480,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAndExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:619:1: ruleAndExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:624:1: ruleAndExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* ) ;
     public final EObject ruleAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1488,22 +1493,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:622:28: ( ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:623:1: ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:627:28: ( ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:628:1: ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:623:1: ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:623:2: ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:628:1: ( ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:628:2: ( (lv_parameters_0_0= ruleEqualityExpression ) ) ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )*
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:623:2: ( (lv_parameters_0_0= ruleEqualityExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:624:1: (lv_parameters_0_0= ruleEqualityExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:628:2: ( (lv_parameters_0_0= ruleEqualityExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:629:1: (lv_parameters_0_0= ruleEqualityExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:624:1: (lv_parameters_0_0= ruleEqualityExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:625:3: lv_parameters_0_0= ruleEqualityExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:629:1: (lv_parameters_0_0= ruleEqualityExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:630:3: lv_parameters_0_0= ruleEqualityExpression
             {
              
             	        newCompositeNode(grammarAccess.getAndExpressionAccess().getParametersEqualityExpressionParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleEqualityExpression_in_ruleAndExpression1261);
+            pushFollow(FOLLOW_ruleEqualityExpression_in_ruleAndExpression1248);
             lv_parameters_0_0=ruleEqualityExpression();
 
             state._fsp--;
@@ -1525,36 +1530,40 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:641:2: ( ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:646:2: ( ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) ) )*
             loop12:
             do {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==30) ) {
+                if ( (LA12_0==RULE_AND) ) {
                     alt12=1;
                 }
 
 
                 switch (alt12) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:641:3: ( (lv_operations_1_0= 'AND' ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:646:3: ( (lv_operations_1_0= RULE_AND ) ) ( (lv_parameters_2_0= ruleEqualityExpression ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:641:3: ( (lv_operations_1_0= 'AND' ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:642:1: (lv_operations_1_0= 'AND' )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:646:3: ( (lv_operations_1_0= RULE_AND ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:647:1: (lv_operations_1_0= RULE_AND )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:642:1: (lv_operations_1_0= 'AND' )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:643:3: lv_operations_1_0= 'AND'
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:647:1: (lv_operations_1_0= RULE_AND )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:648:3: lv_operations_1_0= RULE_AND
             	    {
-            	    lv_operations_1_0=(Token)match(input,30,FOLLOW_30_in_ruleAndExpression1280); 
+            	    lv_operations_1_0=(Token)match(input,RULE_AND,FOLLOW_RULE_AND_in_ruleAndExpression1266); 
 
-            	            newLeafNode(lv_operations_1_0, grammarAccess.getAndExpressionAccess().getOperationsANDKeyword_1_0_0());
-            	        
+            	    			newLeafNode(lv_operations_1_0, grammarAccess.getAndExpressionAccess().getOperationsANDTerminalRuleCall_1_0_0()); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = createModelElement(grammarAccess.getAndExpressionRule());
             	    	        }
-            	           		addWithLastConsumed(current, "operations", lv_operations_1_0, "AND");
+            	           		addWithLastConsumed(
+            	           			current, 
+            	           			"operations",
+            	            		lv_operations_1_0, 
+            	            		"AND");
             	    	    
 
             	    }
@@ -1562,16 +1571,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:656:2: ( (lv_parameters_2_0= ruleEqualityExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:657:1: (lv_parameters_2_0= ruleEqualityExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:664:2: ( (lv_parameters_2_0= ruleEqualityExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:665:1: (lv_parameters_2_0= ruleEqualityExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:657:1: (lv_parameters_2_0= ruleEqualityExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:658:3: lv_parameters_2_0= ruleEqualityExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:665:1: (lv_parameters_2_0= ruleEqualityExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:666:3: lv_parameters_2_0= ruleEqualityExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getAndExpressionAccess().getParametersEqualityExpressionParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleEqualityExpression_in_ruleAndExpression1314);
+            	    pushFollow(FOLLOW_ruleEqualityExpression_in_ruleAndExpression1292);
             	    lv_parameters_2_0=ruleEqualityExpression();
 
             	    state._fsp--;
@@ -1623,7 +1632,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleEqualityExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:682:1: entryRuleEqualityExpression returns [EObject current=null] : iv_ruleEqualityExpression= ruleEqualityExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:690:1: entryRuleEqualityExpression returns [EObject current=null] : iv_ruleEqualityExpression= ruleEqualityExpression EOF ;
     public final EObject entryRuleEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1631,17 +1640,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:683:2: (iv_ruleEqualityExpression= ruleEqualityExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:684:2: iv_ruleEqualityExpression= ruleEqualityExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:691:2: (iv_ruleEqualityExpression= ruleEqualityExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:692:2: iv_ruleEqualityExpression= ruleEqualityExpression EOF
             {
              newCompositeNode(grammarAccess.getEqualityExpressionRule()); 
-            pushFollow(FOLLOW_ruleEqualityExpression_in_entryRuleEqualityExpression1352);
+            pushFollow(FOLLOW_ruleEqualityExpression_in_entryRuleEqualityExpression1330);
             iv_ruleEqualityExpression=ruleEqualityExpression();
 
             state._fsp--;
 
              current =iv_ruleEqualityExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEqualityExpression1362); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEqualityExpression1340); 
 
             }
 
@@ -1659,7 +1668,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleEqualityExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:691:1: ruleEqualityExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:699:1: ruleEqualityExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? ) ;
     public final EObject ruleEqualityExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1675,22 +1684,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:694:28: ( ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:695:1: ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:702:28: ( ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:703:1: ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:695:1: ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:695:2: ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:703:1: ( ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:703:2: ( (lv_parameters_0_0= ruleRelationalExpression ) ) ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )?
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:695:2: ( (lv_parameters_0_0= ruleRelationalExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:696:1: (lv_parameters_0_0= ruleRelationalExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:703:2: ( (lv_parameters_0_0= ruleRelationalExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:704:1: (lv_parameters_0_0= ruleRelationalExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:696:1: (lv_parameters_0_0= ruleRelationalExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:697:3: lv_parameters_0_0= ruleRelationalExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:704:1: (lv_parameters_0_0= ruleRelationalExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:705:3: lv_parameters_0_0= ruleRelationalExpression
             {
              
             	        newCompositeNode(grammarAccess.getEqualityExpressionAccess().getParametersRelationalExpressionParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1408);
+            pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1386);
             lv_parameters_0_0=ruleRelationalExpression();
 
             state._fsp--;
@@ -1712,38 +1721,42 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:713:2: ( ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:721:2: ( ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) ) | ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) ) )?
             int alt13=3;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==31) ) {
+            if ( (LA13_0==RULE_EQUALSEQUALS) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==32) ) {
+            else if ( (LA13_0==RULE_NEQUALS) ) {
                 alt13=2;
             }
             switch (alt13) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:713:3: ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:721:3: ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:713:3: ( ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:713:4: ( (lv_operations_1_0= '==' ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:721:3: ( ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:721:4: ( (lv_operations_1_0= RULE_EQUALSEQUALS ) ) ( (lv_parameters_2_0= ruleRelationalExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:713:4: ( (lv_operations_1_0= '==' ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:714:1: (lv_operations_1_0= '==' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:721:4: ( (lv_operations_1_0= RULE_EQUALSEQUALS ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:722:1: (lv_operations_1_0= RULE_EQUALSEQUALS )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:714:1: (lv_operations_1_0= '==' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:715:3: lv_operations_1_0= '=='
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:722:1: (lv_operations_1_0= RULE_EQUALSEQUALS )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:723:3: lv_operations_1_0= RULE_EQUALSEQUALS
                     {
-                    lv_operations_1_0=(Token)match(input,31,FOLLOW_31_in_ruleEqualityExpression1428); 
+                    lv_operations_1_0=(Token)match(input,RULE_EQUALSEQUALS,FOLLOW_RULE_EQUALSEQUALS_in_ruleEqualityExpression1405); 
 
-                            newLeafNode(lv_operations_1_0, grammarAccess.getEqualityExpressionAccess().getOperationsEqualsSignEqualsSignKeyword_1_0_0_0());
-                        
+                    			newLeafNode(lv_operations_1_0, grammarAccess.getEqualityExpressionAccess().getOperationsEQUALSEQUALSTerminalRuleCall_1_0_0_0()); 
+                    		
 
                     	        if (current==null) {
                     	            current = createModelElement(grammarAccess.getEqualityExpressionRule());
                     	        }
-                           		addWithLastConsumed(current, "operations", lv_operations_1_0, "==");
+                           		addWithLastConsumed(
+                           			current, 
+                           			"operations",
+                            		lv_operations_1_0, 
+                            		"EQUALSEQUALS");
                     	    
 
                     }
@@ -1751,16 +1764,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:728:2: ( (lv_parameters_2_0= ruleRelationalExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:729:1: (lv_parameters_2_0= ruleRelationalExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:739:2: ( (lv_parameters_2_0= ruleRelationalExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:740:1: (lv_parameters_2_0= ruleRelationalExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:729:1: (lv_parameters_2_0= ruleRelationalExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:730:3: lv_parameters_2_0= ruleRelationalExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:740:1: (lv_parameters_2_0= ruleRelationalExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:741:3: lv_parameters_2_0= ruleRelationalExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getEqualityExpressionAccess().getParametersRelationalExpressionParserRuleCall_1_0_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1462);
+                    pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1431);
                     lv_parameters_2_0=ruleRelationalExpression();
 
                     state._fsp--;
@@ -1789,26 +1802,30 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:747:6: ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:758:6: ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:747:6: ( ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:747:7: ( (lv_operations_3_0= '!=' ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:758:6: ( ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:758:7: ( (lv_operations_3_0= RULE_NEQUALS ) ) ( (lv_parameters_4_0= ruleRelationalExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:747:7: ( (lv_operations_3_0= '!=' ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:748:1: (lv_operations_3_0= '!=' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:758:7: ( (lv_operations_3_0= RULE_NEQUALS ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:759:1: (lv_operations_3_0= RULE_NEQUALS )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:748:1: (lv_operations_3_0= '!=' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:749:3: lv_operations_3_0= '!='
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:759:1: (lv_operations_3_0= RULE_NEQUALS )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:760:3: lv_operations_3_0= RULE_NEQUALS
                     {
-                    lv_operations_3_0=(Token)match(input,32,FOLLOW_32_in_ruleEqualityExpression1488); 
+                    lv_operations_3_0=(Token)match(input,RULE_NEQUALS,FOLLOW_RULE_NEQUALS_in_ruleEqualityExpression1456); 
 
-                            newLeafNode(lv_operations_3_0, grammarAccess.getEqualityExpressionAccess().getOperationsExclamationMarkEqualsSignKeyword_1_1_0_0());
-                        
+                    			newLeafNode(lv_operations_3_0, grammarAccess.getEqualityExpressionAccess().getOperationsNEQUALSTerminalRuleCall_1_1_0_0()); 
+                    		
 
                     	        if (current==null) {
                     	            current = createModelElement(grammarAccess.getEqualityExpressionRule());
                     	        }
-                           		addWithLastConsumed(current, "operations", lv_operations_3_0, "!=");
+                           		addWithLastConsumed(
+                           			current, 
+                           			"operations",
+                            		lv_operations_3_0, 
+                            		"NEQUALS");
                     	    
 
                     }
@@ -1816,16 +1833,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:762:2: ( (lv_parameters_4_0= ruleRelationalExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:763:1: (lv_parameters_4_0= ruleRelationalExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:776:2: ( (lv_parameters_4_0= ruleRelationalExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:777:1: (lv_parameters_4_0= ruleRelationalExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:763:1: (lv_parameters_4_0= ruleRelationalExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:764:3: lv_parameters_4_0= ruleRelationalExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:777:1: (lv_parameters_4_0= ruleRelationalExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:778:3: lv_parameters_4_0= ruleRelationalExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getEqualityExpressionAccess().getParametersRelationalExpressionParserRuleCall_1_1_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1522);
+                    pushFollow(FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1482);
                     lv_parameters_4_0=ruleRelationalExpression();
 
                     state._fsp--;
@@ -1877,7 +1894,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleRelationalExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:788:1: entryRuleRelationalExpression returns [EObject current=null] : iv_ruleRelationalExpression= ruleRelationalExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:802:1: entryRuleRelationalExpression returns [EObject current=null] : iv_ruleRelationalExpression= ruleRelationalExpression EOF ;
     public final EObject entryRuleRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1885,17 +1902,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:789:2: (iv_ruleRelationalExpression= ruleRelationalExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:790:2: iv_ruleRelationalExpression= ruleRelationalExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:803:2: (iv_ruleRelationalExpression= ruleRelationalExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:804:2: iv_ruleRelationalExpression= ruleRelationalExpression EOF
             {
              newCompositeNode(grammarAccess.getRelationalExpressionRule()); 
-            pushFollow(FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression1561);
+            pushFollow(FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression1521);
             iv_ruleRelationalExpression=ruleRelationalExpression();
 
             state._fsp--;
 
              current =iv_ruleRelationalExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRelationalExpression1571); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRelationalExpression1531); 
 
             }
 
@@ -1913,7 +1930,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleRelationalExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:797:1: ruleRelationalExpression returns [EObject current=null] : ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:811:1: ruleRelationalExpression returns [EObject current=null] : ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? ) ;
     public final EObject ruleRelationalExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1935,14 +1952,14 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:800:28: ( ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:801:1: ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:814:28: ( ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:815:1: ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:801:1: ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:801:2: () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:815:1: ( () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )? )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:815:2: () ( (lv_parameters_1_0= ruleAdditiveExpression ) ) ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )?
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:801:2: ()
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:802:5: 
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:815:2: ()
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:816:5: 
             {
 
                     current = forceCreateModelElement(
@@ -1952,16 +1969,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:807:2: ( (lv_parameters_1_0= ruleAdditiveExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:808:1: (lv_parameters_1_0= ruleAdditiveExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:821:2: ( (lv_parameters_1_0= ruleAdditiveExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:822:1: (lv_parameters_1_0= ruleAdditiveExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:808:1: (lv_parameters_1_0= ruleAdditiveExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:809:3: lv_parameters_1_0= ruleAdditiveExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:822:1: (lv_parameters_1_0= ruleAdditiveExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:823:3: lv_parameters_1_0= ruleAdditiveExpression
             {
              
             	        newCompositeNode(grammarAccess.getRelationalExpressionAccess().getParametersAdditiveExpressionParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1626);
+            pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1586);
             lv_parameters_1_0=ruleAdditiveExpression();
 
             state._fsp--;
@@ -1983,7 +2000,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:825:2: ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )?
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:839:2: ( ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) ) | ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) ) )?
             int alt14=5;
             switch ( input.LA(1) ) {
                 case RULE_XML_LT:
@@ -2010,18 +2027,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             switch (alt14) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:825:3: ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:839:3: ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:825:3: ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:825:4: ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:839:3: ( ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:839:4: ( (lv_operations_2_0= RULE_XML_LT ) ) ( (lv_parameters_3_0= ruleAdditiveExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:825:4: ( (lv_operations_2_0= RULE_XML_LT ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:826:1: (lv_operations_2_0= RULE_XML_LT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:839:4: ( (lv_operations_2_0= RULE_XML_LT ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:840:1: (lv_operations_2_0= RULE_XML_LT )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:826:1: (lv_operations_2_0= RULE_XML_LT )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:827:3: lv_operations_2_0= RULE_XML_LT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:840:1: (lv_operations_2_0= RULE_XML_LT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:841:3: lv_operations_2_0= RULE_XML_LT
                     {
-                    lv_operations_2_0=(Token)match(input,RULE_XML_LT,FOLLOW_RULE_XML_LT_in_ruleRelationalExpression1645); 
+                    lv_operations_2_0=(Token)match(input,RULE_XML_LT,FOLLOW_RULE_XML_LT_in_ruleRelationalExpression1605); 
 
                     			newLeafNode(lv_operations_2_0, grammarAccess.getRelationalExpressionAccess().getOperationsXML_LTTerminalRuleCall_2_0_0_0()); 
                     		
@@ -2041,16 +2058,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:843:2: ( (lv_parameters_3_0= ruleAdditiveExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:844:1: (lv_parameters_3_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:857:2: ( (lv_parameters_3_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:858:1: (lv_parameters_3_0= ruleAdditiveExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:844:1: (lv_parameters_3_0= ruleAdditiveExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:845:3: lv_parameters_3_0= ruleAdditiveExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:858:1: (lv_parameters_3_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:859:3: lv_parameters_3_0= ruleAdditiveExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getRelationalExpressionAccess().getParametersAdditiveExpressionParserRuleCall_2_0_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1671);
+                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1631);
                     lv_parameters_3_0=ruleAdditiveExpression();
 
                     state._fsp--;
@@ -2079,18 +2096,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:862:6: ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:876:6: ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:862:6: ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:862:7: ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:876:6: ( ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:876:7: ( (lv_operations_4_0= RULE_XML_GT ) ) ( (lv_parameters_5_0= ruleAdditiveExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:862:7: ( (lv_operations_4_0= RULE_XML_GT ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:863:1: (lv_operations_4_0= RULE_XML_GT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:876:7: ( (lv_operations_4_0= RULE_XML_GT ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:877:1: (lv_operations_4_0= RULE_XML_GT )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:863:1: (lv_operations_4_0= RULE_XML_GT )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:864:3: lv_operations_4_0= RULE_XML_GT
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:877:1: (lv_operations_4_0= RULE_XML_GT )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:878:3: lv_operations_4_0= RULE_XML_GT
                     {
-                    lv_operations_4_0=(Token)match(input,RULE_XML_GT,FOLLOW_RULE_XML_GT_in_ruleRelationalExpression1696); 
+                    lv_operations_4_0=(Token)match(input,RULE_XML_GT,FOLLOW_RULE_XML_GT_in_ruleRelationalExpression1656); 
 
                     			newLeafNode(lv_operations_4_0, grammarAccess.getRelationalExpressionAccess().getOperationsXML_GTTerminalRuleCall_2_1_0_0()); 
                     		
@@ -2110,16 +2127,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:880:2: ( (lv_parameters_5_0= ruleAdditiveExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:881:1: (lv_parameters_5_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:894:2: ( (lv_parameters_5_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:895:1: (lv_parameters_5_0= ruleAdditiveExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:881:1: (lv_parameters_5_0= ruleAdditiveExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:882:3: lv_parameters_5_0= ruleAdditiveExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:895:1: (lv_parameters_5_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:896:3: lv_parameters_5_0= ruleAdditiveExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getRelationalExpressionAccess().getParametersAdditiveExpressionParserRuleCall_2_1_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1722);
+                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1682);
                     lv_parameters_5_0=ruleAdditiveExpression();
 
                     state._fsp--;
@@ -2148,18 +2165,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:899:6: ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:913:6: ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:899:6: ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:899:7: ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:913:6: ( ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:913:7: ( (lv_operations_6_0= RULE_XML_LTEQ ) ) ( (lv_parameters_7_0= ruleAdditiveExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:899:7: ( (lv_operations_6_0= RULE_XML_LTEQ ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:900:1: (lv_operations_6_0= RULE_XML_LTEQ )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:913:7: ( (lv_operations_6_0= RULE_XML_LTEQ ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:914:1: (lv_operations_6_0= RULE_XML_LTEQ )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:900:1: (lv_operations_6_0= RULE_XML_LTEQ )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:901:3: lv_operations_6_0= RULE_XML_LTEQ
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:914:1: (lv_operations_6_0= RULE_XML_LTEQ )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:915:3: lv_operations_6_0= RULE_XML_LTEQ
                     {
-                    lv_operations_6_0=(Token)match(input,RULE_XML_LTEQ,FOLLOW_RULE_XML_LTEQ_in_ruleRelationalExpression1747); 
+                    lv_operations_6_0=(Token)match(input,RULE_XML_LTEQ,FOLLOW_RULE_XML_LTEQ_in_ruleRelationalExpression1707); 
 
                     			newLeafNode(lv_operations_6_0, grammarAccess.getRelationalExpressionAccess().getOperationsXML_LTEQTerminalRuleCall_2_2_0_0()); 
                     		
@@ -2179,16 +2196,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:917:2: ( (lv_parameters_7_0= ruleAdditiveExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:918:1: (lv_parameters_7_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:931:2: ( (lv_parameters_7_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:932:1: (lv_parameters_7_0= ruleAdditiveExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:918:1: (lv_parameters_7_0= ruleAdditiveExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:919:3: lv_parameters_7_0= ruleAdditiveExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:932:1: (lv_parameters_7_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:933:3: lv_parameters_7_0= ruleAdditiveExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getRelationalExpressionAccess().getParametersAdditiveExpressionParserRuleCall_2_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1773);
+                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1733);
                     lv_parameters_7_0=ruleAdditiveExpression();
 
                     state._fsp--;
@@ -2217,18 +2234,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:936:6: ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:950:6: ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:936:6: ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:936:7: ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:950:6: ( ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:950:7: ( (lv_operations_8_0= RULE_XML_GTEQ ) ) ( (lv_parameters_9_0= ruleAdditiveExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:936:7: ( (lv_operations_8_0= RULE_XML_GTEQ ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:937:1: (lv_operations_8_0= RULE_XML_GTEQ )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:950:7: ( (lv_operations_8_0= RULE_XML_GTEQ ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:951:1: (lv_operations_8_0= RULE_XML_GTEQ )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:937:1: (lv_operations_8_0= RULE_XML_GTEQ )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:938:3: lv_operations_8_0= RULE_XML_GTEQ
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:951:1: (lv_operations_8_0= RULE_XML_GTEQ )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:952:3: lv_operations_8_0= RULE_XML_GTEQ
                     {
-                    lv_operations_8_0=(Token)match(input,RULE_XML_GTEQ,FOLLOW_RULE_XML_GTEQ_in_ruleRelationalExpression1798); 
+                    lv_operations_8_0=(Token)match(input,RULE_XML_GTEQ,FOLLOW_RULE_XML_GTEQ_in_ruleRelationalExpression1758); 
 
                     			newLeafNode(lv_operations_8_0, grammarAccess.getRelationalExpressionAccess().getOperationsXML_GTEQTerminalRuleCall_2_3_0_0()); 
                     		
@@ -2248,16 +2265,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:954:2: ( (lv_parameters_9_0= ruleAdditiveExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:955:1: (lv_parameters_9_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:968:2: ( (lv_parameters_9_0= ruleAdditiveExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:969:1: (lv_parameters_9_0= ruleAdditiveExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:955:1: (lv_parameters_9_0= ruleAdditiveExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:956:3: lv_parameters_9_0= ruleAdditiveExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:969:1: (lv_parameters_9_0= ruleAdditiveExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:970:3: lv_parameters_9_0= ruleAdditiveExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getRelationalExpressionAccess().getParametersAdditiveExpressionParserRuleCall_2_3_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1824);
+                    pushFollow(FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1784);
                     lv_parameters_9_0=ruleAdditiveExpression();
 
                     state._fsp--;
@@ -2309,7 +2326,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleAdditiveExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:980:1: entryRuleAdditiveExpression returns [EObject current=null] : iv_ruleAdditiveExpression= ruleAdditiveExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:994:1: entryRuleAdditiveExpression returns [EObject current=null] : iv_ruleAdditiveExpression= ruleAdditiveExpression EOF ;
     public final EObject entryRuleAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2317,17 +2334,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:981:2: (iv_ruleAdditiveExpression= ruleAdditiveExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:982:2: iv_ruleAdditiveExpression= ruleAdditiveExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:995:2: (iv_ruleAdditiveExpression= ruleAdditiveExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:996:2: iv_ruleAdditiveExpression= ruleAdditiveExpression EOF
             {
              newCompositeNode(grammarAccess.getAdditiveExpressionRule()); 
-            pushFollow(FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression1863);
+            pushFollow(FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression1823);
             iv_ruleAdditiveExpression=ruleAdditiveExpression();
 
             state._fsp--;
 
              current =iv_ruleAdditiveExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAdditiveExpression1873); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAdditiveExpression1833); 
 
             }
 
@@ -2345,12 +2362,12 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleAdditiveExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:989:1: ruleAdditiveExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1003:1: ruleAdditiveExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* ) ;
     public final EObject ruleAdditiveExpression() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
-        Token otherlv_3=null;
+        Token this_PLUS_1=null;
+        Token this_MINUS_3=null;
         EObject lv_parameters_0_0 = null;
 
         EObject lv_parameters_2_0 = null;
@@ -2361,22 +2378,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:992:28: ( ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:993:1: ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1006:28: ( ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1007:1: ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:993:1: ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:993:2: ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1007:1: ( ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1007:2: ( (lv_parameters_0_0= ruleMultiplicativeExpression ) ) ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )*
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:993:2: ( (lv_parameters_0_0= ruleMultiplicativeExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:994:1: (lv_parameters_0_0= ruleMultiplicativeExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1007:2: ( (lv_parameters_0_0= ruleMultiplicativeExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1008:1: (lv_parameters_0_0= ruleMultiplicativeExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:994:1: (lv_parameters_0_0= ruleMultiplicativeExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:995:3: lv_parameters_0_0= ruleMultiplicativeExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1008:1: (lv_parameters_0_0= ruleMultiplicativeExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1009:3: lv_parameters_0_0= ruleMultiplicativeExpression
             {
              
             	        newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getParametersMultiplicativeExpressionParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1919);
+            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1879);
             lv_parameters_0_0=ruleMultiplicativeExpression();
 
             state._fsp--;
@@ -2398,41 +2415,41 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1011:2: ( (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1025:2: ( (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) ) | (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) ) )*
             loop15:
             do {
                 int alt15=3;
                 int LA15_0 = input.LA(1);
 
-                if ( (LA15_0==33) ) {
+                if ( (LA15_0==RULE_PLUS) ) {
                     alt15=1;
                 }
-                else if ( (LA15_0==34) ) {
+                else if ( (LA15_0==RULE_MINUS) ) {
                     alt15=2;
                 }
 
 
                 switch (alt15) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1011:3: (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1025:3: (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1011:3: (otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1011:5: otherlv_1= '+' ( (lv_parameters_2_0= ruleMultiplicativeExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1025:3: (this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1025:4: this_PLUS_1= RULE_PLUS ( (lv_parameters_2_0= ruleMultiplicativeExpression ) )
             	    {
-            	    otherlv_1=(Token)match(input,33,FOLLOW_33_in_ruleAdditiveExpression1933); 
-
-            	        	newLeafNode(otherlv_1, grammarAccess.getAdditiveExpressionAccess().getPlusSignKeyword_1_0_0());
+            	    this_PLUS_1=(Token)match(input,RULE_PLUS,FOLLOW_RULE_PLUS_in_ruleAdditiveExpression1892); 
+            	     
+            	        newLeafNode(this_PLUS_1, grammarAccess.getAdditiveExpressionAccess().getPLUSTerminalRuleCall_1_0_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1015:1: ( (lv_parameters_2_0= ruleMultiplicativeExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1016:1: (lv_parameters_2_0= ruleMultiplicativeExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1029:1: ( (lv_parameters_2_0= ruleMultiplicativeExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1030:1: (lv_parameters_2_0= ruleMultiplicativeExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1016:1: (lv_parameters_2_0= ruleMultiplicativeExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1017:3: lv_parameters_2_0= ruleMultiplicativeExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1030:1: (lv_parameters_2_0= ruleMultiplicativeExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1031:3: lv_parameters_2_0= ruleMultiplicativeExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getParametersMultiplicativeExpressionParserRuleCall_1_0_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1954);
+            	    pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1912);
             	    lv_parameters_2_0=ruleMultiplicativeExpression();
 
             	    state._fsp--;
@@ -2461,25 +2478,25 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             	    }
             	    break;
             	case 2 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1034:6: (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1048:6: (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1034:6: (otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1034:8: otherlv_3= '-' ( (lv_parameters_4_0= ruleMultiplicativeExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1048:6: (this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1048:7: this_MINUS_3= RULE_MINUS ( (lv_parameters_4_0= ruleMultiplicativeExpression ) )
             	    {
-            	    otherlv_3=(Token)match(input,34,FOLLOW_34_in_ruleAdditiveExpression1974); 
-
-            	        	newLeafNode(otherlv_3, grammarAccess.getAdditiveExpressionAccess().getHyphenMinusKeyword_1_1_0());
+            	    this_MINUS_3=(Token)match(input,RULE_MINUS,FOLLOW_RULE_MINUS_in_ruleAdditiveExpression1931); 
+            	     
+            	        newLeafNode(this_MINUS_3, grammarAccess.getAdditiveExpressionAccess().getMINUSTerminalRuleCall_1_1_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1038:1: ( (lv_parameters_4_0= ruleMultiplicativeExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1039:1: (lv_parameters_4_0= ruleMultiplicativeExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1052:1: ( (lv_parameters_4_0= ruleMultiplicativeExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1053:1: (lv_parameters_4_0= ruleMultiplicativeExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1039:1: (lv_parameters_4_0= ruleMultiplicativeExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1040:3: lv_parameters_4_0= ruleMultiplicativeExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1053:1: (lv_parameters_4_0= ruleMultiplicativeExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1054:3: lv_parameters_4_0= ruleMultiplicativeExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getAdditiveExpressionAccess().getParametersMultiplicativeExpressionParserRuleCall_1_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1995);
+            	    pushFollow(FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1951);
             	    lv_parameters_4_0=ruleMultiplicativeExpression();
 
             	    state._fsp--;
@@ -2534,7 +2551,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleMultiplicativeExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1064:1: entryRuleMultiplicativeExpression returns [EObject current=null] : iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1078:1: entryRuleMultiplicativeExpression returns [EObject current=null] : iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF ;
     public final EObject entryRuleMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2542,17 +2559,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1065:2: (iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1066:2: iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1079:2: (iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1080:2: iv_ruleMultiplicativeExpression= ruleMultiplicativeExpression EOF
             {
              newCompositeNode(grammarAccess.getMultiplicativeExpressionRule()); 
-            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression2034);
+            pushFollow(FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression1990);
             iv_ruleMultiplicativeExpression=ruleMultiplicativeExpression();
 
             state._fsp--;
 
              current =iv_ruleMultiplicativeExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMultiplicativeExpression2044); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMultiplicativeExpression2000); 
 
             }
 
@@ -2570,7 +2587,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleMultiplicativeExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1073:1: ruleMultiplicativeExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1087:1: ruleMultiplicativeExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* ) ;
     public final EObject ruleMultiplicativeExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2586,22 +2603,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1076:28: ( ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1077:1: ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1090:28: ( ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1091:1: ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1077:1: ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1077:2: ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1091:1: ( ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )* )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1091:2: ( (lv_parameters_0_0= ruleUnaryExpression ) ) ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )*
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1077:2: ( (lv_parameters_0_0= ruleUnaryExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1078:1: (lv_parameters_0_0= ruleUnaryExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1091:2: ( (lv_parameters_0_0= ruleUnaryExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1092:1: (lv_parameters_0_0= ruleUnaryExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1078:1: (lv_parameters_0_0= ruleUnaryExpression )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1079:3: lv_parameters_0_0= ruleUnaryExpression
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1092:1: (lv_parameters_0_0= ruleUnaryExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1093:3: lv_parameters_0_0= ruleUnaryExpression
             {
              
             	        newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getParametersUnaryExpressionParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2090);
+            pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2046);
             lv_parameters_0_0=ruleUnaryExpression();
 
             state._fsp--;
@@ -2623,13 +2640,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1095:2: ( ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )*
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1109:2: ( ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) ) | ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) ) )*
             loop16:
             do {
                 int alt16=3;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==35) ) {
+                if ( (LA16_0==RULE_MULTIPLY) ) {
                     alt16=1;
                 }
                 else if ( (LA16_0==RULE_TML_SEPARATOR) ) {
@@ -2639,26 +2656,30 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                 switch (alt16) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1095:3: ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1109:3: ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1095:3: ( ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1095:4: ( (lv_operations_1_0= '*' ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1109:3: ( ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1109:4: ( (lv_operations_1_0= RULE_MULTIPLY ) ) ( (lv_parameters_2_0= ruleUnaryExpression ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1095:4: ( (lv_operations_1_0= '*' ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1096:1: (lv_operations_1_0= '*' )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1109:4: ( (lv_operations_1_0= RULE_MULTIPLY ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1110:1: (lv_operations_1_0= RULE_MULTIPLY )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1096:1: (lv_operations_1_0= '*' )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1097:3: lv_operations_1_0= '*'
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1110:1: (lv_operations_1_0= RULE_MULTIPLY )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1111:3: lv_operations_1_0= RULE_MULTIPLY
             	    {
-            	    lv_operations_1_0=(Token)match(input,35,FOLLOW_35_in_ruleMultiplicativeExpression2110); 
+            	    lv_operations_1_0=(Token)match(input,RULE_MULTIPLY,FOLLOW_RULE_MULTIPLY_in_ruleMultiplicativeExpression2065); 
 
-            	            newLeafNode(lv_operations_1_0, grammarAccess.getMultiplicativeExpressionAccess().getOperationsAsteriskKeyword_1_0_0_0());
-            	        
+            	    			newLeafNode(lv_operations_1_0, grammarAccess.getMultiplicativeExpressionAccess().getOperationsMULTIPLYTerminalRuleCall_1_0_0_0()); 
+            	    		
 
             	    	        if (current==null) {
             	    	            current = createModelElement(grammarAccess.getMultiplicativeExpressionRule());
             	    	        }
-            	           		addWithLastConsumed(current, "operations", lv_operations_1_0, "*");
+            	           		addWithLastConsumed(
+            	           			current, 
+            	           			"operations",
+            	            		lv_operations_1_0, 
+            	            		"MULTIPLY");
             	    	    
 
             	    }
@@ -2666,16 +2687,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1110:2: ( (lv_parameters_2_0= ruleUnaryExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1111:1: (lv_parameters_2_0= ruleUnaryExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1127:2: ( (lv_parameters_2_0= ruleUnaryExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1128:1: (lv_parameters_2_0= ruleUnaryExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1111:1: (lv_parameters_2_0= ruleUnaryExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1112:3: lv_parameters_2_0= ruleUnaryExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1128:1: (lv_parameters_2_0= ruleUnaryExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1129:3: lv_parameters_2_0= ruleUnaryExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getParametersUnaryExpressionParserRuleCall_1_0_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2144);
+            	    pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2091);
             	    lv_parameters_2_0=ruleUnaryExpression();
 
             	    state._fsp--;
@@ -2704,18 +2725,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             	    }
             	    break;
             	case 2 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1129:6: ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1146:6: ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1129:6: ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1129:7: ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1146:6: ( ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1146:7: ( (lv_operations_3_0= RULE_TML_SEPARATOR ) ) ( (lv_parameters_4_0= ruleUnaryExpression ) )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1129:7: ( (lv_operations_3_0= RULE_TML_SEPARATOR ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1130:1: (lv_operations_3_0= RULE_TML_SEPARATOR )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1146:7: ( (lv_operations_3_0= RULE_TML_SEPARATOR ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1147:1: (lv_operations_3_0= RULE_TML_SEPARATOR )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1130:1: (lv_operations_3_0= RULE_TML_SEPARATOR )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1131:3: lv_operations_3_0= RULE_TML_SEPARATOR
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1147:1: (lv_operations_3_0= RULE_TML_SEPARATOR )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1148:3: lv_operations_3_0= RULE_TML_SEPARATOR
             	    {
-            	    lv_operations_3_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleMultiplicativeExpression2169); 
+            	    lv_operations_3_0=(Token)match(input,RULE_TML_SEPARATOR,FOLLOW_RULE_TML_SEPARATOR_in_ruleMultiplicativeExpression2116); 
 
             	    			newLeafNode(lv_operations_3_0, grammarAccess.getMultiplicativeExpressionAccess().getOperationsTML_SEPARATORTerminalRuleCall_1_1_0_0()); 
             	    		
@@ -2735,16 +2756,16 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             	    }
 
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1147:2: ( (lv_parameters_4_0= ruleUnaryExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1148:1: (lv_parameters_4_0= ruleUnaryExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1164:2: ( (lv_parameters_4_0= ruleUnaryExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1165:1: (lv_parameters_4_0= ruleUnaryExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1148:1: (lv_parameters_4_0= ruleUnaryExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1149:3: lv_parameters_4_0= ruleUnaryExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1165:1: (lv_parameters_4_0= ruleUnaryExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1166:3: lv_parameters_4_0= ruleUnaryExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getParametersUnaryExpressionParserRuleCall_1_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2195);
+            	    pushFollow(FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2142);
             	    lv_parameters_4_0=ruleUnaryExpression();
 
             	    state._fsp--;
@@ -2799,7 +2820,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleUnaryExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1173:1: entryRuleUnaryExpression returns [EObject current=null] : iv_ruleUnaryExpression= ruleUnaryExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1190:1: entryRuleUnaryExpression returns [EObject current=null] : iv_ruleUnaryExpression= ruleUnaryExpression EOF ;
     public final EObject entryRuleUnaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2807,17 +2828,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1174:2: (iv_ruleUnaryExpression= ruleUnaryExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1175:2: iv_ruleUnaryExpression= ruleUnaryExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1191:2: (iv_ruleUnaryExpression= ruleUnaryExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1192:2: iv_ruleUnaryExpression= ruleUnaryExpression EOF
             {
              newCompositeNode(grammarAccess.getUnaryExpressionRule()); 
-            pushFollow(FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression2234);
+            pushFollow(FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression2181);
             iv_ruleUnaryExpression=ruleUnaryExpression();
 
             state._fsp--;
 
              current =iv_ruleUnaryExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleUnaryExpression2244); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleUnaryExpression2191); 
 
             }
 
@@ -2835,98 +2856,200 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleUnaryExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1182:1: ruleUnaryExpression returns [EObject current=null] : ( ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | this_PrimaryExpression_2= rulePrimaryExpression ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1199:1: ruleUnaryExpression returns [EObject current=null] : ( ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) ) | this_PrimaryExpression_4= rulePrimaryExpression ) ;
     public final EObject ruleUnaryExpression() throws RecognitionException {
         EObject current = null;
 
         Token lv_operations_0_0=null;
+        Token lv_operations_2_0=null;
         EObject lv_parameters_1_0 = null;
 
-        EObject this_PrimaryExpression_2 = null;
+        EObject lv_parameters_3_0 = null;
+
+        EObject this_PrimaryExpression_4 = null;
 
 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1185:28: ( ( ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | this_PrimaryExpression_2= rulePrimaryExpression ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:1: ( ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | this_PrimaryExpression_2= rulePrimaryExpression )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1202:28: ( ( ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) ) | this_PrimaryExpression_4= rulePrimaryExpression ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:1: ( ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) ) | this_PrimaryExpression_4= rulePrimaryExpression )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:1: ( ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | this_PrimaryExpression_2= rulePrimaryExpression )
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:1: ( ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) ) | this_PrimaryExpression_4= rulePrimaryExpression )
+            int alt18=2;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA17_0==36) ) {
-                alt17=1;
+            if ( (LA18_0==RULE_MINUS||LA18_0==RULE_NOT) ) {
+                alt18=1;
             }
-            else if ( (LA17_0==RULE_ID||LA17_0==RULE_SQBRACKET_OPEN||(LA17_0>=RULE_TML_EXISTS && LA17_0<=RULE_DOLLAR)||(LA17_0>=RULE_NUMBER && LA17_0<=RULE_FALSE)||LA17_0==26||LA17_0==38) ) {
-                alt17=2;
+            else if ( (LA18_0==RULE_ID||LA18_0==RULE_SQBRACKET_OPEN||(LA18_0>=RULE_TML_EXISTS && LA18_0<=RULE_BRACKET_OPEN)||LA18_0==RULE_DOLLAR||LA18_0==RULE_NUMBER||(LA18_0>=RULE_LITERALSTRING && LA18_0<=RULE_CURLYOPEN)||(LA18_0>=RULE_NULL && LA18_0<=RULE_FALSE)) ) {
+                alt18=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 17, 0, input);
+                    new NoViableAltException("", 18, 0, input);
 
                 throw nvae;
             }
-            switch (alt17) {
+            switch (alt18) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:2: ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:2: ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:2: ( ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:3: ( (lv_operations_0_0= '!' ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) )
-                    {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1186:3: ( (lv_operations_0_0= '!' ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1187:1: (lv_operations_0_0= '!' )
-                    {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1187:1: (lv_operations_0_0= '!' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1188:3: lv_operations_0_0= '!'
-                    {
-                    lv_operations_0_0=(Token)match(input,36,FOLLOW_36_in_ruleUnaryExpression2288); 
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:2: ( ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) ) | ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) ) )
+                    int alt17=2;
+                    int LA17_0 = input.LA(1);
 
-                            newLeafNode(lv_operations_0_0, grammarAccess.getUnaryExpressionAccess().getOperationsExclamationMarkKeyword_0_0_0());
-                        
-
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getUnaryExpressionRule());
-                    	        }
-                           		addWithLastConsumed(current, "operations", lv_operations_0_0, "!");
-                    	    
-
+                    if ( (LA17_0==RULE_NOT) ) {
+                        alt17=1;
                     }
-
-
+                    else if ( (LA17_0==RULE_MINUS) ) {
+                        alt17=2;
                     }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("", 17, 0, input);
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1201:2: ( (lv_parameters_1_0= rulePrimaryExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1202:1: (lv_parameters_1_0= rulePrimaryExpression )
-                    {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1202:1: (lv_parameters_1_0= rulePrimaryExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:3: lv_parameters_1_0= rulePrimaryExpression
-                    {
-                     
-                    	        newCompositeNode(grammarAccess.getUnaryExpressionAccess().getParametersPrimaryExpressionParserRuleCall_0_1_0()); 
-                    	    
-                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2322);
-                    lv_parameters_1_0=rulePrimaryExpression();
-
-                    state._fsp--;
-
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getUnaryExpressionRule());
-                    	        }
-                           		add(
-                           			current, 
-                           			"parameters",
-                            		lv_parameters_1_0, 
-                            		"PrimaryExpression");
-                    	        afterParserOrEnumRuleCall();
-                    	    
-
+                        throw nvae;
                     }
+                    switch (alt17) {
+                        case 1 :
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:3: ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:3: ( ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:4: ( (lv_operations_0_0= RULE_NOT ) ) ( (lv_parameters_1_0= rulePrimaryExpression ) )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1203:4: ( (lv_operations_0_0= RULE_NOT ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1204:1: (lv_operations_0_0= RULE_NOT )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1204:1: (lv_operations_0_0= RULE_NOT )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1205:3: lv_operations_0_0= RULE_NOT
+                            {
+                            lv_operations_0_0=(Token)match(input,RULE_NOT,FOLLOW_RULE_NOT_in_ruleUnaryExpression2235); 
+
+                            			newLeafNode(lv_operations_0_0, grammarAccess.getUnaryExpressionAccess().getOperationsNOTTerminalRuleCall_0_0_0_0()); 
+                            		
+
+                            	        if (current==null) {
+                            	            current = createModelElement(grammarAccess.getUnaryExpressionRule());
+                            	        }
+                                   		addWithLastConsumed(
+                                   			current, 
+                                   			"operations",
+                                    		lv_operations_0_0, 
+                                    		"NOT");
+                            	    
+
+                            }
 
 
-                    }
+                            }
 
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1221:2: ( (lv_parameters_1_0= rulePrimaryExpression ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1222:1: (lv_parameters_1_0= rulePrimaryExpression )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1222:1: (lv_parameters_1_0= rulePrimaryExpression )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1223:3: lv_parameters_1_0= rulePrimaryExpression
+                            {
+                             
+                            	        newCompositeNode(grammarAccess.getUnaryExpressionAccess().getParametersPrimaryExpressionParserRuleCall_0_0_1_0()); 
+                            	    
+                            pushFollow(FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2261);
+                            lv_parameters_1_0=rulePrimaryExpression();
+
+                            state._fsp--;
+
+
+                            	        if (current==null) {
+                            	            current = createModelElementForParent(grammarAccess.getUnaryExpressionRule());
+                            	        }
+                                   		add(
+                                   			current, 
+                                   			"parameters",
+                                    		lv_parameters_1_0, 
+                                    		"PrimaryExpression");
+                            	        afterParserOrEnumRuleCall();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+                        case 2 :
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1240:6: ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1240:6: ( ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1240:7: ( (lv_operations_2_0= RULE_MINUS ) ) ( (lv_parameters_3_0= rulePrimaryExpression ) )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1240:7: ( (lv_operations_2_0= RULE_MINUS ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1241:1: (lv_operations_2_0= RULE_MINUS )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1241:1: (lv_operations_2_0= RULE_MINUS )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1242:3: lv_operations_2_0= RULE_MINUS
+                            {
+                            lv_operations_2_0=(Token)match(input,RULE_MINUS,FOLLOW_RULE_MINUS_in_ruleUnaryExpression2286); 
+
+                            			newLeafNode(lv_operations_2_0, grammarAccess.getUnaryExpressionAccess().getOperationsMINUSTerminalRuleCall_0_1_0_0()); 
+                            		
+
+                            	        if (current==null) {
+                            	            current = createModelElement(grammarAccess.getUnaryExpressionRule());
+                            	        }
+                                   		addWithLastConsumed(
+                                   			current, 
+                                   			"operations",
+                                    		lv_operations_2_0, 
+                                    		"MINUS");
+                            	    
+
+                            }
+
+
+                            }
+
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1258:2: ( (lv_parameters_3_0= rulePrimaryExpression ) )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1259:1: (lv_parameters_3_0= rulePrimaryExpression )
+                            {
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1259:1: (lv_parameters_3_0= rulePrimaryExpression )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1260:3: lv_parameters_3_0= rulePrimaryExpression
+                            {
+                             
+                            	        newCompositeNode(grammarAccess.getUnaryExpressionAccess().getParametersPrimaryExpressionParserRuleCall_0_1_1_0()); 
+                            	    
+                            pushFollow(FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2312);
+                            lv_parameters_3_0=rulePrimaryExpression();
+
+                            state._fsp--;
+
+
+                            	        if (current==null) {
+                            	            current = createModelElementForParent(grammarAccess.getUnaryExpressionRule());
+                            	        }
+                                   		add(
+                                   			current, 
+                                   			"parameters",
+                                    		lv_parameters_3_0, 
+                                    		"PrimaryExpression");
+                            	        afterParserOrEnumRuleCall();
+                            	    
+
+                            }
+
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
@@ -2934,18 +3057,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1221:5: this_PrimaryExpression_2= rulePrimaryExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1278:5: this_PrimaryExpression_4= rulePrimaryExpression
                     {
                      
                             newCompositeNode(grammarAccess.getUnaryExpressionAccess().getPrimaryExpressionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2351);
-                    this_PrimaryExpression_2=rulePrimaryExpression();
+                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2342);
+                    this_PrimaryExpression_4=rulePrimaryExpression();
 
                     state._fsp--;
 
                      
-                            current = this_PrimaryExpression_2; 
+                            current = this_PrimaryExpression_4; 
                             afterParserOrEnumRuleCall();
                         
 
@@ -2972,7 +3095,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRulePrimaryExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1237:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1294:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
     public final EObject entryRulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -2980,17 +3103,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1238:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1239:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1295:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1296:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
             {
              newCompositeNode(grammarAccess.getPrimaryExpressionRule()); 
-            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression2386);
+            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression2377);
             iv_rulePrimaryExpression=rulePrimaryExpression();
 
             state._fsp--;
 
              current =iv_rulePrimaryExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression2396); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression2387); 
 
             }
 
@@ -3008,12 +3131,12 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "rulePrimaryExpression"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1246:1: rulePrimaryExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleLiteral ) ) | (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' ) ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1303:1: rulePrimaryExpression returns [EObject current=null] : ( ( (lv_parameters_0_0= ruleLiteral ) ) | (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE ) ) ;
     public final EObject rulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
-        Token otherlv_3=null;
+        Token this_BRACKET_OPEN_1=null;
+        Token this_BRACKET_CLOSE_3=null;
         EObject lv_parameters_0_0 = null;
 
         EObject lv_parameters_2_0 = null;
@@ -3022,39 +3145,39 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1249:28: ( ( ( (lv_parameters_0_0= ruleLiteral ) ) | (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' ) ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1250:1: ( ( (lv_parameters_0_0= ruleLiteral ) ) | (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1306:28: ( ( ( (lv_parameters_0_0= ruleLiteral ) ) | (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE ) ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1307:1: ( ( (lv_parameters_0_0= ruleLiteral ) ) | (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE ) )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1250:1: ( ( (lv_parameters_0_0= ruleLiteral ) ) | (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' ) )
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1307:1: ( ( (lv_parameters_0_0= ruleLiteral ) ) | (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE ) )
+            int alt19=2;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA18_0==RULE_ID||LA18_0==RULE_SQBRACKET_OPEN||(LA18_0>=RULE_TML_EXISTS && LA18_0<=RULE_DOLLAR)||(LA18_0>=RULE_NUMBER && LA18_0<=RULE_FALSE)||LA18_0==38) ) {
-                alt18=1;
+            if ( (LA19_0==RULE_ID||LA19_0==RULE_SQBRACKET_OPEN||LA19_0==RULE_TML_EXISTS||LA19_0==RULE_DOLLAR||LA19_0==RULE_NUMBER||(LA19_0>=RULE_LITERALSTRING && LA19_0<=RULE_CURLYOPEN)||(LA19_0>=RULE_NULL && LA19_0<=RULE_FALSE)) ) {
+                alt19=1;
             }
-            else if ( (LA18_0==26) ) {
-                alt18=2;
+            else if ( (LA19_0==RULE_BRACKET_OPEN) ) {
+                alt19=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 18, 0, input);
+                    new NoViableAltException("", 19, 0, input);
 
                 throw nvae;
             }
-            switch (alt18) {
+            switch (alt19) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1250:2: ( (lv_parameters_0_0= ruleLiteral ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1307:2: ( (lv_parameters_0_0= ruleLiteral ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1250:2: ( (lv_parameters_0_0= ruleLiteral ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1251:1: (lv_parameters_0_0= ruleLiteral )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1307:2: ( (lv_parameters_0_0= ruleLiteral ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1308:1: (lv_parameters_0_0= ruleLiteral )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1251:1: (lv_parameters_0_0= ruleLiteral )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1252:3: lv_parameters_0_0= ruleLiteral
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1308:1: (lv_parameters_0_0= ruleLiteral )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1309:3: lv_parameters_0_0= ruleLiteral
                     {
                      
                     	        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getParametersLiteralParserRuleCall_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleLiteral_in_rulePrimaryExpression2442);
+                    pushFollow(FOLLOW_ruleLiteral_in_rulePrimaryExpression2433);
                     lv_parameters_0_0=ruleLiteral();
 
                     state._fsp--;
@@ -3080,25 +3203,25 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1269:6: (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1326:6: (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1269:6: (otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1269:8: otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) ) otherlv_3= ')'
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1326:6: (this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1326:7: this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) ) this_BRACKET_CLOSE_3= RULE_BRACKET_CLOSE
                     {
-                    otherlv_1=(Token)match(input,26,FOLLOW_26_in_rulePrimaryExpression2461); 
-
-                        	newLeafNode(otherlv_1, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_1_0());
+                    this_BRACKET_OPEN_1=(Token)match(input,RULE_BRACKET_OPEN,FOLLOW_RULE_BRACKET_OPEN_in_rulePrimaryExpression2451); 
+                     
+                        newLeafNode(this_BRACKET_OPEN_1, grammarAccess.getPrimaryExpressionAccess().getBRACKET_OPENTerminalRuleCall_1_0()); 
                         
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1273:1: ( (lv_parameters_2_0= ruleOrExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1274:1: (lv_parameters_2_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1330:1: ( (lv_parameters_2_0= ruleOrExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1331:1: (lv_parameters_2_0= ruleOrExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1274:1: (lv_parameters_2_0= ruleOrExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1275:3: lv_parameters_2_0= ruleOrExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1331:1: (lv_parameters_2_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1332:3: lv_parameters_2_0= ruleOrExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getParametersOrExpressionParserRuleCall_1_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleOrExpression_in_rulePrimaryExpression2482);
+                    pushFollow(FOLLOW_ruleOrExpression_in_rulePrimaryExpression2471);
                     lv_parameters_2_0=ruleOrExpression();
 
                     state._fsp--;
@@ -3120,9 +3243,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    otherlv_3=(Token)match(input,28,FOLLOW_28_in_rulePrimaryExpression2494); 
-
-                        	newLeafNode(otherlv_3, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_1_2());
+                    this_BRACKET_CLOSE_3=(Token)match(input,RULE_BRACKET_CLOSE,FOLLOW_RULE_BRACKET_CLOSE_in_rulePrimaryExpression2482); 
+                     
+                        newLeafNode(this_BRACKET_CLOSE_3, grammarAccess.getPrimaryExpressionAccess().getBRACKET_CLOSETerminalRuleCall_1_2()); 
                         
 
                     }
@@ -3151,7 +3274,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleFunctionName"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1303:1: entryRuleFunctionName returns [String current=null] : iv_ruleFunctionName= ruleFunctionName EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1360:1: entryRuleFunctionName returns [String current=null] : iv_ruleFunctionName= ruleFunctionName EOF ;
     public final String entryRuleFunctionName() throws RecognitionException {
         String current = null;
 
@@ -3159,17 +3282,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1304:2: (iv_ruleFunctionName= ruleFunctionName EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1305:2: iv_ruleFunctionName= ruleFunctionName EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1361:2: (iv_ruleFunctionName= ruleFunctionName EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1362:2: iv_ruleFunctionName= ruleFunctionName EOF
             {
              newCompositeNode(grammarAccess.getFunctionNameRule()); 
-            pushFollow(FOLLOW_ruleFunctionName_in_entryRuleFunctionName2532);
+            pushFollow(FOLLOW_ruleFunctionName_in_entryRuleFunctionName2519);
             iv_ruleFunctionName=ruleFunctionName();
 
             state._fsp--;
 
              current =iv_ruleFunctionName.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionName2543); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionName2530); 
 
             }
 
@@ -3187,7 +3310,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleFunctionName"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1312:1: ruleFunctionName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1369:1: ruleFunctionName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleFunctionName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3196,10 +3319,10 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1315:28: (this_ID_0= RULE_ID )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1316:5: this_ID_0= RULE_ID
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1372:28: (this_ID_0= RULE_ID )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1373:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFunctionName2582); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFunctionName2569); 
 
             		current.merge(this_ID_0);
                 
@@ -3224,7 +3347,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleFunctionCall"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1331:1: entryRuleFunctionCall returns [EObject current=null] : iv_ruleFunctionCall= ruleFunctionCall EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1388:1: entryRuleFunctionCall returns [EObject current=null] : iv_ruleFunctionCall= ruleFunctionCall EOF ;
     public final EObject entryRuleFunctionCall() throws RecognitionException {
         EObject current = null;
 
@@ -3232,17 +3355,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1332:2: (iv_ruleFunctionCall= ruleFunctionCall EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1333:2: iv_ruleFunctionCall= ruleFunctionCall EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1389:2: (iv_ruleFunctionCall= ruleFunctionCall EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1390:2: iv_ruleFunctionCall= ruleFunctionCall EOF
             {
              newCompositeNode(grammarAccess.getFunctionCallRule()); 
-            pushFollow(FOLLOW_ruleFunctionCall_in_entryRuleFunctionCall2626);
+            pushFollow(FOLLOW_ruleFunctionCall_in_entryRuleFunctionCall2613);
             iv_ruleFunctionCall=ruleFunctionCall();
 
             state._fsp--;
 
              current =iv_ruleFunctionCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionCall2636); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionCall2623); 
 
             }
 
@@ -3260,13 +3383,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleFunctionCall"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1340:1: ruleFunctionCall returns [EObject current=null] : ( ( (lv_name_0_0= ruleFunctionName ) ) otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) )? (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )* otherlv_5= ')' ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1397:1: ruleFunctionCall returns [EObject current=null] : ( ( (lv_name_0_0= ruleFunctionName ) ) this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) )? (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )* this_BRACKET_CLOSE_5= RULE_BRACKET_CLOSE ) ;
     public final EObject ruleFunctionCall() throws RecognitionException {
         EObject current = null;
 
-        Token otherlv_1=null;
-        Token otherlv_3=null;
-        Token otherlv_5=null;
+        Token this_BRACKET_OPEN_1=null;
+        Token this_COMMA_3=null;
+        Token this_BRACKET_CLOSE_5=null;
         AntlrDatatypeRuleToken lv_name_0_0 = null;
 
         EObject lv_parameters_2_0 = null;
@@ -3277,22 +3400,22 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1343:28: ( ( ( (lv_name_0_0= ruleFunctionName ) ) otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) )? (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )* otherlv_5= ')' ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1344:1: ( ( (lv_name_0_0= ruleFunctionName ) ) otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) )? (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )* otherlv_5= ')' )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1400:28: ( ( ( (lv_name_0_0= ruleFunctionName ) ) this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) )? (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )* this_BRACKET_CLOSE_5= RULE_BRACKET_CLOSE ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1401:1: ( ( (lv_name_0_0= ruleFunctionName ) ) this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) )? (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )* this_BRACKET_CLOSE_5= RULE_BRACKET_CLOSE )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1344:1: ( ( (lv_name_0_0= ruleFunctionName ) ) otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) )? (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )* otherlv_5= ')' )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1344:2: ( (lv_name_0_0= ruleFunctionName ) ) otherlv_1= '(' ( (lv_parameters_2_0= ruleOrExpression ) )? (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )* otherlv_5= ')'
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1401:1: ( ( (lv_name_0_0= ruleFunctionName ) ) this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) )? (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )* this_BRACKET_CLOSE_5= RULE_BRACKET_CLOSE )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1401:2: ( (lv_name_0_0= ruleFunctionName ) ) this_BRACKET_OPEN_1= RULE_BRACKET_OPEN ( (lv_parameters_2_0= ruleOrExpression ) )? (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )* this_BRACKET_CLOSE_5= RULE_BRACKET_CLOSE
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1344:2: ( (lv_name_0_0= ruleFunctionName ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1345:1: (lv_name_0_0= ruleFunctionName )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1401:2: ( (lv_name_0_0= ruleFunctionName ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1402:1: (lv_name_0_0= ruleFunctionName )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1345:1: (lv_name_0_0= ruleFunctionName )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1346:3: lv_name_0_0= ruleFunctionName
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1402:1: (lv_name_0_0= ruleFunctionName )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1403:3: lv_name_0_0= ruleFunctionName
             {
              
             	        newCompositeNode(grammarAccess.getFunctionCallAccess().getNameFunctionNameParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleFunctionName_in_ruleFunctionCall2682);
+            pushFollow(FOLLOW_ruleFunctionName_in_ruleFunctionCall2669);
             lv_name_0_0=ruleFunctionName();
 
             state._fsp--;
@@ -3314,28 +3437,28 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleFunctionCall2694); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getFunctionCallAccess().getLeftParenthesisKeyword_1());
+            this_BRACKET_OPEN_1=(Token)match(input,RULE_BRACKET_OPEN,FOLLOW_RULE_BRACKET_OPEN_in_ruleFunctionCall2680); 
+             
+                newLeafNode(this_BRACKET_OPEN_1, grammarAccess.getFunctionCallAccess().getBRACKET_OPENTerminalRuleCall_1()); 
                 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1366:1: ( (lv_parameters_2_0= ruleOrExpression ) )?
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1423:1: ( (lv_parameters_2_0= ruleOrExpression ) )?
+            int alt20=2;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA19_0==RULE_ID||LA19_0==RULE_SQBRACKET_OPEN||(LA19_0>=RULE_TML_EXISTS && LA19_0<=RULE_DOLLAR)||(LA19_0>=RULE_NUMBER && LA19_0<=RULE_FALSE)||LA19_0==26||LA19_0==36||LA19_0==38) ) {
-                alt19=1;
+            if ( (LA20_0==RULE_ID||LA20_0==RULE_SQBRACKET_OPEN||(LA20_0>=RULE_TML_EXISTS && LA20_0<=RULE_BRACKET_OPEN)||LA20_0==RULE_DOLLAR||LA20_0==RULE_MINUS||(LA20_0>=RULE_NOT && LA20_0<=RULE_NUMBER)||(LA20_0>=RULE_LITERALSTRING && LA20_0<=RULE_CURLYOPEN)||(LA20_0>=RULE_NULL && LA20_0<=RULE_FALSE)) ) {
+                alt20=1;
             }
-            switch (alt19) {
+            switch (alt20) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1367:1: (lv_parameters_2_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1424:1: (lv_parameters_2_0= ruleOrExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1367:1: (lv_parameters_2_0= ruleOrExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1368:3: lv_parameters_2_0= ruleOrExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1424:1: (lv_parameters_2_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1425:3: lv_parameters_2_0= ruleOrExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getFunctionCallAccess().getParametersOrExpressionParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleOrExpression_in_ruleFunctionCall2715);
+                    pushFollow(FOLLOW_ruleOrExpression_in_ruleFunctionCall2700);
                     lv_parameters_2_0=ruleOrExpression();
 
                     state._fsp--;
@@ -3360,35 +3483,35 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1384:3: (otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) ) )*
-            loop20:
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1441:3: (this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) ) )*
+            loop21:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt21=2;
+                int LA21_0 = input.LA(1);
 
-                if ( (LA20_0==27) ) {
-                    alt20=1;
+                if ( (LA21_0==RULE_COMMA) ) {
+                    alt21=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt21) {
             	case 1 :
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1384:5: otherlv_3= ',' ( (lv_parameters_4_0= ruleOrExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1441:4: this_COMMA_3= RULE_COMMA ( (lv_parameters_4_0= ruleOrExpression ) )
             	    {
-            	    otherlv_3=(Token)match(input,27,FOLLOW_27_in_ruleFunctionCall2729); 
-
-            	        	newLeafNode(otherlv_3, grammarAccess.getFunctionCallAccess().getCommaKeyword_3_0());
+            	    this_COMMA_3=(Token)match(input,RULE_COMMA,FOLLOW_RULE_COMMA_in_ruleFunctionCall2713); 
+            	     
+            	        newLeafNode(this_COMMA_3, grammarAccess.getFunctionCallAccess().getCOMMATerminalRuleCall_3_0()); 
             	        
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1388:1: ( (lv_parameters_4_0= ruleOrExpression ) )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1389:1: (lv_parameters_4_0= ruleOrExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1445:1: ( (lv_parameters_4_0= ruleOrExpression ) )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1446:1: (lv_parameters_4_0= ruleOrExpression )
             	    {
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1389:1: (lv_parameters_4_0= ruleOrExpression )
-            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1390:3: lv_parameters_4_0= ruleOrExpression
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1446:1: (lv_parameters_4_0= ruleOrExpression )
+            	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1447:3: lv_parameters_4_0= ruleOrExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getFunctionCallAccess().getParametersOrExpressionParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleOrExpression_in_ruleFunctionCall2750);
+            	    pushFollow(FOLLOW_ruleOrExpression_in_ruleFunctionCall2733);
             	    lv_parameters_4_0=ruleOrExpression();
 
             	    state._fsp--;
@@ -3415,13 +3538,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop21;
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,28,FOLLOW_28_in_ruleFunctionCall2764); 
-
-                	newLeafNode(otherlv_5, grammarAccess.getFunctionCallAccess().getRightParenthesisKeyword_4());
+            this_BRACKET_CLOSE_5=(Token)match(input,RULE_BRACKET_CLOSE,FOLLOW_RULE_BRACKET_CLOSE_in_ruleFunctionCall2746); 
+             
+                newLeafNode(this_BRACKET_CLOSE_5, grammarAccess.getFunctionCallAccess().getBRACKET_CLOSETerminalRuleCall_4()); 
                 
 
             }
@@ -3444,7 +3567,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleDateLiteral"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1418:1: entryRuleDateLiteral returns [EObject current=null] : iv_ruleDateLiteral= ruleDateLiteral EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1475:1: entryRuleDateLiteral returns [EObject current=null] : iv_ruleDateLiteral= ruleDateLiteral EOF ;
     public final EObject entryRuleDateLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -3452,17 +3575,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1419:2: (iv_ruleDateLiteral= ruleDateLiteral EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1420:2: iv_ruleDateLiteral= ruleDateLiteral EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1476:2: (iv_ruleDateLiteral= ruleDateLiteral EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1477:2: iv_ruleDateLiteral= ruleDateLiteral EOF
             {
              newCompositeNode(grammarAccess.getDateLiteralRule()); 
-            pushFollow(FOLLOW_ruleDateLiteral_in_entryRuleDateLiteral2800);
+            pushFollow(FOLLOW_ruleDateLiteral_in_entryRuleDateLiteral2781);
             iv_ruleDateLiteral=ruleDateLiteral();
 
             state._fsp--;
 
              current =iv_ruleDateLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDateLiteral2810); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDateLiteral2791); 
 
             }
 
@@ -3480,33 +3603,33 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleDateLiteral"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1427:1: ruleDateLiteral returns [EObject current=null] : ( () this_NUMBER_1= RULE_NUMBER otherlv_2= '#' this_NUMBER_3= RULE_NUMBER otherlv_4= '#' this_NUMBER_5= RULE_NUMBER otherlv_6= '#' this_NUMBER_7= RULE_NUMBER otherlv_8= '#' this_NUMBER_9= RULE_NUMBER otherlv_10= '#' this_NUMBER_11= RULE_NUMBER ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1484:1: ruleDateLiteral returns [EObject current=null] : ( () this_NUMBER_1= RULE_NUMBER this_HASH_2= RULE_HASH this_NUMBER_3= RULE_NUMBER this_HASH_4= RULE_HASH this_NUMBER_5= RULE_NUMBER this_HASH_6= RULE_HASH this_NUMBER_7= RULE_NUMBER this_HASH_8= RULE_HASH this_NUMBER_9= RULE_NUMBER this_HASH_10= RULE_HASH this_NUMBER_11= RULE_NUMBER ) ;
     public final EObject ruleDateLiteral() throws RecognitionException {
         EObject current = null;
 
         Token this_NUMBER_1=null;
-        Token otherlv_2=null;
+        Token this_HASH_2=null;
         Token this_NUMBER_3=null;
-        Token otherlv_4=null;
+        Token this_HASH_4=null;
         Token this_NUMBER_5=null;
-        Token otherlv_6=null;
+        Token this_HASH_6=null;
         Token this_NUMBER_7=null;
-        Token otherlv_8=null;
+        Token this_HASH_8=null;
         Token this_NUMBER_9=null;
-        Token otherlv_10=null;
+        Token this_HASH_10=null;
         Token this_NUMBER_11=null;
 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1430:28: ( ( () this_NUMBER_1= RULE_NUMBER otherlv_2= '#' this_NUMBER_3= RULE_NUMBER otherlv_4= '#' this_NUMBER_5= RULE_NUMBER otherlv_6= '#' this_NUMBER_7= RULE_NUMBER otherlv_8= '#' this_NUMBER_9= RULE_NUMBER otherlv_10= '#' this_NUMBER_11= RULE_NUMBER ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1431:1: ( () this_NUMBER_1= RULE_NUMBER otherlv_2= '#' this_NUMBER_3= RULE_NUMBER otherlv_4= '#' this_NUMBER_5= RULE_NUMBER otherlv_6= '#' this_NUMBER_7= RULE_NUMBER otherlv_8= '#' this_NUMBER_9= RULE_NUMBER otherlv_10= '#' this_NUMBER_11= RULE_NUMBER )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1487:28: ( ( () this_NUMBER_1= RULE_NUMBER this_HASH_2= RULE_HASH this_NUMBER_3= RULE_NUMBER this_HASH_4= RULE_HASH this_NUMBER_5= RULE_NUMBER this_HASH_6= RULE_HASH this_NUMBER_7= RULE_NUMBER this_HASH_8= RULE_HASH this_NUMBER_9= RULE_NUMBER this_HASH_10= RULE_HASH this_NUMBER_11= RULE_NUMBER ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1488:1: ( () this_NUMBER_1= RULE_NUMBER this_HASH_2= RULE_HASH this_NUMBER_3= RULE_NUMBER this_HASH_4= RULE_HASH this_NUMBER_5= RULE_NUMBER this_HASH_6= RULE_HASH this_NUMBER_7= RULE_NUMBER this_HASH_8= RULE_HASH this_NUMBER_9= RULE_NUMBER this_HASH_10= RULE_HASH this_NUMBER_11= RULE_NUMBER )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1431:1: ( () this_NUMBER_1= RULE_NUMBER otherlv_2= '#' this_NUMBER_3= RULE_NUMBER otherlv_4= '#' this_NUMBER_5= RULE_NUMBER otherlv_6= '#' this_NUMBER_7= RULE_NUMBER otherlv_8= '#' this_NUMBER_9= RULE_NUMBER otherlv_10= '#' this_NUMBER_11= RULE_NUMBER )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1431:2: () this_NUMBER_1= RULE_NUMBER otherlv_2= '#' this_NUMBER_3= RULE_NUMBER otherlv_4= '#' this_NUMBER_5= RULE_NUMBER otherlv_6= '#' this_NUMBER_7= RULE_NUMBER otherlv_8= '#' this_NUMBER_9= RULE_NUMBER otherlv_10= '#' this_NUMBER_11= RULE_NUMBER
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1488:1: ( () this_NUMBER_1= RULE_NUMBER this_HASH_2= RULE_HASH this_NUMBER_3= RULE_NUMBER this_HASH_4= RULE_HASH this_NUMBER_5= RULE_NUMBER this_HASH_6= RULE_HASH this_NUMBER_7= RULE_NUMBER this_HASH_8= RULE_HASH this_NUMBER_9= RULE_NUMBER this_HASH_10= RULE_HASH this_NUMBER_11= RULE_NUMBER )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1488:2: () this_NUMBER_1= RULE_NUMBER this_HASH_2= RULE_HASH this_NUMBER_3= RULE_NUMBER this_HASH_4= RULE_HASH this_NUMBER_5= RULE_NUMBER this_HASH_6= RULE_HASH this_NUMBER_7= RULE_NUMBER this_HASH_8= RULE_HASH this_NUMBER_9= RULE_NUMBER this_HASH_10= RULE_HASH this_NUMBER_11= RULE_NUMBER
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1431:2: ()
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1432:5: 
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1488:2: ()
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1489:5: 
             {
 
                     current = forceCreateModelElement(
@@ -3516,47 +3639,47 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
             }
 
-            this_NUMBER_1=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2855); 
+            this_NUMBER_1=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2836); 
              
                 newLeafNode(this_NUMBER_1, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_1()); 
                 
-            otherlv_2=(Token)match(input,37,FOLLOW_37_in_ruleDateLiteral2866); 
-
-                	newLeafNode(otherlv_2, grammarAccess.getDateLiteralAccess().getNumberSignKeyword_2());
+            this_HASH_2=(Token)match(input,RULE_HASH,FOLLOW_RULE_HASH_in_ruleDateLiteral2846); 
+             
+                newLeafNode(this_HASH_2, grammarAccess.getDateLiteralAccess().getHASHTerminalRuleCall_2()); 
                 
-            this_NUMBER_3=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2877); 
+            this_NUMBER_3=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2856); 
              
                 newLeafNode(this_NUMBER_3, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_3()); 
                 
-            otherlv_4=(Token)match(input,37,FOLLOW_37_in_ruleDateLiteral2888); 
-
-                	newLeafNode(otherlv_4, grammarAccess.getDateLiteralAccess().getNumberSignKeyword_4());
+            this_HASH_4=(Token)match(input,RULE_HASH,FOLLOW_RULE_HASH_in_ruleDateLiteral2866); 
+             
+                newLeafNode(this_HASH_4, grammarAccess.getDateLiteralAccess().getHASHTerminalRuleCall_4()); 
                 
-            this_NUMBER_5=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2899); 
+            this_NUMBER_5=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2876); 
              
                 newLeafNode(this_NUMBER_5, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_5()); 
                 
-            otherlv_6=(Token)match(input,37,FOLLOW_37_in_ruleDateLiteral2910); 
-
-                	newLeafNode(otherlv_6, grammarAccess.getDateLiteralAccess().getNumberSignKeyword_6());
+            this_HASH_6=(Token)match(input,RULE_HASH,FOLLOW_RULE_HASH_in_ruleDateLiteral2886); 
+             
+                newLeafNode(this_HASH_6, grammarAccess.getDateLiteralAccess().getHASHTerminalRuleCall_6()); 
                 
-            this_NUMBER_7=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2921); 
+            this_NUMBER_7=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2896); 
              
                 newLeafNode(this_NUMBER_7, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_7()); 
                 
-            otherlv_8=(Token)match(input,37,FOLLOW_37_in_ruleDateLiteral2932); 
-
-                	newLeafNode(otherlv_8, grammarAccess.getDateLiteralAccess().getNumberSignKeyword_8());
+            this_HASH_8=(Token)match(input,RULE_HASH,FOLLOW_RULE_HASH_in_ruleDateLiteral2906); 
+             
+                newLeafNode(this_HASH_8, grammarAccess.getDateLiteralAccess().getHASHTerminalRuleCall_8()); 
                 
-            this_NUMBER_9=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2943); 
+            this_NUMBER_9=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2916); 
              
                 newLeafNode(this_NUMBER_9, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_9()); 
                 
-            otherlv_10=(Token)match(input,37,FOLLOW_37_in_ruleDateLiteral2954); 
-
-                	newLeafNode(otherlv_10, grammarAccess.getDateLiteralAccess().getNumberSignKeyword_10());
+            this_HASH_10=(Token)match(input,RULE_HASH,FOLLOW_RULE_HASH_in_ruleDateLiteral2926); 
+             
+                newLeafNode(this_HASH_10, grammarAccess.getDateLiteralAccess().getHASHTerminalRuleCall_10()); 
                 
-            this_NUMBER_11=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2965); 
+            this_NUMBER_11=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleDateLiteral2936); 
              
                 newLeafNode(this_NUMBER_11, grammarAccess.getDateLiteralAccess().getNUMBERTerminalRuleCall_11()); 
                 
@@ -3581,7 +3704,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "entryRuleLiteral"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1489:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1546:1: entryRuleLiteral returns [EObject current=null] : iv_ruleLiteral= ruleLiteral EOF ;
     public final EObject entryRuleLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -3589,17 +3712,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1490:2: (iv_ruleLiteral= ruleLiteral EOF )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1491:2: iv_ruleLiteral= ruleLiteral EOF
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1547:2: (iv_ruleLiteral= ruleLiteral EOF )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1548:2: iv_ruleLiteral= ruleLiteral EOF
             {
              newCompositeNode(grammarAccess.getLiteralRule()); 
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral3000);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral2971);
             iv_ruleLiteral=ruleLiteral();
 
             state._fsp--;
 
              current =iv_ruleLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral3010); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral2981); 
 
             }
 
@@ -3617,20 +3740,20 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
 
     // $ANTLR start "ruleLiteral"
-    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1498:1: ruleLiteral returns [EObject current=null] : ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) ) ;
+    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1555:1: ruleLiteral returns [EObject current=null] : ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) ) ;
     public final EObject ruleLiteral() throws RecognitionException {
         EObject current = null;
 
         Token this_NUMBER_1=null;
         Token lv_valueString_2_0=null;
         Token lv_operations_3_0=null;
-        Token otherlv_4=null;
+        Token this_BRACKET_OPEN_4=null;
         Token lv_valueString_5_0=null;
-        Token otherlv_6=null;
-        Token otherlv_8=null;
+        Token this_COMMA_6=null;
+        Token this_BRACKET_CLOSE_8=null;
         Token lv_expressionType_10_0=null;
-        Token otherlv_12=null;
-        Token otherlv_14=null;
+        Token this_COMMA_12=null;
+        Token this_CURLYCLOSE_14=null;
         Token lv_elements_15_0=null;
         Token lv_elements_16_0=null;
         Token lv_elements_17_0=null;
@@ -3655,21 +3778,21 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
          enterRule(); 
             
         try {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1501:28: ( ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) ) )
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1558:28: ( ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) ) )
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )
             {
-            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )
-            int alt23=13;
-            alt23 = dfa23.predict(input);
-            switch (alt23) {
+            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )
+            int alt24=13;
+            alt24 = dfa24.predict(input);
+            switch (alt24) {
                 case 1 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:2: ( () this_NUMBER_1= RULE_NUMBER )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:2: ( () this_NUMBER_1= RULE_NUMBER )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:2: ( () this_NUMBER_1= RULE_NUMBER )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:3: () this_NUMBER_1= RULE_NUMBER
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:2: ( () this_NUMBER_1= RULE_NUMBER )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:3: () this_NUMBER_1= RULE_NUMBER
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1502:3: ()
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1503:5: 
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1559:3: ()
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1560:5: 
                     {
 
                             current = forceCreateModelElement(
@@ -3679,7 +3802,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    this_NUMBER_1=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleLiteral3056); 
+                    this_NUMBER_1=(Token)match(input,RULE_NUMBER,FOLLOW_RULE_NUMBER_in_ruleLiteral3027); 
                      
                         newLeafNode(this_NUMBER_1, grammarAccess.getLiteralAccess().getNUMBERTerminalRuleCall_0_1()); 
                         
@@ -3690,15 +3813,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 2 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1513:6: ( (lv_valueString_2_0= RULE_LITERALSTRING ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1570:6: ( (lv_valueString_2_0= RULE_LITERALSTRING ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1513:6: ( (lv_valueString_2_0= RULE_LITERALSTRING ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1514:1: (lv_valueString_2_0= RULE_LITERALSTRING )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1570:6: ( (lv_valueString_2_0= RULE_LITERALSTRING ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1571:1: (lv_valueString_2_0= RULE_LITERALSTRING )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1514:1: (lv_valueString_2_0= RULE_LITERALSTRING )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1515:3: lv_valueString_2_0= RULE_LITERALSTRING
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1571:1: (lv_valueString_2_0= RULE_LITERALSTRING )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1572:3: lv_valueString_2_0= RULE_LITERALSTRING
                     {
-                    lv_valueString_2_0=(Token)match(input,RULE_LITERALSTRING,FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3079); 
+                    lv_valueString_2_0=(Token)match(input,RULE_LITERALSTRING,FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3050); 
 
                     			newLeafNode(lv_valueString_2_0, grammarAccess.getLiteralAccess().getValueStringLITERALSTRINGTerminalRuleCall_1_0()); 
                     		
@@ -3722,18 +3845,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 3 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1532:6: ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1589:6: ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1532:6: ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1532:7: ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')'
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1589:6: ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1589:7: ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1532:7: ( (lv_operations_3_0= RULE_FORALL ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1533:1: (lv_operations_3_0= RULE_FORALL )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1589:7: ( (lv_operations_3_0= RULE_FORALL ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1590:1: (lv_operations_3_0= RULE_FORALL )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1533:1: (lv_operations_3_0= RULE_FORALL )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1534:3: lv_operations_3_0= RULE_FORALL
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1590:1: (lv_operations_3_0= RULE_FORALL )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1591:3: lv_operations_3_0= RULE_FORALL
                     {
-                    lv_operations_3_0=(Token)match(input,RULE_FORALL,FOLLOW_RULE_FORALL_in_ruleLiteral3108); 
+                    lv_operations_3_0=(Token)match(input,RULE_FORALL,FOLLOW_RULE_FORALL_in_ruleLiteral3079); 
 
                     			newLeafNode(lv_operations_3_0, grammarAccess.getLiteralAccess().getOperationsFORALLTerminalRuleCall_2_0_0()); 
                     		
@@ -3753,17 +3876,17 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    otherlv_4=(Token)match(input,26,FOLLOW_26_in_ruleLiteral3125); 
-
-                        	newLeafNode(otherlv_4, grammarAccess.getLiteralAccess().getLeftParenthesisKeyword_2_1());
+                    this_BRACKET_OPEN_4=(Token)match(input,RULE_BRACKET_OPEN,FOLLOW_RULE_BRACKET_OPEN_in_ruleLiteral3095); 
+                     
+                        newLeafNode(this_BRACKET_OPEN_4, grammarAccess.getLiteralAccess().getBRACKET_OPENTerminalRuleCall_2_1()); 
                         
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1554:1: ( (lv_valueString_5_0= RULE_LITERALSTRING ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1555:1: (lv_valueString_5_0= RULE_LITERALSTRING )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1611:1: ( (lv_valueString_5_0= RULE_LITERALSTRING ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1612:1: (lv_valueString_5_0= RULE_LITERALSTRING )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1555:1: (lv_valueString_5_0= RULE_LITERALSTRING )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1556:3: lv_valueString_5_0= RULE_LITERALSTRING
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1612:1: (lv_valueString_5_0= RULE_LITERALSTRING )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1613:3: lv_valueString_5_0= RULE_LITERALSTRING
                     {
-                    lv_valueString_5_0=(Token)match(input,RULE_LITERALSTRING,FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3142); 
+                    lv_valueString_5_0=(Token)match(input,RULE_LITERALSTRING,FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3111); 
 
                     			newLeafNode(lv_valueString_5_0, grammarAccess.getLiteralAccess().getValueStringLITERALSTRINGTerminalRuleCall_2_2_0()); 
                     		
@@ -3783,20 +3906,20 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    otherlv_6=(Token)match(input,27,FOLLOW_27_in_ruleLiteral3159); 
-
-                        	newLeafNode(otherlv_6, grammarAccess.getLiteralAccess().getCommaKeyword_2_3());
+                    this_COMMA_6=(Token)match(input,RULE_COMMA,FOLLOW_RULE_COMMA_in_ruleLiteral3127); 
+                     
+                        newLeafNode(this_COMMA_6, grammarAccess.getLiteralAccess().getCOMMATerminalRuleCall_2_3()); 
                         
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1576:1: ( (lv_parameters_7_0= ruleOrExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1577:1: (lv_parameters_7_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1633:1: ( (lv_parameters_7_0= ruleOrExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1634:1: (lv_parameters_7_0= ruleOrExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1577:1: (lv_parameters_7_0= ruleOrExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1578:3: lv_parameters_7_0= ruleOrExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1634:1: (lv_parameters_7_0= ruleOrExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1635:3: lv_parameters_7_0= ruleOrExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersOrExpressionParserRuleCall_2_4_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3180);
+                    pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3147);
                     lv_parameters_7_0=ruleOrExpression();
 
                     state._fsp--;
@@ -3818,9 +3941,9 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    otherlv_8=(Token)match(input,28,FOLLOW_28_in_ruleLiteral3192); 
-
-                        	newLeafNode(otherlv_8, grammarAccess.getLiteralAccess().getRightParenthesisKeyword_2_5());
+                    this_BRACKET_CLOSE_8=(Token)match(input,RULE_BRACKET_CLOSE,FOLLOW_RULE_BRACKET_CLOSE_in_ruleLiteral3158); 
+                     
+                        newLeafNode(this_BRACKET_CLOSE_8, grammarAccess.getLiteralAccess().getBRACKET_CLOSETerminalRuleCall_2_5()); 
                         
 
                     }
@@ -3829,18 +3952,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 4 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1599:6: ( (lv_parameters_9_0= ruleFunctionCall ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1656:6: ( (lv_parameters_9_0= ruleFunctionCall ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1599:6: ( (lv_parameters_9_0= ruleFunctionCall ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1600:1: (lv_parameters_9_0= ruleFunctionCall )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1656:6: ( (lv_parameters_9_0= ruleFunctionCall ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1657:1: (lv_parameters_9_0= ruleFunctionCall )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1600:1: (lv_parameters_9_0= ruleFunctionCall )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1601:3: lv_parameters_9_0= ruleFunctionCall
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1657:1: (lv_parameters_9_0= ruleFunctionCall )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1658:3: lv_parameters_9_0= ruleFunctionCall
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersFunctionCallParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFunctionCall_in_ruleLiteral3220);
+                    pushFollow(FOLLOW_ruleFunctionCall_in_ruleLiteral3185);
                     lv_parameters_9_0=ruleFunctionCall();
 
                     state._fsp--;
@@ -3866,26 +3989,30 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 5 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1618:6: ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1675:6: ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1618:6: ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1618:7: ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}'
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1675:6: ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1675:7: ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1618:7: ( (lv_expressionType_10_0= '{' ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1619:1: (lv_expressionType_10_0= '{' )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1675:7: ( (lv_expressionType_10_0= RULE_CURLYOPEN ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1676:1: (lv_expressionType_10_0= RULE_CURLYOPEN )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1619:1: (lv_expressionType_10_0= '{' )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1620:3: lv_expressionType_10_0= '{'
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1676:1: (lv_expressionType_10_0= RULE_CURLYOPEN )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1677:3: lv_expressionType_10_0= RULE_CURLYOPEN
                     {
-                    lv_expressionType_10_0=(Token)match(input,38,FOLLOW_38_in_ruleLiteral3245); 
+                    lv_expressionType_10_0=(Token)match(input,RULE_CURLYOPEN,FOLLOW_RULE_CURLYOPEN_in_ruleLiteral3209); 
 
-                            newLeafNode(lv_expressionType_10_0, grammarAccess.getLiteralAccess().getExpressionTypeLeftCurlyBracketKeyword_4_0_0());
-                        
+                    			newLeafNode(lv_expressionType_10_0, grammarAccess.getLiteralAccess().getExpressionTypeCURLYOPENTerminalRuleCall_4_0_0()); 
+                    		
 
                     	        if (current==null) {
                     	            current = createModelElement(grammarAccess.getLiteralRule());
                     	        }
-                           		setWithLastConsumed(current, "expressionType", lv_expressionType_10_0, "{");
+                           		setWithLastConsumed(
+                           			current, 
+                           			"expressionType",
+                            		lv_expressionType_10_0, 
+                            		"CURLYOPEN");
                     	    
 
                     }
@@ -3893,24 +4020,24 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1633:2: ( (lv_parameters_11_0= ruleOrExpression ) )?
-                    int alt21=2;
-                    int LA21_0 = input.LA(1);
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1693:2: ( (lv_parameters_11_0= ruleOrExpression ) )?
+                    int alt22=2;
+                    int LA22_0 = input.LA(1);
 
-                    if ( (LA21_0==RULE_ID||LA21_0==RULE_SQBRACKET_OPEN||(LA21_0>=RULE_TML_EXISTS && LA21_0<=RULE_DOLLAR)||(LA21_0>=RULE_NUMBER && LA21_0<=RULE_FALSE)||LA21_0==26||LA21_0==36||LA21_0==38) ) {
-                        alt21=1;
+                    if ( (LA22_0==RULE_ID||LA22_0==RULE_SQBRACKET_OPEN||(LA22_0>=RULE_TML_EXISTS && LA22_0<=RULE_BRACKET_OPEN)||LA22_0==RULE_DOLLAR||LA22_0==RULE_MINUS||(LA22_0>=RULE_NOT && LA22_0<=RULE_NUMBER)||(LA22_0>=RULE_LITERALSTRING && LA22_0<=RULE_CURLYOPEN)||(LA22_0>=RULE_NULL && LA22_0<=RULE_FALSE)) ) {
+                        alt22=1;
                     }
-                    switch (alt21) {
+                    switch (alt22) {
                         case 1 :
-                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1634:1: (lv_parameters_11_0= ruleOrExpression )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1694:1: (lv_parameters_11_0= ruleOrExpression )
                             {
-                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1634:1: (lv_parameters_11_0= ruleOrExpression )
-                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1635:3: lv_parameters_11_0= ruleOrExpression
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1694:1: (lv_parameters_11_0= ruleOrExpression )
+                            // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1695:3: lv_parameters_11_0= ruleOrExpression
                             {
                              
                             	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersOrExpressionParserRuleCall_4_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3279);
+                            pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3235);
                             lv_parameters_11_0=ruleOrExpression();
 
                             state._fsp--;
@@ -3935,35 +4062,35 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
                     }
 
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1651:3: (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )*
-                    loop22:
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1711:3: (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )*
+                    loop23:
                     do {
-                        int alt22=2;
-                        int LA22_0 = input.LA(1);
+                        int alt23=2;
+                        int LA23_0 = input.LA(1);
 
-                        if ( (LA22_0==27) ) {
-                            alt22=1;
+                        if ( (LA23_0==RULE_COMMA) ) {
+                            alt23=1;
                         }
 
 
-                        switch (alt22) {
+                        switch (alt23) {
                     	case 1 :
-                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1651:5: otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) )
+                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1711:4: this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) )
                     	    {
-                    	    otherlv_12=(Token)match(input,27,FOLLOW_27_in_ruleLiteral3293); 
-
-                    	        	newLeafNode(otherlv_12, grammarAccess.getLiteralAccess().getCommaKeyword_4_2_0());
+                    	    this_COMMA_12=(Token)match(input,RULE_COMMA,FOLLOW_RULE_COMMA_in_ruleLiteral3248); 
+                    	     
+                    	        newLeafNode(this_COMMA_12, grammarAccess.getLiteralAccess().getCOMMATerminalRuleCall_4_2_0()); 
                     	        
-                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1655:1: ( (lv_parameters_13_0= ruleOrExpression ) )
-                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1656:1: (lv_parameters_13_0= ruleOrExpression )
+                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1715:1: ( (lv_parameters_13_0= ruleOrExpression ) )
+                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1716:1: (lv_parameters_13_0= ruleOrExpression )
                     	    {
-                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1656:1: (lv_parameters_13_0= ruleOrExpression )
-                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1657:3: lv_parameters_13_0= ruleOrExpression
+                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1716:1: (lv_parameters_13_0= ruleOrExpression )
+                    	    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1717:3: lv_parameters_13_0= ruleOrExpression
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersOrExpressionParserRuleCall_4_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3314);
+                    	    pushFollow(FOLLOW_ruleOrExpression_in_ruleLiteral3268);
                     	    lv_parameters_13_0=ruleOrExpression();
 
                     	    state._fsp--;
@@ -3990,13 +4117,13 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     	    break;
 
                     	default :
-                    	    break loop22;
+                    	    break loop23;
                         }
                     } while (true);
 
-                    otherlv_14=(Token)match(input,39,FOLLOW_39_in_ruleLiteral3328); 
-
-                        	newLeafNode(otherlv_14, grammarAccess.getLiteralAccess().getRightCurlyBracketKeyword_4_3());
+                    this_CURLYCLOSE_14=(Token)match(input,RULE_CURLYCLOSE,FOLLOW_RULE_CURLYCLOSE_in_ruleLiteral3281); 
+                     
+                        newLeafNode(this_CURLYCLOSE_14, grammarAccess.getLiteralAccess().getCURLYCLOSETerminalRuleCall_4_3()); 
                         
 
                     }
@@ -4005,15 +4132,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 6 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1678:6: ( (lv_elements_15_0= RULE_NULL ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1738:6: ( (lv_elements_15_0= RULE_NULL ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1678:6: ( (lv_elements_15_0= RULE_NULL ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1679:1: (lv_elements_15_0= RULE_NULL )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1738:6: ( (lv_elements_15_0= RULE_NULL ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1739:1: (lv_elements_15_0= RULE_NULL )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1679:1: (lv_elements_15_0= RULE_NULL )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1680:3: lv_elements_15_0= RULE_NULL
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1739:1: (lv_elements_15_0= RULE_NULL )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1740:3: lv_elements_15_0= RULE_NULL
                     {
-                    lv_elements_15_0=(Token)match(input,RULE_NULL,FOLLOW_RULE_NULL_in_ruleLiteral3352); 
+                    lv_elements_15_0=(Token)match(input,RULE_NULL,FOLLOW_RULE_NULL_in_ruleLiteral3304); 
 
                     			newLeafNode(lv_elements_15_0, grammarAccess.getLiteralAccess().getElementsNULLTerminalRuleCall_5_0()); 
                     		
@@ -4037,15 +4164,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 7 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1697:6: ( (lv_elements_16_0= RULE_TODAY ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1757:6: ( (lv_elements_16_0= RULE_TODAY ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1697:6: ( (lv_elements_16_0= RULE_TODAY ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1698:1: (lv_elements_16_0= RULE_TODAY )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1757:6: ( (lv_elements_16_0= RULE_TODAY ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1758:1: (lv_elements_16_0= RULE_TODAY )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1698:1: (lv_elements_16_0= RULE_TODAY )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1699:3: lv_elements_16_0= RULE_TODAY
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1758:1: (lv_elements_16_0= RULE_TODAY )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1759:3: lv_elements_16_0= RULE_TODAY
                     {
-                    lv_elements_16_0=(Token)match(input,RULE_TODAY,FOLLOW_RULE_TODAY_in_ruleLiteral3380); 
+                    lv_elements_16_0=(Token)match(input,RULE_TODAY,FOLLOW_RULE_TODAY_in_ruleLiteral3332); 
 
                     			newLeafNode(lv_elements_16_0, grammarAccess.getLiteralAccess().getElementsTODAYTerminalRuleCall_6_0()); 
                     		
@@ -4069,15 +4196,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 8 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1716:6: ( (lv_elements_17_0= RULE_TRUE ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1776:6: ( (lv_elements_17_0= RULE_TRUE ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1716:6: ( (lv_elements_17_0= RULE_TRUE ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1717:1: (lv_elements_17_0= RULE_TRUE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1776:6: ( (lv_elements_17_0= RULE_TRUE ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1777:1: (lv_elements_17_0= RULE_TRUE )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1717:1: (lv_elements_17_0= RULE_TRUE )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1718:3: lv_elements_17_0= RULE_TRUE
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1777:1: (lv_elements_17_0= RULE_TRUE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1778:3: lv_elements_17_0= RULE_TRUE
                     {
-                    lv_elements_17_0=(Token)match(input,RULE_TRUE,FOLLOW_RULE_TRUE_in_ruleLiteral3408); 
+                    lv_elements_17_0=(Token)match(input,RULE_TRUE,FOLLOW_RULE_TRUE_in_ruleLiteral3360); 
 
                     			newLeafNode(lv_elements_17_0, grammarAccess.getLiteralAccess().getElementsTRUETerminalRuleCall_7_0()); 
                     		
@@ -4101,15 +4228,15 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 9 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1735:6: ( (lv_elements_18_0= RULE_FALSE ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1795:6: ( (lv_elements_18_0= RULE_FALSE ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1735:6: ( (lv_elements_18_0= RULE_FALSE ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1736:1: (lv_elements_18_0= RULE_FALSE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1795:6: ( (lv_elements_18_0= RULE_FALSE ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1796:1: (lv_elements_18_0= RULE_FALSE )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1736:1: (lv_elements_18_0= RULE_FALSE )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1737:3: lv_elements_18_0= RULE_FALSE
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1796:1: (lv_elements_18_0= RULE_FALSE )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1797:3: lv_elements_18_0= RULE_FALSE
                     {
-                    lv_elements_18_0=(Token)match(input,RULE_FALSE,FOLLOW_RULE_FALSE_in_ruleLiteral3436); 
+                    lv_elements_18_0=(Token)match(input,RULE_FALSE,FOLLOW_RULE_FALSE_in_ruleLiteral3388); 
 
                     			newLeafNode(lv_elements_18_0, grammarAccess.getLiteralAccess().getElementsFALSETerminalRuleCall_8_0()); 
                     		
@@ -4133,18 +4260,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 10 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1754:6: ( (lv_parameters_19_0= ruleTmlExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1814:6: ( (lv_parameters_19_0= ruleTmlExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1754:6: ( (lv_parameters_19_0= ruleTmlExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1755:1: (lv_parameters_19_0= ruleTmlExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1814:6: ( (lv_parameters_19_0= ruleTmlExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1815:1: (lv_parameters_19_0= ruleTmlExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1755:1: (lv_parameters_19_0= ruleTmlExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1756:3: lv_parameters_19_0= ruleTmlExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1815:1: (lv_parameters_19_0= ruleTmlExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1816:3: lv_parameters_19_0= ruleTmlExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersTmlExpressionParserRuleCall_9_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleTmlExpression_in_ruleLiteral3468);
+                    pushFollow(FOLLOW_ruleTmlExpression_in_ruleLiteral3420);
                     lv_parameters_19_0=ruleTmlExpression();
 
                     state._fsp--;
@@ -4170,18 +4297,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 11 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1773:6: ( (lv_parameters_20_0= ruleExistsTmlExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1833:6: ( (lv_parameters_20_0= ruleExistsTmlExpression ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1773:6: ( (lv_parameters_20_0= ruleExistsTmlExpression ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1774:1: (lv_parameters_20_0= ruleExistsTmlExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1833:6: ( (lv_parameters_20_0= ruleExistsTmlExpression ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1834:1: (lv_parameters_20_0= ruleExistsTmlExpression )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1774:1: (lv_parameters_20_0= ruleExistsTmlExpression )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1775:3: lv_parameters_20_0= ruleExistsTmlExpression
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1834:1: (lv_parameters_20_0= ruleExistsTmlExpression )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1835:3: lv_parameters_20_0= ruleExistsTmlExpression
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersExistsTmlExpressionParserRuleCall_10_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleExistsTmlExpression_in_ruleLiteral3495);
+                    pushFollow(FOLLOW_ruleExistsTmlExpression_in_ruleLiteral3447);
                     lv_parameters_20_0=ruleExistsTmlExpression();
 
                     state._fsp--;
@@ -4207,18 +4334,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 12 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1792:6: ( (lv_parameters_21_0= ruleMapGetReference ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1852:6: ( (lv_parameters_21_0= ruleMapGetReference ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1792:6: ( (lv_parameters_21_0= ruleMapGetReference ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1793:1: (lv_parameters_21_0= ruleMapGetReference )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1852:6: ( (lv_parameters_21_0= ruleMapGetReference ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1853:1: (lv_parameters_21_0= ruleMapGetReference )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1793:1: (lv_parameters_21_0= ruleMapGetReference )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1794:3: lv_parameters_21_0= ruleMapGetReference
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1853:1: (lv_parameters_21_0= ruleMapGetReference )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1854:3: lv_parameters_21_0= ruleMapGetReference
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersMapGetReferenceParserRuleCall_11_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleMapGetReference_in_ruleLiteral3522);
+                    pushFollow(FOLLOW_ruleMapGetReference_in_ruleLiteral3474);
                     lv_parameters_21_0=ruleMapGetReference();
 
                     state._fsp--;
@@ -4244,18 +4371,18 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
                     }
                     break;
                 case 13 :
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1811:6: ( (lv_parameters_22_0= ruleDateLiteral ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1871:6: ( (lv_parameters_22_0= ruleDateLiteral ) )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1811:6: ( (lv_parameters_22_0= ruleDateLiteral ) )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1812:1: (lv_parameters_22_0= ruleDateLiteral )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1871:6: ( (lv_parameters_22_0= ruleDateLiteral ) )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1872:1: (lv_parameters_22_0= ruleDateLiteral )
                     {
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1812:1: (lv_parameters_22_0= ruleDateLiteral )
-                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1813:3: lv_parameters_22_0= ruleDateLiteral
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1872:1: (lv_parameters_22_0= ruleDateLiteral )
+                    // ../com.dexels.navajo.dsl.expression/src-gen/com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.g:1873:3: lv_parameters_22_0= ruleDateLiteral
                     {
                      
                     	        newCompositeNode(grammarAccess.getLiteralAccess().getParametersDateLiteralParserRuleCall_12_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDateLiteral_in_ruleLiteral3549);
+                    pushFollow(FOLLOW_ruleDateLiteral_in_ruleLiteral3501);
                     lv_parameters_22_0=ruleDateLiteral();
 
                     state._fsp--;
@@ -4304,7 +4431,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
 
     protected DFA2 dfa2 = new DFA2(this);
     protected DFA5 dfa5 = new DFA5(this);
-    protected DFA23 dfa23 = new DFA23(this);
+    protected DFA24 dfa24 = new DFA24(this);
     static final String DFA2_eotS =
         "\7\uffff";
     static final String DFA2_eofS =
@@ -4357,7 +4484,7 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             this.transition = DFA2_transition;
         }
         public String getDescription() {
-            return "175:1: ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )?";
+            return "177:1: ( (lv_absolute_1_0= RULE_TML_SEPARATOR ) )?";
         }
     }
     static final String DFA5_eotS =
@@ -4412,26 +4539,26 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "284:1: ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )?";
+            return "286:1: ( (lv_absolute_2_0= RULE_TML_SEPARATOR ) )?";
         }
     }
-    static final String DFA23_eotS =
+    static final String DFA24_eotS =
         "\17\uffff";
-    static final String DFA23_eofS =
+    static final String DFA24_eofS =
         "\1\uffff\1\16\15\uffff";
-    static final String DFA23_minS =
+    static final String DFA24_minS =
         "\1\4\1\7\15\uffff";
-    static final String DFA23_maxS =
-        "\1\46\1\47\15\uffff";
-    static final String DFA23_acceptS =
+    static final String DFA24_maxS =
+        "\1\45\1\41\15\uffff";
+    static final String DFA24_acceptS =
         "\2\uffff\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1"+
         "\1";
-    static final String DFA23_specialS =
+    static final String DFA24_specialS =
         "\17\uffff}>";
-    static final String[] DFA23_transitionS = {
-            "\1\4\3\uffff\1\12\2\uffff\1\13\1\14\4\uffff\1\1\1\2\1\3\1\6"+
-            "\1\7\1\10\1\11\16\uffff\1\5",
-            "\1\16\5\uffff\4\16\12\uffff\11\16\1\uffff\1\15\1\uffff\1\16",
+    static final String[] DFA24_transitionS = {
+            "\1\4\3\uffff\1\12\2\uffff\1\13\3\uffff\1\14\14\uffff\1\1\1\uffff"+
+            "\1\2\1\3\1\5\1\uffff\1\6\1\7\1\10\1\11",
+            "\1\16\5\uffff\2\16\1\uffff\13\16\2\uffff\1\15\3\uffff\1\16",
             "",
             "",
             "",
@@ -4447,37 +4574,37 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
             ""
     };
 
-    static final short[] DFA23_eot = DFA.unpackEncodedString(DFA23_eotS);
-    static final short[] DFA23_eof = DFA.unpackEncodedString(DFA23_eofS);
-    static final char[] DFA23_min = DFA.unpackEncodedStringToUnsignedChars(DFA23_minS);
-    static final char[] DFA23_max = DFA.unpackEncodedStringToUnsignedChars(DFA23_maxS);
-    static final short[] DFA23_accept = DFA.unpackEncodedString(DFA23_acceptS);
-    static final short[] DFA23_special = DFA.unpackEncodedString(DFA23_specialS);
-    static final short[][] DFA23_transition;
+    static final short[] DFA24_eot = DFA.unpackEncodedString(DFA24_eotS);
+    static final short[] DFA24_eof = DFA.unpackEncodedString(DFA24_eofS);
+    static final char[] DFA24_min = DFA.unpackEncodedStringToUnsignedChars(DFA24_minS);
+    static final char[] DFA24_max = DFA.unpackEncodedStringToUnsignedChars(DFA24_maxS);
+    static final short[] DFA24_accept = DFA.unpackEncodedString(DFA24_acceptS);
+    static final short[] DFA24_special = DFA.unpackEncodedString(DFA24_specialS);
+    static final short[][] DFA24_transition;
 
     static {
-        int numStates = DFA23_transitionS.length;
-        DFA23_transition = new short[numStates][];
+        int numStates = DFA24_transitionS.length;
+        DFA24_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA23_transition[i] = DFA.unpackEncodedString(DFA23_transitionS[i]);
+            DFA24_transition[i] = DFA.unpackEncodedString(DFA24_transitionS[i]);
         }
     }
 
-    class DFA23 extends DFA {
+    class DFA24 extends DFA {
 
-        public DFA23(BaseRecognizer recognizer) {
+        public DFA24(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 23;
-            this.eot = DFA23_eot;
-            this.eof = DFA23_eof;
-            this.min = DFA23_min;
-            this.max = DFA23_max;
-            this.accept = DFA23_accept;
-            this.special = DFA23_special;
-            this.transition = DFA23_transition;
+            this.decisionNumber = 24;
+            this.eot = DFA24_eot;
+            this.eof = DFA24_eof;
+            this.min = DFA24_min;
+            this.max = DFA24_max;
+            this.accept = DFA24_accept;
+            this.special = DFA24_special;
+            this.transition = DFA24_transition;
         }
         public String getDescription() {
-            return "1502:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) otherlv_4= '(' ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) otherlv_6= ',' ( (lv_parameters_7_0= ruleOrExpression ) ) otherlv_8= ')' ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= '{' ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (otherlv_12= ',' ( (lv_parameters_13_0= ruleOrExpression ) ) )* otherlv_14= '}' ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )";
+            return "1559:1: ( ( () this_NUMBER_1= RULE_NUMBER ) | ( (lv_valueString_2_0= RULE_LITERALSTRING ) ) | ( ( (lv_operations_3_0= RULE_FORALL ) ) this_BRACKET_OPEN_4= RULE_BRACKET_OPEN ( (lv_valueString_5_0= RULE_LITERALSTRING ) ) this_COMMA_6= RULE_COMMA ( (lv_parameters_7_0= ruleOrExpression ) ) this_BRACKET_CLOSE_8= RULE_BRACKET_CLOSE ) | ( (lv_parameters_9_0= ruleFunctionCall ) ) | ( ( (lv_expressionType_10_0= RULE_CURLYOPEN ) ) ( (lv_parameters_11_0= ruleOrExpression ) )? (this_COMMA_12= RULE_COMMA ( (lv_parameters_13_0= ruleOrExpression ) ) )* this_CURLYCLOSE_14= RULE_CURLYCLOSE ) | ( (lv_elements_15_0= RULE_NULL ) ) | ( (lv_elements_16_0= RULE_TODAY ) ) | ( (lv_elements_17_0= RULE_TRUE ) ) | ( (lv_elements_18_0= RULE_FALSE ) ) | ( (lv_parameters_19_0= ruleTmlExpression ) ) | ( (lv_parameters_20_0= ruleExistsTmlExpression ) ) | ( (lv_parameters_21_0= ruleMapGetReference ) ) | ( (lv_parameters_22_0= ruleDateLiteral ) ) )";
         }
     }
  
@@ -4485,145 +4612,147 @@ public class InternalNavajoExpressionParser extends AbstractInternalAntlrParser 
     public static final BitSet FOLLOW_ruleTopLevel_in_entryRuleTopLevel75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTopLevel85 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOrExpression_in_ruleTopLevel130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePathElement_in_entryRulePathElement166 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePathElement177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulePathElement217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_DOT_in_rulePathElement243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_PARENT_in_rulePathElement269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_rulePathElement295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTmlExpression_in_entryRuleTmlExpression340 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTmlExpression350 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_SQBRACKET_OPEN_in_ruleTmlExpression386 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression402 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_RULE_AT_in_ruleTmlExpression425 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_rulePathElement_in_ruleTmlExpression452 = new BitSet(new long[]{0x0000000000000480L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression464 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_rulePathElement_in_ruleTmlExpression484 = new BitSet(new long[]{0x0000000000000480L});
-    public static final BitSet FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleTmlExpression497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExistsTmlExpression_in_entryRuleExistsTmlExpression532 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExistsTmlExpression542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_TML_EXISTS_in_ruleExistsTmlExpression578 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_SQBRACKET_OPEN_in_ruleExistsTmlExpression588 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression604 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_RULE_AT_in_ruleExistsTmlExpression627 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_rulePathElement_in_ruleExistsTmlExpression654 = new BitSet(new long[]{0x0000000000000480L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression666 = new BitSet(new long[]{0x00000000000002F0L});
-    public static final BitSet FOLLOW_rulePathElement_in_ruleExistsTmlExpression686 = new BitSet(new long[]{0x0000000000000480L});
-    public static final BitSet FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleExistsTmlExpression699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapReferenceParams_in_entryRuleMapReferenceParams734 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMapReferenceParams744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleMapReferenceParams781 = new BitSet(new long[]{0x0000004000FE1910L});
-    public static final BitSet FOLLOW_ruleLiteral_in_ruleMapReferenceParams802 = new BitSet(new long[]{0x0000000018000000L});
-    public static final BitSet FOLLOW_27_in_ruleMapReferenceParams815 = new BitSet(new long[]{0x0000004000FE1910L});
-    public static final BitSet FOLLOW_ruleLiteral_in_ruleMapReferenceParams836 = new BitSet(new long[]{0x0000000018000000L});
-    public static final BitSet FOLLOW_28_in_ruleMapReferenceParams850 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapGetReference_in_entryRuleMapGetReference886 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMapGetReference896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_DOLLAR_in_ruleMapGetReference938 = new BitSet(new long[]{0x0000000000000050L});
-    public static final BitSet FOLLOW_RULE_PARENT_in_ruleMapGetReference961 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleMapGetReference977 = new BitSet(new long[]{0x0000000000000050L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMapGetReference995 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_ruleMapReferenceParams_in_ruleMapGetReference1021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_entryRuleOrExpression1058 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOrExpression1068 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression1114 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_29_in_ruleOrExpression1133 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression1167 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression1205 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression1215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEqualityExpression_in_ruleAndExpression1261 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_ruleAndExpression1280 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleEqualityExpression_in_ruleAndExpression1314 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_ruleEqualityExpression_in_entryRuleEqualityExpression1352 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEqualityExpression1362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1408 = new BitSet(new long[]{0x0000000180000002L});
-    public static final BitSet FOLLOW_31_in_ruleEqualityExpression1428 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleEqualityExpression1488 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression1561 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRelationalExpression1571 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1626 = new BitSet(new long[]{0x000000000001E002L});
-    public static final BitSet FOLLOW_RULE_XML_LT_in_ruleRelationalExpression1645 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1671 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_XML_GT_in_ruleRelationalExpression1696 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_XML_LTEQ_in_ruleRelationalExpression1747 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_XML_GTEQ_in_ruleRelationalExpression1798 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression1863 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAdditiveExpression1873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1919 = new BitSet(new long[]{0x0000000600000002L});
-    public static final BitSet FOLLOW_33_in_ruleAdditiveExpression1933 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1954 = new BitSet(new long[]{0x0000000600000002L});
-    public static final BitSet FOLLOW_34_in_ruleAdditiveExpression1974 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1995 = new BitSet(new long[]{0x0000000600000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression2034 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicativeExpression2044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2090 = new BitSet(new long[]{0x0000000800000082L});
-    public static final BitSet FOLLOW_35_in_ruleMultiplicativeExpression2110 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2144 = new BitSet(new long[]{0x0000000800000082L});
-    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleMultiplicativeExpression2169 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2195 = new BitSet(new long[]{0x0000000800000082L});
-    public static final BitSet FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression2234 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleUnaryExpression2244 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleUnaryExpression2288 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2322 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression2386 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression2396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rulePrimaryExpression2442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rulePrimaryExpression2461 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_rulePrimaryExpression2482 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_rulePrimaryExpression2494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionName_in_entryRuleFunctionName2532 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionName2543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFunctionName2582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionCall_in_entryRuleFunctionCall2626 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionCall2636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionName_in_ruleFunctionCall2682 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_ruleFunctionCall2694 = new BitSet(new long[]{0x000000501CFE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_ruleFunctionCall2715 = new BitSet(new long[]{0x0000000018000000L});
-    public static final BitSet FOLLOW_27_in_ruleFunctionCall2729 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_ruleFunctionCall2750 = new BitSet(new long[]{0x0000000018000000L});
-    public static final BitSet FOLLOW_28_in_ruleFunctionCall2764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDateLiteral_in_entryRuleDateLiteral2800 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDateLiteral2810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2855 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleDateLiteral2866 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2877 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleDateLiteral2888 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2899 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleDateLiteral2910 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2921 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleDateLiteral2932 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2943 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleDateLiteral2954 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral3000 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral3010 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleLiteral3056 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3079 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_FORALL_in_ruleLiteral3108 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_ruleLiteral3125 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3142 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleLiteral3159 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3180 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_ruleLiteral3192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctionCall_in_ruleLiteral3220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_ruleLiteral3245 = new BitSet(new long[]{0x000000D00CFE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3279 = new BitSet(new long[]{0x0000008008000000L});
-    public static final BitSet FOLLOW_27_in_ruleLiteral3293 = new BitSet(new long[]{0x0000005004FE1910L});
-    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3314 = new BitSet(new long[]{0x0000008008000000L});
-    public static final BitSet FOLLOW_39_in_ruleLiteral3328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_NULL_in_ruleLiteral3352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_TODAY_in_ruleLiteral3380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_TRUE_in_ruleLiteral3408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_FALSE_in_ruleLiteral3436 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTmlExpression_in_ruleLiteral3468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExistsTmlExpression_in_ruleLiteral3495 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapGetReference_in_ruleLiteral3522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDateLiteral_in_ruleLiteral3549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePathElement_in_entryRulePathElement168 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePathElement179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePathElement219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_DOT_in_rulePathElement245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_PARENT_in_rulePathElement271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_rulePathElement297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTmlExpression_in_entryRuleTmlExpression342 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTmlExpression352 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_SQBRACKET_OPEN_in_ruleTmlExpression388 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression404 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_RULE_AT_in_ruleTmlExpression427 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_rulePathElement_in_ruleTmlExpression454 = new BitSet(new long[]{0x0000000000000480L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleTmlExpression466 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_rulePathElement_in_ruleTmlExpression486 = new BitSet(new long[]{0x0000000000000480L});
+    public static final BitSet FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleTmlExpression499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExistsTmlExpression_in_entryRuleExistsTmlExpression534 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExistsTmlExpression544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_TML_EXISTS_in_ruleExistsTmlExpression580 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_RULE_SQBRACKET_OPEN_in_ruleExistsTmlExpression590 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression606 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_RULE_AT_in_ruleExistsTmlExpression629 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_rulePathElement_in_ruleExistsTmlExpression656 = new BitSet(new long[]{0x0000000000000480L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleExistsTmlExpression668 = new BitSet(new long[]{0x00000000000002F0L});
+    public static final BitSet FOLLOW_rulePathElement_in_ruleExistsTmlExpression688 = new BitSet(new long[]{0x0000000000000480L});
+    public static final BitSet FOLLOW_RULE_SQBRACKET_CLOSE_in_ruleExistsTmlExpression701 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMapReferenceParams_in_entryRuleMapReferenceParams736 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMapReferenceParams746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BRACKET_OPEN_in_ruleMapReferenceParams782 = new BitSet(new long[]{0x0000003DD0008910L});
+    public static final BitSet FOLLOW_ruleLiteral_in_ruleMapReferenceParams802 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_RULE_COMMA_in_ruleMapReferenceParams814 = new BitSet(new long[]{0x0000003DD0008910L});
+    public static final BitSet FOLLOW_ruleLiteral_in_ruleMapReferenceParams834 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_CLOSE_in_ruleMapReferenceParams847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMapGetReference_in_entryRuleMapGetReference882 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMapGetReference892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_DOLLAR_in_ruleMapGetReference934 = new BitSet(new long[]{0x0000000000000050L});
+    public static final BitSet FOLLOW_RULE_PARENT_in_ruleMapGetReference957 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleMapGetReference973 = new BitSet(new long[]{0x0000000000000050L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMapGetReference991 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_ruleMapReferenceParams_in_ruleMapGetReference1017 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_entryRuleOrExpression1054 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOrExpression1064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression1110 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_RULE_OR_in_ruleOrExpression1128 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression1154 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression1192 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression1202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEqualityExpression_in_ruleAndExpression1248 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_RULE_AND_in_ruleAndExpression1266 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleEqualityExpression_in_ruleAndExpression1292 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_ruleEqualityExpression_in_entryRuleEqualityExpression1330 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEqualityExpression1340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1386 = new BitSet(new long[]{0x00000000000C0002L});
+    public static final BitSet FOLLOW_RULE_EQUALSEQUALS_in_ruleEqualityExpression1405 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_NEQUALS_in_ruleEqualityExpression1456 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleEqualityExpression1482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression1521 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRelationalExpression1531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1586 = new BitSet(new long[]{0x0000000000F00002L});
+    public static final BitSet FOLLOW_RULE_XML_LT_in_ruleRelationalExpression1605 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1631 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_XML_GT_in_ruleRelationalExpression1656 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_XML_LTEQ_in_ruleRelationalExpression1707 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_XML_GTEQ_in_ruleRelationalExpression1758 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression1784 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression1823 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAdditiveExpression1833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1879 = new BitSet(new long[]{0x0000000003000002L});
+    public static final BitSet FOLLOW_RULE_PLUS_in_ruleAdditiveExpression1892 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1912 = new BitSet(new long[]{0x0000000003000002L});
+    public static final BitSet FOLLOW_RULE_MINUS_in_ruleAdditiveExpression1931 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression1951 = new BitSet(new long[]{0x0000000003000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression1990 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicativeExpression2000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2046 = new BitSet(new long[]{0x0000000004000082L});
+    public static final BitSet FOLLOW_RULE_MULTIPLY_in_ruleMultiplicativeExpression2065 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2091 = new BitSet(new long[]{0x0000000004000082L});
+    public static final BitSet FOLLOW_RULE_TML_SEPARATOR_in_ruleMultiplicativeExpression2116 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleMultiplicativeExpression2142 = new BitSet(new long[]{0x0000000004000082L});
+    public static final BitSet FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression2181 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleUnaryExpression2191 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_NOT_in_ruleUnaryExpression2235 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_MINUS_in_ruleUnaryExpression2286 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleUnaryExpression2342 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression2377 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression2387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rulePrimaryExpression2433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BRACKET_OPEN_in_rulePrimaryExpression2451 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_rulePrimaryExpression2471 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_CLOSE_in_rulePrimaryExpression2482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionName_in_entryRuleFunctionName2519 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionName2530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFunctionName2569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionCall_in_entryRuleFunctionCall2613 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionCall2623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionName_in_ruleFunctionCall2669 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_OPEN_in_ruleFunctionCall2680 = new BitSet(new long[]{0x0000003DDA00F910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_ruleFunctionCall2700 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_RULE_COMMA_in_ruleFunctionCall2713 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_ruleFunctionCall2733 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_CLOSE_in_ruleFunctionCall2746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDateLiteral_in_entryRuleDateLiteral2781 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDateLiteral2791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2836 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_RULE_HASH_in_ruleDateLiteral2846 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2856 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_RULE_HASH_in_ruleDateLiteral2866 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2876 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_RULE_HASH_in_ruleDateLiteral2886 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2896 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_RULE_HASH_in_ruleDateLiteral2906 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2916 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_RULE_HASH_in_ruleDateLiteral2926 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleDateLiteral2936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral2971 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral2981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_NUMBER_in_ruleLiteral3027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3050 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FORALL_in_ruleLiteral3079 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_OPEN_in_ruleLiteral3095 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_RULE_LITERALSTRING_in_ruleLiteral3111 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_RULE_COMMA_in_ruleLiteral3127 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3147 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_RULE_BRACKET_CLOSE_in_ruleLiteral3158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionCall_in_ruleLiteral3185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_CURLYOPEN_in_ruleLiteral3209 = new BitSet(new long[]{0x0000003FDA00B910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3235 = new BitSet(new long[]{0x0000000200002000L});
+    public static final BitSet FOLLOW_RULE_COMMA_in_ruleLiteral3248 = new BitSet(new long[]{0x0000003DDA009910L});
+    public static final BitSet FOLLOW_ruleOrExpression_in_ruleLiteral3268 = new BitSet(new long[]{0x0000000200002000L});
+    public static final BitSet FOLLOW_RULE_CURLYCLOSE_in_ruleLiteral3281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_NULL_in_ruleLiteral3304 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_TODAY_in_ruleLiteral3332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_TRUE_in_ruleLiteral3360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FALSE_in_ruleLiteral3388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTmlExpression_in_ruleLiteral3420 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExistsTmlExpression_in_ruleLiteral3447 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMapGetReference_in_ruleLiteral3474 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDateLiteral_in_ruleLiteral3501 = new BitSet(new long[]{0x0000000000000002L});
 
 }

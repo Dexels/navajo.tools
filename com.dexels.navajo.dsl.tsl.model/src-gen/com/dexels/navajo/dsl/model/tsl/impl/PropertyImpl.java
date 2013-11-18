@@ -37,6 +37,7 @@ import java.math.BigDecimal;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl#getCardinality <em>Cardinality</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl#getValueString <em>Value String</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl#getDirection <em>Direction</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -161,6 +162,26 @@ public class PropertyImpl extends ElementImpl implements Property {
 	 * @ordered
 	 */
 	protected String direction = DIRECTION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -331,6 +352,27 @@ public class PropertyImpl extends ElementImpl implements Property {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.PROPERTY__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getName() {
@@ -382,6 +424,8 @@ public class PropertyImpl extends ElementImpl implements Property {
 				return getValueString();
 			case TslPackage.PROPERTY__DIRECTION:
 				return getDirection();
+			case TslPackage.PROPERTY__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -417,6 +461,9 @@ public class PropertyImpl extends ElementImpl implements Property {
 			case TslPackage.PROPERTY__DIRECTION:
 				setDirection((String)newValue);
 				return;
+			case TslPackage.PROPERTY__DESCRIPTION:
+				setDescription((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -450,6 +497,9 @@ public class PropertyImpl extends ElementImpl implements Property {
 			case TslPackage.PROPERTY__DIRECTION:
 				setDirection(DIRECTION_EDEFAULT);
 				return;
+			case TslPackage.PROPERTY__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -476,6 +526,8 @@ public class PropertyImpl extends ElementImpl implements Property {
 				return VALUE_STRING_EDEFAULT == null ? valueString != null : !VALUE_STRING_EDEFAULT.equals(valueString);
 			case TslPackage.PROPERTY__DIRECTION:
 				return DIRECTION_EDEFAULT == null ? direction != null : !DIRECTION_EDEFAULT.equals(direction);
+			case TslPackage.PROPERTY__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -502,6 +554,8 @@ public class PropertyImpl extends ElementImpl implements Property {
 		result.append(valueString);
 		result.append(", direction: ");
 		result.append(direction);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

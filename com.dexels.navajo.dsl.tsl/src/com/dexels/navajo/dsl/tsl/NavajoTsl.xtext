@@ -7,13 +7,25 @@ import "platform:/resource/com.dexels.navajo.dsl.expression.model/model/Expressi
 import "platform:/resource/com.dexels.navajo.dsl.tsl.model/model/NavaScript.ecore" 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
+
+//xsi:noNamespaceSchemaLocation
 Tml :
 	{Tml}
 	XMLHEAD?
-	NAVASCRIPT_START  (attributes+=NonExpression)* 
+	LT (TSLTAG | NAVASCRIPTTAG)  (
+		(NOTES EQUALS QUOTE Garbage QUOTE)?
+	&	(REPOSITORY EQUALS QUOTE Garbage QUOTE)?
+	&	(IDTAG EQUALS QUOTE Garbage QUOTE)?
+	&	(AUTHOR EQUALS QUOTE Garbage QUOTE)?
+	&	(XMLNS EQUALS QUOTE Garbage QUOTE)?
+	&	(XMLNS COLON ID EQUALS QUOTE Garbage QUOTE)?
+	&	(ID COLON SCHEMALOCATION EQUALS QUOTE Garbage QUOTE)?
+	&	(ID COLON NONAMESPACESCHEMALOCATION EQUALS QUOTE Garbage QUOTE)?
+	&	(XMLNS EQUALS QUOTE Garbage QUOTE)?
+	) 
 	(
-		(XML_TAG_END 
-			((children+=Message) | (children+=Map)| (children+=Param) | (methods += Methods) | (children+=DebugTag)| (children+=Include) | (children+=Validations) | (children+=Comment))*
+		(GT 
+			((children+=Message) | (children+=Map)| (children+=Param) | (methods += Methods) | (children+=DebugTag)| (children+=Include) | (children+=Validations) | (children+=CommentClause))*
 		NAVASCRIPT_END
 		)
 	|	(
@@ -29,11 +41,9 @@ terminal XMLCOMMENT: '<!--' -> '-->';
 
 
 
-terminal DEBUG_START_TAG:
-	 '<debug';
-terminal DEBUG_END_TAG:
-	 '</debug' XML_TAG_END;
-
+terminal LT: '<' ;
+terminal NAVASCRIPTTAG: 'navascript' ;
+terminal TSLTAG: 'tsl' ;
 
 //terminal NAVASCRIPT_START:
 //	'<navascript';
@@ -42,12 +52,92 @@ terminal QUOTE:
 	'"'
 ;
 
+terminal NAME:
+	'name'
+;
+
+terminal NOTES:
+	'notes';
+terminal IDTAG:
+	'id';
+terminal REPOSITORY:
+	'repository';
+terminal AUTHOR:
+	'author';
+terminal XMLNS:
+	'xmlns';
+terminal SCHEMALOCATION:
+	'schemaLocation';
+terminal NONAMESPACESCHEMALOCATION:
+	'noNamespaceSchemaLocation';
+terminal SEMICOLON:
+	';';
+
+terminal TYPE:
+	'type'
+;
+terminal MODE:
+	'mode'
+;
+terminal SCRIPT:
+	'script'
+;
+
+
+terminal CONDITION:
+	'condition'
+;
+terminal FILTER:
+	'filter'
+;
+terminal OBJECT:
+	'object'
+;
+terminal COUNT:
+	'count'
+;
+terminal REF:
+	'ref'
+;
+terminal LENGTH:
+	'length'
+;
+terminal CARDINALITY:
+	'cardinality'
+;
+terminal SUBTYPES:
+	'subtypes'
+;
+terminal DIRECTION:
+	'direction'
+;
+terminal DESCRIPTION:
+	'description'
+;
+
+terminal VALUE:
+	'value'
+;
+
+terminal XMLSPACE:
+	'xml:space'
+;
+
+terminal PRESERVE:
+	'preserve'
+;
+
+terminal COMMENT:
+	'comment'
+;
+
+
 
 terminal XML_START_ENDTAG:
 	'</'
 ;
 	
-terminal XML_TAG_END: 
+terminal GT: 
 	'>'
 ;
 
@@ -55,148 +145,89 @@ terminal XML_TAG_SINGLEEND:
 	'/>'
 ;
 
-terminal MAP_METHOD_STARTTAG_START: '<_';
-terminal MAP_METHOD_ENDTAG_START: '</_';
+//terminal MAP_METHOD_STARTTAG_START: '<_';
+//terminal MAP_METHOD_ENDTAG_START: '</_';
 
 
 //terminal XML_TAG_START: '<';
 
 
-terminal MAPENDKEYWORD: 
-	'</map'
-;
 
-terminal MAPSTARTKEYWORD: 
-	'<map' 
+terminal MAPTAG: 
+	'map' 
 ;
 
 
 
-terminal INCLUDE_START_TAG:
-	 '<include'
+terminal INCLUDETAG:
+	 'include'
 ;
 
-terminal PROPERTY_START_TAG:
-	 '<property'
+terminal PROPERTYTAG:
+	 'property'
 ;
 
-terminal REQUIRED_START_TAG:
-	 '<required'
+terminal REQUIREDTAG:
+	 'required'
 ;
 
-terminal VALIDATIONS_START_TAG:
-	 '<validations'
+terminal VALIDATIONSTAG:
+	 'validations'
 ;
-terminal CHECK_START_TAG:
-	 '<check'
-;
-terminal COMMENT_START_TAG:
-	 '<comment'
+terminal CHECKTAG:
+	 'check'
 ;
 
-terminal BREAK_START_TAG:
-	 '<break'
+terminal BREAKTAG:
+	 'break'
 ;
 
-
-//
-terminal OPTION_START_TAG:
-	 '<option'
+terminal OPTIONTAG:
+	 'option'
 ;
 
-
-
-terminal BREAK_END_TAG: 
-	 '</break' XML_TAG_END
+terminal EQUALS:
+	'='
 ;
 
-
-terminal OPTION_END_TAG: 
-	 '</option' XML_TAG_END
-;
-
-
-terminal REQUIRED_END_TAG: 
-	 '</required' XML_TAG_END
-;
-
-terminal INCLUDE_END_TAG: 
-	 '</include' XML_TAG_END
-;
-
-
-terminal PROPERTY_END_TAG: 
-	 '</property' XML_TAG_END
-;
-
-terminal COMMENT_END_TAG: 
-	 '</comment' XML_TAG_END
-;
-terminal VALIDATIONS_END_TAG: 
-	'</validations' XML_TAG_END
-;
-terminal CHECK_END_TAG: 
-	'</check' XML_TAG_END
-;
-
-
-terminal PARAM_END_TAG: 
-	'</param' XML_TAG_END
-;
-
-terminal MESSAGE_END_TAG: 
-	'</message' XML_TAG_END
-;
-
-terminal METHODS_END_TAG: 
-	 '</methods' XML_TAG_END
-;
-terminal METHOD_END_TAG: 
-	 '</method' XML_TAG_END
-;
-
-terminal FIELD_END_TAG: 
-	 '</field' XML_TAG_END
-;
-
-terminal EXPRESSION_START_TAG:
-	 '<expression'
+terminal EXPRESSION_TAG:
+	 'expression'
 ;
 
 terminal EXPRESSION_END_TAG:
-	 '</expression' XML_TAG_END
+	 '</expression' GT
 ;
-terminal PARAM_START_TAG:
-	 '<param'
-;
-
-terminal MESSAGE_START_TAG:
-	'<message'
+terminal PARAMTAG:
+	 'param'
 ;
 
-terminal METHOD_START_TAG:
-	 '<method'
+terminal MESSAGETAG:
+	'message'
 ;
 
-terminal METHODS_START_TAG:
-	 '<methods'
+terminal METHODTAG:
+	 'method'
 ;
 
-terminal FIELD_START_TAG:
-	 '<field'
+terminal METHODSTAG:
+	 'methods'
 ;
-terminal NAVASCRIPT_START:
- //	XML_TAG_START NAVASCRIPT_KEYWORD;
-	'<navascript' | '<tsl';
+
+terminal FIELDTAG:
+	 'field'
+;
+terminal DEBUG_TAG:
+	 'debug'
+;
 
 terminal  NAVASCRIPT_END:
- 	//XML_START_ENDTAG NAVASCRIPT_KEYWORD XML_TAG_END;
-	('</navascript' XML_TAG_END ) | ('</tsl' XML_TAG_END)
+ 	//XML_START_ENDTAG NAVASCRIPT_KEYWORD GT;
+	('</navascript' GT ) | ('</tsl' GT)
 	;
 	
 
 Garbage returns ecore::EString:
-	(ID|DOT|PARENT|DOLLAR|TML_SEPARATOR|NUMBER|","|SQBRACKET_OPEN|SQBRACKET_CLOSE|AT|COLON|"("|")"|TML_EXISTS)*
+	(ID|DOT|PARENT|DOLLAR|TML_SEPARATOR|NUMBER|COMMA|SQBRACKET_OPEN|SQBRACKET_CLOSE|AT|COLON|BRACKET_OPEN|BRACKET_CLOSE|TML_EXISTS|EQUALS|NEQUALS|PLUS|MINUS|MULTIPLY|SEMICOLON|TSLTAG|NAVASCRIPTTAG)*
 	;
 
 	
@@ -208,36 +239,32 @@ AttributeName:
 
 
 Expression returns PossibleExpression:
-	(namespace= ID COLON)? key=AttributeName '='
-	(
-		 QUOTE expressionValue=TopLevel endToken=QUOTE
-	)
+	key=ID EQUALS QUOTE expressionValue=TopLevel endToken=QUOTE
 	;
 	
 NonExpression returns PossibleExpression :
-	(namespace= ID COLON)? key=AttributeName '='
+	(namespace= ID COLON)? key=AttributeName EQUALS
 	(
 		QUOTE value=Garbage QUOTE
 	)
 ;
 
 Methods :
-	METHODS_START_TAG {Methods} 
+	LT METHODSTAG {Methods} 
 	
-	((splitTag?=XML_TAG_END
+	((splitTag?=GT
 	(method+=Method)*
-	closedTag?=METHODS_END_TAG)
+	closedTag?=XML_START_ENDTAG METHODSTAG GT)
 	|
 	XML_TAG_SINGLEEND)
 	;
 	
 Method:
-	METHOD_START_TAG {Method}  (attributes+=NonExpression)* 
+	LT METHODTAG {Method}  (attributes+=NonExpression)* 
 	
-	((splitTag?=XML_TAG_END
+	((splitTag?=GT
 		(children+=Required)*
-	closedTag?=METHOD_END_TAG
-	)
+	closedTag?=XML_START_ENDTAG METHODTAG GT)
 	|
 	XML_TAG_SINGLEEND
 	)
@@ -245,46 +272,43 @@ Method:
 	
 
 Validations :
-	VALIDATIONS_START_TAG {Validations} 
+	LT VALIDATIONSTAG {Validations} 
 	
-	((splitTag?=XML_TAG_END
+	((splitTag?=GT
 	( children+=Check)*
-	closedTag?=VALIDATIONS_END_TAG)
+	closedTag?=XML_START_ENDTAG VALIDATIONSTAG GT)
 	|
 	XML_TAG_SINGLEEND)
 	;
 	
 Check:
-	CHECK_START_TAG {Check}  (attributes+=NonExpression)* 
+	LT CHECKTAG {Check}  (attributes+=NonExpression)* 
 	
-	((splitTag?=XML_TAG_END
+	((splitTag?=GT
 		expression=TopLevel
-	closedTag?=CHECK_END_TAG
-	)
+	closedTag?=XML_START_ENDTAG CHECKTAG GT)
 	|
 	XML_TAG_SINGLEEND
 	)
 	;	
 	
 	
-Comment:
-	COMMENT_START_TAG {Comment}  (attributes+=Expression)* 
+CommentClause returns Comment:
+	LT COMMENT {Comment}  (attributes+=Expression)* 
 	
-	((splitTag ?= XML_TAG_END
-//		expression=TopLevel
-	closedTag?=COMMENT_END_TAG
-	)
+	((splitTag ?= GT
+	closedTag?=XML_START_ENDTAG COMMENT GT)
 	|
 	XML_TAG_SINGLEEND
 	)
 	;	
 	
 Break:
-	BREAK_START_TAG {Break}  (attributes+=Expression)* 
+	LT BREAKTAG {Break}  (attributes+=Expression)* 
 	 
-	((splitTag ?= XML_TAG_END
+	((splitTag ?= GT
 //		expression=TopLevel
-		closedTag?=BREAK_END_TAG
+		closedTag?= BREAKTAG GT
 	)
 	|
 	XML_TAG_SINGLEEND
@@ -296,20 +320,20 @@ FilePath returns ecore::EString:
 ;
 // create Include entity in Model
 Include returns Method:
-	INCLUDE_START_TAG {Method}  
-		('script' '=' QUOTE (path+=PathElement)+ QUOTE )?
-		(( splitTag?=XML_TAG_END closedTag?=INCLUDE_END_TAG) |
+	LT INCLUDETAG {Method}  
+		(SCRIPT EQUALS QUOTE (path+=PathElement)+ QUOTE )?
+		(( splitTag?=GT closedTag?=INCLUDETAG) |
 	XML_TAG_SINGLEEND)
 	;	
 
 
 
 Message:
-	MESSAGE_START_TAG {Message} (('count' '=' QUOTE count=NUMBER QUOTE)? & ('mode' '=' QUOTE mode=ID QUOTE)? & ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
+	LT MESSAGETAG {Message} ((COUNT EQUALS QUOTE count=NUMBER QUOTE)? & (MODE EQUALS QUOTE mode=ID QUOTE)? & (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
 	
-	((splitTag?=XML_TAG_END
-		((children+=Message) | (children+=Property) | (children+=Param)  | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=Comment) | (children+=Break))*
-	closedTag ?= MESSAGE_END_TAG
+	((splitTag?=GT
+		((children+=Message) | (children+=Property) | (children+=Param)  | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break))*
+	XML_START_ENDTAG closedTag ?= MESSAGETAG GT
 	)
 	| 
 	XML_TAG_SINGLEEND
@@ -319,136 +343,117 @@ Message:
 
 
 
-Map returns Map: 
-	MAPSTARTKEYWORD {Map} (
-		(DOT mapName=MapId)? 
-		(
-			("ref" "=" QUOTE (ref+=PathElement)+ QUOTE )? 
-			& ('object' '=' QUOTE (object+=PathElement)+ QUOTE)? 
-			& ('name' '=' QUOTE nameAttribute=ID QUOTE)? 
-			& ('filter' '=' QUOTE filter=TopLevel QUOTE)?
-		) 	
-	) 
-	(
-			( XML_TAG_SINGLEEND
-	| (splitTag?=XML_TAG_END
-		((children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=Comment) | (children+=Break))*
-		
-		(MAPENDKEYWORD (DOT mapClosingName=MapId)? closedTag?=XML_TAG_END)
-	))
-	)
-	;
+Map returns Map:
+	LT MAPTAG {Map}
+	(DOT mapName=MapId)?
+	((REF EQUALS QUOTE (ref+=PathElement)+ QUOTE)?
+	& (OBJECT EQUALS QUOTE (object+=PathElement)+ QUOTE)?
+	& (NAME EQUALS QUOTE nameAttribute=ID QUOTE)?
+	& (FILTER EQUALS QUOTE filter=TopLevel QUOTE)?)
+	(XML_TAG_SINGLEEND
+	|
+		(GT 
+			(
+				(children+=Message) | 
+				(children+=Property) | 
+				(children+=Param) | 
+				(children+=Map) | 
+				(children+=MapMethod) |
+				(children+=DebugTag) | 
+				(children+=Field) | 
+				(children+=CommentClause) | 
+				(children+=Break)
+			)*
+			XML_START_ENDTAG MAPTAG (DOT mapClosingName=MapId)? closedTag?=GT
+		)
+	);
 	
-
-
-
-
 MapId:
 	ID;
 
-
-
-
-
-// doesn't seem to work. All are optional
-	
-//Modifier: static?='static'? & final?='final'? & visibility=Visibility;
-
-// ToDo Add ALL types!
-
-// this fails. All these possibilities will be tokens/keywords, so it will break other stuff.
-
-//PropertyTypes: STRING_PROPERTY='string' | INTEGER_PROPERTY='integer' | LONG_PROPERTY='long' | DATE_PROPERTY = "date" | FLOAT_PROPERTY = "float";
-//MessageTypes: MSG_TYPE_SIMPLE='simple' |  MSG_TYPE_ARRAY = "array" | MSG_TYPE_TABLE = "table";
-//MessageModes: MSG_MODE = "mode" | MSG_MODE_LAZY = "lazy" | MSG_MODE_IGNORE = "ignore" | MSG_MODE_OVERWRITE = "overwrite";
-
-// The direction 'inout' has been deprecated, so I've left that one out.
-//PropertyDirection: DIR_IN = "in" | DIR_OUT = "out";
-
-// '1' this makes 1 a keyword
-//PropertyCardinalities: CARDINALITY_SINGLE = "1" | CARDINALITY_MULTIPLE = "+";
-	
-
-
 Required: 
-	REQUIRED_START_TAG {Required} (attributes+=NonExpression)*
+	LT REQUIREDTAG {Required} (attributes+=NonExpression)*
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 	
-			closedTag ?= REQUIRED_END_TAG
+		( splitTag?=GT 	
+			closedTag ?= XML_START_ENDTAG REQUIREDTAG GT
 		)
 	);
 	
 
 	
 Property:
-	PROPERTY_START_TAG {Property} (('length' '=' QUOTE length=NUMBER QUOTE)? & ('cardinality' '=' QUOTE cardinality=ID QUOTE)? & ('direction' '=' QUOTE direction=ID QUOTE)? & ('subtypes' '=' QUOTE subtypes=ID QUOTE)? & ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
+	LT PROPERTYTAG {Property} ( (DESCRIPTION EQUALS QUOTE description=Garbage QUOTE)? &  (LENGTH EQUALS QUOTE length=NUMBER QUOTE)? & (CARDINALITY EQUALS QUOTE cardinality=ID QUOTE)? & (DIRECTION EQUALS QUOTE direction=ID QUOTE)? & (SUBTYPES EQUALS QUOTE subtypes=ID QUOTE)? & (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
 
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 	 
+		( splitTag?=GT 	 
 			(
 				children += ExpressionOrOption
 				|
 				children += Map
 		 	)*
-		closedTag ?= PROPERTY_END_TAG
+		closedTag ?= XML_START_ENDTAG PROPERTYTAG GT
 		)
 	);
 
 Param returns Param:
-	PARAM_START_TAG {Param} ( ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?) 
+	LT PARAMTAG {Param} ( (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 	
+		( splitTag?=GT 	
 			((children += ExpressionOrOption) | (children+=Map))*
-		closedTag ?= PARAM_END_TAG
+		XML_START_ENDTAG closedTag ?= PARAMTAG GT
 		)
 	);
 
 MapMethod returns MapMethod:
-	MAP_METHOD_STARTTAG_START  mapName = ID DOT methodName= AttributeName (attributes+=NonExpression)* 
+	LT  mapName = ID DOT methodName= ID (attributes+=Expression)* 
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 
-			((children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=Comment) | (children+=Break))*
-		closedTag ?= MAP_METHOD_ENDTAG_START methodClosingName = ID DOT methodClosingMethod = ID XML_TAG_END
+		( splitTag?=GT 
+			((
+				(children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break)
+			)*
+			)
+			closedTag ?= XML_START_ENDTAG methodClosingName = ID DOT methodClosingMethod = ID GT
 		)
-	);
+	)
+	;
 	
 Field returns Field: 
-	FIELD_START_TAG {Field} ( ('name' '=' QUOTE nameAttribute=ID QUOTE)? & ('comment' '=' QUOTE comment= Garbage QUOTE)? & ('type' '=' QUOTE type=ID QUOTE)? & ('condition' '=' QUOTE condition=TopLevel QUOTE)?  & ('filter' '=' QUOTE filter=TopLevel QUOTE)?) 
+	LT FIELDTAG {Field} ( (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (COMMENT EQUALS QUOTE comment= Garbage QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?  & (FILTER EQUALS QUOTE filter=TopLevel QUOTE)?) 
 
 	(
 	 XML_TAG_SINGLEEND
 	 |
-	 ( splitTag?=XML_TAG_END
-		((children += ExpressionOrOption)  | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Comment) | (children+=Break))*
+	 ( splitTag?=GT
+		((children += ExpressionOrOption)  | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=CommentClause) | (children+=Break))*
 	 )
-	 closedTag ?= FIELD_END_TAG
+	 XML_START_ENDTAG closedTag ?= FIELDTAG GT
 	)
 ;
 
 DebugTag returns DebugTag:
-	DEBUG_START_TAG {DebugTag} (('value' '=' value = TopLevel)?  ('condition' '=' QUOTE condition=TopLevel QUOTE)?)
+	LT DEBUG_TAG {DebugTag} ((VALUE EQUALS value = TopLevel)?  (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?)
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=XML_TAG_END 	
+		( splitTag?=GT 	
 			(expression=TopLevel)?
-		closedTag ?= DEBUG_END_TAG
+		XML_START_ENDTAG closedTag ?= DEBUG_TAG GT
 		)
 	)	
 	;	
 
 ExpressionOrOption returns Element:
-		EXPRESSION_START_TAG ExpressionTag
+		LT EXPRESSION_TAG ExpressionTag
 		|
-		OPTION_START_TAG Option
+		LT OPTIONTAG Option
 		
 		
 ;
@@ -456,12 +461,12 @@ ExpressionOrOption returns Element:
 
 ExpressionTag returns ExpressionTag:
 	
-	{ExpressionTag} (('value' '=' QUOTE (value = TopLevel)? QUOTE)?  & ('condition' '=' QUOTE (condition=TopLevel)? QUOTE)? & ('xml:space' '=' QUOTE 'preserve' QUOTE)?)
+	{ExpressionTag} ((VALUE EQUALS QUOTE (value = TopLevel)? QUOTE)?  & (CONDITION EQUALS QUOTE (condition=TopLevel)? QUOTE)? & (XMLSPACE EQUALS QUOTE PRESERVE QUOTE)?)
 
 	(
 		XML_TAG_SINGLEEND
 	|
-		( splitTag?=XML_TAG_END 	
+		( splitTag?=GT 	
 			content=Garbage
 		    closedTag ?= EXPRESSION_END_TAG
 		)
@@ -469,12 +474,12 @@ ExpressionTag returns ExpressionTag:
 	;	
 	
 Option: 
-	 {Option} (attributes+=NonExpression)*
+	 LT OPTIONTAG {Option} (attributes+=NonExpression)*
 	(
 		XML_TAG_SINGLEEND
 	|
-		( splitTag?=XML_TAG_END 	
-		closedTag ?= OPTION_END_TAG
+		( splitTag?=GT 	
+		 XML_START_ENDTAG closedTag ?= OPTIONTAG GT
 		)
 	);
 	

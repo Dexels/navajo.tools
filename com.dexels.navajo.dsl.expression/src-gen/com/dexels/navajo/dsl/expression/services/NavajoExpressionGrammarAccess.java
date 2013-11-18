@@ -22,21 +22,181 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Assignment cToplevelExpressionAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cToplevelExpressionOrExpressionParserRuleCall_0 = (RuleCall)cToplevelExpressionAssignment.eContents().get(0);
 		
-		////import "classpath:/com/dexels/navajo/dsl/expression/Navajo.ecore"
-		////import "file:///Users/frank/Documents/workspace-xtext/com.dexels.navajo.dsl.expression/src/com/dexels/navajo/dsl/expression/Navajo.ecore" as ncore
-		////import "http://www.dexels.com/navajo/dsl/expression/NavajoCore" as ncore
-		////generate navajoExpression "http://www.dexels.com/navajo/dsl/expression/NavajoExpression"
-		////terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-		//TopLevel: //	 toplevelExpression =OrExpression
+		//TopLevel:
 		//	toplevelExpression=OrExpression;
 		public ParserRule getRule() { return rule; }
 
-		////	 toplevelExpression =OrExpression
 		//toplevelExpression=OrExpression
 		public Assignment getToplevelExpressionAssignment() { return cToplevelExpressionAssignment; }
 
 		//OrExpression
 		public RuleCall getToplevelExpressionOrExpressionParserRuleCall_0() { return cToplevelExpressionOrExpressionParserRuleCall_0; }
+	}
+
+	public class AnyExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnyExpression");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cXML_GTTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXML_LTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cXML_GTEQTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cXML_LTEQTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cDOTTerminalRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cNUMBERTerminalRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cBADNUMBERTerminalRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cWSTerminalRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cTRUETerminalRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cFALSETerminalRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
+		private final RuleCall cNULLTerminalRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
+		private final RuleCall cTODAYTerminalRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
+		private final RuleCall cFORALLTerminalRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
+		private final RuleCall cPARENTTerminalRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
+		private final RuleCall cATTerminalRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
+		private final RuleCall cCOLONTerminalRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
+		private final RuleCall cNOTTerminalRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
+		private final RuleCall cLITERALSTRINGTerminalRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
+		private final RuleCall cSQBRACKET_CLOSETerminalRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
+		private final RuleCall cSQBRACKET_OPENTerminalRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
+		private final RuleCall cTML_SEPARATORTerminalRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
+		private final RuleCall cTML_EXISTSTerminalRuleCall_21 = (RuleCall)cAlternatives.eContents().get(21);
+		private final RuleCall cDOLLARTerminalRuleCall_22 = (RuleCall)cAlternatives.eContents().get(22);
+		private final RuleCall cBRACKET_OPENTerminalRuleCall_23 = (RuleCall)cAlternatives.eContents().get(23);
+		private final RuleCall cBRACKET_CLOSETerminalRuleCall_24 = (RuleCall)cAlternatives.eContents().get(24);
+		private final RuleCall cCOMMATerminalRuleCall_25 = (RuleCall)cAlternatives.eContents().get(25);
+		private final RuleCall cANDTerminalRuleCall_26 = (RuleCall)cAlternatives.eContents().get(26);
+		private final RuleCall cORTerminalRuleCall_27 = (RuleCall)cAlternatives.eContents().get(27);
+		private final RuleCall cHASHTerminalRuleCall_28 = (RuleCall)cAlternatives.eContents().get(28);
+		private final RuleCall cCURLYOPENTerminalRuleCall_29 = (RuleCall)cAlternatives.eContents().get(29);
+		private final RuleCall cCURLYCLOSETerminalRuleCall_30 = (RuleCall)cAlternatives.eContents().get(30);
+		private final RuleCall cEQUALSEQUALSTerminalRuleCall_31 = (RuleCall)cAlternatives.eContents().get(31);
+		private final RuleCall cNEQUALSTerminalRuleCall_32 = (RuleCall)cAlternatives.eContents().get(32);
+		private final RuleCall cPLUSTerminalRuleCall_33 = (RuleCall)cAlternatives.eContents().get(33);
+		private final RuleCall cMINUSTerminalRuleCall_34 = (RuleCall)cAlternatives.eContents().get(34);
+		private final RuleCall cMULTIPLYTerminalRuleCall_35 = (RuleCall)cAlternatives.eContents().get(35);
+		private final RuleCall cIDTerminalRuleCall_36 = (RuleCall)cAlternatives.eContents().get(36);
+		
+		//AnyExpression:
+		//	XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT
+		//	| AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
+		//	BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS |
+		//	MINUS | MULTIPLY | ID;
+		public ParserRule getRule() { return rule; }
+
+		//XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT |
+		//AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
+		//BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS | MINUS
+		//| MULTIPLY | ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//XML_GT
+		public RuleCall getXML_GTTerminalRuleCall_0() { return cXML_GTTerminalRuleCall_0; }
+
+		//XML_LT
+		public RuleCall getXML_LTTerminalRuleCall_1() { return cXML_LTTerminalRuleCall_1; }
+
+		//XML_GTEQ
+		public RuleCall getXML_GTEQTerminalRuleCall_2() { return cXML_GTEQTerminalRuleCall_2; }
+
+		//XML_LTEQ
+		public RuleCall getXML_LTEQTerminalRuleCall_3() { return cXML_LTEQTerminalRuleCall_3; }
+
+		//DOT
+		public RuleCall getDOTTerminalRuleCall_4() { return cDOTTerminalRuleCall_4; }
+
+		//NUMBER
+		public RuleCall getNUMBERTerminalRuleCall_5() { return cNUMBERTerminalRuleCall_5; }
+
+		//BADNUMBER
+		public RuleCall getBADNUMBERTerminalRuleCall_6() { return cBADNUMBERTerminalRuleCall_6; }
+
+		//WS
+		public RuleCall getWSTerminalRuleCall_7() { return cWSTerminalRuleCall_7; }
+
+		//TRUE
+		public RuleCall getTRUETerminalRuleCall_8() { return cTRUETerminalRuleCall_8; }
+
+		//FALSE
+		public RuleCall getFALSETerminalRuleCall_9() { return cFALSETerminalRuleCall_9; }
+
+		//NULL
+		public RuleCall getNULLTerminalRuleCall_10() { return cNULLTerminalRuleCall_10; }
+
+		//TODAY
+		public RuleCall getTODAYTerminalRuleCall_11() { return cTODAYTerminalRuleCall_11; }
+
+		//FORALL
+		public RuleCall getFORALLTerminalRuleCall_12() { return cFORALLTerminalRuleCall_12; }
+
+		//PARENT
+		public RuleCall getPARENTTerminalRuleCall_13() { return cPARENTTerminalRuleCall_13; }
+
+		//AT
+		public RuleCall getATTerminalRuleCall_14() { return cATTerminalRuleCall_14; }
+
+		//COLON
+		public RuleCall getCOLONTerminalRuleCall_15() { return cCOLONTerminalRuleCall_15; }
+
+		//NOT
+		public RuleCall getNOTTerminalRuleCall_16() { return cNOTTerminalRuleCall_16; }
+
+		//LITERALSTRING
+		public RuleCall getLITERALSTRINGTerminalRuleCall_17() { return cLITERALSTRINGTerminalRuleCall_17; }
+
+		//SQBRACKET_CLOSE
+		public RuleCall getSQBRACKET_CLOSETerminalRuleCall_18() { return cSQBRACKET_CLOSETerminalRuleCall_18; }
+
+		//SQBRACKET_OPEN
+		public RuleCall getSQBRACKET_OPENTerminalRuleCall_19() { return cSQBRACKET_OPENTerminalRuleCall_19; }
+
+		//TML_SEPARATOR
+		public RuleCall getTML_SEPARATORTerminalRuleCall_20() { return cTML_SEPARATORTerminalRuleCall_20; }
+
+		//TML_EXISTS
+		public RuleCall getTML_EXISTSTerminalRuleCall_21() { return cTML_EXISTSTerminalRuleCall_21; }
+
+		//DOLLAR
+		public RuleCall getDOLLARTerminalRuleCall_22() { return cDOLLARTerminalRuleCall_22; }
+
+		//BRACKET_OPEN
+		public RuleCall getBRACKET_OPENTerminalRuleCall_23() { return cBRACKET_OPENTerminalRuleCall_23; }
+
+		//BRACKET_CLOSE
+		public RuleCall getBRACKET_CLOSETerminalRuleCall_24() { return cBRACKET_CLOSETerminalRuleCall_24; }
+
+		//COMMA
+		public RuleCall getCOMMATerminalRuleCall_25() { return cCOMMATerminalRuleCall_25; }
+
+		//AND
+		public RuleCall getANDTerminalRuleCall_26() { return cANDTerminalRuleCall_26; }
+
+		//OR
+		public RuleCall getORTerminalRuleCall_27() { return cORTerminalRuleCall_27; }
+
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_28() { return cHASHTerminalRuleCall_28; }
+
+		//CURLYOPEN
+		public RuleCall getCURLYOPENTerminalRuleCall_29() { return cCURLYOPENTerminalRuleCall_29; }
+
+		//CURLYCLOSE
+		public RuleCall getCURLYCLOSETerminalRuleCall_30() { return cCURLYCLOSETerminalRuleCall_30; }
+
+		//EQUALSEQUALS
+		public RuleCall getEQUALSEQUALSTerminalRuleCall_31() { return cEQUALSEQUALSTerminalRuleCall_31; }
+
+		//NEQUALS
+		public RuleCall getNEQUALSTerminalRuleCall_32() { return cNEQUALSTerminalRuleCall_32; }
+
+		//PLUS
+		public RuleCall getPLUSTerminalRuleCall_33() { return cPLUSTerminalRuleCall_33; }
+
+		//MINUS
+		public RuleCall getMINUSTerminalRuleCall_34() { return cMINUSTerminalRuleCall_34; }
+
+		//MULTIPLY
+		public RuleCall getMULTIPLYTerminalRuleCall_35() { return cMULTIPLYTerminalRuleCall_35; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_36() { return cIDTerminalRuleCall_36; }
 	}
 
 	public class PathElementElements extends AbstractParserRuleElementFinder {
@@ -48,7 +208,6 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cTML_SEPARATORTerminalRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//// skipped url, image, points, datepattern, password
-		////terminal PATH_ELEMENT: ('.'|'..'|("a".. "z"| "A" .. "Z"|"_")("a".. "z"| "A" .. "Z"|"0" .. "9"|"_")*);
 		//PathElement returns ecore::EString:
 		//	ID | DOT | PARENT | TML_SEPARATOR;
 		public ParserRule getRule() { return rule; }
@@ -200,24 +359,24 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	public class MapReferenceParamsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MapReferenceParams");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cBRACKET_OPENTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Assignment cGetterParamsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cGetterParamsLiteralParserRuleCall_1_0 = (RuleCall)cGetterParamsAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final RuleCall cCOMMATerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
 		private final Assignment cGetterParamsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cGetterParamsLiteralParserRuleCall_2_1_0 = (RuleCall)cGetterParamsAssignment_2_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final RuleCall cBRACKET_CLOSETerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//MapReferenceParams returns ReferenceParams:
-		//	"(" getterParams+=Literal ("," getterParams+=Literal)* ")";
+		//	BRACKET_OPEN getterParams+=Literal (COMMA getterParams+=Literal)* BRACKET_CLOSE;
 		public ParserRule getRule() { return rule; }
 
-		//"(" getterParams+=Literal ("," getterParams+=Literal)* ")"
+		//BRACKET_OPEN getterParams+=Literal (COMMA getterParams+=Literal)* BRACKET_CLOSE
 		public Group getGroup() { return cGroup; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
+		//BRACKET_OPEN
+		public RuleCall getBRACKET_OPENTerminalRuleCall_0() { return cBRACKET_OPENTerminalRuleCall_0; }
 
 		//getterParams+=Literal
 		public Assignment getGetterParamsAssignment_1() { return cGetterParamsAssignment_1; }
@@ -225,11 +384,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//Literal
 		public RuleCall getGetterParamsLiteralParserRuleCall_1_0() { return cGetterParamsLiteralParserRuleCall_1_0; }
 
-		//("," getterParams+=Literal)*
+		//(COMMA getterParams+=Literal)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//","
-		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		//COMMA
+		public RuleCall getCOMMATerminalRuleCall_2_0() { return cCOMMATerminalRuleCall_2_0; }
 
 		//getterParams+=Literal
 		public Assignment getGetterParamsAssignment_2_1() { return cGetterParamsAssignment_2_1; }
@@ -237,8 +396,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//Literal
 		public RuleCall getGetterParamsLiteralParserRuleCall_2_1_0() { return cGetterParamsLiteralParserRuleCall_2_1_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		//BRACKET_CLOSE
+		public RuleCall getBRACKET_CLOSETerminalRuleCall_3() { return cBRACKET_CLOSETerminalRuleCall_3; }
 	}
 
 	public class MapGetReferenceElements extends AbstractParserRuleElementFinder {
@@ -300,15 +459,15 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cParametersAndExpressionParserRuleCall_0_0 = (RuleCall)cParametersAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Assignment cOperationsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cOperationsORKeyword_1_0_0 = (Keyword)cOperationsAssignment_1_0.eContents().get(0);
+		private final RuleCall cOperationsORTerminalRuleCall_1_0_0 = (RuleCall)cOperationsAssignment_1_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cParametersAndExpressionParserRuleCall_1_1_0 = (RuleCall)cParametersAssignment_1_1.eContents().get(0);
 		
 		//OrExpression returns Expression:
-		//	parameters+=AndExpression (operations+="OR" parameters+=AndExpression)*;
+		//	parameters+=AndExpression (operations+=OR parameters+=AndExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=AndExpression (operations+="OR" parameters+=AndExpression)*
+		//parameters+=AndExpression (operations+=OR parameters+=AndExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//parameters+=AndExpression
@@ -317,14 +476,14 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//AndExpression
 		public RuleCall getParametersAndExpressionParserRuleCall_0_0() { return cParametersAndExpressionParserRuleCall_0_0; }
 
-		//(operations+="OR" parameters+=AndExpression)*
+		//(operations+=OR parameters+=AndExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//operations+="OR"
+		//operations+=OR
 		public Assignment getOperationsAssignment_1_0() { return cOperationsAssignment_1_0; }
 
-		//"OR"
-		public Keyword getOperationsORKeyword_1_0_0() { return cOperationsORKeyword_1_0_0; }
+		//OR
+		public RuleCall getOperationsORTerminalRuleCall_1_0_0() { return cOperationsORTerminalRuleCall_1_0_0; }
 
 		//parameters+=AndExpression
 		public Assignment getParametersAssignment_1_1() { return cParametersAssignment_1_1; }
@@ -340,15 +499,15 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cParametersEqualityExpressionParserRuleCall_0_0 = (RuleCall)cParametersAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Assignment cOperationsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cOperationsANDKeyword_1_0_0 = (Keyword)cOperationsAssignment_1_0.eContents().get(0);
+		private final RuleCall cOperationsANDTerminalRuleCall_1_0_0 = (RuleCall)cOperationsAssignment_1_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cParametersEqualityExpressionParserRuleCall_1_1_0 = (RuleCall)cParametersAssignment_1_1.eContents().get(0);
 		
 		//AndExpression returns Expression:
-		//	parameters+=EqualityExpression (operations+="AND" parameters+=EqualityExpression)*;
+		//	parameters+=EqualityExpression (operations+=AND parameters+=EqualityExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=EqualityExpression (operations+="AND" parameters+=EqualityExpression)*
+		//parameters+=EqualityExpression (operations+=AND parameters+=EqualityExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//parameters+=EqualityExpression
@@ -357,14 +516,14 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//EqualityExpression
 		public RuleCall getParametersEqualityExpressionParserRuleCall_0_0() { return cParametersEqualityExpressionParserRuleCall_0_0; }
 
-		//(operations+="AND" parameters+=EqualityExpression)*
+		//(operations+=AND parameters+=EqualityExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//operations+="AND"
+		//operations+=AND
 		public Assignment getOperationsAssignment_1_0() { return cOperationsAssignment_1_0; }
 
-		//"AND"
-		public Keyword getOperationsANDKeyword_1_0_0() { return cOperationsANDKeyword_1_0_0; }
+		//AND
+		public RuleCall getOperationsANDTerminalRuleCall_1_0_0() { return cOperationsANDTerminalRuleCall_1_0_0; }
 
 		//parameters+=EqualityExpression
 		public Assignment getParametersAssignment_1_1() { return cParametersAssignment_1_1; }
@@ -381,21 +540,21 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Assignment cOperationsAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final Keyword cOperationsEqualsSignEqualsSignKeyword_1_0_0_0 = (Keyword)cOperationsAssignment_1_0_0.eContents().get(0);
+		private final RuleCall cOperationsEQUALSEQUALSTerminalRuleCall_1_0_0_0 = (RuleCall)cOperationsAssignment_1_0_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cParametersRelationalExpressionParserRuleCall_1_0_1_0 = (RuleCall)cParametersAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Assignment cOperationsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
-		private final Keyword cOperationsExclamationMarkEqualsSignKeyword_1_1_0_0 = (Keyword)cOperationsAssignment_1_1_0.eContents().get(0);
+		private final RuleCall cOperationsNEQUALSTerminalRuleCall_1_1_0_0 = (RuleCall)cOperationsAssignment_1_1_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cParametersRelationalExpressionParserRuleCall_1_1_1_0 = (RuleCall)cParametersAssignment_1_1_1.eContents().get(0);
 		
 		//EqualityExpression returns Expression:
-		//	parameters+=RelationalExpression (operations+="==" parameters+=RelationalExpression | operations+="!="
+		//	parameters+=RelationalExpression (operations+=EQUALSEQUALS parameters+=RelationalExpression | operations+=NEQUALS
 		//	parameters+=RelationalExpression)?;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=RelationalExpression (operations+="==" parameters+=RelationalExpression | operations+="!="
+		//parameters+=RelationalExpression (operations+=EQUALSEQUALS parameters+=RelationalExpression | operations+=NEQUALS
 		//parameters+=RelationalExpression)?
 		public Group getGroup() { return cGroup; }
 
@@ -405,17 +564,17 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//RelationalExpression
 		public RuleCall getParametersRelationalExpressionParserRuleCall_0_0() { return cParametersRelationalExpressionParserRuleCall_0_0; }
 
-		//(operations+="==" parameters+=RelationalExpression | operations+="!=" parameters+=RelationalExpression)?
+		//(operations+=EQUALSEQUALS parameters+=RelationalExpression | operations+=NEQUALS parameters+=RelationalExpression)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//operations+="==" parameters+=RelationalExpression
+		//operations+=EQUALSEQUALS parameters+=RelationalExpression
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//operations+="=="
+		//operations+=EQUALSEQUALS
 		public Assignment getOperationsAssignment_1_0_0() { return cOperationsAssignment_1_0_0; }
 
-		//"=="
-		public Keyword getOperationsEqualsSignEqualsSignKeyword_1_0_0_0() { return cOperationsEqualsSignEqualsSignKeyword_1_0_0_0; }
+		//EQUALSEQUALS
+		public RuleCall getOperationsEQUALSEQUALSTerminalRuleCall_1_0_0_0() { return cOperationsEQUALSEQUALSTerminalRuleCall_1_0_0_0; }
 
 		//parameters+=RelationalExpression
 		public Assignment getParametersAssignment_1_0_1() { return cParametersAssignment_1_0_1; }
@@ -423,14 +582,14 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//RelationalExpression
 		public RuleCall getParametersRelationalExpressionParserRuleCall_1_0_1_0() { return cParametersRelationalExpressionParserRuleCall_1_0_1_0; }
 
-		//operations+="!=" parameters+=RelationalExpression
+		//operations+=NEQUALS parameters+=RelationalExpression
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//operations+="!="
+		//operations+=NEQUALS
 		public Assignment getOperationsAssignment_1_1_0() { return cOperationsAssignment_1_1_0; }
 
-		//"!="
-		public Keyword getOperationsExclamationMarkEqualsSignKeyword_1_1_0_0() { return cOperationsExclamationMarkEqualsSignKeyword_1_1_0_0; }
+		//NEQUALS
+		public RuleCall getOperationsNEQUALSTerminalRuleCall_1_1_0_0() { return cOperationsNEQUALSTerminalRuleCall_1_1_0_0; }
 
 		//parameters+=RelationalExpression
 		public Assignment getParametersAssignment_1_1_1() { return cParametersAssignment_1_1_1; }
@@ -560,20 +719,20 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cParametersMultiplicativeExpressionParserRuleCall_0_0 = (RuleCall)cParametersAssignment_0.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Keyword cPlusSignKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final RuleCall cPLUSTerminalRuleCall_1_0_0 = (RuleCall)cGroup_1_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cParametersMultiplicativeExpressionParserRuleCall_1_0_1_0 = (RuleCall)cParametersAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Keyword cHyphenMinusKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final RuleCall cMINUSTerminalRuleCall_1_1_0 = (RuleCall)cGroup_1_1.eContents().get(0);
 		private final Assignment cParametersAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cParametersMultiplicativeExpressionParserRuleCall_1_1_1_0 = (RuleCall)cParametersAssignment_1_1_1.eContents().get(0);
 		
 		//AdditiveExpression returns Expression:
-		//	parameters+=MultiplicativeExpression ("+" parameters+=MultiplicativeExpression | "-"
+		//	parameters+=MultiplicativeExpression (PLUS parameters+=MultiplicativeExpression | MINUS
 		//	parameters+=MultiplicativeExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=MultiplicativeExpression ("+" parameters+=MultiplicativeExpression | "-"
+		//parameters+=MultiplicativeExpression (PLUS parameters+=MultiplicativeExpression | MINUS
 		//parameters+=MultiplicativeExpression)*
 		public Group getGroup() { return cGroup; }
 
@@ -583,14 +742,14 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//MultiplicativeExpression
 		public RuleCall getParametersMultiplicativeExpressionParserRuleCall_0_0() { return cParametersMultiplicativeExpressionParserRuleCall_0_0; }
 
-		//("+" parameters+=MultiplicativeExpression | "-" parameters+=MultiplicativeExpression)*
+		//(PLUS parameters+=MultiplicativeExpression | MINUS parameters+=MultiplicativeExpression)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"+" parameters+=MultiplicativeExpression
+		//PLUS parameters+=MultiplicativeExpression
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"+"
-		public Keyword getPlusSignKeyword_1_0_0() { return cPlusSignKeyword_1_0_0; }
+		//PLUS
+		public RuleCall getPLUSTerminalRuleCall_1_0_0() { return cPLUSTerminalRuleCall_1_0_0; }
 
 		//parameters+=MultiplicativeExpression
 		public Assignment getParametersAssignment_1_0_1() { return cParametersAssignment_1_0_1; }
@@ -598,11 +757,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//MultiplicativeExpression
 		public RuleCall getParametersMultiplicativeExpressionParserRuleCall_1_0_1_0() { return cParametersMultiplicativeExpressionParserRuleCall_1_0_1_0; }
 
-		//"-" parameters+=MultiplicativeExpression
+		//MINUS parameters+=MultiplicativeExpression
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"-"
-		public Keyword getHyphenMinusKeyword_1_1_0() { return cHyphenMinusKeyword_1_1_0; }
+		//MINUS
+		public RuleCall getMINUSTerminalRuleCall_1_1_0() { return cMINUSTerminalRuleCall_1_1_0; }
 
 		//parameters+=MultiplicativeExpression
 		public Assignment getParametersAssignment_1_1_1() { return cParametersAssignment_1_1_1; }
@@ -619,7 +778,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Assignment cOperationsAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
-		private final Keyword cOperationsAsteriskKeyword_1_0_0_0 = (Keyword)cOperationsAssignment_1_0_0.eContents().get(0);
+		private final RuleCall cOperationsMULTIPLYTerminalRuleCall_1_0_0_0 = (RuleCall)cOperationsAssignment_1_0_0.eContents().get(0);
 		private final Assignment cParametersAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cParametersUnaryExpressionParserRuleCall_1_0_1_0 = (RuleCall)cParametersAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
@@ -629,11 +788,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cParametersUnaryExpressionParserRuleCall_1_1_1_0 = (RuleCall)cParametersAssignment_1_1_1.eContents().get(0);
 		
 		//MultiplicativeExpression returns Expression:
-		//	parameters+=UnaryExpression (operations+="*" parameters+=UnaryExpression | operations+=TML_SEPARATOR
+		//	parameters+=UnaryExpression (operations+=MULTIPLY parameters+=UnaryExpression | operations+=TML_SEPARATOR
 		//	parameters+=UnaryExpression)*;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=UnaryExpression (operations+="*" parameters+=UnaryExpression | operations+=TML_SEPARATOR
+		//parameters+=UnaryExpression (operations+=MULTIPLY parameters+=UnaryExpression | operations+=TML_SEPARATOR
 		//parameters+=UnaryExpression)*
 		public Group getGroup() { return cGroup; }
 
@@ -643,17 +802,17 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//UnaryExpression
 		public RuleCall getParametersUnaryExpressionParserRuleCall_0_0() { return cParametersUnaryExpressionParserRuleCall_0_0; }
 
-		//(operations+="*" parameters+=UnaryExpression | operations+=TML_SEPARATOR parameters+=UnaryExpression)*
+		//(operations+=MULTIPLY parameters+=UnaryExpression | operations+=TML_SEPARATOR parameters+=UnaryExpression)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//operations+="*" parameters+=UnaryExpression
+		//operations+=MULTIPLY parameters+=UnaryExpression
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//operations+="*"
+		//operations+=MULTIPLY
 		public Assignment getOperationsAssignment_1_0_0() { return cOperationsAssignment_1_0_0; }
 
-		//"*"
-		public Keyword getOperationsAsteriskKeyword_1_0_0_0() { return cOperationsAsteriskKeyword_1_0_0_0; }
+		//MULTIPLY
+		public RuleCall getOperationsMULTIPLYTerminalRuleCall_1_0_0_0() { return cOperationsMULTIPLYTerminalRuleCall_1_0_0_0; }
 
 		//parameters+=UnaryExpression
 		public Assignment getParametersAssignment_1_0_1() { return cParametersAssignment_1_0_1; }
@@ -680,34 +839,58 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	public class UnaryExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Assignment cOperationsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
-		private final Keyword cOperationsExclamationMarkKeyword_0_0_0 = (Keyword)cOperationsAssignment_0_0.eContents().get(0);
-		private final Assignment cParametersAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cParametersPrimaryExpressionParserRuleCall_0_1_0 = (RuleCall)cParametersAssignment_0_1.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cAlternatives.eContents().get(0);
+		private final Group cGroup_0_0 = (Group)cAlternatives_0.eContents().get(0);
+		private final Assignment cOperationsAssignment_0_0_0 = (Assignment)cGroup_0_0.eContents().get(0);
+		private final RuleCall cOperationsNOTTerminalRuleCall_0_0_0_0 = (RuleCall)cOperationsAssignment_0_0_0.eContents().get(0);
+		private final Assignment cParametersAssignment_0_0_1 = (Assignment)cGroup_0_0.eContents().get(1);
+		private final RuleCall cParametersPrimaryExpressionParserRuleCall_0_0_1_0 = (RuleCall)cParametersAssignment_0_0_1.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
+		private final Assignment cOperationsAssignment_0_1_0 = (Assignment)cGroup_0_1.eContents().get(0);
+		private final RuleCall cOperationsMINUSTerminalRuleCall_0_1_0_0 = (RuleCall)cOperationsAssignment_0_1_0.eContents().get(0);
+		private final Assignment cParametersAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cParametersPrimaryExpressionParserRuleCall_0_1_1_0 = (RuleCall)cParametersAssignment_0_1_1.eContents().get(0);
 		private final RuleCall cPrimaryExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//UnaryExpression returns Expression:
-		//	operations+="!" parameters+=PrimaryExpression | PrimaryExpression;
+		//	(operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression) | PrimaryExpression;
 		public ParserRule getRule() { return rule; }
 
-		//operations+="!" parameters+=PrimaryExpression | PrimaryExpression
+		//(operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression) | PrimaryExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//operations+="!" parameters+=PrimaryExpression
-		public Group getGroup_0() { return cGroup_0; }
+		//operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//operations+="!"
-		public Assignment getOperationsAssignment_0_0() { return cOperationsAssignment_0_0; }
+		//operations+=NOT parameters+=PrimaryExpression
+		public Group getGroup_0_0() { return cGroup_0_0; }
 
-		//"!"
-		public Keyword getOperationsExclamationMarkKeyword_0_0_0() { return cOperationsExclamationMarkKeyword_0_0_0; }
+		//operations+=NOT
+		public Assignment getOperationsAssignment_0_0_0() { return cOperationsAssignment_0_0_0; }
+
+		//NOT
+		public RuleCall getOperationsNOTTerminalRuleCall_0_0_0_0() { return cOperationsNOTTerminalRuleCall_0_0_0_0; }
 
 		//parameters+=PrimaryExpression
-		public Assignment getParametersAssignment_0_1() { return cParametersAssignment_0_1; }
+		public Assignment getParametersAssignment_0_0_1() { return cParametersAssignment_0_0_1; }
 
 		//PrimaryExpression
-		public RuleCall getParametersPrimaryExpressionParserRuleCall_0_1_0() { return cParametersPrimaryExpressionParserRuleCall_0_1_0; }
+		public RuleCall getParametersPrimaryExpressionParserRuleCall_0_0_1_0() { return cParametersPrimaryExpressionParserRuleCall_0_0_1_0; }
+
+		//operations+=MINUS parameters+=PrimaryExpression
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//operations+=MINUS
+		public Assignment getOperationsAssignment_0_1_0() { return cOperationsAssignment_0_1_0; }
+
+		//MINUS
+		public RuleCall getOperationsMINUSTerminalRuleCall_0_1_0_0() { return cOperationsMINUSTerminalRuleCall_0_1_0_0; }
+
+		//parameters+=PrimaryExpression
+		public Assignment getParametersAssignment_0_1_1() { return cParametersAssignment_0_1_1; }
+
+		//PrimaryExpression
+		public RuleCall getParametersPrimaryExpressionParserRuleCall_0_1_1_0() { return cParametersPrimaryExpressionParserRuleCall_0_1_1_0; }
 
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_1() { return cPrimaryExpressionParserRuleCall_1; }
@@ -719,16 +902,16 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Assignment cParametersAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cParametersLiteralParserRuleCall_0_0 = (RuleCall)cParametersAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cBRACKET_OPENTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
 		private final Assignment cParametersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cParametersOrExpressionParserRuleCall_1_1_0 = (RuleCall)cParametersAssignment_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final RuleCall cBRACKET_CLOSETerminalRuleCall_1_2 = (RuleCall)cGroup_1.eContents().get(2);
 		
 		//PrimaryExpression returns Expression:
-		//	parameters+=Literal | "(" parameters+=OrExpression ")";
+		//	parameters+=Literal | BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE;
 		public ParserRule getRule() { return rule; }
 
-		//parameters+=Literal | "(" parameters+=OrExpression ")"
+		//parameters+=Literal | BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//parameters+=Literal
@@ -737,11 +920,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//Literal
 		public RuleCall getParametersLiteralParserRuleCall_0_0() { return cParametersLiteralParserRuleCall_0_0; }
 
-		//"(" parameters+=OrExpression ")"
+		//BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
+		//BRACKET_OPEN
+		public RuleCall getBRACKET_OPENTerminalRuleCall_1_0() { return cBRACKET_OPENTerminalRuleCall_1_0; }
 
 		//parameters+=OrExpression
 		public Assignment getParametersAssignment_1_1() { return cParametersAssignment_1_1; }
@@ -749,8 +932,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_1_1_0() { return cParametersOrExpressionParserRuleCall_1_1_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
+		//BRACKET_CLOSE
+		public RuleCall getBRACKET_CLOSETerminalRuleCall_1_2() { return cBRACKET_CLOSETerminalRuleCall_1_2; }
 	}
 
 	public class FunctionNameElements extends AbstractParserRuleElementFinder {
@@ -771,20 +954,20 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameFunctionNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cBRACKET_OPENTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Assignment cParametersAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cParametersOrExpressionParserRuleCall_2_0 = (RuleCall)cParametersAssignment_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final RuleCall cCOMMATerminalRuleCall_3_0 = (RuleCall)cGroup_3.eContents().get(0);
 		private final Assignment cParametersAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cParametersOrExpressionParserRuleCall_3_1_0 = (RuleCall)cParametersAssignment_3_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final RuleCall cBRACKET_CLOSETerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//FunctionCall:
-		//	name=FunctionName "(" parameters+=OrExpression? ("," parameters+=OrExpression)* ")";
+		//	name=FunctionName BRACKET_OPEN parameters+=OrExpression? (COMMA parameters+=OrExpression)* BRACKET_CLOSE;
 		public ParserRule getRule() { return rule; }
 
-		//name=FunctionName "(" parameters+=OrExpression? ("," parameters+=OrExpression)* ")"
+		//name=FunctionName BRACKET_OPEN parameters+=OrExpression? (COMMA parameters+=OrExpression)* BRACKET_CLOSE
 		public Group getGroup() { return cGroup; }
 
 		//name=FunctionName
@@ -793,8 +976,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//FunctionName
 		public RuleCall getNameFunctionNameParserRuleCall_0_0() { return cNameFunctionNameParserRuleCall_0_0; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		//BRACKET_OPEN
+		public RuleCall getBRACKET_OPENTerminalRuleCall_1() { return cBRACKET_OPENTerminalRuleCall_1; }
 
 		//parameters+=OrExpression?
 		public Assignment getParametersAssignment_2() { return cParametersAssignment_2; }
@@ -802,11 +985,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_2_0() { return cParametersOrExpressionParserRuleCall_2_0; }
 
-		//("," parameters+=OrExpression)*
+		//(COMMA parameters+=OrExpression)*
 		public Group getGroup_3() { return cGroup_3; }
 
-		//","
-		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
+		//COMMA
+		public RuleCall getCOMMATerminalRuleCall_3_0() { return cCOMMATerminalRuleCall_3_0; }
 
 		//parameters+=OrExpression
 		public Assignment getParametersAssignment_3_1() { return cParametersAssignment_3_1; }
@@ -814,8 +997,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_3_1_0() { return cParametersOrExpressionParserRuleCall_3_1_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		//BRACKET_CLOSE
+		public RuleCall getBRACKET_CLOSETerminalRuleCall_4() { return cBRACKET_CLOSETerminalRuleCall_4; }
 	}
 
 	public class DateLiteralElements extends AbstractParserRuleElementFinder {
@@ -823,29 +1006,22 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final RuleCall cNUMBERTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword cNumberSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cHASHTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final RuleCall cNUMBERTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
-		private final Keyword cNumberSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final RuleCall cHASHTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		private final RuleCall cNUMBERTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
-		private final Keyword cNumberSignKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final RuleCall cHASHTerminalRuleCall_6 = (RuleCall)cGroup.eContents().get(6);
 		private final RuleCall cNUMBERTerminalRuleCall_7 = (RuleCall)cGroup.eContents().get(7);
-		private final Keyword cNumberSignKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final RuleCall cHASHTerminalRuleCall_8 = (RuleCall)cGroup.eContents().get(8);
 		private final RuleCall cNUMBERTerminalRuleCall_9 = (RuleCall)cGroup.eContents().get(9);
-		private final Keyword cNumberSignKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final RuleCall cHASHTerminalRuleCall_10 = (RuleCall)cGroup.eContents().get(10);
 		private final RuleCall cNUMBERTerminalRuleCall_11 = (RuleCall)cGroup.eContents().get(11);
 		
-		////void DatePatternLiteral() #void:
-		////{}
-		////{
-		////  (Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()) #DatePatternNode
-		////}
-		////Expression returns Expression:
-		////	Literal | FunctionCall | FunctionOperands ;
 		//DateLiteral returns Expression:
-		//	{Expression} NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER;
+		//	{Expression} NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER;
 		public ParserRule getRule() { return rule; }
 
-		//{Expression} NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER
+		//{Expression} NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER
 		public Group getGroup() { return cGroup; }
 
 		//{Expression}
@@ -854,32 +1030,32 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_1() { return cNUMBERTerminalRuleCall_1; }
 
-		//"#"
-		public Keyword getNumberSignKeyword_2() { return cNumberSignKeyword_2; }
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_2() { return cHASHTerminalRuleCall_2; }
 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_3() { return cNUMBERTerminalRuleCall_3; }
 
-		//"#"
-		public Keyword getNumberSignKeyword_4() { return cNumberSignKeyword_4; }
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_4() { return cHASHTerminalRuleCall_4; }
 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_5() { return cNUMBERTerminalRuleCall_5; }
 
-		//"#"
-		public Keyword getNumberSignKeyword_6() { return cNumberSignKeyword_6; }
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_6() { return cHASHTerminalRuleCall_6; }
 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_7() { return cNUMBERTerminalRuleCall_7; }
 
-		//"#"
-		public Keyword getNumberSignKeyword_8() { return cNumberSignKeyword_8; }
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_8() { return cHASHTerminalRuleCall_8; }
 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_9() { return cNUMBERTerminalRuleCall_9; }
 
-		//"#"
-		public Keyword getNumberSignKeyword_10() { return cNumberSignKeyword_10; }
+		//HASH
+		public RuleCall getHASHTerminalRuleCall_10() { return cHASHTerminalRuleCall_10; }
 
 		//NUMBER
 		public RuleCall getNUMBERTerminalRuleCall_11() { return cNUMBERTerminalRuleCall_11; }
@@ -896,25 +1072,25 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
 		private final Assignment cOperationsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
 		private final RuleCall cOperationsFORALLTerminalRuleCall_2_0_0 = (RuleCall)cOperationsAssignment_2_0.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final RuleCall cBRACKET_OPENTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
 		private final Assignment cValueStringAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
 		private final RuleCall cValueStringLITERALSTRINGTerminalRuleCall_2_2_0 = (RuleCall)cValueStringAssignment_2_2.eContents().get(0);
-		private final Keyword cCommaKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		private final RuleCall cCOMMATerminalRuleCall_2_3 = (RuleCall)cGroup_2.eContents().get(3);
 		private final Assignment cParametersAssignment_2_4 = (Assignment)cGroup_2.eContents().get(4);
 		private final RuleCall cParametersOrExpressionParserRuleCall_2_4_0 = (RuleCall)cParametersAssignment_2_4.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_5 = (Keyword)cGroup_2.eContents().get(5);
+		private final RuleCall cBRACKET_CLOSETerminalRuleCall_2_5 = (RuleCall)cGroup_2.eContents().get(5);
 		private final Assignment cParametersAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
 		private final RuleCall cParametersFunctionCallParserRuleCall_3_0 = (RuleCall)cParametersAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
 		private final Assignment cExpressionTypeAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final Keyword cExpressionTypeLeftCurlyBracketKeyword_4_0_0 = (Keyword)cExpressionTypeAssignment_4_0.eContents().get(0);
+		private final RuleCall cExpressionTypeCURLYOPENTerminalRuleCall_4_0_0 = (RuleCall)cExpressionTypeAssignment_4_0.eContents().get(0);
 		private final Assignment cParametersAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cParametersOrExpressionParserRuleCall_4_1_0 = (RuleCall)cParametersAssignment_4_1.eContents().get(0);
 		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
-		private final Keyword cCommaKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final RuleCall cCOMMATerminalRuleCall_4_2_0 = (RuleCall)cGroup_4_2.eContents().get(0);
 		private final Assignment cParametersAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
 		private final RuleCall cParametersOrExpressionParserRuleCall_4_2_1_0 = (RuleCall)cParametersAssignment_4_2_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final RuleCall cCURLYCLOSETerminalRuleCall_4_3 = (RuleCall)cGroup_4.eContents().get(3);
 		private final Assignment cElementsAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
 		private final RuleCall cElementsNULLTerminalRuleCall_5_0 = (RuleCall)cElementsAssignment_5.eContents().get(0);
 		private final Assignment cElementsAssignment_6 = (Assignment)cAlternatives.eContents().get(6);
@@ -933,15 +1109,15 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cParametersDateLiteralParserRuleCall_12_0 = (RuleCall)cParametersAssignment_12.eContents().get(0);
 		
 		//Literal returns Expression:
-		//	{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL "(" valueString=LITERALSTRING ","
-		//	parameters+=OrExpression ")" | parameters+=FunctionCall | expressionType="{" parameters+=OrExpression? (","
-		//	parameters+=OrExpression)* "}" | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
+		//	{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL BRACKET_OPEN valueString=LITERALSTRING COMMA
+		//	parameters+=OrExpression BRACKET_CLOSE | parameters+=FunctionCall | expressionType=CURLYOPEN parameters+=OrExpression?
+		//	(COMMA parameters+=OrExpression)* CURLYCLOSE | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
 		//	parameters+=TmlExpression | parameters+=ExistsTmlExpression | parameters+=MapGetReference | parameters+=DateLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL "(" valueString=LITERALSTRING ","
-		//parameters+=OrExpression ")" | parameters+=FunctionCall | expressionType="{" parameters+=OrExpression? (","
-		//parameters+=OrExpression)* "}" | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
+		//{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL BRACKET_OPEN valueString=LITERALSTRING COMMA
+		//parameters+=OrExpression BRACKET_CLOSE | parameters+=FunctionCall | expressionType=CURLYOPEN parameters+=OrExpression?
+		//(COMMA parameters+=OrExpression)* CURLYCLOSE | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
 		//parameters+=TmlExpression | parameters+=ExistsTmlExpression | parameters+=MapGetReference | parameters+=DateLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -960,7 +1136,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//LITERALSTRING
 		public RuleCall getValueStringLITERALSTRINGTerminalRuleCall_1_0() { return cValueStringLITERALSTRINGTerminalRuleCall_1_0; }
 
-		//operations+=FORALL "(" valueString=LITERALSTRING "," parameters+=OrExpression ")"
+		//operations+=FORALL BRACKET_OPEN valueString=LITERALSTRING COMMA parameters+=OrExpression BRACKET_CLOSE
 		public Group getGroup_2() { return cGroup_2; }
 
 		//operations+=FORALL
@@ -969,8 +1145,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//FORALL
 		public RuleCall getOperationsFORALLTerminalRuleCall_2_0_0() { return cOperationsFORALLTerminalRuleCall_2_0_0; }
 
-		//"("
-		public Keyword getLeftParenthesisKeyword_2_1() { return cLeftParenthesisKeyword_2_1; }
+		//BRACKET_OPEN
+		public RuleCall getBRACKET_OPENTerminalRuleCall_2_1() { return cBRACKET_OPENTerminalRuleCall_2_1; }
 
 		//valueString=LITERALSTRING
 		public Assignment getValueStringAssignment_2_2() { return cValueStringAssignment_2_2; }
@@ -978,8 +1154,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//LITERALSTRING
 		public RuleCall getValueStringLITERALSTRINGTerminalRuleCall_2_2_0() { return cValueStringLITERALSTRINGTerminalRuleCall_2_2_0; }
 
-		//","
-		public Keyword getCommaKeyword_2_3() { return cCommaKeyword_2_3; }
+		//COMMA
+		public RuleCall getCOMMATerminalRuleCall_2_3() { return cCOMMATerminalRuleCall_2_3; }
 
 		//parameters+=OrExpression
 		public Assignment getParametersAssignment_2_4() { return cParametersAssignment_2_4; }
@@ -987,8 +1163,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_2_4_0() { return cParametersOrExpressionParserRuleCall_2_4_0; }
 
-		//")"
-		public Keyword getRightParenthesisKeyword_2_5() { return cRightParenthesisKeyword_2_5; }
+		//BRACKET_CLOSE
+		public RuleCall getBRACKET_CLOSETerminalRuleCall_2_5() { return cBRACKET_CLOSETerminalRuleCall_2_5; }
 
 		//parameters+=FunctionCall
 		public Assignment getParametersAssignment_3() { return cParametersAssignment_3; }
@@ -996,14 +1172,14 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//FunctionCall
 		public RuleCall getParametersFunctionCallParserRuleCall_3_0() { return cParametersFunctionCallParserRuleCall_3_0; }
 
-		//expressionType="{" parameters+=OrExpression? ("," parameters+=OrExpression)* "}"
+		//expressionType=CURLYOPEN parameters+=OrExpression? (COMMA parameters+=OrExpression)* CURLYCLOSE
 		public Group getGroup_4() { return cGroup_4; }
 
-		//expressionType="{"
+		//expressionType=CURLYOPEN
 		public Assignment getExpressionTypeAssignment_4_0() { return cExpressionTypeAssignment_4_0; }
 
-		//"{"
-		public Keyword getExpressionTypeLeftCurlyBracketKeyword_4_0_0() { return cExpressionTypeLeftCurlyBracketKeyword_4_0_0; }
+		//CURLYOPEN
+		public RuleCall getExpressionTypeCURLYOPENTerminalRuleCall_4_0_0() { return cExpressionTypeCURLYOPENTerminalRuleCall_4_0_0; }
 
 		//parameters+=OrExpression?
 		public Assignment getParametersAssignment_4_1() { return cParametersAssignment_4_1; }
@@ -1011,11 +1187,11 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_4_1_0() { return cParametersOrExpressionParserRuleCall_4_1_0; }
 
-		//("," parameters+=OrExpression)*
+		//(COMMA parameters+=OrExpression)*
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
-		//","
-		public Keyword getCommaKeyword_4_2_0() { return cCommaKeyword_4_2_0; }
+		//COMMA
+		public RuleCall getCOMMATerminalRuleCall_4_2_0() { return cCOMMATerminalRuleCall_4_2_0; }
 
 		//parameters+=OrExpression
 		public Assignment getParametersAssignment_4_2_1() { return cParametersAssignment_4_2_1; }
@@ -1023,8 +1199,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		//OrExpression
 		public RuleCall getParametersOrExpressionParserRuleCall_4_2_1_0() { return cParametersOrExpressionParserRuleCall_4_2_1_0; }
 
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4_3() { return cRightCurlyBracketKeyword_4_3; }
+		//CURLYCLOSE
+		public RuleCall getCURLYCLOSETerminalRuleCall_4_3() { return cCURLYCLOSETerminalRuleCall_4_3; }
 
 		//elements+=NULL
 		public Assignment getElementsAssignment_5() { return cElementsAssignment_5; }
@@ -1081,7 +1257,9 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	private TerminalRule tXML_LT;
 	private TerminalRule tXML_GTEQ;
 	private TerminalRule tXML_LTEQ;
+	private TerminalRule tDOT;
 	private TerminalRule tNUMBER;
+	private TerminalRule tBADNUMBER;
 	private TerminalRule tWS;
 	private TerminalRule tTRUE;
 	private TerminalRule tFALSE;
@@ -1090,15 +1268,29 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	private TerminalRule tFORALL;
 	private TerminalRule tPARENT;
 	private TerminalRule tAT;
-	private TerminalRule tDOT;
 	private TerminalRule tCOLON;
+	private TerminalRule tNOT;
 	private TerminalRule tLITERALSTRING;
 	private TerminalRule tSQBRACKET_OPEN;
 	private TerminalRule tSQBRACKET_CLOSE;
 	private TerminalRule tTML_SEPARATOR;
 	private TerminalRule tTML_EXISTS;
 	private TerminalRule tDOLLAR;
+	private TerminalRule tBRACKET_OPEN;
+	private TerminalRule tBRACKET_CLOSE;
+	private TerminalRule tCOMMA;
+	private TerminalRule tAND;
+	private TerminalRule tOR;
+	private TerminalRule tHASH;
+	private TerminalRule tCURLYOPEN;
+	private TerminalRule tCURLYCLOSE;
+	private TerminalRule tEQUALSEQUALS;
+	private TerminalRule tNEQUALS;
+	private TerminalRule tPLUS;
+	private TerminalRule tMINUS;
+	private TerminalRule tMULTIPLY;
 	private TerminalRule tID;
+	private AnyExpressionElements pAnyExpression;
 	private PathElementElements pPathElement;
 	private TmlExpressionElements pTmlExpression;
 	private ExistsTmlExpressionElements pExistsTmlExpression;
@@ -1147,12 +1339,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	
 
 	
-	////import "classpath:/com/dexels/navajo/dsl/expression/Navajo.ecore"
-	////import "file:///Users/frank/Documents/workspace-xtext/com.dexels.navajo.dsl.expression/src/com/dexels/navajo/dsl/expression/Navajo.ecore" as ncore
-	////import "http://www.dexels.com/navajo/dsl/expression/NavajoCore" as ncore
-	////generate navajoExpression "http://www.dexels.com/navajo/dsl/expression/NavajoExpression"
-	////terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-	//TopLevel: //	 toplevelExpression =OrExpression
+	//TopLevel:
 	//	toplevelExpression=OrExpression;
 	public TopLevelElements getTopLevelAccess() {
 		return (pTopLevel != null) ? pTopLevel : (pTopLevel = new TopLevelElements());
@@ -1162,7 +1349,6 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		return getTopLevelAccess().getRule();
 	}
 
-	////terminal INT returns ecore::EString: ('0'..'9')+;
 	//terminal XML_GT:
 	//	"&gt;";
 	public TerminalRule getXML_GTRule() {
@@ -1187,10 +1373,22 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		return (tXML_LTEQ != null) ? tXML_LTEQ : (tXML_LTEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "XML_LTEQ"));
 	} 
 
+	//terminal DOT:
+	//	".";
+	public TerminalRule getDOTRule() {
+		return (tDOT != null) ? tDOT : (tDOT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOT"));
+	} 
+
 	//terminal NUMBER returns ecore::EBigDecimal:
-	//	"0".."9"+ ("." "0".."9"+)?;
+	//	"0".."9"+ (DOT "0".."9"+)?;
 	public TerminalRule getNUMBERRule() {
 		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
+	} 
+
+	//terminal BADNUMBER:
+	//	"0".."9"+ DOT;
+	public TerminalRule getBADNUMBERRule() {
+		return (tBADNUMBER != null) ? tBADNUMBER : (tBADNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BADNUMBER"));
 	} 
 
 	//terminal WS:
@@ -1241,16 +1439,16 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		return (tAT != null) ? tAT : (tAT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "AT"));
 	} 
 
-	//terminal DOT:
-	//	".";
-	public TerminalRule getDOTRule() {
-		return (tDOT != null) ? tDOT : (tDOT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOT"));
-	} 
-
 	//terminal COLON:
 	//	":";
 	public TerminalRule getCOLONRule() {
 		return (tCOLON != null) ? tCOLON : (tCOLON = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COLON"));
+	} 
+
+	//terminal NOT:
+	//	"!";
+	public TerminalRule getNOTRule() {
+		return (tNOT != null) ? tNOT : (tNOT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NOT"));
 	} 
 
 	//terminal LITERALSTRING:
@@ -1289,14 +1487,104 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		return (tDOLLAR != null) ? tDOLLAR : (tDOLLAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOLLAR"));
 	} 
 
+	//terminal BRACKET_OPEN:
+	//	"(";
+	public TerminalRule getBRACKET_OPENRule() {
+		return (tBRACKET_OPEN != null) ? tBRACKET_OPEN : (tBRACKET_OPEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BRACKET_OPEN"));
+	} 
+
+	//terminal BRACKET_CLOSE:
+	//	")";
+	public TerminalRule getBRACKET_CLOSERule() {
+		return (tBRACKET_CLOSE != null) ? tBRACKET_CLOSE : (tBRACKET_CLOSE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BRACKET_CLOSE"));
+	} 
+
+	//terminal COMMA:
+	//	",";
+	public TerminalRule getCOMMARule() {
+		return (tCOMMA != null) ? tCOMMA : (tCOMMA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "COMMA"));
+	} 
+
+	//terminal AND:
+	//	"AND";
+	public TerminalRule getANDRule() {
+		return (tAND != null) ? tAND : (tAND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "AND"));
+	} 
+
+	//terminal OR:
+	//	"OR";
+	public TerminalRule getORRule() {
+		return (tOR != null) ? tOR : (tOR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "OR"));
+	} 
+
+	//terminal HASH:
+	//	"#";
+	public TerminalRule getHASHRule() {
+		return (tHASH != null) ? tHASH : (tHASH = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HASH"));
+	} 
+
+	//terminal CURLYOPEN:
+	//	"{";
+	public TerminalRule getCURLYOPENRule() {
+		return (tCURLYOPEN != null) ? tCURLYOPEN : (tCURLYOPEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CURLYOPEN"));
+	} 
+
+	//terminal CURLYCLOSE:
+	//	"}";
+	public TerminalRule getCURLYCLOSERule() {
+		return (tCURLYCLOSE != null) ? tCURLYCLOSE : (tCURLYCLOSE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CURLYCLOSE"));
+	} 
+
+	//terminal EQUALSEQUALS:
+	//	"==";
+	public TerminalRule getEQUALSEQUALSRule() {
+		return (tEQUALSEQUALS != null) ? tEQUALSEQUALS : (tEQUALSEQUALS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EQUALSEQUALS"));
+	} 
+
+	//terminal NEQUALS:
+	//	"!=";
+	public TerminalRule getNEQUALSRule() {
+		return (tNEQUALS != null) ? tNEQUALS : (tNEQUALS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NEQUALS"));
+	} 
+
+	//terminal PLUS:
+	//	"+";
+	public TerminalRule getPLUSRule() {
+		return (tPLUS != null) ? tPLUS : (tPLUS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "PLUS"));
+	} 
+
+	//terminal MINUS:
+	//	"-";
+	public TerminalRule getMINUSRule() {
+		return (tMINUS != null) ? tMINUS : (tMINUS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MINUS"));
+	} 
+
+	//terminal MULTIPLY:
+	//	"*";
+	public TerminalRule getMULTIPLYRule() {
+		return (tMULTIPLY != null) ? tMULTIPLY : (tMULTIPLY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MULTIPLY"));
+	} 
+
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
+	//AnyExpression:
+	//	XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT
+	//	| AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
+	//	BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS |
+	//	MINUS | MULTIPLY | ID;
+	public AnyExpressionElements getAnyExpressionAccess() {
+		return (pAnyExpression != null) ? pAnyExpression : (pAnyExpression = new AnyExpressionElements());
+	}
+	
+	public ParserRule getAnyExpressionRule() {
+		return getAnyExpressionAccess().getRule();
+	}
+
 	//// skipped url, image, points, datepattern, password
-	////terminal PATH_ELEMENT: ('.'|'..'|("a".. "z"| "A" .. "Z"|"_")("a".. "z"| "A" .. "Z"|"0" .. "9"|"_")*);
 	//PathElement returns ecore::EString:
 	//	ID | DOT | PARENT | TML_SEPARATOR;
 	public PathElementElements getPathElementAccess() {
@@ -1330,7 +1618,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//MapReferenceParams returns ReferenceParams:
-	//	"(" getterParams+=Literal ("," getterParams+=Literal)* ")";
+	//	BRACKET_OPEN getterParams+=Literal (COMMA getterParams+=Literal)* BRACKET_CLOSE;
 	public MapReferenceParamsElements getMapReferenceParamsAccess() {
 		return (pMapReferenceParams != null) ? pMapReferenceParams : (pMapReferenceParams = new MapReferenceParamsElements());
 	}
@@ -1350,7 +1638,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//OrExpression returns Expression:
-	//	parameters+=AndExpression (operations+="OR" parameters+=AndExpression)*;
+	//	parameters+=AndExpression (operations+=OR parameters+=AndExpression)*;
 	public OrExpressionElements getOrExpressionAccess() {
 		return (pOrExpression != null) ? pOrExpression : (pOrExpression = new OrExpressionElements());
 	}
@@ -1360,7 +1648,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//AndExpression returns Expression:
-	//	parameters+=EqualityExpression (operations+="AND" parameters+=EqualityExpression)*;
+	//	parameters+=EqualityExpression (operations+=AND parameters+=EqualityExpression)*;
 	public AndExpressionElements getAndExpressionAccess() {
 		return (pAndExpression != null) ? pAndExpression : (pAndExpression = new AndExpressionElements());
 	}
@@ -1370,7 +1658,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//EqualityExpression returns Expression:
-	//	parameters+=RelationalExpression (operations+="==" parameters+=RelationalExpression | operations+="!="
+	//	parameters+=RelationalExpression (operations+=EQUALSEQUALS parameters+=RelationalExpression | operations+=NEQUALS
 	//	parameters+=RelationalExpression)?;
 	public EqualityExpressionElements getEqualityExpressionAccess() {
 		return (pEqualityExpression != null) ? pEqualityExpression : (pEqualityExpression = new EqualityExpressionElements());
@@ -1394,7 +1682,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//AdditiveExpression returns Expression:
-	//	parameters+=MultiplicativeExpression ("+" parameters+=MultiplicativeExpression | "-"
+	//	parameters+=MultiplicativeExpression (PLUS parameters+=MultiplicativeExpression | MINUS
 	//	parameters+=MultiplicativeExpression)*;
 	public AdditiveExpressionElements getAdditiveExpressionAccess() {
 		return (pAdditiveExpression != null) ? pAdditiveExpression : (pAdditiveExpression = new AdditiveExpressionElements());
@@ -1405,7 +1693,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//MultiplicativeExpression returns Expression:
-	//	parameters+=UnaryExpression (operations+="*" parameters+=UnaryExpression | operations+=TML_SEPARATOR
+	//	parameters+=UnaryExpression (operations+=MULTIPLY parameters+=UnaryExpression | operations+=TML_SEPARATOR
 	//	parameters+=UnaryExpression)*;
 	public MultiplicativeExpressionElements getMultiplicativeExpressionAccess() {
 		return (pMultiplicativeExpression != null) ? pMultiplicativeExpression : (pMultiplicativeExpression = new MultiplicativeExpressionElements());
@@ -1416,7 +1704,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//UnaryExpression returns Expression:
-	//	operations+="!" parameters+=PrimaryExpression | PrimaryExpression;
+	//	(operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression) | PrimaryExpression;
 	public UnaryExpressionElements getUnaryExpressionAccess() {
 		return (pUnaryExpression != null) ? pUnaryExpression : (pUnaryExpression = new UnaryExpressionElements());
 	}
@@ -1426,7 +1714,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//PrimaryExpression returns Expression:
-	//	parameters+=Literal | "(" parameters+=OrExpression ")";
+	//	parameters+=Literal | BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -1447,7 +1735,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//FunctionCall:
-	//	name=FunctionName "(" parameters+=OrExpression? ("," parameters+=OrExpression)* ")";
+	//	name=FunctionName BRACKET_OPEN parameters+=OrExpression? (COMMA parameters+=OrExpression)* BRACKET_CLOSE;
 	public FunctionCallElements getFunctionCallAccess() {
 		return (pFunctionCall != null) ? pFunctionCall : (pFunctionCall = new FunctionCallElements());
 	}
@@ -1456,15 +1744,8 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		return getFunctionCallAccess().getRule();
 	}
 
-	////void DatePatternLiteral() #void:
-	////{}
-	////{
-	////  (Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()) #DatePatternNode
-	////}
-	////Expression returns Expression:
-	////	Literal | FunctionCall | FunctionOperands ;
 	//DateLiteral returns Expression:
-	//	{Expression} NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER "#" NUMBER;
+	//	{Expression} NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER;
 	public DateLiteralElements getDateLiteralAccess() {
 		return (pDateLiteral != null) ? pDateLiteral : (pDateLiteral = new DateLiteralElements());
 	}
@@ -1474,9 +1755,9 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	}
 
 	//Literal returns Expression:
-	//	{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL "(" valueString=LITERALSTRING ","
-	//	parameters+=OrExpression ")" | parameters+=FunctionCall | expressionType="{" parameters+=OrExpression? (","
-	//	parameters+=OrExpression)* "}" | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
+	//	{Expression} NUMBER | valueString=LITERALSTRING | operations+=FORALL BRACKET_OPEN valueString=LITERALSTRING COMMA
+	//	parameters+=OrExpression BRACKET_CLOSE | parameters+=FunctionCall | expressionType=CURLYOPEN parameters+=OrExpression?
+	//	(COMMA parameters+=OrExpression)* CURLYCLOSE | elements+=NULL | elements+=TODAY | elements+=TRUE | elements+=FALSE |
 	//	parameters+=TmlExpression | parameters+=ExistsTmlExpression | parameters+=MapGetReference | parameters+=DateLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());

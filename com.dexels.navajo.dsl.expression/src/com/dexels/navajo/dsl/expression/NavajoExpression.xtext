@@ -1,35 +1,26 @@
 grammar com.dexels.navajo.dsl.expression.NavajoExpression   hidden(WS)
 
-//import "platform:/resource/com.dexels.navajo.dsl.expression/src/com/dexels/navajo/dsl/expression/Navajo.ecore" as ncore
 import "platform:/resource/com.dexels.navajo.dsl.expression.model/model/Expression.ecore"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 
-//import "classpath:/com/dexels/navajo/dsl/expression/Navajo.ecore"
-//import "file:///Users/frank/Documents/workspace-xtext/com.dexels.navajo.dsl.expression/src/com/dexels/navajo/dsl/expression/Navajo.ecore" as ncore
-
-//import "http://www.dexels.com/navajo/dsl/expression/NavajoCore" as ncore
- 
-
-//generate navajoExpression "http://www.dexels.com/navajo/dsl/expression/NavajoExpression"
-//terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 TopLevel returns TopLevel: 
-//	 toplevelExpression =OrExpression
 		toplevelExpression=OrExpression
  	;
 
 
  
-//terminal INT returns ecore::EString: ('0'..'9')+;
 terminal XML_GT: '&gt;';
 terminal XML_LT: '&lt;';
 terminal XML_GTEQ: '&gt;=';
 terminal XML_LTEQ: '&lt;=';
 
+terminal DOT: '.';
 terminal NUMBER returns ecore::EBigDecimal:
-  ('0'..'9')+ ('.' ('0'..'9')+)?;
-
+  ('0'..'9')+ (DOT ('0'..'9')+)?;
+terminal BADNUMBER:
+	('0'..'9')+ DOT
+;
 
 terminal WS			: (' '|'\t'|'\r'|'\n')+;
 terminal TRUE: 'true' | 'TRUE';
@@ -40,8 +31,8 @@ terminal FORALL: 'FORALL';
 terminal PARENT: "..";
 	
 terminal AT: '@';	
-terminal DOT: '.';
 terminal COLON: ':';
+terminal NOT: '!';
 
 
 
@@ -66,15 +57,63 @@ terminal TML_EXISTS:
 terminal DOLLAR:
 	'$';
 	
+terminal BRACKET_OPEN:
+	'('
+;
+
+terminal BRACKET_CLOSE:
+	')'
+;
+
+terminal COMMA:
+	','
+;
+
+terminal AND:
+	'AND'
+;
+
+terminal OR:
+	'OR'
+;
+
+terminal HASH:
+	'#'
+;
+terminal CURLYOPEN:
+	'{'
+;
+terminal CURLYCLOSE:
+	'}'
+;
+terminal EQUALSEQUALS:
+	'=='
+;
+terminal NEQUALS:
+	'!='
+;
+
+terminal PLUS:
+	'+'
+;
+terminal MINUS:
+	'-'
+;
+terminal MULTIPLY:
+	'*'
+;
+
+
+
+	
 terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
+AnyExpression:
+	(XML_GT|XML_LT|XML_GTEQ|XML_LTEQ|DOT|NUMBER|BADNUMBER|WS|TRUE|FALSE|NULL|TODAY|FORALL|PARENT|AT|COLON|NOT|LITERALSTRING|SQBRACKET_CLOSE|SQBRACKET_OPEN|TML_SEPARATOR|TML_EXISTS|DOLLAR|BRACKET_OPEN|BRACKET_CLOSE|COMMA|AND|OR|HASH|CURLYOPEN|CURLYCLOSE|EQUALSEQUALS|NEQUALS|PLUS|MINUS|MULTIPLY|ID)
+;
 
 // skipped url, image, points, datepattern, password
 
-	
-
-//terminal PATH_ELEMENT: ('.'|'..'|("a".. "z"| "A" .. "Z"|"_")("a".. "z"| "A" .. "Z"|"0" .. "9"|"_")*);
- 	
 PathElement returns ecore::EString:
 	(ID|DOT|PARENT|TML_SEPARATOR)
 	;
@@ -90,7 +129,7 @@ ExistsTmlExpression returns ExistsTmlReference:
 ;
 
 MapReferenceParams returns ReferenceParams: 
-	'(' (getterParams+=Literal) (',' getterParams+=Literal)* ')'
+	BRACKET_OPEN (getterParams+=Literal) (COMMA getterParams+=Literal)* BRACKET_CLOSE
 ;
 
 MapGetReference returns MapGetReference: 
@@ -98,14 +137,14 @@ MapGetReference returns MapGetReference:
 ;
    
 OrExpression returns Expression:
-    parameters+=AndExpression (operations+="OR" parameters+=AndExpression )*;
+    parameters+=AndExpression (operations+= OR parameters+=AndExpression )*;
     
 AndExpression returns Expression:
-     parameters+=EqualityExpression (operations+="AND" parameters+=EqualityExpression )*
+     parameters+=EqualityExpression (operations+= AND parameters+=EqualityExpression )*
      ;  
 
 EqualityExpression returns Expression: 
-     parameters+=RelationalExpression ((operations+='==' parameters+=RelationalExpression) | (operations+='!=' parameters+=RelationalExpression))?
+     parameters+=RelationalExpression ((operations+= EQUALSEQUALS parameters+=RelationalExpression) | (operations+=NEQUALS parameters+=RelationalExpression))?
 ;     
   
 // Skipped for now. Trouble with overloaded '<' stuff  
@@ -113,20 +152,23 @@ RelationalExpression returns Expression:
    {Expression} parameters+=AdditiveExpression ((operations+=XML_LT parameters+=AdditiveExpression)|(operations+=XML_GT parameters+=AdditiveExpression)|(operations+=XML_LTEQ parameters+=AdditiveExpression)|(operations+=XML_GTEQ parameters+=AdditiveExpression))?
     ;
 AdditiveExpression returns Expression:
-      parameters+=MultiplicativeExpression (('+' parameters+=MultiplicativeExpression ) | ('-' parameters+=MultiplicativeExpression))*
+      parameters+=MultiplicativeExpression ((PLUS parameters+=MultiplicativeExpression ) | (MINUS parameters+=MultiplicativeExpression))*
 	;
 	
 MultiplicativeExpression returns Expression: 
-      parameters+=UnaryExpression ((operations+='*' parameters+=UnaryExpression ) |  (operations+=TML_SEPARATOR parameters+=UnaryExpression ))*
+      parameters+=UnaryExpression ((operations+=MULTIPLY parameters+=UnaryExpression ) |  (operations+=TML_SEPARATOR parameters+=UnaryExpression ))*
 	;
 	
 UnaryExpression returns Expression:
-	operations+="!" parameters+=PrimaryExpression
+	(
+		NOT parameters+=PrimaryExpression 
+		| MINUS parameters+=PrimaryExpression
+	)
 	| PrimaryExpression;	
 
 PrimaryExpression returns Expression:
    	parameters+=Literal
-	| '(' parameters+=OrExpression ')'
+	| BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE
 ;	
 
 
@@ -136,31 +178,22 @@ FunctionName:
 
 
 FunctionCall returns FunctionCall:
-	name=FunctionName '('(parameters+=OrExpression)? (',' parameters+=OrExpression)*  ')'
+	name=FunctionName BRACKET_OPEN (parameters+=OrExpression)? (COMMA parameters+=OrExpression)*  BRACKET_CLOSE
 ;
 
-//void DatePatternLiteral() #void:
-//{}
-//{
-//  (Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()"#"Literal()) #DatePatternNode
-//}
-
-
-//Expression returns Expression:
-//	Literal | FunctionCall | FunctionOperands ;
 
 DateLiteral returns Expression:
 {Expression}
-	NUMBER '#' NUMBER '#' NUMBER '#' NUMBER '#' NUMBER '#' NUMBER
+	NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER
 ;
 
 
 Literal returns Expression:
   {Expression}NUMBER
   | valueString= LITERALSTRING
-  | operations+=FORALL '(' valueString=LITERALSTRING ',' parameters+=OrExpression ')'
+  | operations+=FORALL BRACKET_OPEN valueString=LITERALSTRING COMMA parameters+=OrExpression BRACKET_CLOSE
   | parameters+=FunctionCall
-  | expressionType='{' (parameters+=OrExpression)?  (',' parameters+=OrExpression)* '}'
+  | expressionType=CURLYOPEN (parameters+=OrExpression)?  (COMMA parameters+=OrExpression)* CURLYCLOSE
   | elements+=NULL
   | elements+=TODAY 
   | elements+=TRUE

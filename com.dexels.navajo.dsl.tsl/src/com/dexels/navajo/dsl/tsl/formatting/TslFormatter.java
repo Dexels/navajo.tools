@@ -32,10 +32,9 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 		c.setNoSpace().after(f.getAttributeNameRule());
 	//	c.setNoSpace().after(f.getMapStartRule());
 //		c.setNoSpace().after(f.getMAPSTARTKEYWORDRule());
-		c.setNoSpace().after(f.getMAPENDKEYWORDRule());
 		c.setNoSpace().after(f.getDOLLARRule());
 		c.setNoSpace().before(f.getMapIdRule());
-		c.setNoSpace().before(f.getXML_TAG_ENDRule());
+		c.setNoSpace().before(f.getGTRule());
 		c.setNoSpace().before(f.getXML_TAG_SINGLEENDRule());
 //		c.setNoSpace().before(f.getATTRIBUTESTRINGRule());
 //		c.setNoSpace().before(f.getQUOTEQRule());
@@ -48,102 +47,27 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1).after(f.getXMLHEADRule());
 
 		
-		c.setLinewrap(1).after(f.getXML_TAG_ENDRule());
+		c.setLinewrap(1).after(f.getXML_GTRule());
 		c.setLinewrap(1).after(f.getXML_TAG_SINGLEENDRule());
 //		c.setLinewrap(1).before(f.getXML_TAG_STARTRule());
-		c.setLinewrap(1).before(f.getPROPERTY_START_TAGRule());
-		c.setLinewrap(1).before(f.getPROPERTY_END_TAGRule());
-		c.setLinewrap(1).before(f.getMESSAGE_START_TAGRule());
-		c.setLinewrap(1).before(f.getMESSAGE_END_TAGRule());
-		c.setLinewrap(1).before(f.getFIELD_START_TAGRule());
-		c.setLinewrap(1).before(f.getFIELD_END_TAGRule());
-		c.setLinewrap(1).before(f.getDEBUG_START_TAGRule());
-		c.setLinewrap(1).before(f.getDEBUG_END_TAGRule());
+		c.setLinewrap(1).before(f.getPropertyRule());
+		c.setLinewrap(1).before(f.getMessageRule());
+		c.setLinewrap(1).before(f.getFieldRule());
 		c.setLinewrap(1).before(f.getNAVASCRIPT_ENDRule());
-		c.setLinewrap(1).before(f.getMAPSTARTKEYWORDRule());
-		c.setLinewrap(1).before(f.getMAPENDKEYWORDRule());
+		c.setLinewrap(1).before(f.getMapRule());
 
-		c.setLinewrap(1).before(f.getMETHOD_START_TAGRule());
-		c.setLinewrap(1).before(f.getMETHOD_END_TAGRule());
+		c.setLinewrap(1).before(f.getMethodRule());
 
-		c.setLinewrap(1).before(f.getMETHODS_START_TAGRule());
-		c.setLinewrap(1).before(f.getMETHODS_END_TAGRule());
-		
-
-		c.setIndentationIncrement().before(f.getDEBUG_START_TAGRule());
-		c.setIndentationDecrement().after(f.getDEBUG_END_TAGRule());
-
-		
-		c.setIndentationIncrement().before(f.getMAPSTARTKEYWORDRule());
-		c.setIndentationDecrement().after(f.getMAPENDKEYWORDRule());
-
-		c.setIndentationIncrement().before(f.getMETHODS_START_TAGRule());
-		c.setIndentationDecrement().after(f.getMETHODS_END_TAGRule());
-
-		c.setIndentationIncrement().before(f.getMETHOD_START_TAGRule());
-		c.setIndentationDecrement().after(f.getMETHOD_END_TAGRule());
-		
-		c.setIndentationIncrement().before(f.getPARAM_START_TAGRule());
-		c.setIndentationDecrement().after(f.getPARAM_END_TAGRule());
-
-		c.setIndentationIncrement().before(f.getFIELD_START_TAGRule());
-		c.setIndentationDecrement().after(f.getFIELD_END_TAGRule());
-
+		c.setLinewrap(1).before(f.getMethodsRule());
 		
 
 
-		c.setIndentationIncrement().before(f.getMESSAGE_START_TAGRule());
-		c.setIndentationDecrement().after(f.getMESSAGE_END_TAGRule());
 		
-//		c.setIndentationIncrement().after(f.getNAVASCRIPT_STARTRule());
-//		c.setIndentationDecrement().before(f.getNAVASCRIPT_ENDRule());
-
-
-		
-		//		c.setIndentationDecrement().before(f.getMapEndRule());
-
-		// switched
-//		c.setIndentationIncrement().after(f.getNAVASCRIPT_STARTRule());
-//		c.setIndentationDecrement().before(f.getNAVASCRIPT_ENDRule());
-
-		
-		c.setIndentationIncrement().before(f.getEXPRESSION_START_TAGRule());
-		c.setIndentationDecrement().after(f.getEXPRESSION_END_TAGRule());
-		
-		c.setIndentationIncrement().before(f.getPROPERTY_START_TAGRule());
-		c.setIndentationDecrement().after(f.getPROPERTY_END_TAGRule());
-
-		c.setIndentationIncrement().before(f.getOPTION_START_TAGRule());
-		c.setIndentationDecrement().after(f.getOPTION_END_TAGRule());
-
+		c.setIndentationIncrement().before(f.getGTRule());
+		c.setIndentationDecrement().after(f.getXML_START_ENDTAGRule());
 		
 		c.setIndentationDecrement().after(f.getXML_TAG_SINGLEENDRule());
 		
-
-		
-//		c.setIndentationIncrement().after(f.getExpressionOrOptionRule());
-//		c.setIndentationDecrement().before(f.getExpressionOrOptionRule());
-
-		
-		// 
-//		c.setLinewrap(1).after(f.getXML_TAG_SINGLEENDRule());
-
-//		c.setIndentationIncrement().after(f.getXML_TAG_ENDRule());
-//		
-//		c.setLinewrap(1).after(f.getEXPRESSION_STARTRule());
-//		c.setLinewrap(1).before(f.getEXPRESSION_ENDRule());
-
-		
-//		c.setLinewrap(1).after(f.getPROPERTY_END_TAGRule());
-//		c.setLinewrap(1).after(f.getMESSAGE_END_TAGRule());
-//		c.setLinewrap(1).after(f.getMapEndRule());
-//		c.setLinewrap(1).after(f.getMULTILINETAG_ENDRule());
-//		
-//		c.setLinewrap(1).before(f.getEXPRESSION_ENDRule());
-//		c.setLinewrap(1).after(f.getEXPRESSION_ENDRule());
-
-//		c.setIndentationDecrement().before(f.getNAVASCRIPT_ENDRule());
-//		c.setIndentationDecrement().before(f.getEXPRESSION_ENDRule());
 
 //		c.setNoSpace().after(f.getQUOTEQRule());
 		c.setNoSpace().after(f.getPathElementRule());

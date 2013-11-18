@@ -622,6 +622,15 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProperty_Description() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParam() {
 		return paramEClass;
 	}
@@ -892,6 +901,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		createEAttribute(propertyEClass, PROPERTY__CARDINALITY);
 		createEAttribute(propertyEClass, PROPERTY__VALUE_STRING);
 		createEAttribute(propertyEClass, PROPERTY__DIRECTION);
+		createEAttribute(propertyEClass, PROPERTY__DESCRIPTION);
 
 		paramEClass = createEClass(PARAM);
 
@@ -1032,6 +1042,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		initEAttribute(getProperty_Cardinality(), ecorePackage.getEString(), "cardinality", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_Direction(), ecorePackage.getEString(), "direction", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_Description(), ecorePackage.getEString(), "description", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

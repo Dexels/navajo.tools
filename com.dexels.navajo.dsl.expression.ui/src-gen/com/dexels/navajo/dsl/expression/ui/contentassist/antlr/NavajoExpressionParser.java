@@ -37,12 +37,14 @@ public class NavajoExpressionParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getAnyExpressionAccess().getAlternatives(), "rule__AnyExpression__Alternatives");
 					put(grammarAccess.getPathElementAccess().getAlternatives(), "rule__PathElement__Alternatives");
 					put(grammarAccess.getEqualityExpressionAccess().getAlternatives_1(), "rule__EqualityExpression__Alternatives_1");
 					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_2(), "rule__RelationalExpression__Alternatives_2");
 					put(grammarAccess.getAdditiveExpressionAccess().getAlternatives_1(), "rule__AdditiveExpression__Alternatives_1");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getAlternatives_1(), "rule__MultiplicativeExpression__Alternatives_1");
 					put(grammarAccess.getUnaryExpressionAccess().getAlternatives(), "rule__UnaryExpression__Alternatives");
+					put(grammarAccess.getUnaryExpressionAccess().getAlternatives_0(), "rule__UnaryExpression__Alternatives_0");
 					put(grammarAccess.getPrimaryExpressionAccess().getAlternatives(), "rule__PrimaryExpression__Alternatives");
 					put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
 					put(grammarAccess.getTmlExpressionAccess().getGroup(), "rule__TmlExpression__Group__0");
@@ -71,7 +73,8 @@ public class NavajoExpressionParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicativeExpressionAccess().getGroup(), "rule__MultiplicativeExpression__Group__0");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getGroup_1_0(), "rule__MultiplicativeExpression__Group_1_0__0");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getGroup_1_1(), "rule__MultiplicativeExpression__Group_1_1__0");
-					put(grammarAccess.getUnaryExpressionAccess().getGroup_0(), "rule__UnaryExpression__Group_0__0");
+					put(grammarAccess.getUnaryExpressionAccess().getGroup_0_0(), "rule__UnaryExpression__Group_0_0__0");
+					put(grammarAccess.getUnaryExpressionAccess().getGroup_0_1(), "rule__UnaryExpression__Group_0_1__0");
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_1(), "rule__PrimaryExpression__Group_1__0");
 					put(grammarAccess.getFunctionCallAccess().getGroup(), "rule__FunctionCall__Group__0");
 					put(grammarAccess.getFunctionCallAccess().getGroup_3(), "rule__FunctionCall__Group_3__0");
@@ -123,8 +126,10 @@ public class NavajoExpressionParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicativeExpressionAccess().getParametersAssignment_1_0_1(), "rule__MultiplicativeExpression__ParametersAssignment_1_0_1");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getOperationsAssignment_1_1_0(), "rule__MultiplicativeExpression__OperationsAssignment_1_1_0");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getParametersAssignment_1_1_1(), "rule__MultiplicativeExpression__ParametersAssignment_1_1_1");
-					put(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0(), "rule__UnaryExpression__OperationsAssignment_0_0");
-					put(grammarAccess.getUnaryExpressionAccess().getParametersAssignment_0_1(), "rule__UnaryExpression__ParametersAssignment_0_1");
+					put(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0_0(), "rule__UnaryExpression__OperationsAssignment_0_0_0");
+					put(grammarAccess.getUnaryExpressionAccess().getParametersAssignment_0_0_1(), "rule__UnaryExpression__ParametersAssignment_0_0_1");
+					put(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_1_0(), "rule__UnaryExpression__OperationsAssignment_0_1_0");
+					put(grammarAccess.getUnaryExpressionAccess().getParametersAssignment_0_1_1(), "rule__UnaryExpression__ParametersAssignment_0_1_1");
 					put(grammarAccess.getPrimaryExpressionAccess().getParametersAssignment_0(), "rule__PrimaryExpression__ParametersAssignment_0");
 					put(grammarAccess.getPrimaryExpressionAccess().getParametersAssignment_1_1(), "rule__PrimaryExpression__ParametersAssignment_1_1");
 					put(grammarAccess.getFunctionCallAccess().getNameAssignment_0(), "rule__FunctionCall__NameAssignment_0");

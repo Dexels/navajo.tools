@@ -1103,13 +1103,22 @@ public interface TslPackage extends EPackage {
 	int PROPERTY__DIRECTION = ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__DESCRIPTION = ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 7;
+	int PROPERTY_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link com.dexels.navajo.dsl.model.tsl.impl.ParamImpl <em>Param</em>}' class.
@@ -1282,6 +1291,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAM__DIRECTION = PROPERTY__DIRECTION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__DESCRIPTION = PROPERTY__DESCRIPTION;
 
 	/**
 	 * The number of structural features of the '<em>Param</em>' class.
@@ -3032,6 +3050,17 @@ public interface TslPackage extends EPackage {
 	EAttribute getProperty_Direction();
 
 	/**
+	 * Returns the meta object for the attribute '{@link com.dexels.navajo.dsl.model.tsl.Property#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.dexels.navajo.dsl.model.tsl.Property#getDescription()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_Description();
+
+	/**
 	 * Returns the meta object for class '{@link com.dexels.navajo.dsl.model.tsl.Param <em>Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3635,6 +3664,14 @@ public interface TslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__DIRECTION = eINSTANCE.getProperty_Direction();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__DESCRIPTION = eINSTANCE.getProperty_Description();
 
 		/**
 		 * The meta object literal for the '{@link com.dexels.navajo.dsl.model.tsl.impl.ParamImpl <em>Param</em>}' class.
