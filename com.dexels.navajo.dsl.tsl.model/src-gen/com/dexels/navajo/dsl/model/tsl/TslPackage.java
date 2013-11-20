@@ -97,7 +97,7 @@ public interface TslPackage extends EPackage {
 	int ELEMENT__ATTRIBUTES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -169,13 +169,22 @@ public interface TslPackage extends EPackage {
 	int ELEMENT__COMMENT = 10;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__RAW_VALUE = 11;
+
+	/**
 	 * The number of structural features of the '<em>Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = 11;
+	int ELEMENT_FEATURE_COUNT = 12;
 
 	/**
 	 * The meta object id for the '{@link com.dexels.navajo.dsl.model.tsl.impl.TmlImpl <em>Tml</em>}' class.
@@ -215,7 +224,7 @@ public interface TslPackage extends EPackage {
 	int TML__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -287,6 +296,15 @@ public interface TslPackage extends EPackage {
 	int TML__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TML__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -342,7 +360,7 @@ public interface TslPackage extends EPackage {
 	int METHODS__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -414,6 +432,15 @@ public interface TslPackage extends EPackage {
 	int METHODS__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHODS__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Method</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -469,7 +496,7 @@ public interface TslPackage extends EPackage {
 	int METHOD__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -539,6 +566,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int METHOD__COMMENT = ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__RAW_VALUE = ELEMENT__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -669,7 +705,7 @@ public interface TslPackage extends EPackage {
 	int MESSAGE__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -739,6 +775,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int MESSAGE__COMMENT = ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE__RAW_VALUE = ELEMENT__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -814,7 +859,7 @@ public interface TslPackage extends EPackage {
 	int MAP__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -886,6 +931,15 @@ public interface TslPackage extends EPackage {
 	int MAP__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Map Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -922,13 +976,22 @@ public interface TslPackage extends EPackage {
 	int MAP__REF = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP__EXPRESSIONS = ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Map</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 4;
+	int MAP_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl <em>Property</em>}' class.
@@ -968,7 +1031,7 @@ public interface TslPackage extends EPackage {
 	int PROPERTY__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1038,6 +1101,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__COMMENT = ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__RAW_VALUE = ELEMENT__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Expression Value</b></em>' containment reference list.
@@ -1158,7 +1230,7 @@ public interface TslPackage extends EPackage {
 	int PARAM__ATTRIBUTES = PROPERTY__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1228,6 +1300,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAM__COMMENT = PROPERTY__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__RAW_VALUE = PROPERTY__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Expression Value</b></em>' containment reference list.
@@ -1348,7 +1429,7 @@ public interface TslPackage extends EPackage {
 	int EXPRESSION_TAG__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1420,6 +1501,15 @@ public interface TslPackage extends EPackage {
 	int EXPRESSION_TAG__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_TAG__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1476,7 +1566,7 @@ public interface TslPackage extends EPackage {
 	int DEBUG_TAG__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1548,6 +1638,15 @@ public interface TslPackage extends EPackage {
 	int DEBUG_TAG__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEBUG_TAG__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1603,7 +1702,7 @@ public interface TslPackage extends EPackage {
 	int MAP_METHOD__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1673,6 +1772,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAP_METHOD__COMMENT = ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_METHOD__RAW_VALUE = ELEMENT__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Map Name</b></em>' attribute.
@@ -1767,7 +1875,7 @@ public interface TslPackage extends EPackage {
 	int REQUIRED__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1839,6 +1947,15 @@ public interface TslPackage extends EPackage {
 	int REQUIRED__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRED__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Required</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1885,7 +2002,7 @@ public interface TslPackage extends EPackage {
 	int OPTION__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1957,6 +2074,15 @@ public interface TslPackage extends EPackage {
 	int OPTION__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPTION__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Option</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2004,7 +2130,7 @@ public interface TslPackage extends EPackage {
 	int CHECK__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2076,6 +2202,15 @@ public interface TslPackage extends EPackage {
 	int CHECK__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2140,7 +2275,7 @@ public interface TslPackage extends EPackage {
 	int VALIDATIONS__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2212,6 +2347,15 @@ public interface TslPackage extends EPackage {
 	int VALIDATIONS__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALIDATIONS__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Validations</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2258,7 +2402,7 @@ public interface TslPackage extends EPackage {
 	int COMMENT__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2330,6 +2474,15 @@ public interface TslPackage extends EPackage {
 	int COMMENT__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMENT__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Comment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2377,7 +2530,7 @@ public interface TslPackage extends EPackage {
 	int BREAK__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2449,6 +2602,15 @@ public interface TslPackage extends EPackage {
 	int BREAK__COMMENT = ELEMENT__COMMENT;
 
 	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BREAK__RAW_VALUE = ELEMENT__RAW_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Break</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2496,7 +2658,7 @@ public interface TslPackage extends EPackage {
 	int FIELD__ATTRIBUTES = ELEMENT__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * The feature id for the '<em><b>Content</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2566,6 +2728,15 @@ public interface TslPackage extends EPackage {
 	 * @ordered
 	 */
 	int FIELD__COMMENT = ELEMENT__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FIELD__RAW_VALUE = ELEMENT__RAW_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Expression Value</b></em>' containment reference list.
@@ -2778,10 +2949,10 @@ public interface TslPackage extends EPackage {
 	EReference getElement_Attributes();
 
 	/**
-	 * Returns the meta object for the attribute '{@link com.dexels.navajo.dsl.model.tsl.Element#getContent <em>Content</em>}'.
+	 * Returns the meta object for the attribute list '{@link com.dexels.navajo.dsl.model.tsl.Element#getContent <em>Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Content</em>'.
+	 * @return the meta object for the attribute list '<em>Content</em>'.
 	 * @see com.dexels.navajo.dsl.model.tsl.Element#getContent()
 	 * @see #getElement()
 	 * @generated
@@ -2864,6 +3035,17 @@ public interface TslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getElement_Comment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.dexels.navajo.dsl.model.tsl.Element#getRawValue <em>Raw Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Raw Value</em>'.
+	 * @see com.dexels.navajo.dsl.model.tsl.Element#getRawValue()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EAttribute getElement_RawValue();
 
 	/**
 	 * Returns the meta object for class '{@link com.dexels.navajo.dsl.model.tsl.Message <em>Message</em>}'.
@@ -2961,6 +3143,17 @@ public interface TslPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMap_Ref();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.dexels.navajo.dsl.model.tsl.Map#getExpressions <em>Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see com.dexels.navajo.dsl.model.tsl.Map#getExpressions()
+	 * @see #getMap()
+	 * @generated
+	 */
+	EReference getMap_Expressions();
 
 	/**
 	 * Returns the meta object for class '{@link com.dexels.navajo.dsl.model.tsl.Property <em>Property</em>}'.
@@ -3460,7 +3653,7 @@ public interface TslPackage extends EPackage {
 		EReference ELEMENT__ATTRIBUTES = eINSTANCE.getElement_Attributes();
 
 		/**
-		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Content</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3522,6 +3715,14 @@ public interface TslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ELEMENT__COMMENT = eINSTANCE.getElement_Comment();
+
+		/**
+		 * The meta object literal for the '<em><b>Raw Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ELEMENT__RAW_VALUE = eINSTANCE.getElement_RawValue();
 
 		/**
 		 * The meta object literal for the '{@link com.dexels.navajo.dsl.model.tsl.impl.MessageImpl <em>Message</em>}' class.
@@ -3598,6 +3799,14 @@ public interface TslPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAP__REF = eINSTANCE.getMap_Ref();
+
+		/**
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAP__EXPRESSIONS = eINSTANCE.getMap_Expressions();
 
 		/**
 		 * The meta object literal for the '{@link com.dexels.navajo.dsl.model.tsl.impl.PropertyImpl <em>Property</em>}' class.

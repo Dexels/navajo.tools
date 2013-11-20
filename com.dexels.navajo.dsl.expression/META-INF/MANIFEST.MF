@@ -29,4 +29,5 @@ Export-Package: com.dexels.navajo.dsl.expression,
  com.dexels.navajo.dsl.expression.scoping,
  com.dexels.navajo.dsl.expression.services,
  com.dexels.navajo.dsl.expression.validation,
- com.dexels.navajo.dsl.expression.generator
+ com.dexels.navajo.dsl.expression.generator,
+ com.dexels.navajo.dsl.expression.parser.antlr.lexer

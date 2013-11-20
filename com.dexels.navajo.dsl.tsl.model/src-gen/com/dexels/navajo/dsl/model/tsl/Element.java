@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Element#getFilter <em>Filter</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Element#getNameAttribute <em>Name Attribute</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Element#getComment <em>Comment</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Element#getRawValue <em>Raw Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,30 +101,20 @@ public interface Element extends EObject {
 	EList<PossibleExpression> getAttributes();
 
 	/**
-	 * Returns the value of the '<em><b>Content</b></em>' attribute.
+	 * Returns the value of the '<em><b>Content</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Content</em>' attribute.
-	 * @see #setContent(String)
+	 * @return the value of the '<em>Content</em>' attribute list.
 	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getElement_Content()
 	 * @model
 	 * @generated
 	 */
-	String getContent();
-
-	/**
-	 * Sets the value of the '{@link com.dexels.navajo.dsl.model.tsl.Element#getContent <em>Content</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Content</em>' attribute.
-	 * @see #getContent()
-	 * @generated
-	 */
-	void setContent(String value);
+	EList<String> getContent();
 
 	/**
 	 * Returns the value of the '<em><b>Split Tag</b></em>' attribute.
@@ -308,6 +299,32 @@ public interface Element extends EObject {
 	 * @generated
 	 */
 	void setComment(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Raw Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Raw Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Raw Value</em>' attribute.
+	 * @see #setRawValue(String)
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getElement_RawValue()
+	 * @model
+	 * @generated
+	 */
+	String getRawValue();
+
+	/**
+	 * Sets the value of the '{@link com.dexels.navajo.dsl.model.tsl.Element#getRawValue <em>Raw Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Raw Value</em>' attribute.
+	 * @see #getRawValue()
+	 * @generated
+	 */
+	void setRawValue(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

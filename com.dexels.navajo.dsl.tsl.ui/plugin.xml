@@ -9,7 +9,7 @@
             class="com.dexels.navajo.dsl.tsl.ui.TslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="tsl"
+            extensions="tsl,xml"
             id="com.dexels.navajo.dsl.tsl.Tsl"
             name="Tsl Editor">
         </editor>

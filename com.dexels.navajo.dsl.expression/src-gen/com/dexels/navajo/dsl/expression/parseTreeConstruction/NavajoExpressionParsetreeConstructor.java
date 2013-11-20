@@ -3006,11 +3006,11 @@ protected class MultiplicativeExpression_ParametersAssignment_1_1_1 extends Assi
 /************ begin Rule UnaryExpression ****************
  *
  * UnaryExpression returns Expression:
- * 	(operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression) | PrimaryExpression;
+ * 	(NOT parameters+=PrimaryExpression | MINUS parameters+=PrimaryExpression) | PrimaryExpression;
  *
  **/
 
-// (operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression) | PrimaryExpression
+// (NOT parameters+=PrimaryExpression | MINUS parameters+=PrimaryExpression) | PrimaryExpression
 protected class UnaryExpression_Alternatives extends AlternativesToken {
 
 	public UnaryExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3040,7 +3040,7 @@ protected class UnaryExpression_Alternatives extends AlternativesToken {
 
 }
 
-// operations+=NOT parameters+=PrimaryExpression | operations+=MINUS parameters+=PrimaryExpression
+// NOT parameters+=PrimaryExpression | MINUS parameters+=PrimaryExpression
 protected class UnaryExpression_Alternatives_0 extends AlternativesToken {
 
 	public UnaryExpression_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3063,7 +3063,7 @@ protected class UnaryExpression_Alternatives_0 extends AlternativesToken {
 
 }
 
-// operations+=NOT parameters+=PrimaryExpression
+// NOT parameters+=PrimaryExpression
 protected class UnaryExpression_Group_0_0 extends GroupToken {
 	
 	public UnaryExpression_Group_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3085,16 +3085,16 @@ protected class UnaryExpression_Group_0_0 extends GroupToken {
 
 }
 
-// operations+=NOT
-protected class UnaryExpression_OperationsAssignment_0_0_0 extends AssignmentToken  {
-	
-	public UnaryExpression_OperationsAssignment_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// NOT
+protected class UnaryExpression_NOTTerminalRuleCall_0_0_0 extends UnassignedTextToken {
+
+	public UnaryExpression_NOTTerminalRuleCall_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0_0();
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getUnaryExpressionAccess().getNOTTerminalRuleCall_0_0_0();
 	}
 
     @Override
@@ -3102,18 +3102,6 @@ protected class UnaryExpression_OperationsAssignment_0_0_0 extends AssignmentTok
 		switch(index) {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnaryExpressionAccess().getOperationsNOTTerminalRuleCall_0_0_0_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getUnaryExpressionAccess().getOperationsNOTTerminalRuleCall_0_0_0_0();
-			return obj;
-		}
-		return null;
 	}
 
 }
@@ -3158,14 +3146,14 @@ protected class UnaryExpression_ParametersAssignment_0_0_1 extends AssignmentTok
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new UnaryExpression_OperationsAssignment_0_0_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new UnaryExpression_NOTTerminalRuleCall_0_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// operations+=MINUS parameters+=PrimaryExpression
+// MINUS parameters+=PrimaryExpression
 protected class UnaryExpression_Group_0_1 extends GroupToken {
 	
 	public UnaryExpression_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3187,16 +3175,16 @@ protected class UnaryExpression_Group_0_1 extends GroupToken {
 
 }
 
-// operations+=MINUS
-protected class UnaryExpression_OperationsAssignment_0_1_0 extends AssignmentToken  {
-	
-	public UnaryExpression_OperationsAssignment_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// MINUS
+protected class UnaryExpression_MINUSTerminalRuleCall_0_1_0 extends UnassignedTextToken {
+
+	public UnaryExpression_MINUSTerminalRuleCall_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_1_0();
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getUnaryExpressionAccess().getMINUSTerminalRuleCall_0_1_0();
 	}
 
     @Override
@@ -3204,18 +3192,6 @@ protected class UnaryExpression_OperationsAssignment_0_1_0 extends AssignmentTok
 		switch(index) {
 			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnaryExpressionAccess().getOperationsMINUSTerminalRuleCall_0_1_0_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getUnaryExpressionAccess().getOperationsMINUSTerminalRuleCall_0_1_0_0();
-			return obj;
-		}
-		return null;
 	}
 
 }
@@ -3260,7 +3236,7 @@ protected class UnaryExpression_ParametersAssignment_0_1_1 extends AssignmentTok
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new UnaryExpression_OperationsAssignment_0_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new UnaryExpression_MINUSTerminalRuleCall_0_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

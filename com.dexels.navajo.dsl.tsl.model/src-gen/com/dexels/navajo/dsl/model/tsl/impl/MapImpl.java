@@ -6,12 +6,17 @@
  */
 package com.dexels.navajo.dsl.model.tsl.impl;
 
+import com.dexels.navajo.dsl.model.expression.TopLevel;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import com.dexels.navajo.dsl.model.tsl.Map;
 import com.dexels.navajo.dsl.model.tsl.PossibleExpression;
 import com.dexels.navajo.dsl.model.tsl.TslPackage;
@@ -28,6 +33,7 @@ import java.util.Collection;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getMapClosingName <em>Map Closing Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getObject <em>Object</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,6 +99,16 @@ public class MapImpl extends ElementImpl implements Map {
 	 * @ordered
 	 */
 	protected EList<String> ref;
+
+	/**
+	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpressions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TopLevel> expressions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -186,6 +202,32 @@ public class MapImpl extends ElementImpl implements Map {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TopLevel> getExpressions() {
+		if (expressions == null) {
+			expressions = new EObjectContainmentEList<TopLevel>(TopLevel.class, this, TslPackage.MAP__EXPRESSIONS);
+		}
+		return expressions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TslPackage.MAP__EXPRESSIONS:
+				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -197,6 +239,8 @@ public class MapImpl extends ElementImpl implements Map {
 				return getObject();
 			case TslPackage.MAP__REF:
 				return getRef();
+			case TslPackage.MAP__EXPRESSIONS:
+				return getExpressions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -224,6 +268,10 @@ public class MapImpl extends ElementImpl implements Map {
 				getRef().clear();
 				getRef().addAll((Collection<? extends String>)newValue);
 				return;
+			case TslPackage.MAP__EXPRESSIONS:
+				getExpressions().clear();
+				getExpressions().addAll((Collection<? extends TopLevel>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -248,6 +296,9 @@ public class MapImpl extends ElementImpl implements Map {
 			case TslPackage.MAP__REF:
 				getRef().clear();
 				return;
+			case TslPackage.MAP__EXPRESSIONS:
+				getExpressions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -268,6 +319,8 @@ public class MapImpl extends ElementImpl implements Map {
 				return object != null && !object.isEmpty();
 			case TslPackage.MAP__REF:
 				return ref != null && !ref.isEmpty();
+			case TslPackage.MAP__EXPRESSIONS:
+				return expressions != null && !expressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

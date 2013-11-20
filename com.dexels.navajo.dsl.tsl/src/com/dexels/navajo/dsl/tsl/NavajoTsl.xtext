@@ -12,16 +12,15 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 Tml :
 	{Tml}
 	XMLHEAD?
-	LT (TSLTAG | NAVASCRIPTTAG)  (
-		(NOTES EQUALS QUOTE Garbage QUOTE)?
-	&	(REPOSITORY EQUALS QUOTE Garbage QUOTE)?
-	&	(IDTAG EQUALS QUOTE Garbage QUOTE)?
-	&	(AUTHOR EQUALS QUOTE Garbage QUOTE)?
-	&	(XMLNS EQUALS QUOTE Garbage QUOTE)?
-	&	(XMLNS COLON ID EQUALS QUOTE Garbage QUOTE)?
-	&	(ID COLON SCHEMALOCATION EQUALS QUOTE Garbage QUOTE)?
-	&	(ID COLON NONAMESPACESCHEMALOCATION EQUALS QUOTE Garbage QUOTE)?
-	&	(XMLNS EQUALS QUOTE Garbage QUOTE)?
+	(LTTSLTAG | LTNAVASCRIPTTAG)  (
+		(NOTESEQ QUOTE AnyUntilQuote QUOTE)?
+	&	(REPOSITORYEQ QUOTE AnyUntilQuote QUOTE)?
+	&	(IDEQ QUOTE AnyUntilQuote QUOTE)?
+	&	(AUTHOREQ QUOTE AnyUntilQuote QUOTE)?
+	&	(XMLNS EQUALS QUOTE AnyUntilQuote QUOTE)?
+	&	(XMLNS COLON ID EQUALS QUOTE AnyUntilQuote QUOTE)?
+	&	(ID COLON SCHEMALOCATIONEQ QUOTE AnyUntilQuote QUOTE)?
+	&	(ID COLON NONAMESPACESCHEMALOCATIONEQ QUOTE AnyUntilQuote QUOTE)?
 	) 
 	(
 		(GT 
@@ -41,82 +40,81 @@ terminal XMLCOMMENT: '<!--' -> '-->';
 
 
 
-terminal LT: '<' ;
-terminal NAVASCRIPTTAG: 'navascript' ;
-terminal TSLTAG: 'tsl' ;
+terminal LTNAVASCRIPTTAG: '<navascript' ;
+terminal LTSNAVASCRIPTTAG: '</navascript' ;
+terminal LTTSLTAG: '<tsl' ;
+terminal LTSTSLTAG: '</tsl' ;
 
 //terminal NAVASCRIPT_START:
 //	'<navascript';
-
 terminal QUOTE:
 	'"'
 ;
-
-terminal NAME:
-	'name'
+terminal LT:
+	'<';
+terminal NAMEEQ:
+	'name='
 ;
 
-terminal NOTES:
-	'notes';
-terminal IDTAG:
-	'id';
-terminal REPOSITORY:
-	'repository';
-terminal AUTHOR:
-	'author';
+terminal NOTESEQ:
+	'notes=';
+terminal IDEQ:
+	'id=';
+terminal REPOSITORYEQ:
+	'repository=';
+terminal AUTHOREQ:
+	'author=';
 terminal XMLNS:
 	'xmlns';
-terminal SCHEMALOCATION:
-	'schemaLocation';
-terminal NONAMESPACESCHEMALOCATION:
-	'noNamespaceSchemaLocation';
-terminal SEMICOLON:
-	';';
+terminal SCHEMALOCATIONEQ:
+	'schemaLocation=';
+terminal NONAMESPACESCHEMALOCATIONEQ:
+	'noNamespaceSchemaLocation=';
 
-terminal TYPE:
-	'type'
+terminal TYPEEQ:
+	'type='
 ;
-terminal MODE:
-	'mode'
+terminal MODEEQ:
+	'mode='
 ;
-terminal SCRIPT:
-	'script'
+terminal SCRIPTEQ:
+	'script='
 ;
 
 
-terminal CONDITION:
-	'condition'
+terminal CONDITIONEQ:
+	'condition='
 ;
-terminal FILTER:
-	'filter'
+terminal FILTEREQ:
+	'filter='
 ;
-terminal OBJECT:
-	'object'
+terminal OBJECTEQ:
+	'object='
 ;
-terminal COUNT:
-	'count'
+terminal COUNTEQ:
+	'count='
 ;
-terminal REF:
-	'ref'
+terminal REFEQ:
+	'ref='
 ;
-terminal LENGTH:
-	'length'
+terminal LENGTHEQ:
+	'length='
 ;
-terminal CARDINALITY:
-	'cardinality'
+terminal CARDINALITYEQ:
+	'cardinality='
 ;
-terminal SUBTYPES:
-	'subtypes'
+terminal SUBTYPESEQ:
+	'subtypes='
 ;
-terminal DIRECTION:
-	'direction'
+terminal DIRECTIONEQ:
+	'direction='
 ;
-terminal DESCRIPTION:
-	'description'
+terminal DESCRIPTIONEQ:
+	'description='
 ;
 
-terminal VALUE:
-	'value'
+terminal VALUEEQ:
+	'value='
 ;
 
 terminal XMLSPACE:
@@ -127,8 +125,14 @@ terminal PRESERVE:
 	'preserve'
 ;
 
-terminal COMMENT:
-	'comment'
+terminal COMMENTEQ:
+	'comment='
+;
+terminal LTCOMMENT:
+	'<comment'
+;
+terminal LTSCOMMENT:
+	'</comment'
 ;
 
 
@@ -153,71 +157,132 @@ terminal XML_TAG_SINGLEEND:
 
 
 
-terminal MAPTAG: 
-	'map' 
+
+terminal LTMAPTAG: 
+	'<map' 
+;
+terminal LTSMAPTAG: 
+	'</map' 
 ;
 
 
 
-terminal INCLUDETAG:
-	 'include'
+terminal LTINCLUDETAG:
+	 '<include'
+;
+terminal LTSINCLUDETAG:
+	 '</include'
 ;
 
-terminal PROPERTYTAG:
-	 'property'
+terminal LTPROPERTYTAG:
+	 '<property'
+;
+terminal LTSPROPERTYTAG:
+	 '</property'
 ;
 
-terminal REQUIREDTAG:
-	 'required'
+terminal LTREQUIREDTAG:
+	 '<required'
+;
+terminal LTSREQUIREDTAG:
+	 '</required'
 ;
 
-terminal VALIDATIONSTAG:
-	 'validations'
+terminal LTVALIDATIONSTAG:
+	 '<validations'
 ;
-terminal CHECKTAG:
-	 'check'
-;
-
-terminal BREAKTAG:
-	 'break'
+terminal LTSVALIDATIONSTAG:
+	 '</validations'
 ;
 
-terminal OPTIONTAG:
-	 'option'
+terminal LTCHECKTAG:
+	 '<check'
+;
+terminal LTSCHECKTAG:
+	 '</check'
+;
+
+terminal LTBREAKTAG:
+	 '<break'
+;
+terminal LTSBREAKTAG:
+	 '</break'
+;
+
+terminal LTOPTIONTAG:
+	 '<option'
+;
+terminal LTSOPTIONTAG:
+	 '</option'
 ;
 
 terminal EQUALS:
 	'='
 ;
 
-terminal EXPRESSION_TAG:
-	 'expression'
+terminal LTEXPRESSION_TAG:
+	 '<expression'
 ;
 
 terminal EXPRESSION_END_TAG:
 	 '</expression' GT
 ;
-terminal PARAMTAG:
-	 'param'
+terminal LTPARAMTAG:
+	 '<param'
+;
+terminal LTSPARAMTAG:
+	 '</param'
 ;
 
-terminal MESSAGETAG:
-	'message'
+terminal MESSAGEEQ:
+	'message='
 ;
 
-terminal METHODTAG:
-	 'method'
+terminal LTMESSAGETAG:
+	'<message'
+;
+terminal LTSMESSAGETAG:
+	'</message'
 ;
 
-terminal METHODSTAG:
-	 'methods'
+terminal LTMETHODTAG:
+	 '<method'
+;
+terminal LTSMETHODTAG:
+	 '</method'
 ;
 
-terminal FIELDTAG:
-	 'field'
+AnyContent:
+	AnyExpression |
+	QUOTE |
+	EQUALS
 ;
-terminal DEBUG_TAG:
-	 'debug'
+
+AnyUntilQuote:
+	(AnyContent
+	)*
+;
+
+
+terminal LTMETHODSTAG:
+	 '<methods'
+;
+terminal LTSMETHODSTAG:
+	 '</methods'
+;
+
+terminal LTFIELDTAG:
+	 '<field'
+;
+terminal LTSFIELDTAG:
+	 '</field'
+;
+
+terminal LTDEBUG_TAG:
+	 '<debug'
+;
+terminal LTSDEBUG_TAG:
+	 '</debug'
 ;
 
 terminal  NAVASCRIPT_END:
@@ -225,10 +290,10 @@ terminal  NAVASCRIPT_END:
 	('</navascript' GT ) | ('</tsl' GT)
 	;
 	
-
-Garbage returns ecore::EString:
-	(ID|DOT|PARENT|DOLLAR|TML_SEPARATOR|NUMBER|COMMA|SQBRACKET_OPEN|SQBRACKET_CLOSE|AT|COLON|BRACKET_OPEN|BRACKET_CLOSE|TML_EXISTS|EQUALS|NEQUALS|PLUS|MINUS|MULTIPLY|SEMICOLON|TSLTAG|NAVASCRIPTTAG)*
-	;
+//
+//Garbage returns ecore::EString:
+//	(ID|DOT|PARENT|DOLLAR|TML_SEPARATOR|NUMBER|COMMA|SQBRACKET_OPEN|SQBRACKET_CLOSE|AT|COLON|BRACKET_OPEN|BRACKET_CLOSE|TML_EXISTS|EQUALS|NEQUALS|PLUS|MINUS|MULTIPLY|SEMICOLON)*
+//	;
 
 	
 
@@ -245,26 +310,26 @@ Expression returns PossibleExpression:
 NonExpression returns PossibleExpression :
 	(namespace= ID COLON)? key=AttributeName EQUALS
 	(
-		QUOTE value=Garbage QUOTE
+		QUOTE (AnyExpression|EXPRESSION_END_TAG)* QUOTE
 	)
 ;
 
 Methods :
-	LT METHODSTAG {Methods} 
+	LTMETHODSTAG {Methods} 
 	
-	((splitTag?=GT
+	((GT
 	(method+=Method)*
-	closedTag?=XML_START_ENDTAG METHODSTAG GT)
+	LTSMETHODSTAG GT)
 	|
 	XML_TAG_SINGLEEND)
 	;
 	
 Method:
-	LT METHODTAG {Method}  (attributes+=NonExpression)* 
+	LTMETHODTAG {Method}  ( (NAMEEQ QUOTE nameAttribute=ID QUOTE)?) 
 	
-	((splitTag?=GT
+	((GT
 		(children+=Required)*
-	closedTag?=XML_START_ENDTAG METHODTAG GT)
+	closedTag?=LTSMETHODTAG GT)
 	|
 	XML_TAG_SINGLEEND
 	)
@@ -272,21 +337,21 @@ Method:
 	
 
 Validations :
-	LT VALIDATIONSTAG {Validations} 
+	LTVALIDATIONSTAG {Validations} 
 	
-	((splitTag?=GT
+	((GT
 	( children+=Check)*
-	closedTag?=XML_START_ENDTAG VALIDATIONSTAG GT)
+	closedTag?=LTSVALIDATIONSTAG GT)
 	|
 	XML_TAG_SINGLEEND)
 	;
 	
 Check:
-	LT CHECKTAG {Check}  (attributes+=NonExpression)* 
+	LTCHECKTAG {Check}  (attributes+=NonExpression)* 
 	
-	((splitTag?=GT
+	((GT
 		expression=TopLevel
-	closedTag?=XML_START_ENDTAG CHECKTAG GT)
+	closedTag?=LTSCHECKTAG GT)
 	|
 	XML_TAG_SINGLEEND
 	)
@@ -294,21 +359,21 @@ Check:
 	
 	
 CommentClause returns Comment:
-	LT COMMENT {Comment}  (attributes+=Expression)* 
+	LTCOMMENT {Comment}  (attributes+=Expression)* 
 	
-	((splitTag ?= GT
-	closedTag?=XML_START_ENDTAG COMMENT GT)
+	((GT
+	closedTag?=LTSCOMMENT GT)
 	|
 	XML_TAG_SINGLEEND
 	)
 	;	
 	
 Break:
-	LT BREAKTAG {Break}  (attributes+=Expression)* 
+	LTBREAKTAG {Break}  (attributes+=Expression)* 
 	 
-	((splitTag ?= GT
+	((GT
 //		expression=TopLevel
-		closedTag?= BREAKTAG GT
+		LTSBREAKTAG GT
 	)
 	|
 	XML_TAG_SINGLEEND
@@ -320,20 +385,21 @@ FilePath returns ecore::EString:
 ;
 // create Include entity in Model
 Include returns Method:
-	LT INCLUDETAG {Method}  
-		(SCRIPT EQUALS QUOTE (path+=PathElement)+ QUOTE )?
-		(( splitTag?=GT closedTag?=INCLUDETAG) |
+	LTINCLUDETAG {Method}  
+		(SCRIPTEQ QUOTE AnyUntilQuote QUOTE )?
+		(( LTSINCLUDETAG) |
 	XML_TAG_SINGLEEND)
 	;	
 
 
 
 Message:
-	LT MESSAGETAG {Message} ((COUNT EQUALS QUOTE count=NUMBER QUOTE)? & (MODE EQUALS QUOTE mode=ID QUOTE)? & (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
+	LTMESSAGETAG {Message} ((COUNTEQ QUOTE count=NUMBER QUOTE)? & (MODEEQ QUOTE mode=ID QUOTE)? & (NAMEEQ QUOTE nameAttribute=ID QUOTE)? & (TYPEEQ QUOTE type=ID QUOTE)? & (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?) 
 	
-	((splitTag?=GT
+	(
+		(GT
 		((children+=Message) | (children+=Property) | (children+=Param)  | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break))*
-	XML_START_ENDTAG closedTag ?= MESSAGETAG GT
+	LTSMESSAGETAG GT
 	)
 	| 
 	XML_TAG_SINGLEEND
@@ -344,12 +410,15 @@ Message:
 
 
 Map returns Map:
-	LT MAPTAG {Map}
-	(DOT mapName=MapId)?
-	((REF EQUALS QUOTE (ref+=PathElement)+ QUOTE)?
-	& (OBJECT EQUALS QUOTE (object+=PathElement)+ QUOTE)?
-	& (NAME EQUALS QUOTE nameAttribute=ID QUOTE)?
-	& (FILTER EQUALS QUOTE filter=TopLevel QUOTE)?)
+	LTMAPTAG {Map}
+	(DOT mapName=ID)?
+	((REFEQ QUOTE (ref+=PathElement)+ QUOTE)?
+	& (OBJECTEQ QUOTE (object+=PathElement)+ QUOTE)?
+	& (NAMEEQ QUOTE nameAttribute=ID QUOTE)?
+	& (FILTEREQ QUOTE filter=TopLevel QUOTE)?
+	& (ID EQUALS QUOTE expressions+=TopLevel QUOTE)*
+	& (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?
+	)
 	(XML_TAG_SINGLEEND
 	|
 		(GT 
@@ -362,9 +431,10 @@ Map returns Map:
 				(children+=DebugTag) | 
 				(children+=Field) | 
 				(children+=CommentClause) | 
-				(children+=Break)
+				(children+=Break) |
+				(content+=AnyContent)
 			)*
-			XML_START_ENDTAG MAPTAG (DOT mapClosingName=MapId)? closedTag?=GT
+			LTSMAPTAG (DOT mapClosingName=MapId)? closedTag?=GT
 		)
 	);
 	
@@ -372,41 +442,49 @@ MapId:
 	ID;
 
 Required: 
-	LT REQUIREDTAG {Required} (attributes+=NonExpression)*
+	LTREQUIREDTAG {Required} ( (MESSAGEEQ QUOTE nameAttribute=ID QUOTE)? )
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=GT 	
-			closedTag ?= XML_START_ENDTAG REQUIREDTAG GT
+		( GT 	
+			LTSREQUIREDTAG GT
 		)
 	);
 	
 
 	
 Property:
-	LT PROPERTYTAG {Property} ( (DESCRIPTION EQUALS QUOTE description=Garbage QUOTE)? &  (LENGTH EQUALS QUOTE length=NUMBER QUOTE)? & (CARDINALITY EQUALS QUOTE cardinality=ID QUOTE)? & (DIRECTION EQUALS QUOTE direction=ID QUOTE)? & (SUBTYPES EQUALS QUOTE subtypes=ID QUOTE)? & (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
+	LTPROPERTYTAG {Property} ( (DESCRIPTIONEQ QUOTE description=AnyUntilQuote QUOTE)? &  (LENGTHEQ QUOTE length=NUMBER QUOTE)? & (CARDINALITYEQ QUOTE cardinality=(ID | PLUS) QUOTE)? & (DIRECTIONEQ QUOTE direction=ID QUOTE)? & (SUBTYPESEQ QUOTE subtypes=ID QUOTE)? & (NAMEEQ QUOTE nameAttribute=ID QUOTE)? & (TYPEEQ QUOTE type=ID QUOTE)? & (CONDITIONEQ QUOTE condition=TopLevel QUOTE)? & (VALUEEQ QUOTE rawValue=AnyUntilQuote QUOTE)?) 
 
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=GT 	 
+		( GT 	 
 			(
 				children += ExpressionOrOption
 				|
 				children += Map
+				|
+				children += MapMethod
 		 	)*
-		closedTag ?= XML_START_ENDTAG PROPERTYTAG GT
+		LTSPROPERTYTAG GT
 		)
 	);
 
 Param returns Param:
-	LT PARAMTAG {Param} ( (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?) 
+	LTPARAMTAG {Param} ( (NAMEEQ QUOTE nameAttribute=ID QUOTE)? & (TYPEEQ QUOTE type=ID QUOTE)? & (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?) 
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=GT 	
-			((children += ExpressionOrOption) | (children+=Map))*
-		XML_START_ENDTAG closedTag ?= PARAMTAG GT
+		( GT 	
+			(
+				children += ExpressionOrOption
+				|
+				children += Map
+				|
+				children += MapMethod
+		 	)*
+		LTSPARAMTAG GT
 		)
 	);
 
@@ -415,9 +493,9 @@ MapMethod returns MapMethod:
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=GT 
+		( GT 
 			((
-				(children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break)
+				(children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break) | (content+=AnyContent)
 			)*
 			)
 			closedTag ?= XML_START_ENDTAG methodClosingName = ID DOT methodClosingMethod = ID GT
@@ -426,34 +504,34 @@ MapMethod returns MapMethod:
 	;
 	
 Field returns Field: 
-	LT FIELDTAG {Field} ( (NAME EQUALS QUOTE nameAttribute=ID QUOTE)? & (COMMENT EQUALS QUOTE comment= Garbage QUOTE)? & (TYPE EQUALS QUOTE type=ID QUOTE)? & (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?  & (FILTER EQUALS QUOTE filter=TopLevel QUOTE)?) 
+	LTFIELDTAG {Field} ( (NAMEEQ QUOTE nameAttribute=ID QUOTE)? & (COMMENTEQ QUOTE comment= AnyUntilQuote QUOTE)? & (TYPEEQ QUOTE type=ID QUOTE)? & (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?  & (FILTEREQ QUOTE filter=TopLevel QUOTE)?) 
 
 	(
 	 XML_TAG_SINGLEEND
 	 |
-	 ( splitTag?=GT
+	 ( GT
 		((children += ExpressionOrOption)  | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=CommentClause) | (children+=Break))*
 	 )
-	 XML_START_ENDTAG closedTag ?= FIELDTAG GT
+	 LTSFIELDTAG GT
 	)
 ;
 
 DebugTag returns DebugTag:
-	LT DEBUG_TAG {DebugTag} ((VALUE EQUALS value = TopLevel)?  (CONDITION EQUALS QUOTE condition=TopLevel QUOTE)?)
+	LTDEBUG_TAG {DebugTag} ((VALUEEQ value = TopLevel)?  (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?)
 	(
 		(XML_TAG_SINGLEEND)
 	|
-		( splitTag?=GT 	
+		( GT 	
 			(expression=TopLevel)?
-		XML_START_ENDTAG closedTag ?= DEBUG_TAG GT
+		LTSDEBUG_TAG GT
 		)
 	)	
 	;	
 
 ExpressionOrOption returns Element:
-		LT EXPRESSION_TAG ExpressionTag
+		LTEXPRESSION_TAG ExpressionTag
 		|
-		LT OPTIONTAG Option
+		Option
 		
 		
 ;
@@ -461,25 +539,25 @@ ExpressionOrOption returns Element:
 
 ExpressionTag returns ExpressionTag:
 	
-	{ExpressionTag} ((VALUE EQUALS QUOTE (value = TopLevel)? QUOTE)?  & (CONDITION EQUALS QUOTE (condition=TopLevel)? QUOTE)? & (XMLSPACE EQUALS QUOTE PRESERVE QUOTE)?)
+	{ExpressionTag} ((VALUEEQ QUOTE (value = TopLevel)? QUOTE)?  & (CONDITIONEQ QUOTE (condition=TopLevel)? QUOTE)? & (XMLSPACE EQUALS QUOTE PRESERVE QUOTE)?)
 
 	(
 		XML_TAG_SINGLEEND
 	|
-		( splitTag?=GT 	
-			content=Garbage
+		( GT 	
+			(AnyContent)*
 		    closedTag ?= EXPRESSION_END_TAG
 		)
 	)	
 	;	
 	
 Option: 
-	 LT OPTIONTAG {Option} (attributes+=NonExpression)*
+	 LTOPTIONTAG {Option} (attributes+=NonExpression)*
 	(
 		XML_TAG_SINGLEEND
 	|
-		( splitTag?=GT 	
-		 XML_START_ENDTAG closedTag ?= OPTIONTAG GT
+		( GT 	
+		 LTSOPTIONTAG GT
 		)
 	);
 	

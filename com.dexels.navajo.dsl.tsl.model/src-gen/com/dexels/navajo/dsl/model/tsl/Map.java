@@ -6,6 +6,7 @@
  */
 package com.dexels.navajo.dsl.model.tsl;
 
+import com.dexels.navajo.dsl.model.expression.TopLevel;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -21,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getMapClosingName <em>Map Closing Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getObject <em>Object</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getRef <em>Ref</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Map#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,5 +110,21 @@ public interface Map extends Element {
 	 * @generated
 	 */
 	EList<String> getRef();
+
+	/**
+	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+	 * The list contents are of type {@link com.dexels.navajo.dsl.model.expression.TopLevel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expressions</em>' containment reference list.
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getMap_Expressions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TopLevel> getExpressions();
 
 } // Map

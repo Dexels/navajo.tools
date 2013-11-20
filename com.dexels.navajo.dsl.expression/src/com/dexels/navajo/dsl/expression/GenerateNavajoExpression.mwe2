@@ -53,10 +53,16 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+//			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 			//  options = {
 			//		backtrack = true
 			//	}
+//			}
+			fragment = org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment {
+				options = {
+					backtrack = false
+					backtrackLexer = false
+				}
 			}
 			
 			// java-based API for validation 

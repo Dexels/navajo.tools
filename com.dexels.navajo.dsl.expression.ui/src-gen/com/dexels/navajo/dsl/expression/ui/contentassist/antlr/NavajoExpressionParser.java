@@ -126,9 +126,7 @@ public class NavajoExpressionParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicativeExpressionAccess().getParametersAssignment_1_0_1(), "rule__MultiplicativeExpression__ParametersAssignment_1_0_1");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getOperationsAssignment_1_1_0(), "rule__MultiplicativeExpression__OperationsAssignment_1_1_0");
 					put(grammarAccess.getMultiplicativeExpressionAccess().getParametersAssignment_1_1_1(), "rule__MultiplicativeExpression__ParametersAssignment_1_1_1");
-					put(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0_0(), "rule__UnaryExpression__OperationsAssignment_0_0_0");
 					put(grammarAccess.getUnaryExpressionAccess().getParametersAssignment_0_0_1(), "rule__UnaryExpression__ParametersAssignment_0_0_1");
-					put(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_1_0(), "rule__UnaryExpression__OperationsAssignment_0_1_0");
 					put(grammarAccess.getUnaryExpressionAccess().getParametersAssignment_0_1_1(), "rule__UnaryExpression__ParametersAssignment_0_1_1");
 					put(grammarAccess.getPrimaryExpressionAccess().getParametersAssignment_0(), "rule__PrimaryExpression__ParametersAssignment_0");
 					put(grammarAccess.getPrimaryExpressionAccess().getParametersAssignment_1_1(), "rule__PrimaryExpression__ParametersAssignment_1_1");

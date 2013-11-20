@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -44,6 +45,7 @@ import com.dexels.navajo.dsl.model.tsl.TslPackage;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getFilter <em>Filter</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getNameAttribute <em>Name Attribute</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.ElementImpl#getRawValue <em>Raw Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,24 +73,14 @@ public class ElementImpl extends EObjectImpl implements Element {
 	protected EList<PossibleExpression> attributes;
 
 	/**
-	 * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getContent()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONTENT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getContent()
-	 * @generated
-	 * @ordered
-	 */
-	protected String content = CONTENT_EDEFAULT;
+	protected EList<String> content;
 
 	/**
 	 * The default value of the '{@link #isSplitTag() <em>Split Tag</em>}' attribute.
@@ -201,6 +193,26 @@ public class ElementImpl extends EObjectImpl implements Element {
 	protected String comment = COMMENT_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getRawValue() <em>Raw Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRawValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RAW_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRawValue() <em>Raw Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRawValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String rawValue = RAW_VALUE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -289,20 +301,11 @@ public class ElementImpl extends EObjectImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getContent() {
+	public EList<String> getContent() {
+		if (content == null) {
+			content = new EDataTypeUniqueEList<String>(String.class, this, TslPackage.ELEMENT__CONTENT);
+		}
 		return content;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContent(String newContent) {
-		String oldContent = content;
-		content = newContent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__CONTENT, oldContent, content));
 	}
 
 	/**
@@ -521,6 +524,27 @@ public class ElementImpl extends EObjectImpl implements Element {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getRawValue() {
+		return rawValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRawValue(String newRawValue) {
+		String oldRawValue = rawValue;
+		rawValue = newRawValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.ELEMENT__RAW_VALUE, oldRawValue, rawValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public int calculateDepth() {
@@ -618,6 +642,8 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return getNameAttribute();
 			case TslPackage.ELEMENT__COMMENT:
 				return getComment();
+			case TslPackage.ELEMENT__RAW_VALUE:
+				return getRawValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -643,7 +669,8 @@ public class ElementImpl extends EObjectImpl implements Element {
 				getAttributes().addAll((Collection<? extends PossibleExpression>)newValue);
 				return;
 			case TslPackage.ELEMENT__CONTENT:
-				setContent((String)newValue);
+				getContent().clear();
+				getContent().addAll((Collection<? extends String>)newValue);
 				return;
 			case TslPackage.ELEMENT__SPLIT_TAG:
 				setSplitTag((Boolean)newValue);
@@ -665,6 +692,9 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return;
 			case TslPackage.ELEMENT__COMMENT:
 				setComment((String)newValue);
+				return;
+			case TslPackage.ELEMENT__RAW_VALUE:
+				setRawValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -688,7 +718,7 @@ public class ElementImpl extends EObjectImpl implements Element {
 				getAttributes().clear();
 				return;
 			case TslPackage.ELEMENT__CONTENT:
-				setContent(CONTENT_EDEFAULT);
+				getContent().clear();
 				return;
 			case TslPackage.ELEMENT__SPLIT_TAG:
 				setSplitTag(SPLIT_TAG_EDEFAULT);
@@ -711,6 +741,9 @@ public class ElementImpl extends EObjectImpl implements Element {
 			case TslPackage.ELEMENT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
+			case TslPackage.ELEMENT__RAW_VALUE:
+				setRawValue(RAW_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -730,7 +763,7 @@ public class ElementImpl extends EObjectImpl implements Element {
 			case TslPackage.ELEMENT__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case TslPackage.ELEMENT__CONTENT:
-				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+				return content != null && !content.isEmpty();
 			case TslPackage.ELEMENT__SPLIT_TAG:
 				return splitTag != SPLIT_TAG_EDEFAULT;
 			case TslPackage.ELEMENT__CLOSED_TAG:
@@ -745,6 +778,8 @@ public class ElementImpl extends EObjectImpl implements Element {
 				return NAME_ATTRIBUTE_EDEFAULT == null ? nameAttribute != null : !NAME_ATTRIBUTE_EDEFAULT.equals(nameAttribute);
 			case TslPackage.ELEMENT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case TslPackage.ELEMENT__RAW_VALUE:
+				return RAW_VALUE_EDEFAULT == null ? rawValue != null : !RAW_VALUE_EDEFAULT.equals(rawValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -769,6 +804,8 @@ public class ElementImpl extends EObjectImpl implements Element {
 		result.append(nameAttribute);
 		result.append(", comment: ");
 		result.append(comment);
+		result.append(", rawValue: ");
+		result.append(rawValue);
 		result.append(')');
 		return result.toString();
 	}

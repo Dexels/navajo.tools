@@ -2894,9 +2894,9 @@ rule__UnaryExpression__Group_0_0__0__Impl
     }
 :
 (
-{ before(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0_0()); }
-(rule__UnaryExpression__OperationsAssignment_0_0_0)
-{ after(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_0_0()); }
+{ before(grammarAccess.getUnaryExpressionAccess().getNOTTerminalRuleCall_0_0_0()); }
+	RULE_NOT
+{ after(grammarAccess.getUnaryExpressionAccess().getNOTTerminalRuleCall_0_0_0()); }
 )
 
 ;
@@ -2955,9 +2955,9 @@ rule__UnaryExpression__Group_0_1__0__Impl
     }
 :
 (
-{ before(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_1_0()); }
-(rule__UnaryExpression__OperationsAssignment_0_1_0)
-{ after(grammarAccess.getUnaryExpressionAccess().getOperationsAssignment_0_1_0()); }
+{ before(grammarAccess.getUnaryExpressionAccess().getMINUSTerminalRuleCall_0_1_0()); }
+	RULE_MINUS
+{ after(grammarAccess.getUnaryExpressionAccess().getMINUSTerminalRuleCall_0_1_0()); }
 )
 
 ;
@@ -4756,21 +4756,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__UnaryExpression__OperationsAssignment_0_0_0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getUnaryExpressionAccess().getOperationsNOTTerminalRuleCall_0_0_0_0()); }
-	RULE_NOT{ after(grammarAccess.getUnaryExpressionAccess().getOperationsNOTTerminalRuleCall_0_0_0_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 rule__UnaryExpression__ParametersAssignment_0_0_1
     @init {
 		int stackSize = keepStackSize();
@@ -4779,21 +4764,6 @@ rule__UnaryExpression__ParametersAssignment_0_0_1
 (
 { before(grammarAccess.getUnaryExpressionAccess().getParametersPrimaryExpressionParserRuleCall_0_0_1_0()); }
 	rulePrimaryExpression{ after(grammarAccess.getUnaryExpressionAccess().getParametersPrimaryExpressionParserRuleCall_0_0_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__UnaryExpression__OperationsAssignment_0_1_0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getUnaryExpressionAccess().getOperationsMINUSTerminalRuleCall_0_1_0_0()); }
-	RULE_MINUS{ after(grammarAccess.getUnaryExpressionAccess().getOperationsMINUSTerminalRuleCall_0_1_0_0()); }
 )
 
 ;
@@ -5165,6 +5135,8 @@ RULE_AT : '@';
 RULE_COLON : ':';
 
 RULE_NOT : '!';
+
+RULE_XMLESCAPED : '&' RULE_ID ';';
 
 RULE_LITERALSTRING : ('\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\''|'<![CDATA[' ( options {greedy=false;} : . )*']]>');
 

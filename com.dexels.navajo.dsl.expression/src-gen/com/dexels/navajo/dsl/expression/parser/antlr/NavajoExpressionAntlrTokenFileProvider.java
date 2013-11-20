@@ -10,6 +10,6 @@ public class NavajoExpressionAntlrTokenFileProvider implements IAntlrTokenFilePr
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpression.tokens");
+    	return classLoader.getResourceAsStream("com/dexels/navajo/dsl/expression/parser/antlr/internal/InternalNavajoExpressionParser.tokens");
 	}
 }
