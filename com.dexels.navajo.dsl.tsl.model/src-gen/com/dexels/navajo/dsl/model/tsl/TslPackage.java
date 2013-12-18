@@ -1819,13 +1819,13 @@ public interface TslPackage extends EPackage {
 	int MAP_METHOD__METHOD_CLOSING_METHOD = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_METHOD__EXPRESSION = ELEMENT_FEATURE_COUNT + 4;
+	int MAP_METHOD__EXPRESSIONS = ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Map Method</em>' class.
@@ -2229,13 +2229,22 @@ public interface TslPackage extends EPackage {
 	int CHECK__EXPRESSION = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK__EXPRESSIONS = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Check</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+	int CHECK_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link com.dexels.navajo.dsl.model.tsl.impl.ValidationsImpl <em>Validations</em>}' class.
@@ -3360,15 +3369,15 @@ public interface TslPackage extends EPackage {
 	EAttribute getMapMethod_MethodClosingMethod();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference list '{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getExpressions <em>Expressions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see com.dexels.navajo.dsl.model.tsl.MapMethod#getExpression()
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see com.dexels.navajo.dsl.model.tsl.MapMethod#getExpressions()
 	 * @see #getMapMethod()
 	 * @generated
 	 */
-	EReference getMapMethod_Expression();
+	EReference getMapMethod_Expressions();
 
 	/**
 	 * Returns the meta object for class '{@link com.dexels.navajo.dsl.model.tsl.Required <em>Required</em>}'.
@@ -3421,6 +3430,17 @@ public interface TslPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCheck_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.dexels.navajo.dsl.model.tsl.Check#getExpressions <em>Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see com.dexels.navajo.dsl.model.tsl.Check#getExpressions()
+	 * @see #getCheck()
+	 * @generated
+	 */
+	EReference getCheck_Expressions();
 
 	/**
 	 * Returns the meta object for class '{@link com.dexels.navajo.dsl.model.tsl.Validations <em>Validations</em>}'.
@@ -3971,12 +3991,12 @@ public interface TslPackage extends EPackage {
 		EAttribute MAP_METHOD__METHOD_CLOSING_METHOD = eINSTANCE.getMapMethod_MethodClosingMethod();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAP_METHOD__EXPRESSION = eINSTANCE.getMapMethod_Expression();
+		EReference MAP_METHOD__EXPRESSIONS = eINSTANCE.getMapMethod_Expressions();
 
 		/**
 		 * The meta object literal for the '{@link com.dexels.navajo.dsl.model.tsl.impl.RequiredImpl <em>Required</em>}' class.
@@ -4023,6 +4043,14 @@ public interface TslPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CHECK__EXPRESSION = eINSTANCE.getCheck_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CHECK__EXPRESSIONS = eINSTANCE.getCheck_Expressions();
 
 		/**
 		 * The meta object literal for the '{@link com.dexels.navajo.dsl.model.tsl.impl.ValidationsImpl <em>Validations</em>}' class.

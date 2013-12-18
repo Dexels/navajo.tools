@@ -8,13 +8,17 @@ package com.dexels.navajo.dsl.model.tsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import com.dexels.navajo.dsl.model.expression.TopLevel;
 import com.dexels.navajo.dsl.model.tsl.Check;
 import com.dexels.navajo.dsl.model.tsl.TslPackage;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +29,7 @@ import com.dexels.navajo.dsl.model.tsl.TslPackage;
  * <ul>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.CheckImpl#getCode <em>Code</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.CheckImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.CheckImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -60,6 +65,16 @@ public class CheckImpl extends ElementImpl implements Check {
 	 * @ordered
 	 */
 	protected TopLevel expression;
+
+	/**
+	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpressions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TopLevel> expressions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,11 +164,25 @@ public class CheckImpl extends ElementImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TopLevel> getExpressions() {
+		if (expressions == null) {
+			expressions = new EObjectContainmentEList<TopLevel>(TopLevel.class, this, TslPackage.CHECK__EXPRESSIONS);
+		}
+		return expressions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TslPackage.CHECK__EXPRESSION:
 				return basicSetExpression(null, msgs);
+			case TslPackage.CHECK__EXPRESSIONS:
+				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -170,6 +199,8 @@ public class CheckImpl extends ElementImpl implements Check {
 				return getCode();
 			case TslPackage.CHECK__EXPRESSION:
 				return getExpression();
+			case TslPackage.CHECK__EXPRESSIONS:
+				return getExpressions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,6 +210,7 @@ public class CheckImpl extends ElementImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -187,6 +219,10 @@ public class CheckImpl extends ElementImpl implements Check {
 				return;
 			case TslPackage.CHECK__EXPRESSION:
 				setExpression((TopLevel)newValue);
+				return;
+			case TslPackage.CHECK__EXPRESSIONS:
+				getExpressions().clear();
+				getExpressions().addAll((Collection<? extends TopLevel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -206,6 +242,9 @@ public class CheckImpl extends ElementImpl implements Check {
 			case TslPackage.CHECK__EXPRESSION:
 				setExpression((TopLevel)null);
 				return;
+			case TslPackage.CHECK__EXPRESSIONS:
+				getExpressions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -222,6 +261,8 @@ public class CheckImpl extends ElementImpl implements Check {
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case TslPackage.CHECK__EXPRESSION:
 				return expression != null;
+			case TslPackage.CHECK__EXPRESSIONS:
+				return expressions != null && !expressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

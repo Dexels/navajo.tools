@@ -16,15 +16,15 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_1 : '&';
-
-KEYWORD_2 : ';';
+KEYWORD_1 : ';';
 
 
 
 RULE_XMLHEAD : '<?' ( options {greedy=false;} : . )*'?>';
 
 RULE_XMLCOMMENT : '<!--' ( options {greedy=false;} : . )*'-->';
+
+RULE_LT : '<';
 
 RULE_LTNAVASCRIPTTAG : '<navascript';
 
@@ -35,8 +35,6 @@ RULE_LTTSLTAG : '<tsl';
 RULE_LTSTSLTAG : '</tsl';
 
 RULE_QUOTE : '"';
-
-RULE_LT : '<';
 
 RULE_NAMEEQ : 'name=';
 
@@ -80,6 +78,8 @@ RULE_DIRECTIONEQ : 'direction=';
 
 RULE_DESCRIPTIONEQ : 'description=';
 
+RULE_CODEEQ : 'code=';
+
 RULE_VALUEEQ : 'value=';
 
 RULE_XMLSPACE : 'xml:space';
@@ -97,10 +97,6 @@ RULE_XML_START_ENDTAG : '</';
 RULE_GT : '>';
 
 RULE_XML_TAG_SINGLEEND : '/>';
-
-RULE_LTMAPTAG : '<map';
-
-RULE_LTSMAPTAG : '</map';
 
 RULE_LTINCLUDETAG : '<include';
 
@@ -162,7 +158,7 @@ RULE_LTDEBUG_TAG : '<debug';
 
 RULE_LTSDEBUG_TAG : '</debug';
 
-RULE_NAVASCRIPT_END : ('</navascript' RULE_GT|'</tsl' RULE_GT);
+RULE_NAVASCRIPT_END : (RULE_LTSNAVASCRIPTTAG RULE_GT|RULE_LTSTSLTAG RULE_GT);
 
 RULE_XML_GT : '&gt;';
 

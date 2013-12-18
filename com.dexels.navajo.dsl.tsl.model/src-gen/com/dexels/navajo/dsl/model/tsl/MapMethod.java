@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getMethodClosingName <em>Method Closing Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getMethodName <em>Method Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getMethodClosingMethod <em>Method Closing Method</em>}</li>
- *   <li>{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getExpression <em>Expression</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,29 +136,19 @@ public interface MapMethod extends Element {
 	void setMethodClosingMethod(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+	 * The list contents are of type {@link com.dexels.navajo.dsl.model.expression.TopLevel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(TopLevel)
-	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getMapMethod_Expression()
+	 * @return the value of the '<em>Expressions</em>' containment reference list.
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getMapMethod_Expressions()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TopLevel getExpression();
-
-	/**
-	 * Sets the value of the '{@link com.dexels.navajo.dsl.model.tsl.MapMethod#getExpression <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(TopLevel value);
+	EList<TopLevel> getExpressions();
 
 } // MapMethod

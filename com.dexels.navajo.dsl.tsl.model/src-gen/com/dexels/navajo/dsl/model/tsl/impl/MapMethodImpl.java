@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import com.dexels.navajo.dsl.model.expression.TopLevel;
 import com.dexels.navajo.dsl.model.tsl.MapMethod;
 import com.dexels.navajo.dsl.model.tsl.TslPackage;
@@ -30,7 +32,7 @@ import java.util.Collection;
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapMethodImpl#getMethodClosingName <em>Method Closing Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapMethodImpl#getMethodName <em>Method Name</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapMethodImpl#getMethodClosingMethod <em>Method Closing Method</em>}</li>
- *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapMethodImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.impl.MapMethodImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -118,14 +120,14 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 	protected String methodClosingMethod = METHOD_CLOSING_METHOD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getExpressions()
 	 * @generated
 	 * @ordered
 	 */
-	protected TopLevel expression;
+	protected EList<TopLevel> expressions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -235,42 +237,11 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TopLevel getExpression() {
-		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExpression(TopLevel newExpression, NotificationChain msgs) {
-		TopLevel oldExpression = expression;
-		expression = newExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TslPackage.MAP_METHOD__EXPRESSION, oldExpression, newExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<TopLevel> getExpressions() {
+		if (expressions == null) {
+			expressions = new EObjectContainmentEList<TopLevel>(TopLevel.class, this, TslPackage.MAP_METHOD__EXPRESSIONS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExpression(TopLevel newExpression) {
-		if (newExpression != expression) {
-			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TslPackage.MAP_METHOD__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TslPackage.MAP_METHOD__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TslPackage.MAP_METHOD__EXPRESSION, newExpression, newExpression));
+		return expressions;
 	}
 
 	/**
@@ -281,8 +252,8 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TslPackage.MAP_METHOD__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case TslPackage.MAP_METHOD__EXPRESSIONS:
+				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -303,8 +274,8 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 				return getMethodName();
 			case TslPackage.MAP_METHOD__METHOD_CLOSING_METHOD:
 				return getMethodClosingMethod();
-			case TslPackage.MAP_METHOD__EXPRESSION:
-				return getExpression();
+			case TslPackage.MAP_METHOD__EXPRESSIONS:
+				return getExpressions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -330,8 +301,9 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 			case TslPackage.MAP_METHOD__METHOD_CLOSING_METHOD:
 				setMethodClosingMethod((String)newValue);
 				return;
-			case TslPackage.MAP_METHOD__EXPRESSION:
-				setExpression((TopLevel)newValue);
+			case TslPackage.MAP_METHOD__EXPRESSIONS:
+				getExpressions().clear();
+				getExpressions().addAll((Collection<? extends TopLevel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -357,8 +329,8 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 			case TslPackage.MAP_METHOD__METHOD_CLOSING_METHOD:
 				setMethodClosingMethod(METHOD_CLOSING_METHOD_EDEFAULT);
 				return;
-			case TslPackage.MAP_METHOD__EXPRESSION:
-				setExpression((TopLevel)null);
+			case TslPackage.MAP_METHOD__EXPRESSIONS:
+				getExpressions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -380,8 +352,8 @@ public class MapMethodImpl extends ElementImpl implements MapMethod {
 				return METHOD_NAME_EDEFAULT == null ? methodName != null : !METHOD_NAME_EDEFAULT.equals(methodName);
 			case TslPackage.MAP_METHOD__METHOD_CLOSING_METHOD:
 				return METHOD_CLOSING_METHOD_EDEFAULT == null ? methodClosingMethod != null : !METHOD_CLOSING_METHOD_EDEFAULT.equals(methodClosingMethod);
-			case TslPackage.MAP_METHOD__EXPRESSION:
-				return expression != null;
+			case TslPackage.MAP_METHOD__EXPRESSIONS:
+				return expressions != null && !expressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

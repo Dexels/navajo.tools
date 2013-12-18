@@ -7,6 +7,7 @@
 package com.dexels.navajo.dsl.model.tsl;
 
 import com.dexels.navajo.dsl.model.expression.TopLevel;
+import org.eclipse.emf.common.util.EList;
 
 
 /**
@@ -19,6 +20,7 @@ import com.dexels.navajo.dsl.model.expression.TopLevel;
  * <ul>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Check#getCode <em>Code</em>}</li>
  *   <li>{@link com.dexels.navajo.dsl.model.tsl.Check#getExpression <em>Expression</em>}</li>
+ *   <li>{@link com.dexels.navajo.dsl.model.tsl.Check#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +80,21 @@ public interface Check extends Element {
 	 * @generated
 	 */
 	void setExpression(TopLevel value);
+
+	/**
+	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+	 * The list contents are of type {@link com.dexels.navajo.dsl.model.expression.TopLevel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expressions</em>' containment reference list.
+	 * @see com.dexels.navajo.dsl.model.tsl.TslPackage#getCheck_Expressions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<TopLevel> getExpressions();
 
 } // Check

@@ -16,9 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_1 : '&';
-
-KEYWORD_2 : ';';
+KEYWORD_1 : ';';
 
 
 

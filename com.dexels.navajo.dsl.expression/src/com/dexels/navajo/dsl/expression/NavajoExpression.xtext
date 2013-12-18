@@ -103,9 +103,6 @@ terminal MULTIPLY:
 	'*'
 ;
 
-
-
-	
 terminal ID  		: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 AnyExpression:
@@ -171,22 +168,18 @@ PrimaryExpression returns Expression:
 	| BRACKET_OPEN parameters+=OrExpression BRACKET_CLOSE
 ;	
 
-
 // Keep this one in place so it will create a node for the code completion
 FunctionName:
 	ID;
-
 
 FunctionCall returns FunctionCall:
 	name=FunctionName BRACKET_OPEN (parameters+=OrExpression)? (COMMA parameters+=OrExpression)*  BRACKET_CLOSE
 ;
 
-
 DateLiteral returns Expression:
 {Expression}
 	NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER HASH NUMBER
 ;
-
 
 Literal returns Expression:
   {Expression}NUMBER
@@ -202,6 +195,4 @@ Literal returns Expression:
   | parameters+=ExistsTmlExpression
   | parameters+=MapGetReference
   | parameters+=DateLiteral
-  
   ;
-

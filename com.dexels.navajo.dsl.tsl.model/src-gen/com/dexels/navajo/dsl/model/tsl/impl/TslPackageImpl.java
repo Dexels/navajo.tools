@@ -739,7 +739,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMapMethod_Expression() {
+	public EReference getMapMethod_Expressions() {
 		return (EReference)mapMethodEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -786,6 +786,15 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 	 */
 	public EReference getCheck_Expression() {
 		return (EReference)checkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCheck_Expressions() {
+		return (EReference)checkEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -936,7 +945,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		createEAttribute(mapMethodEClass, MAP_METHOD__METHOD_CLOSING_NAME);
 		createEAttribute(mapMethodEClass, MAP_METHOD__METHOD_NAME);
 		createEAttribute(mapMethodEClass, MAP_METHOD__METHOD_CLOSING_METHOD);
-		createEReference(mapMethodEClass, MAP_METHOD__EXPRESSION);
+		createEReference(mapMethodEClass, MAP_METHOD__EXPRESSIONS);
 
 		requiredEClass = createEClass(REQUIRED);
 
@@ -945,6 +954,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		checkEClass = createEClass(CHECK);
 		createEAttribute(checkEClass, CHECK__CODE);
 		createEReference(checkEClass, CHECK__EXPRESSION);
+		createEReference(checkEClass, CHECK__EXPRESSIONS);
 
 		validationsEClass = createEClass(VALIDATIONS);
 
@@ -1079,7 +1089,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		initEAttribute(getMapMethod_MethodClosingName(), ecorePackage.getEString(), "methodClosingName", null, 0, 1, MapMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMapMethod_MethodName(), ecorePackage.getEString(), "methodName", null, 0, 1, MapMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMapMethod_MethodClosingMethod(), ecorePackage.getEString(), "methodClosingMethod", null, 0, 1, MapMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapMethod_Expression(), theExpressionPackage.getTopLevel(), null, "expression", null, 0, 1, MapMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapMethod_Expressions(), theExpressionPackage.getTopLevel(), null, "expressions", null, 0, -1, MapMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(requiredEClass, Required.class, "Required", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1088,6 +1098,7 @@ public class TslPackageImpl extends EPackageImpl implements TslPackage {
 		initEClass(checkEClass, Check.class, "Check", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCheck_Code(), ecorePackage.getEString(), "code", null, 0, 1, Check.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCheck_Expression(), theExpressionPackage.getTopLevel(), null, "expression", null, 0, 1, Check.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCheck_Expressions(), theExpressionPackage.getTopLevel(), null, "expressions", null, 0, -1, Check.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(validationsEClass, Validations.class, "Validations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

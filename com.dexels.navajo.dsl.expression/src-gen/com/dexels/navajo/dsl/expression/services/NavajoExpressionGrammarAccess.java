@@ -75,19 +75,18 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 		private final RuleCall cIDTerminalRuleCall_36 = (RuleCall)cAlternatives.eContents().get(36);
 		private final RuleCall cXMLESCAPEDTerminalRuleCall_37 = (RuleCall)cAlternatives.eContents().get(37);
 		private final Keyword cSemicolonKeyword_38 = (Keyword)cAlternatives.eContents().get(38);
-		private final Keyword cAmpersandKeyword_39 = (Keyword)cAlternatives.eContents().get(39);
 		
 		//AnyExpression:
 		//	XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT
 		//	| AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
 		//	BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS |
-		//	MINUS | MULTIPLY | ID | XMLESCAPED | ";" | "&";
+		//	MINUS | MULTIPLY | ID | XMLESCAPED | ";";
 		public ParserRule getRule() { return rule; }
 
 		//XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT |
 		//AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
 		//BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS | MINUS
-		//| MULTIPLY | ID | XMLESCAPED | ";" | "&"
+		//| MULTIPLY | ID | XMLESCAPED | ";"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XML_GT
@@ -206,9 +205,6 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 
 		//";"
 		public Keyword getSemicolonKeyword_38() { return cSemicolonKeyword_38; }
-
-		//"&"
-		public Keyword getAmpersandKeyword_39() { return cAmpersandKeyword_39; }
 	}
 
 	public class PathElementElements extends AbstractParserRuleElementFinder {
@@ -1586,7 +1582,7 @@ public class NavajoExpressionGrammarAccess extends AbstractGrammarElementFinder 
 	//	XML_GT | XML_LT | XML_GTEQ | XML_LTEQ | DOT | NUMBER | BADNUMBER | WS | TRUE | FALSE | NULL | TODAY | FORALL | PARENT
 	//	| AT | COLON | NOT | LITERALSTRING | SQBRACKET_CLOSE | SQBRACKET_OPEN | TML_SEPARATOR | TML_EXISTS | DOLLAR |
 	//	BRACKET_OPEN | BRACKET_CLOSE | COMMA | AND | OR | HASH | CURLYOPEN | CURLYCLOSE | EQUALSEQUALS | NEQUALS | PLUS |
-	//	MINUS | MULTIPLY | ID | XMLESCAPED | ";" | "&";
+	//	MINUS | MULTIPLY | ID | XMLESCAPED | ";";
 	public AnyExpressionElements getAnyExpressionAccess() {
 		return (pAnyExpression != null) ? pAnyExpression : (pAnyExpression = new AnyExpressionElements());
 	}

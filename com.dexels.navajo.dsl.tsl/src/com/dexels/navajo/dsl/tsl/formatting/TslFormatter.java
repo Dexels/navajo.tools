@@ -54,7 +54,7 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1).before(f.getMessageRule());
 		c.setLinewrap(1).before(f.getFieldRule());
 		c.setLinewrap(1).before(f.getNAVASCRIPT_ENDRule());
-		c.setLinewrap(1).before(f.getMapRule());
+//		c.setLinewrap(1).before(f.getMapRule());
 
 		c.setLinewrap(1).before(f.getMethodRule());
 

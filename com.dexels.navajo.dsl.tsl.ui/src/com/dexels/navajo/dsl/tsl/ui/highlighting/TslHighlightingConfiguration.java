@@ -9,6 +9,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
 public class TslHighlightingConfiguration implements IHighlightingConfiguration {
 
 	public static final String KEYWORD_ID = "keyword";
+	public static final String KEYATTRIBUTE_ID = "keyattribute";
 	public static final String MAP_ID = "map";
 	public static final String FUNCTION_CALL_ID = "functioncall";
 	public static final String EXPR_DELIM_ID = "exprdelim";
@@ -16,6 +17,8 @@ public class TslHighlightingConfiguration implements IHighlightingConfiguration 
 	public static final String DEPRECATED_ID = "deprecated";
 	public static final String LITERAL_ID = "literal";
 	public static final String TSL_COMMENT_ID = "tslcomment";
+	public static final String KEYEXPRESSION_ID = "keyexpression";
+	
 
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(MAP_ID, "Map", mapIdTextStyle());
@@ -27,6 +30,10 @@ public class TslHighlightingConfiguration implements IHighlightingConfiguration 
 				tmlInputStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword",
 				keywordTextStyle());
+		acceptor.acceptDefaultHighlighting(KEYATTRIBUTE_ID, "Key attribute",
+				keyattributeTextStyle());
+		acceptor.acceptDefaultHighlighting(KEYEXPRESSION_ID, "Key expression",
+				keyexpressionTextStyle());
 		acceptor.acceptDefaultHighlighting(DEPRECATED_ID, "Deprecated",
 				deprecatedStyle());
 		acceptor.acceptDefaultHighlighting(LITERAL_ID, "Literal",
@@ -81,7 +88,19 @@ public class TslHighlightingConfiguration implements IHighlightingConfiguration 
 		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
-
+	public TextStyle keyattributeTextStyle() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setColor(new RGB(0, 0, 100));
+		textStyle.setStyle(SWT.BOLD);
+		return textStyle;
+	}
+public TextStyle keyexpressionTextStyle() {
+	TextStyle textStyle = new TextStyle();
+	textStyle.setColor(new RGB(0, 0, 0));
+	textStyle.setStyle(SWT.BOLD);
+	return textStyle;
+}
+	
 	public TextStyle commentTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(120, 180, 120));

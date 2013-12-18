@@ -24,7 +24,7 @@ Tml :
 	) 
 	(
 		(GT 
-			((children+=Message) | (children+=Map)| (children+=Param) | (methods += Methods) | (children+=DebugTag)| (children+=Include) | (children+=Validations) | (children+=CommentClause))*
+			((children+=Message) | (children+=MapMethod)| (children+=Param) | (methods += Methods) | (children+=DebugTag)| (children+=Include) | (children+=Validations) | (children+=CommentClause))*
 		NAVASCRIPT_END
 		)
 	|	(
@@ -38,6 +38,8 @@ terminal XMLCOMMENT: '<!--' -> '-->';
 //terminal QUOTEQ: '"=';	
 //terminal SEMICOLONQUOTE: ';"';
 
+terminal LT:
+	'<';
 
 
 terminal LTNAVASCRIPTTAG: '<navascript' ;
@@ -50,8 +52,6 @@ terminal LTSTSLTAG: '</tsl' ;
 terminal QUOTE:
 	'"'
 ;
-terminal LT:
-	'<';
 terminal NAMEEQ:
 	'name='
 ;
@@ -113,6 +113,11 @@ terminal DESCRIPTIONEQ:
 	'description='
 ;
 
+terminal CODEEQ:
+	'code='
+;
+
+
 terminal VALUEEQ:
 	'value='
 ;
@@ -154,18 +159,6 @@ terminal XML_TAG_SINGLEEND:
 
 
 //terminal XML_TAG_START: '<';
-
-
-
-
-terminal LTMAPTAG: 
-	'<map' 
-;
-terminal LTSMAPTAG: 
-	'</map' 
-;
-
-
 
 terminal LTINCLUDETAG:
 	 '<include'
@@ -287,7 +280,7 @@ terminal LTSDEBUG_TAG:
 
 terminal  NAVASCRIPT_END:
  	//XML_START_ENDTAG NAVASCRIPT_KEYWORD GT;
-	('</navascript' GT ) | ('</tsl' GT)
+	(LTSNAVASCRIPTTAG GT ) | (LTSTSLTAG GT)
 	;
 	
 //
@@ -347,7 +340,12 @@ Validations :
 	;
 	
 Check:
-	LTCHECKTAG {Check}  (attributes+=NonExpression)* 
+	LTCHECKTAG {Check}  (
+		
+		  (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?
+		& (DESCRIPTIONEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (CODEEQ QUOTE expressions+=TopLevel QUOTE)?
+	) 
 	
 	((GT
 		expression=TopLevel
@@ -394,11 +392,26 @@ Include returns Method:
 
 
 Message:
-	LTMESSAGETAG {Message} ((COUNTEQ QUOTE count=NUMBER QUOTE)? & (MODEEQ QUOTE mode=ID QUOTE)? & (NAMEEQ QUOTE nameAttribute=ID QUOTE)? & (TYPEEQ QUOTE type=ID QUOTE)? & (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?) 
+	LTMESSAGETAG {Message} (
+		(COUNTEQ QUOTE count=NUMBER QUOTE)? 
+		& (MODEEQ QUOTE mode=ID QUOTE)? 
+		& (NAMEEQ QUOTE nameAttribute=ID QUOTE)? 
+		& (TYPEEQ QUOTE type=ID QUOTE)? 
+		& (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?
+	) 
 	
 	(
 		(GT
-		((children+=Message) | (children+=Property) | (children+=Param)  | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break))*
+		(
+			(children+=Message) | 
+			(children+=Property) | 
+			(children+=Param)  |
+			(children+=MapMethod) | 
+			(children+=DebugTag) | 
+			(children+=Field) | 
+			(children+=CommentClause) | 
+			(children+=Break)
+		)*
 	LTSMESSAGETAG GT
 	)
 	| 
@@ -409,34 +422,6 @@ Message:
 
 
 
-Map returns Map:
-	LTMAPTAG {Map}
-	(DOT mapName=ID)?
-	((REFEQ QUOTE (ref+=PathElement)+ QUOTE)?
-	& (OBJECTEQ QUOTE (object+=PathElement)+ QUOTE)?
-	& (NAMEEQ QUOTE nameAttribute=ID QUOTE)?
-	& (FILTEREQ QUOTE filter=TopLevel QUOTE)?
-	& (ID EQUALS QUOTE expressions+=TopLevel QUOTE)*
-	& (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?
-	)
-	(XML_TAG_SINGLEEND
-	|
-		(GT 
-			(
-				(children+=Message) | 
-				(children+=Property) | 
-				(children+=Param) | 
-				(children+=Map) | 
-				(children+=MapMethod) |
-				(children+=DebugTag) | 
-				(children+=Field) | 
-				(children+=CommentClause) | 
-				(children+=Break) |
-				(content+=AnyContent)
-			)*
-			LTSMAPTAG (DOT mapClosingName=MapId)? closedTag?=GT
-		)
-	);
 	
 MapId:
 	ID;
@@ -463,8 +448,6 @@ Property:
 			(
 				children += ExpressionOrOption
 				|
-				children += Map
-				|
 				children += MapMethod
 		 	)*
 		LTSPROPERTYTAG GT
@@ -480,8 +463,6 @@ Param returns Param:
 			(
 				children += ExpressionOrOption
 				|
-				children += Map
-				|
 				children += MapMethod
 		 	)*
 		LTSPARAMTAG GT
@@ -489,13 +470,37 @@ Param returns Param:
 	);
 
 MapMethod returns MapMethod:
-	LT  mapName = ID DOT methodName= ID (attributes+=Expression)* 
+	LT methodName=ID DOT ID
+	  
+		(
+		  (ID EQUALS QUOTE expressions+=TopLevel QUOTE)*
+		& (NAMEEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (FILTEREQ QUOTE filter=TopLevel QUOTE)?
+		& (CONDITIONEQ QUOTE condition=TopLevel QUOTE)?
+		& (VALUEEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (MESSAGEEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (REPOSITORYEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (SUBTYPESEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (AUTHOREQ QUOTE expressions+=TopLevel QUOTE)?
+		& (DIRECTIONEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (CARDINALITYEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (NOTESEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (SCRIPTEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (DESCRIPTIONEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (CODEEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (MODEEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (COMMENTEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (COUNTEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (LENGTHEQ QUOTE expressions+=TopLevel QUOTE)?
+		& (XMLSPACE EQUALS QUOTE PRESERVE QUOTE)?
+	)
+	
 	(
 		(XML_TAG_SINGLEEND)
 	|
 		( GT 
 			((
-				(children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break) | (content+=AnyContent)
+				(children += ExpressionOrOption) | (children+=Message) | (children+=Property) | (children+=Param) | (children+=MapMethod) | (children+=DebugTag) | (children+=Field) | (children+=CommentClause) | (children+=Break) | (content+=AnyContent)
 			)*
 			)
 			closedTag ?= XML_START_ENDTAG methodClosingName = ID DOT methodClosingMethod = ID GT
@@ -510,7 +515,7 @@ Field returns Field:
 	 XML_TAG_SINGLEEND
 	 |
 	 ( GT
-		((children += ExpressionOrOption)  | (children+=Param) | (children+=Map) | (children+=MapMethod) | (children+=DebugTag) | (children+=CommentClause) | (children+=Break))*
+		((children += ExpressionOrOption)  | (children+=Param) | (children+=MapMethod) | (children+=DebugTag) | (children+=CommentClause) | (children+=Break))*
 	 )
 	 LTSFIELDTAG GT
 	)
