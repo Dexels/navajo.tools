@@ -9,10 +9,9 @@ var file.extensions = "tsl"
 var projectName = "com.dexels.navajo.dsl.tsl"
 var runtimeProject = "../${projectName}"
 
-
 Workflow {
-    bean = StandaloneSetup {
-	    scanClassPath = true
+	bean = StandaloneSetup {
+		scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 	}
 
@@ -26,8 +25,7 @@ Workflow {
 
 	component = Generator {
 		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		//pathTestProject = "${runtimeProject}.tests"
+		pathUiProject = "${runtimeProject}.ui"//pathTestProject = "${runtimeProject}.tests"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
@@ -54,18 +52,27 @@ Workflow {
 			}
 
 			// The antlr parser generator fragment.
-//			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-//			  options = {
-//					backtrack = false
-//				}
-//			}
+			//			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			//			  options = {
+			//					backtrack = false
+			//				}
+			//			}
 			fragment = org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment {
 				options = {
 					backtrack = false
 					backtrackLexer = false
 				}
 			}
-			
+
+			// Uses ANTLR Tools to compile a custom lexer and will also add a binding in the runtime module to use the Lexer
+			fragment = parser.antlr.ex.ExternalAntlrLexerFragment {
+			// A grammar file with .g will be expected in this package (should be stored in src folder)
+				lexerGrammar = "com.dexels.navajo.dsl.tsl.TslCustomLexer"
+				runtime = true
+				antlrParam = "-lib"// This is the folder where the lexer will be created
+				antlrParam = "${runtimeProject}/src-gen/com/dexels/navajo/dsl/tsl/"
+			}
+
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
@@ -86,7 +93,7 @@ Workflow {
 				generateMwe = true
 				generateJavaMain = true
 			}
-			
+
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
 
@@ -102,7 +109,7 @@ Workflow {
 
 			// content assist API  
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			
+
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 
@@ -120,20 +127,20 @@ Workflow {
 
 			// generates the required bindings only if the grammar inherits from Xbase
 			fragment = xbase.XbaseGeneratorFragment {}
-			
+
 			// provides a preference page for template proposals 
 			fragment = templates.CodetemplatesGeneratorFragment {}
 
 			// rename refactoring
-            // fragment = refactoring.RefactorElementNameFragment {}
+			// fragment = refactoring.RefactorElementNameFragment {}
 
-            // provides a compare view
-            // fragment = compare.CompareFragment {
-            //    fileExtensions = file.extensions
-            // }
+			// provides a compare view
+			// fragment = compare.CompareFragment {
+			//    fileExtensions = file.extensions
+			// }
 
-            // Serializer 2.0
-            // fragment = serializer.SerializerFragment {}
+			// Serializer 2.0
+			// fragment = serializer.SerializerFragment {}
 		}
 	}
 }

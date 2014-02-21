@@ -64,7 +64,7 @@ public class TslFormatter extends AbstractDeclarativeFormatter {
 
 		
 		c.setIndentationIncrement().before(f.getGTRule());
-		c.setIndentationDecrement().after(f.getXML_START_ENDTAGRule());
+//		c.setIndentationDecrement().after(f.getXML_START_ENDTAGRule());
 		
 		c.setIndentationDecrement().after(f.getXML_TAG_SINGLEENDRule());
 		

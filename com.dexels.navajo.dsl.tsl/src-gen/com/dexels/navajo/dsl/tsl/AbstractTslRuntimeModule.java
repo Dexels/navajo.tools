@@ -70,11 +70,6 @@ public abstract class AbstractTslRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(com.dexels.navajo.dsl.tsl.parser.antlr.lexer.InternalTslLexer.class);
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
@@ -82,6 +77,11 @@ public abstract class AbstractTslRuntimeModule extends DefaultRuntimeModule {
 	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper> bindIUnorderedGroupHelper() {
 		return org.eclipse.xtext.parser.antlr.UnorderedGroupHelper.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.ExternalAntlrLexerFragment
+	public void configureRuntimeLexer(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(com.dexels.navajo.dsl.tsl.TslCustomLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
