@@ -67,7 +67,6 @@ public class TslPreCompiler {
 
             tslDoc = XMLDocumentUtils.createDocument(is, false);
             findIncludeDependencies(script,  scriptFolder, deps, tslDoc);
-
             findNavajoDependencies(script, deps, tslDoc);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -90,7 +89,7 @@ public class TslPreCompiler {
             File scriptFolderFile = new File(scripFolder);
             
             // Going to check for tenant-specific include-variants
-            AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(includeScript) + "*.xml");
+            AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(includeScript) + "_*.xml");
             Collection<File> files = FileUtils.listFiles(scriptFolderFile, fileFilter, null);
             for (File f : files) {
                 String includeScriptPath = f.getAbsolutePath().substring(scripFolder.length());
@@ -154,7 +153,6 @@ public class TslPreCompiler {
             }
         }
         return result;
-
     }
 
 }
