@@ -21,10 +21,8 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dexels.navajo.callhierarchy.dependency.Dependency;
 import com.dexels.navajo.callhierarchy.views.NavajoMapsMetaData;
-import com.dexels.navajo.mapping.compiler.meta.IncludeDependency;
-import com.dexels.navajo.mapping.compiler.meta.NavajoDependency;
-import com.dexels.navajo.script.api.Dependency;
 import com.dexels.navajo.script.api.NavajoClassSupplier;
 import com.dexels.navajo.script.api.SystemException;
 import com.dexels.navajo.server.DispatcherFactory;
@@ -41,8 +39,7 @@ public class DependencyAnalyzer {
     private String scriptFolder;
 
     private Map<String, List<Dependency>> dependencies = new HashMap<String, List<Dependency>>();
-    private Map<String, Set<String>> reverseIncludeDependencies = new HashMap<String, Set<String>>();
-    private Map<String, Set<String>> reverseNavajoDependencies = new HashMap<String, Set<String>>();
+    private Map<String, List<Dependency>> reverseDependencies = new HashMap<String, List<Dependency>>();
 
     public DependencyAnalyzer() {
         precompiler = new TslPreCompiler();
@@ -127,32 +124,21 @@ public class DependencyAnalyzer {
 
     }
 
-    public Set<String> getDependentScripts(String scriptPath) {
-        String script = scriptPath;
-        if (scriptPath.indexOf('_') > 0) {
-            // Remove tenant-specific part
-            script = scriptPath.substring(0, scriptPath.indexOf('_'));
-        }
-        if (!reverseIncludeDependencies.containsKey(script)) {
-            return new HashSet<String>();
-        }
-        return reverseIncludeDependencies.get(script);
-    }
-
     
-    public Set<String> getDependentNavajo(String scriptPath) {
+    public List<Dependency> getDependencies(String scriptPath) {
+        return dependencies.get(scriptPath);
+    }
+    
+    public List<Dependency> getReverseDependencies(String scriptPath) {
         String script = scriptPath;
+
         if (scriptPath.indexOf('_') > 0) {
             // Remove tenant-specific part
             script = scriptPath.substring(0, scriptPath.indexOf('_'));
         }
-
-        if (!reverseNavajoDependencies.containsKey(script)) {
-            return new HashSet<String>();
-        }
-
-        return reverseNavajoDependencies.get(script);
+        return reverseDependencies.get(script);
     }
+    
 
     @SuppressWarnings({ "unchecked" })
     private void importDependencies(String scriptPath) {
@@ -215,27 +201,12 @@ public class DependencyAnalyzer {
     private void updateReverseDependencies(String originScript, List<Dependency> dependencies) {
         for (Dependency dep : dependencies) {
 
-            if (dep instanceof NavajoDependency) {
-                NavajoDependency navajoDep = (NavajoDependency) dep;
-                String navajoScript = navajoDep.getScriptPath();
-
-                if (!reverseNavajoDependencies.containsKey(navajoScript)) {
-                    reverseNavajoDependencies.put(navajoScript, new HashSet<String>());
-                }
-
-                reverseNavajoDependencies.get(navajoScript).add(scriptFolder + File.separator + originScript + ".xml");
-            } else if (dep instanceof IncludeDependency) {
-
-                IncludeDependency includeDep = (IncludeDependency) dep;
-                String includeScript = includeDep.getScriptPath();
-
-                if (!reverseIncludeDependencies.containsKey(includeScript)) {
-                    reverseIncludeDependencies.put(includeScript, new HashSet<String>());
-                }
-                reverseIncludeDependencies.get(includeScript)
-                        .add(scriptFolder + File.separator + originScript + ".xml");
-
+      
+            if (!reverseDependencies.containsKey(dep.getDependee())) {
+                reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
             }
+
+            reverseDependencies.get(dep.getDependee()).add(dep);
         }
     }
 

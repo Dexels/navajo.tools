@@ -6,6 +6,8 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
+import com.dexels.navajo.callhierarchy.dependency.Dependency;
+
 class ViewLabelProvider extends LabelProvider {
 
     public static Display getDisplay() {
@@ -28,8 +30,10 @@ class ViewLabelProvider extends LabelProvider {
             TreeObject treeObj = (TreeObject) obj;
 
             imgName = "icons/navajoDep.gif";
-            if (treeObj.getType() == TreeObject.TYPE_INCLUDE) {
+            if (treeObj.getType() == Dependency.INCLUDE_DEPENDENCY) {
                 imgName = "icons/includeDep.gif";
+            } else if (treeObj.getType() == Dependency.METHOD_DEPENDENCY) {
+                imgName = "icons/methodDep.gif";
             }
         }
         InputStream input = classLoader.getResourceAsStream(imgName);

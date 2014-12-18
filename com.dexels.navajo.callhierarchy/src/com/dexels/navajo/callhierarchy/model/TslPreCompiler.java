@@ -38,12 +38,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.dexels.navajo.callhierarchy.dependency.Dependency;
 import com.dexels.navajo.document.jaxpimpl.xml.XMLDocumentUtils;
-import com.dexels.navajo.mapping.compiler.meta.IncludeDependency;
 import com.dexels.navajo.mapping.compiler.meta.MapMetaData;
-import com.dexels.navajo.mapping.compiler.meta.NavajoDependency;
-import com.dexels.navajo.script.api.Dependency;
-import com.dexels.navajo.script.api.UserException;
 
 public class TslPreCompiler {
 
@@ -66,8 +63,9 @@ public class TslPreCompiler {
             }
 
             tslDoc = XMLDocumentUtils.createDocument(is, false);
-            findIncludeDependencies(script,  scriptFolder, deps, tslDoc);
-            findNavajoDependencies(script, deps, tslDoc);
+            findIncludeDependencies(script, scriptFile.getAbsolutePath(), scriptFolder, deps, tslDoc);
+            findNavajoDependencies(script, scriptFile.getAbsolutePath(),  scriptFolder, deps, tslDoc);
+            findMethodDependencies(script, scriptFile.getAbsolutePath(),  scriptFolder, deps, tslDoc);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -75,7 +73,7 @@ public class TslPreCompiler {
 
     }
 
-    private void findIncludeDependencies(String script,  String scripFolder, List<Dependency> deps, Document tslDoc) {
+    private void findIncludeDependencies(String script, String scriptFile, String scriptFolder, List<Dependency> deps, Document tslDoc) {
         NodeList includes = tslDoc.getElementsByTagName("include");
         int included = 0;
         for (int i = 0; i < includes.getLength(); i++) {
@@ -85,16 +83,16 @@ public class TslPreCompiler {
                return;
             }
             
-            deps.add(new IncludeDependency(IncludeDependency.getScriptTimeStamp(includeScript), script,  includeScript));
-            File scriptFolderFile = new File(scripFolder);
+            String includeScriptFile = scriptFolder + File.separator + includeScript + ".xml";
+
+            deps.add(new Dependency(scriptFile, includeScriptFile, Dependency.INCLUDE_DEPENDENCY));
             
             // Going to check for tenant-specific include-variants
+            File scriptFolderFile = new File(includeScriptFile).getParentFile();
             AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(includeScript) + "_*.xml");
             Collection<File> files = FileUtils.listFiles(scriptFolderFile, fileFilter, null);
             for (File f : files) {
-                String includeScriptPath = f.getAbsolutePath().substring(scripFolder.length());
-                String includeScriptTenant = includeScriptPath.substring(1, includeScriptPath.indexOf(".xml"));
-                deps.add(new IncludeDependency(IncludeDependency.getScriptTimeStamp(includeScriptTenant), script,  includeScriptTenant));
+                deps.add(new Dependency(scriptFile, f.getAbsolutePath(), Dependency.INCLUDE_DEPENDENCY));
             }
             included++;
 
@@ -103,8 +101,31 @@ public class TslPreCompiler {
             }
         }
     }
+    
+    private void findMethodDependencies(String script, String scriptFile, String scriptFolder, List<Dependency> deps, Document tslDoc) {
+        NodeList methods = tslDoc.getElementsByTagName("method");
+        for (int i = 0; i < methods.getLength(); i++) {
+            Node n = methods.item(i);
+            String methodScript = ((Element) n).getAttribute("name");
+            if (methodScript == null || methodScript.equals("")) {
+               return;
+            }
+            String methodScriptFile = scriptFolder + File.separator + methodScript + ".xml";
+            deps.add(new Dependency(scriptFile, methodScriptFile, Dependency.METHOD_DEPENDENCY));
 
-    private void findNavajoDependencies(String script, List<Dependency> deps, Document tslDoc)
+            // Going to check for tenant-specific include-variants
+            File scriptFolderFile =new File(methodScriptFile).getParentFile();
+            AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(methodScript) + "_*.xml");
+            Collection<File> files = FileUtils.listFiles(scriptFolderFile, fileFilter, null);
+            for (File f : files) {
+                deps.add(new Dependency(scriptFile, f.getAbsolutePath(), Dependency.METHOD_DEPENDENCY));
+            }
+          
+        }
+    }
+    
+
+    private void findNavajoDependencies(String script, String scriptFile, String scriptFolder, List<Dependency> deps, Document tslDoc)
             throws XPathExpressionException {
         XPath xPath = XPathFactory.newInstance().newXPath();
         NodeList nodes = (NodeList) xPath.evaluate(
@@ -113,21 +134,37 @@ public class TslPreCompiler {
 
         for (int i = 0; i < nodes.getLength(); ++i) {
             Element value = (Element) nodes.item(i);
-            String scriptString = value.getTextContent();
-            if (scriptString.contains("@")) {
+            String navajoScript = value.getTextContent();
+            if (navajoScript.contains("@")) {
                 // Going to try to parse param ...
-                List<String> result = getParamValue(tslDoc, scriptString);
+                List<String> result = getParamValue(tslDoc, navajoScript);
                 for (String res : result) {
-                    deps.add(new NavajoDependency(NavajoDependency.getScriptTimeStamp(res), script, res));
+                    addNavajoDependency(scriptFile, deps, res, scriptFolder);
                 }
 
             } else {
-                String cleanScript = scriptString.replace("'", "");
-                deps.add(new NavajoDependency(NavajoDependency.getScriptTimeStamp(cleanScript), script, cleanScript));
+                addNavajoDependency(scriptFile, deps, navajoScript, scriptFolder);
+                
             }
         }
     }
 
+    private void addNavajoDependency(String scriptFile, List<Dependency> deps, String navajoScript, String scriptFolder) {
+        String cleanScript = navajoScript.replace("'", "");
+        String navajoScriptFile = scriptFolder + File.separator + cleanScript + ".xml";
+        deps.add(new Dependency(scriptFile, navajoScriptFile, Dependency.NAVAJO_DEPENDENCY));
+        
+        // Going to check for tenant-specific include-variants
+        File scriptFolderFile = new File(scriptFile).getParentFile();
+        AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(cleanScript) + "_*.xml");
+        Collection<File> files = FileUtils.listFiles(scriptFolderFile, fileFilter, null);
+        for (File f : files) {
+            deps.add(new Dependency(scriptFile, f.getAbsolutePath(), Dependency.NAVAJO_DEPENDENCY));
+        }
+    }
+
+    
+    
     private List<String> getParamValue(Document tslDoc, String paramString) throws XPathExpressionException {
         String paramName = paramString.split("\\@")[1];
         paramName = paramName.substring(0, paramName.length() - 1);

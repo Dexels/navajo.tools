@@ -5,10 +5,7 @@ import java.io.File;
 import org.eclipse.core.runtime.IAdaptable;
 
 public class TreeObject implements IAdaptable {
-    public static int TYPE_ROOT = 1;
-    public static int TYPE_NAVAJO = 2;
-    public static int TYPE_INCLUDE = 3;
-    public static int TYPE_ENTITY = 4;
+
 
     private String scriptName = "";
     private String filePath;

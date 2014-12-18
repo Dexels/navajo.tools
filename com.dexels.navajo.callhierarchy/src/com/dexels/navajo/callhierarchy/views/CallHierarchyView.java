@@ -1,6 +1,7 @@
 package com.dexels.navajo.callhierarchy.views;
 
 import java.io.File;
+
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
@@ -28,10 +29,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
     private DrillDownAdapter drillDownAdapter;
-    private Action action1;
-    private Action action2;
+    private Action reverseCallTree;
     private Action doubleClickAction;
-    private IResourceChangeListener resourceListener;
+    private MyResourceChangeReporter resourceListener;
 
     /*
      * The content provider class is responsible for providing objects to the
@@ -54,13 +54,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         // Register to get notifications of changed files
         resourceListener = new MyResourceChangeReporter();
         ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceListener, IResourceChangeEvent.POST_CHANGE);
-
+        
+        // Register to get notifications of opened files
+        window.getPartService().addPartListener(resourceListener);
     }
 
     public void dispose() {
         IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
         window.getSelectionService().removeSelectionListener(this);
         ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceListener);
+        window.getPartService().removePartListener(resourceListener);
     }
 
     /**
@@ -106,14 +109,12 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalPullDown(IMenuManager manager) {
-        manager.add(action1);
+        manager.add(reverseCallTree);
         manager.add(new Separator());
-        manager.add(action2);
     }
 
     private void fillContextMenu(IMenuManager manager) {
-        manager.add(action1);
-        manager.add(action2);
+        manager.add(reverseCallTree);
         manager.add(new Separator());
         drillDownAdapter.addNavigationActions(manager);
         // Other plug-ins can contribute there actions here
@@ -121,32 +122,26 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalToolBar(IToolBarManager manager) {
-        manager.add(action1);
-        manager.add(action2);
+        manager.add(reverseCallTree);
         manager.add(new Separator());
         drillDownAdapter.addNavigationActions(manager);
     }
 
     private void makeActions() {
-        action1 = new Action() {
+        reverseCallTree = new Action() {
             public void run() {
-                showMessage("Action 1 executed");
+                viewProvider.setReverseMode(!viewProvider.isReverseMode());
+                TreeObject o = viewProvider.getRoot();
+                updateRoot(new TreeParent(o.getFilePath(), 0));                
             }
         };
-        action1.setText("Action 1");
-        action1.setToolTipText("Action 1 tooltip");
-        action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
+        reverseCallTree.setText("Reverse call hierarchy");
+        reverseCallTree.setToolTipText("Reverse call hierarchy");
+        reverseCallTree.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
                 .getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 
-        action2 = new Action() {
-            public void run() {
-                showMessage("Action 2 executed");
-            }
-        };
-        action2.setText("Action 2");
-        action2.setToolTipText("Action 2 tooltip");
-        action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-                .getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+       
+
         doubleClickAction = new Action() {
             public void run() {
                 ISelection selection = viewer.getSelection();
@@ -180,9 +175,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         });
     }
 
-    private void showMessage(String message) {
-        MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
-    }
+//    private void showMessage(String message) {
+//        MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
+//    }
 
     /**
      * Passing the focus request to the viewer's control.
@@ -203,22 +198,57 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     // only interested in scripts
                     return;
                 }
-
-                viewProvider.setRoot(new TreeParent(filePath, TreeObject.TYPE_ROOT));
-                viewer.refresh();
+                updateRoot(new TreeParent(filePath, 0));
+               
             }
         }
     }
 
     
     
-    class MyResourceChangeReporter implements IResourceChangeListener {
+    private void updateRoot(TreeParent treeParent) {
+        viewProvider.setRoot(treeParent);
+        viewer.refresh();
+        viewer.expandToLevel(2);
+    }
+
+
+
+    class MyResourceChangeReporter implements IResourceChangeListener,IPartListener {
 
         @Override
         public void resourceChanged(IResourceChangeEvent e) {
             IResourceDelta delta = e.getDelta();
             delta.getAffectedChildren();
+            System.out.println("CHANGE");
+        }
 
+        @Override
+        public void partActivated(IWorkbenchPart arg0) {
+        }
+
+        @Override
+        public void partBroughtToTop(IWorkbenchPart arg0) {            
+        }
+
+        @Override
+        public void partClosed(IWorkbenchPart arg0) {            
+        }
+
+        @Override
+        public void partDeactivated(IWorkbenchPart arg0) {            
+        }
+
+        @Override
+        public void partOpened(IWorkbenchPart e) {
+            if (e instanceof IEditorPart) {
+//                EditorPart editor = (EditorPart) e;
+//                System.out.println(editor);
+//                editor.getEditorInput().get
+               
+            }
+            System.out.println("opened");
+            
         }
 
     }
