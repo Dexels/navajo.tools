@@ -33,6 +33,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.AbstractFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -43,6 +45,7 @@ import com.dexels.navajo.document.jaxpimpl.xml.XMLDocumentUtils;
 import com.dexels.navajo.mapping.compiler.meta.MapMetaData;
 
 public class TslPreCompiler {
+    private final static Logger logger = LoggerFactory.getLogger(TslPreCompiler.class);
 
     public void getAllDependencies(File scriptFile, String script, String scriptFolder, List<Dependency> deps) {
         String fullScriptPath = scriptFile.getAbsolutePath();
@@ -84,7 +87,12 @@ public class TslPreCompiler {
             }
             
             String includeScriptFile = scriptFolder + File.separator + includeScript + ".xml";
-
+            
+            // Check if exists
+            if (! new File(includeScriptFile).exists()) {
+                deps.add(new Dependency(scriptFile, includeScriptFile, Dependency.BROKEN_DEPENDENCY));
+                continue;
+            }
             deps.add(new Dependency(scriptFile, includeScriptFile, Dependency.INCLUDE_DEPENDENCY));
             
             // Going to check for tenant-specific include-variants
@@ -111,6 +119,12 @@ public class TslPreCompiler {
                return;
             }
             String methodScriptFile = scriptFolder + File.separator + methodScript + ".xml";
+            
+            // Check if exists
+            if (! new File(methodScriptFile).exists()) {
+                deps.add(new Dependency(scriptFile, methodScriptFile, Dependency.BROKEN_DEPENDENCY));
+                continue;
+            }
             deps.add(new Dependency(scriptFile, methodScriptFile, Dependency.METHOD_DEPENDENCY));
 
             // Going to check for tenant-specific include-variants
@@ -152,6 +166,13 @@ public class TslPreCompiler {
     private void addNavajoDependency(String scriptFile, List<Dependency> deps, String navajoScript, String scriptFolder) {
         String cleanScript = navajoScript.replace("'", "");
         String navajoScriptFile = scriptFolder + File.separator + cleanScript + ".xml";
+        
+        // Check if exists
+        if (! new File(navajoScriptFile).exists()) {
+            deps.add(new Dependency(scriptFile, navajoScriptFile, Dependency.BROKEN_DEPENDENCY));
+            return;
+        }
+        
         deps.add(new Dependency(scriptFile, navajoScriptFile, Dependency.NAVAJO_DEPENDENCY));
         
         // Going to check for tenant-specific include-variants

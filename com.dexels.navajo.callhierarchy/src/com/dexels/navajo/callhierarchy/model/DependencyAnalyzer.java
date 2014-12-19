@@ -12,11 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.List;
-import java.util.Set;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +32,7 @@ public class DependencyAnalyzer {
     private final static Logger logger = LoggerFactory.getLogger(DependencyAnalyzer.class);
 
     private TslPreCompiler precompiler;
+    private CodeSearch codeSearch;
     private boolean initialized = false;
     private String scriptFolder;
 
@@ -43,6 +41,7 @@ public class DependencyAnalyzer {
 
     public DependencyAnalyzer() {
         precompiler = new TslPreCompiler();
+        codeSearch = new CodeSearch();
     }
 
     public void initialize(String aScript) {
@@ -79,6 +78,7 @@ public class DependencyAnalyzer {
             }
 
         }
+        addWorkflowDependencies(scriptFolder);
         persistDependencies(scriptFolder);
         initialized = true;
 
@@ -115,16 +115,45 @@ public class DependencyAnalyzer {
         List<Dependency> myDependencies = new ArrayList<Dependency>();
         try {
             precompiler.getAllDependencies(scriptFile, scriptPath, scriptFolder, myDependencies);
+            //codeSearch.getAllWorkflowDependencies(scriptFile, scriptPath, scriptFolder, myDependencies);
         } catch (Exception e) {
             throw e;
         }
         dependencies.put(scriptPath, myDependencies);
 
         updateReverseDependencies(scriptPath, myDependencies);
+    }
+    
+    private void addWorkflowDependencies(String scriptFolder) {
+        logger.debug("Starting workflow dependencies");
+        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        try {
+            codeSearch.addWorkflowDependencies(scriptFolder, myDependencies);
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        
+        for (Dependency dep : myDependencies) {
+            
+            if (!dependencies.containsKey(dep.getScript())) {
+                dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+            }
+
+            dependencies.get(dep.getScript()).add(dep);
+            
+
+            if (!reverseDependencies.containsKey(dep.getDependee())) {
+                reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+            }
+
+            reverseDependencies.get(dep.getDependee()).add(dep);
+        }
+        logger.debug("Done workflow dependencies");
 
     }
-
     
+       
     public List<Dependency> getDependencies(String scriptPath) {
         return dependencies.get(scriptPath);
     }
@@ -201,7 +230,6 @@ public class DependencyAnalyzer {
     private void updateReverseDependencies(String originScript, List<Dependency> dependencies) {
         for (Dependency dep : dependencies) {
 
-      
             if (!reverseDependencies.containsKey(dep.getDependee())) {
                 reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
             }

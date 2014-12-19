@@ -75,14 +75,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewProvider = new ViewContentProvider(getViewSite());
         viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
         drillDownAdapter = new DrillDownAdapter(viewer);
-        viewer.setContentProvider(viewProvider);
         viewer.setLabelProvider(new ViewLabelProvider());
+        viewer.setContentProvider(viewProvider);
         viewer.setSorter(new NameSorter());
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem()
-                .setHelp(viewer.getControl(), "com.dexels.navajo.callhierarchy.viewer");
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.callhierarchy.viewer");
         makeActions();
         hookContextMenu();
         hookDoubleClickAction();
@@ -194,7 +193,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
             if (selectedObject instanceof IFile) {
                 String filePath = ((IFile) selectedObject).getLocation().toString();
-                if (!filePath.contains("scripts")) {
+                if (!filePath.contains("scripts") && !filePath.contains("workflows") ) {
                     // only interested in scripts
                     return;
                 }

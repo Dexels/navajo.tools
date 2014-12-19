@@ -3,10 +3,14 @@ package com.dexels.navajo.callhierarchy.dependency;
 import java.io.File;
 
 public class Dependency {
-    public static int INCLUDE_DEPENDENCY = 1;
-    public static int NAVAJO_DEPENDENCY = 2;
-    public static int METHOD_DEPENDENCY = 3;
-    public static int ENTITY_DEPENDENCY = 4;
+    public static final int UNKNOWN_TYPE = 0;
+    public static final int INCLUDE_DEPENDENCY = 1;
+    public static final int NAVAJO_DEPENDENCY = 2;
+    public static final int METHOD_DEPENDENCY = 3;
+    public static final int ENTITY_DEPENDENCY = 4;
+    public static final int TASK_DEPENDENCY = 5;
+    public static final int WORKFLOW_DEPENDENCY = 6;
+    public static final int BROKEN_DEPENDENCY = 7;
     
     private int type;
     private String scriptFile;
@@ -43,14 +47,25 @@ public class Dependency {
     }
 
    public String getScript() {
-       String scriptFileRel = scriptFile.split("scripts" + File.separator)[1];
+       String scriptFileRel = null;
+       if (scriptFile.indexOf("workflows") > 0) {
+           scriptFileRel = scriptFile.split("workflows" + File.separator)[1];
+       } else {
+           scriptFileRel = scriptFile.split("scripts" + File.separator)[1];
+       }
        return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
    }
    
-   public String getDependee() {
-       String scriptFileRel = dependeeFile.split("scripts" + File.separator)[1];
-       return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
-   }
+    public String getDependee() {
+        String scriptFileRel = null;
+        if (dependeeFile.indexOf("workflows") > 0) {
+            scriptFileRel = dependeeFile.split("workflows" + File.separator)[1];
+        } else {
+            scriptFileRel = dependeeFile.split("scripts" + File.separator)[1];
+        }
+
+        return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
+    }
 
    @Override
     public String toString() {
