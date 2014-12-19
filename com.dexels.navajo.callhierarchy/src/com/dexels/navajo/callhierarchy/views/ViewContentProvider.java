@@ -81,7 +81,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     
     public TreeObject getRoot() {
         TreeObject[] children = invisibleRoot.getChildren();
-        if (children != null) {
+        if (children != null && children.length > 0) {
             return children[0];
         }
         return null;
@@ -94,6 +94,12 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
 
     public void setReverseMode(boolean reverseMode) {
         this.reverseMode = reverseMode;
+    }
+    
+    public void rebuild() {
+        depAnalyzer.rebuild();
+        
+    
     }
 
     private void addDependencies(TreeParent node, int ttl) {
@@ -128,6 +134,19 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         }
        
 
+    }
+
+   
+    public void removeResource(String filePath) {
+        depAnalyzer.remove(filePath);
+
+               
+    }
+
+    public void updateResource(String filePath) {
+        depAnalyzer.refresh(filePath);
+
+        
     }
 
 

@@ -8,7 +8,6 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
@@ -17,13 +16,6 @@ import com.dexels.navajo.callhierarchy.dependency.Dependency;
 class ViewLabelProvider extends StyledCellLabelProvider {
     FontRegistry registry = new FontRegistry();
 
-    public static Display getDisplay() {
-        Display display = Display.getCurrent();
-        // may be null if outside the UI thread
-        if (display == null)
-            display = Display.getDefault();
-        return display;
-    }
 
     public Image getImage(Object element) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -36,10 +28,15 @@ class ViewLabelProvider extends StyledCellLabelProvider {
                 imgName = "icons/includeDep.gif";
             } else if (treeObj.getType() == Dependency.METHOD_DEPENDENCY) {
                 imgName = "icons/methodDep.gif";
+            } else if (treeObj.getType() == Dependency.BROKEN_DEPENDENCY) {
+                imgName = "icons/brokenDep.gif";
+            } else if (treeObj.getType() == Dependency.WORKFLOW_DEPENDENCY) {
+                imgName = "icons/workflowDep.gif";
             }
+
         }
         InputStream input = classLoader.getResourceAsStream(imgName);
-        return new Image(getDisplay(), input);
+        return new Image(Display.getCurrent(), input);
     }
 
     @Override

@@ -14,7 +14,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,61 +33,101 @@ import com.dexels.navajo.server.NavajoConfig;
 import com.dexels.navajo.server.test.TestDispatcher;
 
 public class DependencyAnalyzer {
+    public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
+    
+    private static final String DEFAULT_SERVER_XML = "config/server.xml";
+    private static final int WORKFLOW_WORKCOUNT = 500;
     private static final String NAVAJO_DEPS_FILE = ".navajodeps";
-    public static final String DEFAULT_SERVER_XML = "config/server.xml";
     private final static Logger logger = LoggerFactory.getLogger(DependencyAnalyzer.class);
 
+    private Job initializeJob;
+    
     private TslPreCompiler precompiler;
     private CodeSearch codeSearch;
     private boolean initialized = false;
     private String scriptFolder;
 
-    private Map<String, List<Dependency>> dependencies = new HashMap<String, List<Dependency>>();
-    private Map<String, List<Dependency>> reverseDependencies = new HashMap<String, List<Dependency>>();
+    private Map<String, List<Dependency>> dependencies;;
+    private Map<String, List<Dependency>> reverseDependencies;
 
     public DependencyAnalyzer() {
         precompiler = new TslPreCompiler();
         codeSearch = new CodeSearch();
+        
     }
 
     public void initialize(String aScript) {
-        if (initialized) {
+        if (initialized || initializeJob != null) {
             return;
         }
-        logger.debug("Initializing DependencyAnalyzer");
-        String rootPath = aScript.split("scripts")[0];
-        initializeDispatcher(rootPath);
-        scriptFolder = rootPath + "scripts";
+       
+        initializeJob = createJob(aScript);
+        initializeJob.schedule();
+    }
+    
+    public void rebuild() {
+        // Resetting the following values will trigger a rebuild
+        initialized = false;
+        initializeJob = null;
+    }
 
-        // Read in existing dependencies
-        importDependencies(scriptFolder);
+    private Job createJob(final String aScript) {
 
-        // Check for missing/new files
-        String[] xmlExt = { "xml" };
-        Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
-        int totalSize = files.size();
-        int done = 0;
-        int previousDonePerc = 0;
-        for (File f : files) {
-            String fullScriptName = f.getPath().split("scripts" + File.separator)[1];
-            String scriptName = fullScriptName.substring(0, fullScriptName.indexOf('.'));
-            if (!dependencies.containsKey(scriptName)) {
-                addDependencies(scriptName, f);
-                done++;
-                Double newDonePercDouble = (((double) done / totalSize) * 100);
-                int newDonePerc = newDonePercDouble.intValue();
-                if (newDonePerc != previousDonePerc) {
-                    previousDonePerc = newDonePerc;
-                    System.out.println(newDonePerc + " % done");
+        return new Job(INIT_JOB_NAME) {
+
+            private String script = aScript;
+
+            @Override
+            protected IStatus run(IProgressMonitor monitor) {
+                dependencies = new HashMap<String, List<Dependency>>();
+                reverseDependencies = new HashMap<String, List<Dependency>>();
+                
+                String rootPath = script.split("scripts")[0];
+                initializeDispatcher(rootPath);
+                scriptFolder = rootPath + "scripts";
+
+                // Read in existing dependencies
+                importDependencies(scriptFolder);
+
+                // Check for missing/new files
+                String[] xmlExt = { "xml" };
+                Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
+
+                try {
+                    // Files.size + 'fake' 100 for workflow progress
+                    monitor.beginTask("Calculating Navajo dependencies", files.size() + WORKFLOW_WORKCOUNT);
+
+                    for (File f : files) {
+                        monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
+                        
+                        String fullScriptName = f.getPath().split("scripts" + File.separator)[1];
+                        String scriptName = fullScriptName.substring(0, fullScriptName.indexOf('.'));
+                        if (!dependencies.containsKey(scriptName)) {
+                            addDependencies(scriptName, f);
+                            monitor.worked(1);
+                        }
+                        if(monitor.isCanceled()) {
+                            return Status.CANCEL_STATUS;
+                        }
+                    }
+                    addWorkflowDependencies(scriptFolder, new SubProgressMonitor(monitor, 500));
+                    persistDependencies(scriptFolder);
+                    
+                    if(monitor.isCanceled()) {
+                        return Status.CANCEL_STATUS;
+                    }
+                    
+                    initialized = true;
+                    
+                  
+                } finally {
+                    monitor.done();
+                    
                 }
 
+                return Status.OK_STATUS;
             }
-
-        }
-        addWorkflowDependencies(scriptFolder);
-        persistDependencies(scriptFolder);
-        initialized = true;
-
+        };
     }
 
     private static void initializeDispatcher(String rootPath) {
@@ -121,14 +167,14 @@ public class DependencyAnalyzer {
         }
         dependencies.put(scriptPath, myDependencies);
 
-        updateReverseDependencies(scriptPath, myDependencies);
+        updateReverseDependencies(myDependencies);
     }
     
-    private void addWorkflowDependencies(String scriptFolder) {
+    private void addWorkflowDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting workflow dependencies");
         List<Dependency> myDependencies = new ArrayList<Dependency>();
         try {
-            codeSearch.addWorkflowDependencies(scriptFolder, myDependencies);
+            codeSearch.addWorkflowDependencies(scriptFolder, myDependencies, monitor);
         } catch (Exception e) {
             throw e;
         }
@@ -198,7 +244,7 @@ public class DependencyAnalyzer {
 
         for (String script : dependencies.keySet()) {
             List<Dependency> myDependencies = dependencies.get(script);
-            updateReverseDependencies(script, myDependencies);
+            updateReverseDependencies(myDependencies);
 
         }
     }
@@ -227,7 +273,8 @@ public class DependencyAnalyzer {
 
     }
 
-    private void updateReverseDependencies(String originScript, List<Dependency> dependencies) {
+    private void updateReverseDependencies(List<Dependency> dependencies) {
+
         for (Dependency dep : dependencies) {
 
             if (!reverseDependencies.containsKey(dep.getDependee())) {
@@ -236,6 +283,23 @@ public class DependencyAnalyzer {
 
             reverseDependencies.get(dep.getDependee()).add(dep);
         }
+    }
+
+    public void refresh(String filePath) {
+        String relScript = filePath.split("scripts" + File.separator)[1];
+        String scriptName = relScript.substring(0,  relScript.indexOf("."));
+        dependencies.remove(scriptName);
+        
+        addDependencies(scriptName, new File(filePath));
+        updateReverseDependencies(dependencies.get(scriptName));
+        
+    }
+
+    public void remove(String filePath) {
+        String relScript = filePath.split("scripts"  + File.separator)[1];
+        String scriptName = relScript.substring(0,  relScript.indexOf("."));
+        dependencies.remove(scriptName);
+        
     }
 
 }

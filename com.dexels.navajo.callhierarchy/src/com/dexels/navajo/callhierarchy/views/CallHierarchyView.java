@@ -1,23 +1,26 @@
 package com.dexels.navajo.callhierarchy.views;
 
 import java.io.File;
-
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.jface.action.*;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
+import com.dexels.navajo.callhierarchy.Activator;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
@@ -29,9 +32,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
     private DrillDownAdapter drillDownAdapter;
-    private Action reverseCallTree;
+    private Action callerHierarchy;
     private Action doubleClickAction;
     private MyResourceChangeReporter resourceListener;
+
+    private Action rebuildAction;
+
+    private Action calleeHierarchy;
 
     /*
      * The content provider class is responsible for providing objects to the
@@ -108,12 +115,14 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalPullDown(IMenuManager manager) {
-        manager.add(reverseCallTree);
+        manager.add(callerHierarchy);
+        manager.add(calleeHierarchy);
         manager.add(new Separator());
     }
 
     private void fillContextMenu(IMenuManager manager) {
-        manager.add(reverseCallTree);
+       
+
         manager.add(new Separator());
         drillDownAdapter.addNavigationActions(manager);
         // Other plug-ins can contribute there actions here
@@ -121,23 +130,50 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalToolBar(IToolBarManager manager) {
-        manager.add(reverseCallTree);
+        manager.add(callerHierarchy);
+        manager.add(calleeHierarchy);
+        manager.add(rebuildAction);
         manager.add(new Separator());
         drillDownAdapter.addNavigationActions(manager);
     }
 
     private void makeActions() {
-        reverseCallTree = new Action() {
+        callerHierarchy = new Action() {
             public void run() {
-                viewProvider.setReverseMode(!viewProvider.isReverseMode());
+                viewProvider.setReverseMode(true);
+                callerHierarchy.setChecked(true);
+                calleeHierarchy.setChecked(false);
                 TreeObject o = viewProvider.getRoot();
                 updateRoot(new TreeParent(o.getFilePath(), 0));                
             }
         };
-        reverseCallTree.setText("Reverse call hierarchy");
-        reverseCallTree.setToolTipText("Reverse call hierarchy");
-        reverseCallTree.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-                .getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+        callerHierarchy.setText("Show Caller Hierarchy");
+        callerHierarchy.setToolTipText("Show Caller Hierarchy");
+        callerHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callers.gif"));
+        callerHierarchy.setChecked(true);
+        
+        calleeHierarchy = new Action() {
+            public void run() {
+                viewProvider.setReverseMode(false);
+                callerHierarchy.setChecked(false);
+                calleeHierarchy.setChecked(true);
+                TreeObject o = viewProvider.getRoot();
+                updateRoot(new TreeParent(o.getFilePath(), 0));                
+            }
+        };
+        calleeHierarchy.setText("Show Callee Hierarchy");
+        calleeHierarchy.setToolTipText("Show Callee Hierarchy");
+        calleeHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callees.gif"));
+        calleeHierarchy.setChecked(false);
+        
+        rebuildAction = new Action() {
+            public void run() {
+                rebuild();             
+            }
+        };
+        rebuildAction.setText("Rebuild dependency tree");
+        rebuildAction.setToolTipText("Rebuild dependency tree");
+        rebuildAction.setImageDescriptor(Activator.getImageDescriptor("icons/refresh.gif"));
 
        
 
@@ -165,6 +201,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             }
         };
     }
+    
 
     private void hookDoubleClickAction() {
         viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -205,21 +242,32 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     
     
-    private void updateRoot(TreeParent treeParent) {
-        viewProvider.setRoot(treeParent);
-        viewer.refresh();
-        viewer.expandToLevel(2);
+    private void updateRoot(final TreeParent treeParent) {
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run() {
+                viewProvider.setRoot(treeParent);
+                viewer.refresh();
+                viewer.expandToLevel(2);
+            }
+        });
     }
 
+    private void rebuild() {
+        TreeParent root = (TreeParent) viewProvider.getRoot();
+        viewProvider.rebuild();
+        updateRoot(root);
+    }
 
 
     class MyResourceChangeReporter implements IResourceChangeListener,IPartListener {
 
         @Override
-        public void resourceChanged(IResourceChangeEvent e) {
-            IResourceDelta delta = e.getDelta();
-            delta.getAffectedChildren();
-            System.out.println("CHANGE");
+        public void resourceChanged(IResourceChangeEvent event) {
+            try {
+                event.getDelta().accept(new DeltaUpdater());
+            } catch (CoreException e) {
+                // Something weird happened - lets just leave it at this
+            }
         }
 
         @Override
@@ -240,16 +288,58 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         @Override
         public void partOpened(IWorkbenchPart e) {
+
             if (e instanceof IEditorPart) {
-//                EditorPart editor = (EditorPart) e;
-//                System.out.println(editor);
-//                editor.getEditorInput().get
-               
+                IEditorInput input = ((IEditorPart) e).getEditorInput();
+                if (input instanceof FileEditorInput) {
+                    FileEditorInput fileInput = (FileEditorInput) input;
+                    String filePath = fileInput.getFile().getLocation().toFile().getAbsolutePath();
+                    if (!filePath.contains("scripts") && !filePath.contains("workflows")) {
+                        // only interested in scripts
+                        return;
+                    }
+                    updateRoot(new TreeParent(filePath, 0));
+
+                }
+
             }
-            System.out.println("opened");
-            
+
         }
 
+    }
+    
+    class DeltaUpdater implements IResourceDeltaVisitor {
+        public boolean visit(IResourceDelta delta) {
+            IResource res = delta.getResource();
+            String filePath = res.getLocation().toFile().getAbsolutePath();
+            if (filePath.indexOf("scripts") > 0  && filePath.indexOf(".xml") > 0 ) {
+
+            switch (delta.getKind()) {
+            case IResourceDelta.ADDED:
+                viewProvider.updateResource(filePath);
+                refreshRoot();
+                break;
+            case IResourceDelta.REMOVED:
+                viewProvider.removeResource(filePath);
+                refreshRoot();
+                break;
+            case IResourceDelta.CHANGED:
+                viewProvider.updateResource(filePath);
+                refreshRoot();
+
+                break;
+            }}
+            return true;
+        }
+
+        private void refreshRoot() {
+            Display.getDefault().asyncExec(new Runnable() {
+                public void run() {
+                    TreeObject o = viewProvider.getRoot();
+                    updateRoot(new TreeParent(o.getFilePath(), 0));
+                }
+            });
+        }
     }
 
 }

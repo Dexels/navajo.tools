@@ -61,6 +61,7 @@ public class TreeObject implements IAdaptable {
         return getScriptName();
     }
 
+    @SuppressWarnings("rawtypes")
     public Object getAdapter(Class key) {
         return null;
     }
