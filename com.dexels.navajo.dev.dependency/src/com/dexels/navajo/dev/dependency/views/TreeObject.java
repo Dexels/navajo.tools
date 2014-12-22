@@ -1,11 +1,11 @@
-package com.dexels.navajo.dependency.views;
+package com.dexels.navajo.dev.dependency.views;
 
 import java.io.File;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
 
-import com.dexels.navajo.dependency.model.Dependency;
+import com.dexels.navajo.dev.dependency.model.Dependency;
 
 public class TreeObject implements IAdaptable {
 

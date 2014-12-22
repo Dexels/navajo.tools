@@ -1,4 +1,4 @@
-package com.dexels.navajo.dependency.views;
+package com.dexels.navajo.dev.dependency.views;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IViewSite;
 
-import com.dexels.navajo.dependency.model.Dependency;
-import com.dexels.navajo.dependency.model.DependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.model.Dependency;
+import com.dexels.navajo.dev.dependency.model.DependencyAnalyzer;
 
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
     private static int MAX_STACK_DEPTH = 5;

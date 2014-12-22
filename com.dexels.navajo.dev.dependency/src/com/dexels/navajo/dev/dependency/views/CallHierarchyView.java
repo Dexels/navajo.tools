@@ -1,4 +1,4 @@
-package com.dexels.navajo.dependency.views;
+package com.dexels.navajo.dev.dependency.views;
 
 import java.io.File;
 
@@ -22,14 +22,14 @@ import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 
-import com.dexels.navajo.dependency.Activator;
+import com.dexels.navajo.dev.dependency.Activator;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     /**
      * The ID of the view as specified by the extension.
      */
-    public static final String ID = "com.dexels.navajo.dependency.views.CallHierarchyView";
+    public static final String ID = "com.dexels.navajo.dev.dependency.views.CallHierarchyView";
 
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
@@ -91,7 +91,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dependency.viewer");
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
         makeActions();
         hookContextMenu();
         hookDoubleClickAction();

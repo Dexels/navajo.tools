@@ -1,16 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CallHierarchy
-Bundle-SymbolicName: com.dexels.navajo.dependency;singleton:=true
+Bundle-SymbolicName: com.dexels.navajo.dep.dependency;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.dexels.navajo.dependency.Activator
+Bundle-Activator: com.dexels.navajo.dep.dependency.Activator
 Bundle-Vendor: Dexels
-Import-Package: com.dexels.navajo.document;version="2.2.1",
- com.dexels.navajo.document.jaxpimpl.xml;version="2.2.1",
- com.dexels.navajo.document.nanoimpl;version="2.2.1",
- com.dexels.navajo.functions.util,
+Import-Package: com.dexels.navajo.document.nanoimpl,
  com.dexels.navajo.mapping.compiler.meta,
- com.dexels.navajo.script.api,
+ com.dexels.navajo.script.api;version="1.0.0",
  com.dexels.navajo.server,
  com.dexels.navajo.server.test,
  org.apache.commons.io;version="1.4.9999",
@@ -20,9 +17,6 @@ Import-Package: com.dexels.navajo.document;version="2.2.1",
  org.codehaus.jackson.map;version="1.9.11",
  org.codehaus.jackson.map.type;version="1.9.11",
  org.codehaus.jackson.type;version="1.9.11",
- org.eclipse.jface.resource,
- org.eclipse.ui,
- org.eclipse.ui.ide,
  org.slf4j;version="1.7.5"
 Require-Bundle: org.eclipse.core.filesystem;bundle-version="1.4.100",
  org.eclipse.jface;bundle-version="3.10.1",

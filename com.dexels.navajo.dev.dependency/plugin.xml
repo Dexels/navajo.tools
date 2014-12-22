@@ -6,14 +6,14 @@
          point="org.eclipse.ui.views">
       <category
             name="Navajo"
-            id="com.dexels.navajo.dependency">
+            id="com.dexels.navajo.dev.dependency">
       </category>
       <view
             name="Navajo Dependency Analyzer"
             icon="icons/sample.gif"
-            category="com.dexels.navajo.dependency"
-            class="com.dexels.navajo.dependency.views.CallHierarchyView"
-            id="com.dexels.navajo.dependency.views.CallHierarchyView">
+            category="com.dexels.navajo.dev.dependency"
+            class="com.dexels.navajo.dev.dependency.views.CallHierarchyView"
+            id="com.dexels.navajo.dev.dependency.views.CallHierarchyView">
       </view>
    </extension>
    <extension
@@ -24,7 +24,7 @@
                ratio="0.5"
                relative="org.eclipse.ui.views.ProblemView"
                relationship="right"
-               id="com.dexels.navajo.dependency.views.CallHierarchyView">
+               id="com.dexels.navajo.dev.dependency.views.CallHierarchyView">
          </view>
       </perspectiveExtension>
    </extension>

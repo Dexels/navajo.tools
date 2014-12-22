@@ -1,4 +1,4 @@
-package com.dexels.navajo.dependency.model;
+package com.dexels.navajo.dev.dependency.model;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +26,8 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dexels.navajo.dependency.views.NavajoMapsMetaData;
-import com.dexels.navajo.dependency.views.ViewContentProvider;
+import com.dexels.navajo.dev.dependency.views.NavajoMapsMetaData;
+import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 import com.dexels.navajo.script.api.NavajoClassSupplier;
 import com.dexels.navajo.script.api.SystemException;
 import com.dexels.navajo.server.DispatcherFactory;

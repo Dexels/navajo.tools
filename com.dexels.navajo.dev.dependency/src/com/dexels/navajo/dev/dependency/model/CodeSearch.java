@@ -1,4 +1,4 @@
-package com.dexels.navajo.dependency.model;
+package com.dexels.navajo.dev.dependency.model;
 
 import java.io.BufferedReader;
 import java.io.File;

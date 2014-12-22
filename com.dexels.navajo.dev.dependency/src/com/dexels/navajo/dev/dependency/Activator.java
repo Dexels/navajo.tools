@@ -1,4 +1,4 @@
-package com.dexels.navajo.dependency;
+package com.dexels.navajo.dev.dependency;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.dexels.navajo.dependency"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.dexels.navajo.dev.dependency"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
