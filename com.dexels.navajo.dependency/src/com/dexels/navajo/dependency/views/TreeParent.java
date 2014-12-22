@@ -1,4 +1,4 @@
-package com.dexels.navajo.callhierarchy.views;
+package com.dexels.navajo.dependency.views;
 
 import java.util.ArrayList;
 

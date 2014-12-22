@@ -1,4 +1,4 @@
-package com.dexels.navajo.callhierarchy.model;
+package com.dexels.navajo.dependency.model;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,8 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
 
 public class CodeSearch {
 

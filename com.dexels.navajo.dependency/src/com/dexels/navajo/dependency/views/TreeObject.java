@@ -1,11 +1,11 @@
-package com.dexels.navajo.callhierarchy.views;
+package com.dexels.navajo.dependency.views;
 
 import java.io.File;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
 
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
+import com.dexels.navajo.dependency.model.Dependency;
 
 public class TreeObject implements IAdaptable {
 
@@ -65,6 +65,10 @@ public class TreeObject implements IAdaptable {
     public Object getAdapter(Class key) {
         return null;
     }
+    
+    public boolean isEmptyTreeObject() {
+        return filePath.equals("");
+    }
 
     public String getDependencyTypeString() {
         String result;
@@ -81,6 +85,9 @@ public class TreeObject implements IAdaptable {
             break;
         case Dependency.WORKFLOW_DEPENDENCY:
             result = "Workflow";
+            break;
+        case Dependency.ENTITY_DEPENDENCY:
+            result = "Entity";
             break;
         case Dependency.BROKEN_DEPENDENCY:
             result = "Broken";

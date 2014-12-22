@@ -1,6 +1,8 @@
-package com.dexels.navajo.callhierarchy.dependency;
+package com.dexels.navajo.dependency.model;
 
 import java.io.File;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class Dependency {
     public static final int UNKNOWN_TYPE = 0;
@@ -11,11 +13,15 @@ public class Dependency {
     public static final int TASK_DEPENDENCY = 5;
     public static final int WORKFLOW_DEPENDENCY = 6;
     public static final int BROKEN_DEPENDENCY = 7;
-    
+
     private int type;
     private String scriptFile;
     private String dependeeFile;
     
+    public Dependency() {
+        
+    }
+
     public Dependency(String scriptFile, String dependeeFile, int type) {
         this.scriptFile = scriptFile;
         this.dependeeFile = dependeeFile;
@@ -46,16 +52,18 @@ public class Dependency {
         this.dependeeFile = dependeeFile;
     }
 
-   public String getScript() {
-       String scriptFileRel = null;
-       if (scriptFile.indexOf("workflows") > 0) {
-           scriptFileRel = scriptFile.split("workflows" + File.separator)[1];
-       } else {
-           scriptFileRel = scriptFile.split("scripts" + File.separator)[1];
-       }
-       return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
-   }
-   
+    @JsonIgnore
+    public String getScript() {
+        String scriptFileRel = null;
+        if (scriptFile.indexOf("workflows") > 0) {
+            scriptFileRel = scriptFile.split("workflows" + File.separator)[1];
+        } else {
+            scriptFileRel = scriptFile.split("scripts" + File.separator)[1];
+        }
+        return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
+    }
+
+    @JsonIgnore
     public String getDependee() {
         String scriptFileRel = null;
         if (dependeeFile.indexOf("workflows") > 0) {
@@ -67,7 +75,7 @@ public class Dependency {
         return scriptFileRel.substring(0, scriptFileRel.indexOf('.'));
     }
 
-   @Override
+    @Override
     public String toString() {
         return getScript() + " - " + getDependee();
     }

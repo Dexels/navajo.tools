@@ -1,4 +1,4 @@
-package com.dexels.navajo.callhierarchy.views;
+package com.dexels.navajo.dependency.views;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IViewSite;
 
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
-import com.dexels.navajo.callhierarchy.model.DependencyAnalyzer;
+import com.dexels.navajo.dependency.model.Dependency;
+import com.dexels.navajo.dependency.model.DependencyAnalyzer;
 
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
     private static int MAX_STACK_DEPTH = 5;
@@ -16,9 +16,11 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     private IViewSite viewSite;
     private DependencyAnalyzer depAnalyzer;
     private boolean reverseMode = true;
+    private CallHierarchyView parent;
 
-    public ViewContentProvider(IViewSite viewSite) {
+    public ViewContentProvider(IViewSite viewSite, CallHierarchyView parent) {
         this.viewSite = viewSite;
+        this.parent = parent;
         depAnalyzer = new DependencyAnalyzer();
     }
 
@@ -53,8 +55,18 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         return null;
     }
 
-    public Object[] getChildren(Object parent) {
-        if (parent instanceof TreeParent) {
+    public Object[] getChildren(Object parentObj) {
+        if (parentObj instanceof TreeParent) {
+            TreeParent parent = (TreeParent) parentObj;
+            Object[] children = parent.getChildren();
+            if (children.length == 1) {
+                TreeObject child = (TreeObject) children[0];
+                if (child.isEmptyTreeObject()) {
+                    parent.removeChild(child);
+                    addDependencies(parent, MAX_STACK_DEPTH);
+
+                }
+            } 
             return ((TreeParent) parent).getChildren();
         }
         return new Object[0];
@@ -71,10 +83,16 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             initialize();
         }
   
+        // Remove any existing root
         for (TreeObject child : invisibleRoot.getChildren()) {
             invisibleRoot.removeChild(child);
         }
-        depAnalyzer.initialize(node.getFilePath());
+        
+        // remove any existing children of the new root
+        for (TreeObject child : node.getChildren()) {
+            node.removeChild(child);
+        }
+        depAnalyzer.initialize(node.getFilePath(), this);
         addDependencies(node, MAX_STACK_DEPTH);
         invisibleRoot.addChild(node);
     }
@@ -146,6 +164,11 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     public void updateResource(String filePath) {
         depAnalyzer.refresh(filePath);
 
+        
+    }
+
+    public void triggerTreeRefresh() {
+        parent.setFocus();
         
     }
 

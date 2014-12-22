@@ -1,6 +1,7 @@
-package com.dexels.navajo.callhierarchy.views;
+package com.dexels.navajo.dependency.views;
 
 import java.io.File;
+
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
@@ -20,20 +21,22 @@ import org.eclipse.jface.action.*;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
-import com.dexels.navajo.callhierarchy.Activator;
+
+import com.dexels.navajo.dependency.Activator;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     /**
      * The ID of the view as specified by the extension.
      */
-    public static final String ID = "com.dexels.navajo.callhierarchy.views.CallHierarchyView";
+    public static final String ID = "com.dexels.navajo.dependency.views.CallHierarchyView";
 
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
     private DrillDownAdapter drillDownAdapter;
     private Action callerHierarchy;
     private Action doubleClickAction;
+    private Action cancelAction;
     private MyResourceChangeReporter resourceListener;
 
     private Action rebuildAction;
@@ -79,7 +82,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
      */
     public void createPartControl(Composite parent) {
 
-        viewProvider = new ViewContentProvider(getViewSite());
+        viewProvider = new ViewContentProvider(getViewSite(), this);
         viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
         drillDownAdapter = new DrillDownAdapter(viewer);
         viewer.setLabelProvider(new ViewLabelProvider());
@@ -88,7 +91,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.callhierarchy.viewer");
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dependency.viewer");
         makeActions();
         hookContextMenu();
         hookDoubleClickAction();
@@ -133,6 +136,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         manager.add(callerHierarchy);
         manager.add(calleeHierarchy);
         manager.add(rebuildAction);
+        //manager.add(cancelAction);
         manager.add(new Separator());
         drillDownAdapter.addNavigationActions(manager);
     }
@@ -174,8 +178,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         rebuildAction.setText("Rebuild dependency tree");
         rebuildAction.setToolTipText("Rebuild dependency tree");
         rebuildAction.setImageDescriptor(Activator.getImageDescriptor("icons/refresh.gif"));
-
-       
+        
+        cancelAction = new Action() {
+            public void run() {
+                cancelJob();             
+            }
+        };
+        cancelAction.setText("Cancel current search");
+        cancelAction.setToolTipText("Cancel current search");
+        cancelAction.setImageDescriptor(Activator.getImageDescriptor("icons/cancel.gif"));
 
         doubleClickAction = new Action() {
             public void run() {
@@ -219,7 +230,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
      * Passing the focus request to the viewer's control.
      */
     public void setFocus() {
-        viewer.getControl().setFocus();
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run() {
+                viewProvider.setRoot((TreeParent) viewProvider.getRoot());
+                viewer.refresh();
+                viewer.expandToLevel(2);
+                viewer.getControl().setFocus();
+            }
+        });
+       
     }
 
     @Override
@@ -258,7 +277,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         updateRoot(root);
     }
 
-
+    private void cancelJob() {
+        //
+    }
+    
     class MyResourceChangeReporter implements IResourceChangeListener,IPartListener {
 
         @Override
@@ -271,11 +293,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         @Override
-        public void partActivated(IWorkbenchPart arg0) {
+        public void partActivated(IWorkbenchPart e) {
+            if (e instanceof IEditorPart) {
+                updateRootFromWorkbench(e);
+
+            }
         }
 
         @Override
-        public void partBroughtToTop(IWorkbenchPart arg0) {            
+        public void partBroughtToTop(IWorkbenchPart arg0) {   
         }
 
         @Override
@@ -290,20 +316,24 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         public void partOpened(IWorkbenchPart e) {
 
             if (e instanceof IEditorPart) {
-                IEditorInput input = ((IEditorPart) e).getEditorInput();
-                if (input instanceof FileEditorInput) {
-                    FileEditorInput fileInput = (FileEditorInput) input;
-                    String filePath = fileInput.getFile().getLocation().toFile().getAbsolutePath();
-                    if (!filePath.contains("scripts") && !filePath.contains("workflows")) {
-                        // only interested in scripts
-                        return;
-                    }
-                    updateRoot(new TreeParent(filePath, 0));
-
-                }
+                updateRootFromWorkbench(e);
 
             }
 
+        }
+
+        private void updateRootFromWorkbench(IWorkbenchPart e) {
+            IEditorInput input = ((IEditorPart) e).getEditorInput();
+            if (input instanceof FileEditorInput) {
+                FileEditorInput fileInput = (FileEditorInput) input;
+                String filePath = fileInput.getFile().getLocation().toFile().getAbsolutePath();
+                if (!filePath.contains("scripts") && !filePath.contains("workflows")) {
+                    // only interested in scripts
+                    return;
+                }
+                updateRoot(new TreeParent(filePath, 0));
+
+            }
         }
 
     }

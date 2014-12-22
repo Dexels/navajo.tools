@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CallHierarchy
-Bundle-SymbolicName: com.dexels.navajo.callhierarchy;singleton:=true
+Bundle-SymbolicName: com.dexels.navajo.dependency;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.dexels.navajo.callhierarchy.Activator
+Bundle-Activator: com.dexels.navajo.dependency.Activator
 Bundle-Vendor: Dexels
 Import-Package: com.dexels.navajo.document;version="2.2.1",
  com.dexels.navajo.document.jaxpimpl.xml;version="2.2.1",
@@ -15,6 +15,11 @@ Import-Package: com.dexels.navajo.document;version="2.2.1",
  com.dexels.navajo.server.test,
  org.apache.commons.io;version="1.4.9999",
  org.apache.commons.io.filefilter;version="1.4.0",
+ org.codehaus.jackson;version="1.9.11",
+ org.codehaus.jackson.annotate;version="1.9.11",
+ org.codehaus.jackson.map;version="1.9.11",
+ org.codehaus.jackson.map.type;version="1.9.11",
+ org.codehaus.jackson.type;version="1.9.11",
  org.eclipse.jface.resource,
  org.eclipse.ui,
  org.eclipse.ui.ide,

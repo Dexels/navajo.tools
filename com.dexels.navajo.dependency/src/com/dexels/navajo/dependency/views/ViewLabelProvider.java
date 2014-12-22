@@ -1,5 +1,4 @@
-package com.dexels.navajo.callhierarchy.views;
-
+package com.dexels.navajo.dependency.views;
 
 import java.io.InputStream;
 
@@ -11,31 +10,42 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
+import com.dexels.navajo.dependency.model.Dependency;
 
 class ViewLabelProvider extends StyledCellLabelProvider {
     FontRegistry registry = new FontRegistry();
 
-
     public Image getImage(Object element) {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         String imgName = null;
         if (element instanceof TreeObject) {
             TreeObject treeObj = (TreeObject) element;
 
             imgName = "icons/navajoDep.gif";
-            if (treeObj.getType() == Dependency.INCLUDE_DEPENDENCY) {
+            switch (treeObj.getType()) {
+            case Dependency.INCLUDE_DEPENDENCY:
                 imgName = "icons/includeDep.gif";
-            } else if (treeObj.getType() == Dependency.METHOD_DEPENDENCY) {
+                break;
+            case Dependency.METHOD_DEPENDENCY:
                 imgName = "icons/methodDep.gif";
-            } else if (treeObj.getType() == Dependency.BROKEN_DEPENDENCY) {
-                imgName = "icons/brokenDep.gif";
-            } else if (treeObj.getType() == Dependency.WORKFLOW_DEPENDENCY) {
+                break;
+            case Dependency.WORKFLOW_DEPENDENCY:
                 imgName = "icons/workflowDep.gif";
+                break;
+            case Dependency.ENTITY_DEPENDENCY:
+                imgName = "icons/entityDep.gif";
+                break;
+            case Dependency.BROKEN_DEPENDENCY:
+                imgName = "icons/brokenDep.gif";
+                break;
+
             }
 
         }
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream input = classLoader.getResourceAsStream(imgName);
+        if (input == null) {
+            System.out.println("HE");
+        }
         return new Image(Display.getCurrent(), input);
     }
 
@@ -70,8 +80,5 @@ class ViewLabelProvider extends StyledCellLabelProvider {
 
         super.update(cell);
     }
-
-    
-   
 
 }

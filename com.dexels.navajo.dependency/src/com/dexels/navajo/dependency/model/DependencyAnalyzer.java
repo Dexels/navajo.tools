@@ -1,12 +1,7 @@
-package com.dexels.navajo.callhierarchy.model;
+package com.dexels.navajo.dependency.model;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,16 +11,23 @@ import java.util.Map;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.CollectionType;
+import org.codehaus.jackson.map.type.MapType;
+import org.codehaus.jackson.map.type.TypeFactory;
+import org.codehaus.jackson.type.JavaType;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
-import com.dexels.navajo.callhierarchy.views.NavajoMapsMetaData;
+import com.dexels.navajo.dependency.views.NavajoMapsMetaData;
+import com.dexels.navajo.dependency.views.ViewContentProvider;
 import com.dexels.navajo.script.api.NavajoClassSupplier;
 import com.dexels.navajo.script.api.SystemException;
 import com.dexels.navajo.server.DispatcherFactory;
@@ -34,16 +36,17 @@ import com.dexels.navajo.server.test.TestDispatcher;
 
 public class DependencyAnalyzer {
     public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
-    
+
     private static final String DEFAULT_SERVER_XML = "config/server.xml";
     private static final int WORKFLOW_WORKCOUNT = 500;
     private static final String NAVAJO_DEPS_FILE = ".navajodeps";
     private final static Logger logger = LoggerFactory.getLogger(DependencyAnalyzer.class);
 
     private Job initializeJob;
-    
+
     private TslPreCompiler precompiler;
     private CodeSearch codeSearch;
+    private ObjectMapper objectMapper;
     private boolean initialized = false;
     private String scriptFolder;
 
@@ -53,22 +56,39 @@ public class DependencyAnalyzer {
     public DependencyAnalyzer() {
         precompiler = new TslPreCompiler();
         codeSearch = new CodeSearch();
-        
+        objectMapper = new ObjectMapper();
+        dependencies = new HashMap<String, List<Dependency>>();
+        reverseDependencies = new HashMap<String, List<Dependency>>();
+
+    }
+    
+    public void initialize(String aScript) {
+        initialize(aScript, null); 
     }
 
-    public void initialize(String aScript) {
+    public void initialize(String aScript, final ViewContentProvider callback) {
         if (initialized || initializeJob != null) {
             return;
         }
-       
+
         initializeJob = createJob(aScript);
         initializeJob.schedule();
+        initializeJob.addJobChangeListener(new JobChangeAdapter() {
+            @Override
+            public void done(IJobChangeEvent arg0) {
+                callback.triggerTreeRefresh();
+            }
+            
+        });
+        
     }
-    
+
     public void rebuild() {
         // Resetting the following values will trigger a rebuild
         initialized = false;
         initializeJob = null;
+        dependencies = new HashMap<String, List<Dependency>>();
+        reverseDependencies = new HashMap<String, List<Dependency>>();
     }
 
     private Job createJob(final String aScript) {
@@ -79,17 +99,14 @@ public class DependencyAnalyzer {
 
             @Override
             protected IStatus run(IProgressMonitor monitor) {
-                dependencies = new HashMap<String, List<Dependency>>();
-                reverseDependencies = new HashMap<String, List<Dependency>>();
-                
                 String rootPath = script.split("scripts")[0];
                 initializeDispatcher(rootPath);
                 scriptFolder = rootPath + "scripts";
 
                 // Read in existing dependencies
-                importDependencies(scriptFolder);
+                importPersistedDependencies(scriptFolder);
 
-                // Check for missing/new files
+                // We missed changes, so re-read all files
                 String[] xmlExt = { "xml" };
                 Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
 
@@ -99,30 +116,29 @@ public class DependencyAnalyzer {
 
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
-                        
+
                         String fullScriptName = f.getPath().split("scripts" + File.separator)[1];
                         String scriptName = fullScriptName.substring(0, fullScriptName.indexOf('.'));
-                        if (!dependencies.containsKey(scriptName)) {
-                            addDependencies(scriptName, f);
-                            monitor.worked(1);
-                        }
-                        if(monitor.isCanceled()) {
+                        
+                        addDependencies(scriptName, f);
+                        monitor.worked(1);
+                        
+                        if (monitor.isCanceled()) {
                             return Status.CANCEL_STATUS;
                         }
                     }
                     addWorkflowDependencies(scriptFolder, new SubProgressMonitor(monitor, 500));
                     persistDependencies(scriptFolder);
-                    
-                    if(monitor.isCanceled()) {
+
+                    if (monitor.isCanceled()) {
                         return Status.CANCEL_STATUS;
                     }
-                    
+
                     initialized = true;
-                    
-                  
+
                 } finally {
                     monitor.done();
-                    
+
                 }
 
                 return Status.OK_STATUS;
@@ -161,7 +177,8 @@ public class DependencyAnalyzer {
         List<Dependency> myDependencies = new ArrayList<Dependency>();
         try {
             precompiler.getAllDependencies(scriptFile, scriptPath, scriptFolder, myDependencies);
-            //codeSearch.getAllWorkflowDependencies(scriptFile, scriptPath, scriptFolder, myDependencies);
+            // codeSearch.getAllWorkflowDependencies(scriptFile, scriptPath,
+            // scriptFolder, myDependencies);
         } catch (Exception e) {
             throw e;
         }
@@ -169,7 +186,7 @@ public class DependencyAnalyzer {
 
         updateReverseDependencies(myDependencies);
     }
-    
+
     private void addWorkflowDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting workflow dependencies");
         List<Dependency> myDependencies = new ArrayList<Dependency>();
@@ -178,16 +195,14 @@ public class DependencyAnalyzer {
         } catch (Exception e) {
             throw e;
         }
-        
-        
+
         for (Dependency dep : myDependencies) {
-            
+
             if (!dependencies.containsKey(dep.getScript())) {
                 dependencies.put(dep.getScript(), new ArrayList<Dependency>());
             }
 
             dependencies.get(dep.getScript()).add(dep);
-            
 
             if (!reverseDependencies.containsKey(dep.getDependee())) {
                 reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
@@ -198,12 +213,11 @@ public class DependencyAnalyzer {
         logger.debug("Done workflow dependencies");
 
     }
-    
-       
+
     public List<Dependency> getDependencies(String scriptPath) {
         return dependencies.get(scriptPath);
     }
-    
+
     public List<Dependency> getReverseDependencies(String scriptPath) {
         String script = scriptPath;
 
@@ -211,42 +225,40 @@ public class DependencyAnalyzer {
             // Remove tenant-specific part
             script = scriptPath.substring(0, scriptPath.indexOf('_'));
         }
-        return reverseDependencies.get(script);
-    }
-    
+        if (reverseDependencies.containsKey(script)) {
+            return reverseDependencies.get(script);
+        }
+        return null;
 
-    @SuppressWarnings({ "unchecked" })
-    private void importDependencies(String scriptPath) {
+    }
+
+    
+    private void importPersistedDependencies(String scriptPath) {
         Map<String, List<Dependency>> result = null;
         File depsFile = new File(scriptPath, NAVAJO_DEPS_FILE);
         if (!depsFile.exists()) {
             return;
         }
 
+        TypeFactory typeFactory = objectMapper.getTypeFactory();
+        JavaType stringType = typeFactory.constructType(String.class);
+        CollectionType listType = typeFactory.constructCollectionType(ArrayList.class, Dependency.class);
+        MapType mapType = typeFactory.constructMapType(HashMap.class, stringType, listType);
+
         try {
-            FileInputStream f = new FileInputStream(depsFile);
-            ObjectInputStream s = new ObjectInputStream(f);
-            result = (HashMap<String, List<Dependency>>) s.readObject();
-            s.close();
-            f.close();
-        } catch (FileNotFoundException e) {
-            logger.error("Error in opening navajoDeps file - file disappeared?", e);
-            return;
+            result = objectMapper.readValue(depsFile, mapType);
         } catch (IOException e) {
-            logger.error("IOException in opening navajoDeps file", e);
-            return;
-        } catch (ClassNotFoundException e) {
-            logger.error("ClassNotFoundException in opening navajoDeps file", e);
+            logger.error("Something went wrong de-serializing the NavajoDeps file {}: {}", depsFile, e);
             return;
         }
 
         dependencies.putAll(result);
 
-        for (String script : dependencies.keySet()) {
-            List<Dependency> myDependencies = dependencies.get(script);
-            updateReverseDependencies(myDependencies);
-
-        }
+        // Reverse is updated later
+//        for (String script : dependencies.keySet()) {
+//            List<Dependency> myDependencies = dependencies.get(script);
+//            updateReverseDependencies(myDependencies);
+//        }
     }
 
     private void persistDependencies(String scriptPath) {
@@ -257,18 +269,10 @@ public class DependencyAnalyzer {
         }
 
         File depsFile = new File(scriptFolder, NAVAJO_DEPS_FILE);
-
         try {
-            FileOutputStream f = new FileOutputStream(depsFile);
-            ObjectOutputStream s = new ObjectOutputStream(f);
-            s.writeObject(dependencies);
-            s.close();
-            f.close();
-        } catch (FileNotFoundException e) {
-            logger.error("FileNotFound exception in writing navajoDeps file", e);
-
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(depsFile, dependencies);
         } catch (IOException e) {
-            logger.error("IOException exception in writing navajoDeps file", e);
+            e.printStackTrace();
         }
 
     }
@@ -280,26 +284,25 @@ public class DependencyAnalyzer {
             if (!reverseDependencies.containsKey(dep.getDependee())) {
                 reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
             }
-
             reverseDependencies.get(dep.getDependee()).add(dep);
         }
     }
 
     public void refresh(String filePath) {
         String relScript = filePath.split("scripts" + File.separator)[1];
-        String scriptName = relScript.substring(0,  relScript.indexOf("."));
+        String scriptName = relScript.substring(0, relScript.indexOf("."));
         dependencies.remove(scriptName);
-        
+
         addDependencies(scriptName, new File(filePath));
         updateReverseDependencies(dependencies.get(scriptName));
-        
+
     }
 
     public void remove(String filePath) {
-        String relScript = filePath.split("scripts"  + File.separator)[1];
-        String scriptName = relScript.substring(0,  relScript.indexOf("."));
+        String relScript = filePath.split("scripts" + File.separator)[1];
+        String scriptName = relScript.substring(0, relScript.indexOf("."));
         dependencies.remove(scriptName);
-        
+
     }
 
 }

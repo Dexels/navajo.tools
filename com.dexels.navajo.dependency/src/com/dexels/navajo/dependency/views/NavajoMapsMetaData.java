@@ -1,4 +1,4 @@
-package com.dexels.navajo.callhierarchy.views;
+package com.dexels.navajo.dependency.views;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +22,11 @@ public class NavajoMapsMetaData {
         addMapMetaData();
     }
 
+    /** This helper class goes through the projects currently opened in the workspace, looks 
+     * for their Manifest file, and determine whether the 'Navajo-Extension' property
+     * is defined. If so, the relevant XML file(s) are read in and their meta-data added to
+     * MapMetaData. This allows for later parsing of Navascript files.
+     */
     public void addMapMetaData() {
         IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 

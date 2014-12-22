@@ -1,4 +1,4 @@
-package com.dexels.navajo.callhierarchy.model;
+package com.dexels.navajo.dependency.model;
 
 /**
  * <p>Title: Navajo Product Project</p>"
@@ -40,7 +40,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.dexels.navajo.callhierarchy.dependency.Dependency;
 import com.dexels.navajo.document.jaxpimpl.xml.XMLDocumentUtils;
 import com.dexels.navajo.mapping.compiler.meta.MapMetaData;
 
@@ -69,6 +68,7 @@ public class TslPreCompiler {
             findIncludeDependencies(script, scriptFile.getAbsolutePath(), scriptFolder, deps, tslDoc);
             findNavajoDependencies(script, scriptFile.getAbsolutePath(),  scriptFolder, deps, tslDoc);
             findMethodDependencies(script, scriptFile.getAbsolutePath(),  scriptFolder, deps, tslDoc);
+            findEntityDependencies(script, scriptFile.getAbsolutePath(),  scriptFolder, deps, tslDoc);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -106,6 +106,35 @@ public class TslPreCompiler {
 
             if (included > 1000) {
                return;
+            }
+        }
+    }
+    
+
+    private void findEntityDependencies(String script, String scriptFile, String scriptFolder, List<Dependency> deps, Document tslDoc) {
+        NodeList operations = tslDoc.getElementsByTagName("operation");
+        for (int i = 0; i < operations.getLength(); i++) {
+            Node n = operations.item(i);
+            String operationScript = ((Element) n).getAttribute("service");
+            if (operationScript == null || operationScript.equals("")) {
+               return;
+            }
+            
+            String operationScriptFile = scriptFolder + File.separator + operationScript + ".xml";
+            
+            // Check if exists
+            if (! new File(operationScriptFile).exists()) {
+                deps.add(new Dependency(scriptFile, operationScriptFile, Dependency.BROKEN_DEPENDENCY));
+                continue;
+            }
+            deps.add(new Dependency(scriptFile, operationScriptFile, Dependency.ENTITY_DEPENDENCY));
+            
+            // Going to check for tenant-specific include-variants
+            File scriptFolderFile = new File(operationScriptFile).getParentFile();
+            AbstractFileFilter fileFilter = new WildcardFileFilter(FilenameUtils.getName(operationScript) + "_*.xml");
+            Collection<File> files = FileUtils.listFiles(scriptFolderFile, fileFilter, null);
+            for (File f : files) {
+                deps.add(new Dependency(scriptFile, f.getAbsolutePath(), Dependency.ENTITY_DEPENDENCY));
             }
         }
     }
