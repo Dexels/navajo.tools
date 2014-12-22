@@ -8,7 +8,7 @@
 	<packaging>eclipse-plugin</packaging>
 	<parent>
 		<groupId>com.dexels.navajo</groupId>
-		<artifactId>com.dexels.navajo.super</artifactId>
+		<artifactId>com.dexels.navajo.tools.super</artifactId>
 		<version>1.0.0</version>
 		<relativePath>../../setup/com.dexels.repository</relativePath>
 	</parent>

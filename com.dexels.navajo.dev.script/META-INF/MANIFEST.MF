@@ -69,5 +69,5 @@ Export-Package: com.dexels.navajo.studio.eclipse;
    org.eclipse.ui.part,
    org.eclipse.swt.widgets,
    com.dexels.navajo.document"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 

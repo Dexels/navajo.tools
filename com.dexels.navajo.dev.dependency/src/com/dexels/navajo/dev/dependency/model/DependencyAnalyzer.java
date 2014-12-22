@@ -161,8 +161,11 @@ public class DependencyAnalyzer {
             NavajoConfig nc = null;
             try {
                 nc = new NavajoConfig((NavajoClassSupplier) null, configurationUrl.openStream(), rootPath, rootPath);
-            } catch (SystemException | IOException e) {
-                logger.error("Error in opening a (dummy) NavajoConfig!", e);
+            } catch (SystemException e) {
+               
+                logger.error("SystemException in opening a (dummy) NavajoConfig!", e);
+            } catch (IOException e) {
+                logger.error("IOException in opening a (dummy) NavajoConfig!", e);
             }
             TestDispatcher td = new TestDispatcher(nc);
             new DispatcherFactory(td);
@@ -180,7 +183,8 @@ public class DependencyAnalyzer {
             // codeSearch.getAllWorkflowDependencies(scriptFile, scriptPath,
             // scriptFolder, myDependencies);
         } catch (Exception e) {
-            throw e;
+           logger.error("Exception on getting depencencies for {}: {}", scriptPath, e);
+           return;
         }
         dependencies.put(scriptPath, myDependencies);
 
@@ -193,7 +197,8 @@ public class DependencyAnalyzer {
         try {
             codeSearch.addWorkflowDependencies(scriptFolder, myDependencies, monitor);
         } catch (Exception e) {
-            throw e;
+            logger.error("Exception on getting workflow depencencies for {}: {}", e);
+            return;
         }
 
         for (Dependency dep : myDependencies) {
