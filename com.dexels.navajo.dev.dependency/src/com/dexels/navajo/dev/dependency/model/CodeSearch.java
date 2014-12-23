@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import com.dexels.navajo.dependency.Dependency;
+
 public class CodeSearch {
 
     public void addWorkflowDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {

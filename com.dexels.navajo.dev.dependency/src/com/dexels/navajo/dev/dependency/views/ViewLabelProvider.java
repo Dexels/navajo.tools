@@ -10,7 +10,7 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
-import com.dexels.navajo.dev.dependency.model.Dependency;
+import com.dexels.navajo.dependency.Dependency;
 
 class ViewLabelProvider extends StyledCellLabelProvider {
     FontRegistry registry = new FontRegistry();

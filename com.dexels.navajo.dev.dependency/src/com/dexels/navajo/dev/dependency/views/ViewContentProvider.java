@@ -7,21 +7,21 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IViewSite;
 
-import com.dexels.navajo.dev.dependency.model.Dependency;
-import com.dexels.navajo.dev.dependency.model.DependencyAnalyzer;
+import com.dexels.navajo.dependency.Dependency;
+import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
 
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
     private static int MAX_STACK_DEPTH = 5;
     private TreeParent invisibleRoot;
     private IViewSite viewSite;
-    private DependencyAnalyzer depAnalyzer;
+    private EclipseDependencyAnalyzer depAnalyzer;
     private boolean reverseMode = true;
     private CallHierarchyView parent;
 
     public ViewContentProvider(IViewSite viewSite, CallHierarchyView parent) {
         this.viewSite = viewSite;
         this.parent = parent;
-        depAnalyzer = new DependencyAnalyzer();
+        depAnalyzer = new EclipseDependencyAnalyzer();
     }
 
     public void inputChanged(Viewer v, Object oldInput, Object newInput) {

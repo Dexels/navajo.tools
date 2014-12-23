@@ -5,7 +5,9 @@ import java.io.File;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
 
-import com.dexels.navajo.dev.dependency.model.Dependency;
+import com.dexels.navajo.dependency.Dependency;
+
+
 
 public class TreeObject implements IAdaptable {
 
