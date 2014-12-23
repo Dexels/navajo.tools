@@ -92,9 +92,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                         String fullScriptName = f.getPath().split("scripts")[1];
                         String scriptName = fullScriptName.substring(1, fullScriptName.indexOf('.'));
                         
-                        if (scriptName.equals("external/ProcessCheckParkedRelation")) {
-                            System.out.println("HE");
-                        }
                         addDependencies(scriptName);
                         monitor.worked(1);
                         
