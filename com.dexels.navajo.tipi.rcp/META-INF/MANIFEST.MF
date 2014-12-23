@@ -17,5 +17,5 @@ Import-Package: com.dexels.navajo.document;version="2.2.0",
  tipi;version="1.1.42"
 Require-Bundle: org.eclipse.osgi,
  org.eclipse.jface,
- org.eclipse.core.runtime;bundle-version="3.10.0",
+ org.eclipse.core.runtime,
  org.eclipse.ui.workbench

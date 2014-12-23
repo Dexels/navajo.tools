@@ -3,5 +3,5 @@ Bundle-ManifestVersion: 2
 Bundle-Name: com.dexels.navajo.workflow.editor.gmf
 Bundle-SymbolicName: com.dexels.navajo.workflow.editor.gmf
 Bundle-Version: 0.1.0
-Require-Bundle: org.eclipse.emf;bundle-version="2.6.0"
+Require-Bundle: org.eclipse.emf
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
