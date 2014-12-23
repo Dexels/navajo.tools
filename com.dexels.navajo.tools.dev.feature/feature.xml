@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.dexels.navajo.dev.feature"
+      id="com.dexels.navajo.tools.dev.feature"
       label="Navajo Development Plugin"
-      version="2.0.6.qualifier"
+      version="3.0.0.qualifier"
       provider-name="Dexels">
 
    <description url="http://www.example.com/description">
@@ -17,10 +17,40 @@
       [Enter License Description here.]
    </license>
 
-   <requires>
-      <import feature="com.dexels.navajo.core.feature" version="1.0.6"/>
-      <import feature="com.dexels.navajo.server.feature" version="1.0.3"/>
-   </requires>
+   <plugin
+         id="slf4j.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.document"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.commons.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="com.dexels.navajo.birt.push"
@@ -30,7 +60,48 @@
          unpack="false"/>
 
    <plugin
-         id="com.dexels.navajo.tipi.swt.client"
+         id="com.dexels.navajo.client"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.version"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.tipi.dev.ant"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.tipi.dev.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.ant"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="com.dexels.navajo.tipi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.dexels.navajo.dev.dependency"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -44,63 +115,21 @@
          unpack="false"/>
 
    <plugin
-         id="com.dexels.navajo.dsl.expression"
+         id="com.dexels.navajo.workflow.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.dexels.navajo.dsl.expression.model"
+         id="com.dexels.navajo.oda"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.dexels.navajo.dsl.expression.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dsl.integration"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dsl.navajomanager"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dsl.tsl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dsl.tsl.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dsl.tsl.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.dexels.navajo.dev.console"
+         id="com.dexels.navajo.oda.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

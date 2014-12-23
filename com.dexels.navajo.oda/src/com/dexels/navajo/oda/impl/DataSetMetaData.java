@@ -12,6 +12,9 @@ import org.eclipse.datatools.connectivity.oda.IDataSetMetaData;
 import org.eclipse.datatools.connectivity.oda.IResultSet;
 import org.eclipse.datatools.connectivity.oda.OdaException;
 
+
+
+
 /**
  * Implementation class of IDataSetMetaData for an ODA runtime driver.
  * <br>

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1324">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1383">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="com.dexels.thirdparty.feature.feature.group" version="1.9.0.RELEASE"/>
 <repository location="http://repo.dexels.com/eclipse/3rdparty_1.9.0"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201412220927"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201412220927"/>
+<repository location="https://repo.dexels.com/eclipse/navajo/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.java7.feature.group" version="3.1.0.201310021548-r"/>
@@ -20,17 +25,19 @@
 <repository location="http://repo.dexels.com/eclipse/equinox_luna"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="4.4.1.M20140925-0400"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.10.0.v20140925-0400"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jetty.bundles.f.feature.group" version="8.1.3.201305221702"/>
 <repository location="http://repo.dexels.com/eclipse/jetty8"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.12.0.v201406061321-7PB21FEpPZQXdcX0z-_yMM0Hfz0w"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.10.1.v20140901-1055"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.9.101.201408150207"/>
 <repository location="http://download.eclipse.org/releases/luna/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.4.1.M20140925-0400"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.10.0.v20140925-0400"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
 </location>
 </locations>
 <includeBundles>
@@ -39,6 +46,8 @@
 <plugin id="ch.qos.logback.access"/>
 <plugin id="ch.qos.logback.classic"/>
 <plugin id="ch.qos.logback.core"/>
+<plugin id="com.dexels.navajo.birt.push"/>
+<plugin id="com.dexels.navajo.core"/>
 <plugin id="com.dexels.osgi.bundlesync"/>
 <plugin id="com.dexels.repository.api"/>
 <plugin id="com.dexels.repository.file"/>
@@ -169,11 +178,11 @@
 <plugin id="org.apache.felix.webconsole.plugins.packageadmin"/>
 <plugin id="org.apache.felix.webconsole.plugins.scriptconsole"/>
 <plugin id="org.apache.felix.webconsole.plugins.upnp"/>
-<plugin id="org.apache.httpcomponents.httpclient" version="4.2.6.v201311072007"/>
 <plugin id="org.apache.httpcomponents.httpclient" version="4.3.5"/>
+<plugin id="org.apache.httpcomponents.httpclient" version="4.2.6.v201311072007"/>
 <plugin id="org.apache.httpcomponents.httpclient.source"/>
-<plugin id="org.apache.httpcomponents.httpcore" version="4.3.0"/>
 <plugin id="org.apache.httpcomponents.httpcore" version="4.2.5.v201311072007"/>
+<plugin id="org.apache.httpcomponents.httpcore" version="4.3.0"/>
 <plugin id="org.apache.httpcomponents.httpcore.source"/>
 <plugin id="org.apache.james.protocols.api"/>
 <plugin id="org.apache.james.protocols.netty"/>
@@ -225,6 +234,8 @@
 <plugin id="org.codehaus.jettison.jettison"/>
 <plugin id="org.eclipse.ant.core"/>
 <plugin id="org.eclipse.ant.core.source"/>
+<plugin id="org.eclipse.ant.launching"/>
+<plugin id="org.eclipse.ant.ui"/>
 <plugin id="org.eclipse.compare"/>
 <plugin id="org.eclipse.compare.core"/>
 <plugin id="org.eclipse.compare.core.source"/>
@@ -267,10 +278,16 @@
 <plugin id="org.eclipse.core.runtime.source"/>
 <plugin id="org.eclipse.core.variables"/>
 <plugin id="org.eclipse.core.variables.source"/>
+<plugin id="org.eclipse.datatools.connectivity"/>
+<plugin id="org.eclipse.datatools.connectivity.oda"/>
+<plugin id="org.eclipse.datatools.connectivity.oda.design"/>
+<plugin id="org.eclipse.datatools.connectivity.oda.design.ui"/>
+<plugin id="org.eclipse.datatools.connectivity.ui"/>
 <plugin id="org.eclipse.debug.core"/>
 <plugin id="org.eclipse.debug.core.source"/>
 <plugin id="org.eclipse.debug.ui"/>
 <plugin id="org.eclipse.debug.ui.source"/>
+<plugin id="org.eclipse.draw2d"/>
 <plugin id="org.eclipse.e4.core.commands"/>
 <plugin id="org.eclipse.e4.core.commands.source"/>
 <plugin id="org.eclipse.e4.core.contexts"/>
@@ -307,7 +324,38 @@
 <plugin id="org.eclipse.e4.ui.workbench.swt.source"/>
 <plugin id="org.eclipse.e4.ui.workbench3"/>
 <plugin id="org.eclipse.e4.ui.workbench3.source"/>
+<plugin id="org.eclipse.emf"/>
+<plugin id="org.eclipse.emf.ant"/>
+<plugin id="org.eclipse.emf.codegen"/>
+<plugin id="org.eclipse.emf.codegen.ecore"/>
+<plugin id="org.eclipse.emf.codegen.ecore.ui"/>
+<plugin id="org.eclipse.emf.codegen.ui"/>
+<plugin id="org.eclipse.emf.common"/>
+<plugin id="org.eclipse.emf.common.ui"/>
+<plugin id="org.eclipse.emf.converter"/>
+<plugin id="org.eclipse.emf.databinding"/>
+<plugin id="org.eclipse.emf.databinding.edit"/>
 <plugin id="org.eclipse.emf.ecore"/>
+<plugin id="org.eclipse.emf.ecore.change"/>
+<plugin id="org.eclipse.emf.ecore.change.edit"/>
+<plugin id="org.eclipse.emf.ecore.edit"/>
+<plugin id="org.eclipse.emf.ecore.editor"/>
+<plugin id="org.eclipse.emf.ecore.xmi"/>
+<plugin id="org.eclipse.emf.edit"/>
+<plugin id="org.eclipse.emf.edit.ui"/>
+<plugin id="org.eclipse.emf.exporter"/>
+<plugin id="org.eclipse.emf.importer"/>
+<plugin id="org.eclipse.emf.importer.ecore"/>
+<plugin id="org.eclipse.emf.importer.java"/>
+<plugin id="org.eclipse.emf.importer.rose"/>
+<plugin id="org.eclipse.emf.mapping"/>
+<plugin id="org.eclipse.emf.mapping.ecore"/>
+<plugin id="org.eclipse.emf.mapping.ecore.editor"/>
+<plugin id="org.eclipse.emf.mapping.ecore2ecore"/>
+<plugin id="org.eclipse.emf.mapping.ecore2ecore.editor"/>
+<plugin id="org.eclipse.emf.mapping.ecore2xml"/>
+<plugin id="org.eclipse.emf.mapping.ecore2xml.ui"/>
+<plugin id="org.eclipse.emf.mapping.ui"/>
 <plugin id="org.eclipse.equinox.app" version="1.3.200.v20130910-1609"/>
 <plugin id="org.eclipse.equinox.app.source" version="1.3.200.v20130910-1609"/>
 <plugin id="org.eclipse.equinox.bidi" version="0.10.0.v20130327-1442"/>
@@ -443,6 +491,7 @@
 <plugin id="org.eclipse.equinox.util.source" version="1.0.500.v20130404-1337"/>
 <plugin id="org.eclipse.equinox.wireadmin"/>
 <plugin id="org.eclipse.equinox.wireadmin.source"/>
+<plugin id="org.eclipse.gef"/>
 <plugin id="org.eclipse.help"/>
 <plugin id="org.eclipse.help.base"/>
 <plugin id="org.eclipse.help.base.source"/>
@@ -451,28 +500,46 @@
 <plugin id="org.eclipse.help.ui.source"/>
 <plugin id="org.eclipse.help.webapp"/>
 <plugin id="org.eclipse.help.webapp.source"/>
+<plugin id="org.eclipse.jdt"/>
+<plugin id="org.eclipse.jdt.annotation" version="1.1.0.v20140129-1625"/>
+<plugin id="org.eclipse.jdt.annotation" version="2.0.0.v20140415-1436"/>
+<plugin id="org.eclipse.jdt.apt.core"/>
+<plugin id="org.eclipse.jdt.apt.pluggable.core"/>
+<plugin id="org.eclipse.jdt.apt.ui"/>
+<plugin id="org.eclipse.jdt.compiler.apt"/>
+<plugin id="org.eclipse.jdt.compiler.tool"/>
 <plugin id="org.eclipse.jdt.core"/>
+<plugin id="org.eclipse.jdt.core.manipulation"/>
 <plugin id="org.eclipse.jdt.core.source"/>
+<plugin id="org.eclipse.jdt.debug"/>
+<plugin id="org.eclipse.jdt.debug.ui"/>
+<plugin id="org.eclipse.jdt.doc.user"/>
+<plugin id="org.eclipse.jdt.junit"/>
+<plugin id="org.eclipse.jdt.junit.core"/>
+<plugin id="org.eclipse.jdt.junit.runtime"/>
+<plugin id="org.eclipse.jdt.junit4.runtime"/>
+<plugin id="org.eclipse.jdt.launching"/>
+<plugin id="org.eclipse.jdt.ui"/>
 <plugin id="org.eclipse.jetty.ajp"/>
 <plugin id="org.eclipse.jetty.ajp.source"/>
 <plugin id="org.eclipse.jetty.annotations"/>
 <plugin id="org.eclipse.jetty.annotations.source"/>
 <plugin id="org.eclipse.jetty.client"/>
 <plugin id="org.eclipse.jetty.client.source"/>
-<plugin id="org.eclipse.jetty.continuation" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.continuation" version="8.1.14.v20131031"/>
+<plugin id="org.eclipse.jetty.continuation" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.continuation.source" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.continuation.source" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.deploy"/>
 <plugin id="org.eclipse.jetty.deploy.source"/>
-<plugin id="org.eclipse.jetty.http" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.http" version="8.1.11.v20130520"/>
+<plugin id="org.eclipse.jetty.http" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.http.source" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.http.source" version="8.1.14.v20131031"/>
-<plugin id="org.eclipse.jetty.io" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.io" version="8.1.14.v20131031"/>
-<plugin id="org.eclipse.jetty.io.source" version="8.1.14.v20131031"/>
+<plugin id="org.eclipse.jetty.io" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.io.source" version="8.1.11.v20130520"/>
+<plugin id="org.eclipse.jetty.io.source" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.jaspi"/>
 <plugin id="org.eclipse.jetty.jaspi.source"/>
 <plugin id="org.eclipse.jetty.jmx"/>
@@ -503,12 +570,12 @@
 <plugin id="org.eclipse.jetty.security" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.security.source" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.security.source" version="8.1.11.v20130520"/>
-<plugin id="org.eclipse.jetty.server" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.server" version="8.1.14.v20131031"/>
-<plugin id="org.eclipse.jetty.server.source" version="8.1.11.v20130520"/>
+<plugin id="org.eclipse.jetty.server" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.server.source" version="8.1.14.v20131031"/>
-<plugin id="org.eclipse.jetty.servlet" version="8.1.11.v20130520"/>
+<plugin id="org.eclipse.jetty.server.source" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.servlet" version="8.1.14.v20131031"/>
+<plugin id="org.eclipse.jetty.servlet" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.servlet.source" version="8.1.14.v20131031"/>
 <plugin id="org.eclipse.jetty.servlet.source" version="8.1.11.v20130520"/>
 <plugin id="org.eclipse.jetty.servlets"/>
@@ -529,9 +596,8 @@
 <plugin id="org.eclipse.jface.source"/>
 <plugin id="org.eclipse.jface.text"/>
 <plugin id="org.eclipse.jface.text.source"/>
-<plugin id="org.eclipse.jgit" version="3.1.0.201310021548-r"/>
 <plugin id="org.eclipse.jgit" version="3.6.0.201411121045-m1"/>
-<plugin id="org.eclipse.jgit.archive"/>
+<plugin id="org.eclipse.jgit" version="3.1.0.201310021548-r"/>
 <plugin id="org.eclipse.jgit.java7"/>
 <plugin id="org.eclipse.jgit.java7.source"/>
 <plugin id="org.eclipse.jgit.pgm"/>

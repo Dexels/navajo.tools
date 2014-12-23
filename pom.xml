@@ -9,13 +9,13 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>com.dexels.navajo.dev.feature/allgit</module>	
+		<module>com.dexels.navajo.tools.dev.feature/allgit</module>	
 		<module>com.dexels.navajo.oda.feature/allgit</module>	
 		<module>com.dexels.navajo.workflow.editor.feature/allgit</module>	
 	</modules>
 	<parent>
 		<groupId>com.dexels.navajo</groupId>
-		<artifactId>com.dexels.navajo.super</artifactId>
+		<artifactId>com.dexels.navajo.tools.super</artifactId>
 		<version>1.0.0</version>
 		<relativePath>setup/com.dexels.repository/</relativePath>
 	</parent>

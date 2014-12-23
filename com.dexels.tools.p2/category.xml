@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.dexels.navajo.tools.dev.feature-3.0.0.qualifier.jar" id="com.dexels.navajo.tools.dev.feature" version="3.0.0.qualifier">
+      <category name="Navajo"/>
+   </feature>
+
+   <category-def name="Navajo" label="Navajo"/>
+</site>
+
