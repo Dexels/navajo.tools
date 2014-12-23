@@ -89,8 +89,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
 
-                        String fullScriptName = f.getPath().split("scripts" + File.separator)[1];
-                        String scriptName = fullScriptName.substring(0, fullScriptName.indexOf('.'));
+                        String fullScriptName = f.getPath().split("scripts")[1];
+                        String scriptName = fullScriptName.substring(1, fullScriptName.indexOf('.'));
                         
                         if (scriptName.equals("external/ProcessCheckParkedRelation")) {
                             System.out.println("HE");
@@ -152,8 +152,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public void refresh(String scriptFile) {
-        String relScript = scriptFile.split("scripts" + File.separator)[1];
-        String scriptName = relScript.substring(0, relScript.indexOf("."));
+        String relScript = scriptFile.split("scripts")[1];
+        String scriptName = relScript.substring(1, relScript.indexOf("."));
         dependencies.remove(scriptName);
 
         addDependencies(scriptName);
@@ -162,8 +162,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public void remove(String scriptFile) {
-        String relScript = scriptFile.split("scripts" + File.separator)[1];
-        String scriptName = relScript.substring(0, relScript.indexOf("."));
+        String relScript = scriptFile.split("scripts")[1];
+        String scriptName = relScript.substring(1, relScript.indexOf("."));
         dependencies.remove(scriptName);
     }
 

@@ -30,13 +30,15 @@ public class TreeObject implements IAdaptable {
     private void getScriptString(String filePath, int type) {
         String scriptFilePath = null;
         if (filePath.indexOf("workflows") > 0) {
-            scriptFilePath = filePath.split("workflows" + File.separator)[1];
+            scriptFilePath = filePath.split("workflows")[1];
             // For clarity reasons, we actually include the 'workflows' part
-            scriptFilePath = "workflows" + File.separator + scriptFilePath;
+            scriptFilePath = "workflows" + scriptFilePath;
+            scriptName = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
         } else {
-            scriptFilePath = filePath.split("scripts" + File.separator)[1];
+            scriptFilePath = filePath.split("scripts")[1];
+            scriptName = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         }
-        scriptName = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
+        
     }
 
     public String getScriptName() {
