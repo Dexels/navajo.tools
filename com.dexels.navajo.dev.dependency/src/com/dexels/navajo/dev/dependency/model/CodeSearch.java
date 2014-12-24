@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import com.dexels.navajo.dependency.Dependency;
 
+
 public class CodeSearch {
 
     public void addWorkflowDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
@@ -43,15 +44,15 @@ public class CodeSearch {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(workflowFile));
 
-            Pattern p1 = Pattern.compile("\\b" + "navajo:(.*)\"" + "\\b", Pattern.CASE_INSENSITIVE);
-            Pattern p2 = Pattern.compile("\\b" + "service=\"(.*)\"" + "\\b", Pattern.CASE_INSENSITIVE);
-
-            while ((line = bf.readLine()) != null) {
+            Pattern p1 = Pattern.compile("\\b" + "(:?before)?navajo:([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
+            Pattern p2 = Pattern.compile("\\b" + "service=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
+            
+            while ((line = bf.readLine()) != null) {                
                 Matcher m = p1.matcher(line);
-
+                
                 while (m.find()) {
-                    String match = m.group();
-                    String scriptName = match.substring("navajo:".length(), match.indexOf('"'));
+                    String scriptName = m.group(2);
+                    
                     if (scriptName.indexOf(':') > 0) {
                         continue;
                     }
@@ -62,8 +63,7 @@ public class CodeSearch {
 
                 m = p2.matcher(line);
                 while (m.find()) {
-                    String match = m.group(1);
-                    String scriptName = match.substring(0, match.indexOf('"'));
+                    String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath,
                             Dependency.WORKFLOW_DEPENDENCY));
