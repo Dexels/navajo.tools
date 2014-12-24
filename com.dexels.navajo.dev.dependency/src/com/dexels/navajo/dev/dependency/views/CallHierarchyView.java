@@ -33,7 +33,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
-    private DrillDownAdapter drillDownAdapter;
     private Action callerHierarchy;
     private Action doubleClickAction;
     private Action cancelAction;
@@ -84,7 +83,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         viewProvider = new ViewContentProvider(getViewSite(), this);
         viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-        drillDownAdapter = new DrillDownAdapter(viewer);
         viewer.setLabelProvider(new ViewLabelProvider());
         viewer.setContentProvider(viewProvider);
         viewer.setSorter(new NameSorter());
@@ -127,7 +125,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
        
 
         manager.add(new Separator());
-        drillDownAdapter.addNavigationActions(manager);
+       // drillDownAdapter.addNavigationActions(manager);
         // Other plug-ins can contribute there actions here
         manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
     }
@@ -138,7 +136,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         manager.add(rebuildAction);
         //manager.add(cancelAction);
         manager.add(new Separator());
-        drillDownAdapter.addNavigationActions(manager);
+        //drillDownAdapter.addNavigationActions(manager);
     }
 
     private void makeActions() {
@@ -226,14 +224,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 //        MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
 //    }
 
+    
     /**
      * Passing the focus request to the viewer's control.
      */
     public void setFocus() {
+        viewProvider.setRoot((TreeParent) viewProvider.getRoot());
+
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
-                viewProvider.setRoot((TreeParent) viewProvider.getRoot());
-                viewer.refresh();
+                viewer.refresh(getViewSite());
                 viewer.expandToLevel(2);
                 viewer.getControl().setFocus();
             }
@@ -262,10 +262,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     
     
     private void updateRoot(final TreeParent treeParent) {
+        viewProvider.setRoot(treeParent);
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
-                viewProvider.setRoot(treeParent);
-                viewer.refresh();
+                viewer.refresh(getViewSite());
                 viewer.expandToLevel(2);
             }
         });
@@ -301,7 +301,11 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         @Override
-        public void partBroughtToTop(IWorkbenchPart arg0) {   
+        public void partBroughtToTop(IWorkbenchPart e) {  
+
+            if (e instanceof IEditorPart) {
+                updateRootFromWorkbench(e);
+            }
         }
 
         @Override
@@ -317,7 +321,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
             if (e instanceof IEditorPart) {
                 updateRootFromWorkbench(e);
-
             }
 
         }
@@ -326,7 +329,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             IEditorInput input = ((IEditorPart) e).getEditorInput();
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
-                String filePath = fileInput.getFile().getLocation().toFile().getAbsolutePath();
+                String filePath = fileInput.getFile().getLocation().toString();
                 if (!filePath.contains("scripts") && !filePath.contains("workflows")) {
                     // only interested in scripts
                     return;
@@ -342,33 +345,31 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
             String filePath = res.getLocation().toFile().getAbsolutePath();
-            if (filePath.indexOf("scripts") > 0  && filePath.indexOf(".xml") > 0 ) {
+            if (filePath.indexOf("scripts") > 0 && filePath.indexOf(".xml") > 0) {
 
-            switch (delta.getKind()) {
-            case IResourceDelta.ADDED:
-                viewProvider.updateResource(filePath);
-                refreshRoot();
-                break;
-            case IResourceDelta.REMOVED:
-                viewProvider.removeResource(filePath);
-                refreshRoot();
-                break;
-            case IResourceDelta.CHANGED:
-                viewProvider.updateResource(filePath);
-                refreshRoot();
+                switch (delta.getKind()) {
+                case IResourceDelta.ADDED:
+                    viewProvider.updateResource(filePath);
+                    refreshRoot();
+                    break;
+                case IResourceDelta.REMOVED:
+                    viewProvider.removeResource(filePath);
+                    refreshRoot();
+                    break;
+                case IResourceDelta.CHANGED:
+                    viewProvider.updateResource(filePath);
+                    refreshRoot();
 
-                break;
-            }}
+                    break;
+                }
+            }
             return true;
         }
 
         private void refreshRoot() {
-            Display.getDefault().asyncExec(new Runnable() {
-                public void run() {
-                    TreeObject o = viewProvider.getRoot();
-                    updateRoot(new TreeParent(o.getFilePath(), 0));
-                }
-            });
+            TreeObject o = viewProvider.getRoot();
+            updateRoot(new TreeParent(o.getFilePath(), 0));
+
         }
     }
 

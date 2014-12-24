@@ -78,7 +78,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         return false;
     }
 
-    public void setRoot(TreeParent node) {
+    public synchronized void setRoot(TreeParent node) {
         if (invisibleRoot == null) {
             initialize();
         }
@@ -105,6 +105,9 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         return null;
     }
     
+    public TreeParent getAbsoluteRoot() {
+        return invisibleRoot;
+    }
 
     public boolean isReverseMode() {
         return reverseMode;
