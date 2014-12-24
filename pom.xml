@@ -12,6 +12,7 @@
 		<module>com.dexels.navajo.tools.dev.feature/allgit</module>	
 		<module>com.dexels.navajo.oda.feature/allgit</module>	
 		<module>com.dexels.navajo.workflow.editor.feature/allgit</module>	
+		<module>com.dexels.tools.p2</module>
 	</modules>
 	<parent>
 		<groupId>com.dexels.navajo</groupId>
