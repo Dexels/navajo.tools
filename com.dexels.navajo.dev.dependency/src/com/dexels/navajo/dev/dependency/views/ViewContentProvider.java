@@ -92,6 +92,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         for (TreeObject child : node.getChildren()) {
             node.removeChild(child);
         }
+        
         depAnalyzer.initialize(node.getFilePath(), this);
         addDependencies(node, MAX_STACK_DEPTH);
         invisibleRoot.addChild(node);
@@ -123,8 +124,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     
     }
 
-    private void addDependencies(TreeParent node, int ttl) {
-        
+    private void addDependencies(TreeParent node, int ttl) {      
         if (ttl < 1) { 
             TreeParent newChild = new TreeParent("", 0);
             node.addChild(newChild);

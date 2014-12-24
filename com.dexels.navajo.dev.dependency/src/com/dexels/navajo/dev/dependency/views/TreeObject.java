@@ -1,7 +1,5 @@
 package com.dexels.navajo.dev.dependency.views;
 
-import java.io.File;
-
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
 
@@ -22,22 +20,29 @@ public class TreeObject implements IAdaptable {
         this.filePath = filePath;
         this.type = type;
         if (!filePath.equals(scriptName)) {
-            getScriptString(filePath, type);
+            scriptName = getScriptFromFilename(filePath);
         }
 
     }
 
-    private void getScriptString(String filePath, int type) {
+    /** 
+     * Returns the script part from a full filepath. Supports scripts + workflows
+     */
+    public static String getScriptFromFilename(String filename) {
         String scriptFilePath = null;
-        if (filePath.indexOf("workflows") > 0) {
-            scriptFilePath = filePath.split("workflows")[1];
+        String script = null;
+        if (filename.indexOf("workflows") > 0) {
+            scriptFilePath = filename.split("workflows")[1];
             // For clarity reasons, we actually include the 'workflows' part
             scriptFilePath = "workflows" + scriptFilePath;
-            scriptName = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
+            script = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
         } else {
-            scriptFilePath = filePath.split("scripts")[1];
-            scriptName = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+            scriptFilePath = filename.split("scripts")[1];
+            script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         }
+        
+        // Replace win32 slashes to be consistent with Navajo script slashes        
+        return script.replace("\\", "/");
         
     }
 

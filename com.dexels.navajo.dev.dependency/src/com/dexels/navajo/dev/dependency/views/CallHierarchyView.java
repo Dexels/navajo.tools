@@ -145,8 +145,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 viewProvider.setReverseMode(true);
                 callerHierarchy.setChecked(true);
                 calleeHierarchy.setChecked(false);
-                TreeObject o = viewProvider.getRoot();
-                updateRoot(new TreeParent(o.getFilePath(), 0));                
+                updateRoot((TreeParent)viewProvider.getRoot());                
             }
         };
         callerHierarchy.setText("Show Caller Hierarchy");
@@ -159,8 +158,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 viewProvider.setReverseMode(false);
                 callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(true);
-                TreeObject o = viewProvider.getRoot();
-                updateRoot(new TreeParent(o.getFilePath(), 0));                
+                updateRoot((TreeParent)viewProvider.getRoot());                
             }
         };
         calleeHierarchy.setText("Show Callee Hierarchy");
@@ -263,8 +261,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     
     private void updateRoot(final TreeParent treeParent) {
         viewProvider.setRoot(treeParent);
+        
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
+                viewer.refresh();
                 viewer.refresh(getViewSite());
                 viewer.expandToLevel(2);
             }

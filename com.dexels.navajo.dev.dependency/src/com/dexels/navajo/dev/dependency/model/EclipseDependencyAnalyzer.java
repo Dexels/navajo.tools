@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dependency.DependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.views.TreeObject;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
 public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
@@ -88,11 +89,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
-
-                        String fullScriptName = f.getPath().split("scripts")[1];
-                        String scriptName = fullScriptName.substring(1, fullScriptName.indexOf('.'));
                         
-                        addDependencies(scriptName);
+                        addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
                         monitor.worked(1);
                         
                         if (monitor.isCanceled()) {
@@ -149,8 +147,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public void refresh(String scriptFile) {
-        String relScript = scriptFile.split("scripts")[1];
-        String scriptName = relScript.substring(1, relScript.indexOf("."));
+        String scriptName = TreeObject.getScriptFromFilename(scriptFile);
         dependencies.remove(scriptName);
 
         addDependencies(scriptName);
@@ -159,8 +156,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public void remove(String scriptFile) {
-        String relScript = scriptFile.split("scripts")[1];
-        String scriptName = relScript.substring(1, relScript.indexOf("."));
+        String scriptName = TreeObject.getScriptFromFilename(scriptFile);
         dependencies.remove(scriptName);
     }
 
