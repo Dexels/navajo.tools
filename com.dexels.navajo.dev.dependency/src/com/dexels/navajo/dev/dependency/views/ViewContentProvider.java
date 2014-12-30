@@ -11,7 +11,7 @@ import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
 
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
-    private static int MAX_STACK_DEPTH = 5;
+    private static int MAX_STACK_DEPTH = 2;
     private TreeParent invisibleRoot;
     private IViewSite viewSite;
     private EclipseDependencyAnalyzer depAnalyzer;
@@ -82,7 +82,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         if (invisibleRoot == null) {
             initialize();
         }
-  
+          
         // Remove any existing root
         for (TreeObject child : invisibleRoot.getChildren()) {
             invisibleRoot.removeChild(child);
@@ -91,6 +91,10 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         // remove any existing children of the new root
         for (TreeObject child : node.getChildren()) {
             node.removeChild(child);
+        }
+        
+        if (node == invisibleRoot) {
+            return;
         }
         
         depAnalyzer.initialize(node.getFilePath(), this);

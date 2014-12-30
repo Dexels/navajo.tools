@@ -43,6 +43,9 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         }
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream input = classLoader.getResourceAsStream(imgName);
+        if (input == null) {
+            return null;
+        }
         return new Image(Display.getCurrent(), input);
     }
 

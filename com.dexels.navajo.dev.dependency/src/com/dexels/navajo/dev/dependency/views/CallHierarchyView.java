@@ -232,7 +232,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 viewer.refresh(getViewSite());
-                viewer.expandToLevel(2);
                 viewer.getControl().setFocus();
             }
         });
@@ -242,18 +241,20 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
         if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
-            // doSomething(();
             Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
 
             if (selectedObject instanceof IFile) {
                 String filePath = ((IFile) selectedObject).getLocation().toString();
-                if (!filePath.contains("scripts") && !filePath.contains("workflows") ) {
-                    // only interested in scripts
+                if (filePath.contains("scripts") || filePath.contains("workflows")) {
+                    if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                        updateRoot(new TreeParent(filePath, 0));
+                    }
                     return;
                 }
-                updateRoot(new TreeParent(filePath, 0));
-               
+
             }
+            updateRoot(viewProvider.getAbsoluteRoot());
+
         }
     }
 
@@ -281,7 +282,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         //
     }
     
-    class MyResourceChangeReporter implements IResourceChangeListener,IPartListener {
+    class MyResourceChangeReporter implements IResourceChangeListener, IPartListener {
 
         @Override
         public void resourceChanged(IResourceChangeEvent event) {
@@ -301,7 +302,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         @Override
-        public void partBroughtToTop(IWorkbenchPart e) {  
+        public void partBroughtToTop(IWorkbenchPart e) {
 
             if (e instanceof IEditorPart) {
                 updateRootFromWorkbench(e);
@@ -309,16 +310,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         @Override
-        public void partClosed(IWorkbenchPart arg0) {            
+        public void partClosed(IWorkbenchPart arg0) {
         }
 
         @Override
-        public void partDeactivated(IWorkbenchPart arg0) {            
+        public void partDeactivated(IWorkbenchPart arg0) {
         }
 
         @Override
         public void partOpened(IWorkbenchPart e) {
-
             if (e instanceof IEditorPart) {
                 updateRootFromWorkbench(e);
             }
@@ -330,12 +330,14 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
                 String filePath = fileInput.getFile().getLocation().toString();
-                if (!filePath.contains("scripts") && !filePath.contains("workflows")) {
-                    // only interested in scripts
+                if (filePath.contains("scripts") || filePath.contains("workflows")) {
+                    if (viewProvider.getRoot() == null || ! viewProvider.getRoot().getFilePath().equals(filePath)) {
+                        updateRoot(new TreeParent(filePath, 0));
+                    }
                     return;
                 }
-                updateRoot(new TreeParent(filePath, 0));
-
+                updateRoot(viewProvider.getAbsoluteRoot());
+                
             }
         }
 
@@ -368,7 +370,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         private void refreshRoot() {
             TreeObject o = viewProvider.getRoot();
-            updateRoot(new TreeParent(o.getFilePath(), 0));
+            if (o != null) {
+                updateRoot(new TreeParent(o.getFilePath(), 0));
+            }
 
         }
     }
