@@ -223,21 +223,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 //    }
 
     
-    /**
-     * Passing the focus request to the viewer's control.
-     */
-    public void setFocus() {
-        viewProvider.setRoot((TreeParent) viewProvider.getRoot());
-
-        Display.getDefault().asyncExec(new Runnable() {
-            public void run() {
-                viewer.refresh(getViewSite());
-                viewer.getControl().setFocus();
-            }
-        });
-       
-    }
-
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
         if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
@@ -260,14 +245,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     
     
-    private void updateRoot(final TreeParent treeParent) {
+   protected void updateRoot(final TreeParent treeParent) {
         viewProvider.setRoot(treeParent);
-        
+
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
-                viewer.refresh();
-                viewer.refresh(getViewSite());
-                viewer.expandToLevel(2);
+                if (viewer != null && !viewer.getControl().isDisposed()) {
+                    viewer.refresh();
+                    viewer.refresh(getViewSite());
+                    viewer.expandToLevel(2);
+                }
             }
         });
     }
@@ -375,6 +362,11 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             }
 
         }
+    }
+
+    @Override
+    public void setFocus() {
+        
     }
 
 }

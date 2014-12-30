@@ -63,7 +63,7 @@ public class EclipseTslPreCompiler extends TslPreCompiler {
             }
 
             tslDoc = newDocumentFromInputStream(is);
-            getAllDependencies(fullScriptPath, scriptFolder, deps, tslDoc);
+            getAllDependencies(fullScriptPath, scriptTenant, scriptFolder, deps, tslDoc);
 
         } catch (Exception e) {
             logger.error("Exception in reading XML: {}", e);

@@ -24,10 +24,6 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         depAnalyzer = new EclipseDependencyAnalyzer();
     }
 
-    public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-
-    }
-
     private void initialize() {
         invisibleRoot = new TreeParent("", 0);
     }
@@ -36,6 +32,8 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         for (TreeObject child : invisibleRoot.getChildren()) {
             invisibleRoot.removeChild(child);
         }
+        viewSite = null;
+        parent = null;
     }
 
     public Object[] getElements(Object parent) {
@@ -87,19 +85,22 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         for (TreeObject child : invisibleRoot.getChildren()) {
             invisibleRoot.removeChild(child);
         }
-        
-        // remove any existing children of the new root
-        for (TreeObject child : node.getChildren()) {
-            node.removeChild(child);
+        if (node != null) {
+            // remove any existing children of the new root
+            for (TreeObject child : node.getChildren()) {
+                node.removeChild(child);
+            }
+            
+            if (node == invisibleRoot) {
+                return;
+            }
+            
+            depAnalyzer.initialize(node.getFilePath(), this);
+            addDependencies(node, MAX_STACK_DEPTH);
+            invisibleRoot.addChild(node);
         }
-        
-        if (node == invisibleRoot) {
-            return;
-        }
-        
-        depAnalyzer.initialize(node.getFilePath(), this);
-        addDependencies(node, MAX_STACK_DEPTH);
-        invisibleRoot.addChild(node);
+      
+     
     }
     
     public TreeObject getRoot() {
@@ -143,6 +144,9 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             }
             for (Dependency dep : deps) {
                 TreeParent newChild = new TreeParent(dep.getScriptFile(), dep.getType());
+                if (dep.getLinenr() > 0) {
+                    newChild.setLinenr(dep.getLinenr());
+                }
                 addDependencies(newChild, ttl);
                 node.addChild(newChild);
             }
@@ -153,6 +157,9 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             }
             for (Dependency dep : deps) {
                 TreeParent newChild = new TreeParent(dep.getDependeeFile(), dep.getType());
+                if (dep.getLinenr() > 0) {
+                    newChild.setLinenr(dep.getLinenr());
+                }
                 addDependencies(newChild, ttl);
                 node.addChild(newChild);
             }
@@ -175,7 +182,12 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     }
 
     public void triggerTreeRefresh() {
-        parent.setFocus();
+        parent.updateRoot((TreeParent) this.getRoot());
+        
+    }
+
+    @Override
+    public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
         
     }
 

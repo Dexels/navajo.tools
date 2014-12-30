@@ -39,8 +39,9 @@ public class CodeSearch {
 
     }
 
-    public static void searchFiles(File workflowFile, List<Dependency> deps, String scriptFolder) {
+    public void searchFiles(File workflowFile, List<Dependency> deps, String scriptFolder) {
         String line;
+        int linenr = 0;
         try {
             BufferedReader bf = new BufferedReader(new FileReader(workflowFile));
 
@@ -49,7 +50,7 @@ public class CodeSearch {
             
             while ((line = bf.readLine()) != null) {                
                 Matcher m = p1.matcher(line);
-                
+                linenr++;
                 while (m.find()) {
                     String scriptName = m.group(2);
                     
@@ -57,16 +58,14 @@ public class CodeSearch {
                         continue;
                     }
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath,
-                            Dependency.WORKFLOW_DEPENDENCY));
+                    deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
 
                 m = p2.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath,
-                            Dependency.WORKFLOW_DEPENDENCY));
+                    deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath,  Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
             }
             bf.close();

@@ -5,8 +5,6 @@ import org.eclipse.swt.SWT;
 
 import com.dexels.navajo.dependency.Dependency;
 
-
-
 public class TreeObject implements IAdaptable {
 
 
@@ -14,6 +12,7 @@ public class TreeObject implements IAdaptable {
     private String filePath;
     private TreeParent parent;
     private int type;
+    private int linenr;
 
     public TreeObject(String filePath, int type) {
 
@@ -78,6 +77,16 @@ public class TreeObject implements IAdaptable {
     public boolean isEmptyTreeObject() {
         return filePath.equals("");
     }
+    
+    
+
+    public int getLinenr() {
+        return linenr;
+    }
+
+    public void setLinenr(int linenr) {
+        this.linenr = linenr;
+    }
 
     public String getDependencyTypeString() {
         String result;
@@ -124,7 +133,5 @@ public class TreeObject implements IAdaptable {
             break;
         }
         return result;
-        
-        
     }
 }

@@ -2,7 +2,6 @@ package com.dexels.navajo.dev.dependency.views;
 
 import java.io.InputStream;
 
-import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
@@ -13,40 +12,74 @@ import org.eclipse.swt.widgets.Display;
 import com.dexels.navajo.dependency.Dependency;
 
 class ViewLabelProvider extends StyledCellLabelProvider {
-    FontRegistry registry = new FontRegistry();
+    
+    Image navajoDep;
+    Image includeDep;
+    Image methodDep;
+    Image workflowDep;
+    Image entityDep;
+    Image brokenDep;
+
+    public ViewLabelProvider() {
+        
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("icons/navajoDep.gif");
+        navajoDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/includeDep.gif");
+        includeDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/methodDep.gif");
+        methodDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/workflowDep.gif");
+        workflowDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/entityDep.gif");
+        entityDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/brokenDep.gif");
+        brokenDep = new Image(Display.getCurrent(), input);
+        
+    }
 
     public Image getImage(Object element) {
-        String imgName = null;
+        Image res = navajoDep;
         if (element instanceof TreeObject) {
             TreeObject treeObj = (TreeObject) element;
 
-            imgName = "icons/navajoDep.gif";
             switch (treeObj.getType()) {
             case Dependency.INCLUDE_DEPENDENCY:
-                imgName = "icons/includeDep.gif";
+                res = includeDep;
                 break;
             case Dependency.METHOD_DEPENDENCY:
-                imgName = "icons/methodDep.gif";
+                res = methodDep;
                 break;
             case Dependency.WORKFLOW_DEPENDENCY:
-                imgName = "icons/workflowDep.gif";
+                res = workflowDep;
                 break;
             case Dependency.ENTITY_DEPENDENCY:
-                imgName = "icons/entityDep.gif";
+                res = entityDep;
                 break;
             case Dependency.BROKEN_DEPENDENCY:
-                imgName = "icons/brokenDep.gif";
+                res = brokenDep;
                 break;
 
             }
 
         }
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream(imgName);
-        if (input == null) {
-            return null;
-        }
-        return new Image(Display.getCurrent(), input);
+        return res;
+    }
+    
+    @Override
+    public void dispose() {        
+        navajoDep.dispose();
+        includeDep.dispose();
+        methodDep.dispose();
+        workflowDep.dispose();
+        entityDep.dispose();
+        brokenDep.dispose();
+        super.dispose();
     }
 
     @Override
@@ -62,10 +95,14 @@ class ViewLabelProvider extends StyledCellLabelProvider {
                 String dependencyType = obj.getDependencyTypeString();
                 String seperator = " - ";
                 int dependencyTextColor = obj.getDependencyTextColor();
-                cell.setText(objectString + seperator + dependencyType);
+                String fullObjectString = objectString;
+                if (obj.getLinenr() > 0) {
+                    fullObjectString += " (line " + obj.getLinenr() + ")";
+                }
+                cell.setText(fullObjectString + seperator + dependencyType);
 
                 // The ' - ' part is always gray
-                StyleRange stylerange1 = new StyleRange(objectString.length(), seperator.length(), Display.getCurrent()
+                StyleRange stylerange1 = new StyleRange(objectString.length(), (fullObjectString.length() - objectString.length()) + seperator.length(), Display.getCurrent()
                         .getSystemColor(SWT.COLOR_DARK_GRAY), null);
 
                 // The dependency string can be overriden - e.g. red for broken
@@ -76,9 +113,12 @@ class ViewLabelProvider extends StyledCellLabelProvider {
             }
 
             cell.setImage(getImage(cell.getElement()));
+
         }
 
         super.update(cell);
     }
+    
+   
 
 }
