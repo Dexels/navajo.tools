@@ -33,5 +33,24 @@
             file="contexts.xml">
       </contexts>
    </extension>
+   
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+      		adaptable="true"
+      		lightweight="true"
+    		location="TOP_RIGHT"
+            class="com.dexels.navajo.dev.dependency.decorator.NavajoLightweightDecorator"
+            id="com.dexels.navajo.dev.dependency.decorator"
+            label="Navajo Broken Dependencies"
+            state="true">
+         <enablement>
+     	     <objectClass name="org.eclipse.core.resources.IResource"/> 
+     	 </enablement>  
+     	 <description>
+      		Adds an icon decoration to Navajo scripts that contain broken references
+    	</description> 
+      </decorator>
+</extension>
 
 </plugin>

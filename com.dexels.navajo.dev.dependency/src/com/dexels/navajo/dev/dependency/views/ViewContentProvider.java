@@ -21,7 +21,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     public ViewContentProvider(IViewSite viewSite, CallHierarchyView parent) {
         this.viewSite = viewSite;
         this.parent = parent;
-        depAnalyzer = new EclipseDependencyAnalyzer();
+        depAnalyzer = EclipseDependencyAnalyzer.getInstance();
     }
 
     private void initialize() {

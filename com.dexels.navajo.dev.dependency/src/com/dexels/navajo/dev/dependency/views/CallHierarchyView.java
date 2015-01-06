@@ -5,6 +5,7 @@ import java.io.File;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -66,6 +67,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         
         // Register to get notifications of opened files
         window.getPartService().addPartListener(resourceListener);
+        
+        // Add Navajo Decorator
+        try {
+            PlatformUI.getWorkbench().getDecoratorManager().setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
+        } catch (CoreException e) {
+            // Forget it...
+        }
     }
 
     public void dispose() {
@@ -73,6 +81,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         window.getSelectionService().removeSelectionListener(this);
         ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceListener);
         window.getPartService().removePartListener(resourceListener);
+       
+        // remove Navajo Decorator
+        try {
+            PlatformUI.getWorkbench().getDecoratorManager().setEnabled("com.dexels.navajo.dev.dependency.decorator", false);
+        } catch (CoreException e) {
+            // Forget it...
+        }
     }
 
     /**
@@ -218,10 +233,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         });
     }
 
-//    private void showMessage(String message) {
-//        MessageDialog.openInformation(viewer.getControl().getShell(), "Sample View", message);
-//    }
-
     
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
@@ -235,17 +246,19 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                         updateRoot(new TreeParent(filePath, 0));
                     }
                     return;
+                } else {
+                    // Non-script file selected
+                    updateRoot(viewProvider.getAbsoluteRoot());
                 }
-
+            } else if(selectedObject instanceof IFolder ) {
+                updateRoot(viewProvider.getAbsoluteRoot());
             }
-            updateRoot(viewProvider.getAbsoluteRoot());
-
         }
     }
 
     
     
-   protected void updateRoot(final TreeParent treeParent) {
+    protected void updateRoot(final TreeParent treeParent) {
         viewProvider.setRoot(treeParent);
 
         Display.getDefault().asyncExec(new Runnable() {
@@ -254,9 +267,21 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     viewer.refresh();
                     viewer.refresh(getViewSite());
                     viewer.expandToLevel(2);
+
                 }
+
+                // If the NavajoDecorator is enabled, then trigger update
+                IDecoratorManager decoratorManager = PlatformUI.getWorkbench().getDecoratorManager();
+                if (decoratorManager != null) {
+                    IBaseLabelProvider dec = decoratorManager.getBaseLabelProvider("com.dexels.navajo.dev.dependency.decorator");
+                    if (dec != null) {
+                        decoratorManager.update("com.dexels.navajo.dev.dependency.decorator");
+                    }
+                }
+
             }
         });
+
     }
 
     private void rebuild() {
@@ -348,7 +373,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 case IResourceDelta.CHANGED:
                     viewProvider.updateResource(filePath);
                     refreshRoot();
-
+                    
                     break;
                 }
             }
@@ -360,7 +385,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             if (o != null) {
                 updateRoot(new TreeParent(o.getFilePath(), 0));
             }
-
         }
     }
 

@@ -23,8 +23,11 @@ import com.dexels.navajo.dev.dependency.views.TreeObject;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
 public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
-    public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
+    private static class Holder {
+        static final EclipseDependencyAnalyzer INSTANCE = new EclipseDependencyAnalyzer();
+    }
 
+    public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
     private static final int WORKFLOW_WORKCOUNT = 500;
     private final static Logger logger = LoggerFactory.getLogger(EclipseDependencyAnalyzer.class);
 
@@ -39,9 +42,17 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         initialize();
 
     }
-    
+
+    public static EclipseDependencyAnalyzer getInstance() {
+        return Holder.INSTANCE;
+    }
 
     public void initialize(String aScript, final ViewContentProvider callback) {
+        String newScriptFolder = aScript.split("scripts")[0] + "scripts";
+        if (scriptFolder != null && !scriptFolder.equals(newScriptFolder)) {
+            rebuild();
+        }
+
         if (initialized || initializeJob != null) {
             return;
         }
@@ -63,7 +74,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         dependencies = new HashMap<String, List<Dependency>>();
         reverseDependencies = new HashMap<String, List<Dependency>>();
     }
-    
 
     private Job createJob(final String aScript) {
 
@@ -89,10 +99,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
-                        
+
                         addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
                         monitor.worked(1);
-                        
+
                         if (monitor.isCanceled()) {
                             return Status.CANCEL_STATUS;
                         }
@@ -115,8 +125,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             }
         };
     }
-
-   
 
     private void addWorkflowDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting workflow dependencies");
@@ -148,16 +156,50 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     public void refresh(String scriptFile) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
+        removeReverseValues(dependencies.get(scriptName));
         dependencies.remove(scriptName);
 
         addDependencies(scriptName);
-        updateReverseDependencies(dependencies.get(scriptName));
-
     }
 
     public void remove(String scriptFile) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
+        removeReverseValues(dependencies.get(scriptName));
         dependencies.remove(scriptName);
     }
 
+    private void removeReverseValues(List<Dependency> deps) {
+        if (deps == null) {
+            return;
+        }
+
+        for (Dependency dep : deps) {
+            List<Dependency> reverseDeps = reverseDependencies.get(dep.getDependee());
+            if (reverseDeps == null)
+                continue; // nothing to do...
+
+            List<Dependency> toRemove = new ArrayList<Dependency>();
+            for (Dependency reverseDep : reverseDeps) {
+                if (dep == reverseDep) {
+                    toRemove.add(reverseDep);
+                }
+            }
+            reverseDeps.removeAll(toRemove);
+            reverseDependencies.put(dep.getDependee(), reverseDeps);
+        }
+    }
+    
+    public boolean containsBrokenDependencies(String scriptPath) {
+        List<Dependency> deps =  getDependencies(scriptPath);
+        if (deps == null) {
+            return false;
+        }
+        
+        for (Dependency dep : deps) {
+            if (dep.getType() == Dependency.BROKEN_DEPENDENCY) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
