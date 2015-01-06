@@ -39,7 +39,7 @@
       <decorator
       		adaptable="true"
       		lightweight="true"
-    		location="TOP_RIGHT"
+    		location="BOTTOM_LEFT"
             class="com.dexels.navajo.dev.dependency.decorator.NavajoLightweightDecorator"
             id="com.dexels.navajo.dev.dependency.decorator"
             label="Navajo Broken Dependencies"

@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 
 import com.dexels.navajo.dev.dependency.Activator;
+import com.dexels.navajo.dev.dependency.decorator.NavajoLightweightDecorator;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
@@ -373,7 +374,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 case IResourceDelta.CHANGED:
                     viewProvider.updateResource(filePath);
                     refreshRoot();
-                    
                     break;
                 }
             }
@@ -381,6 +381,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         private void refreshRoot() {
+            
+            // If the NavajoDecorator is enabled, then reset cache
+            IDecoratorManager decoratorManager = PlatformUI.getWorkbench().getDecoratorManager();
+            if (decoratorManager != null) {
+                IBaseLabelProvider dec = decoratorManager.getBaseLabelProvider("com.dexels.navajo.dev.dependency.decorator");
+                if (dec != null) {
+                    ((NavajoLightweightDecorator) dec).resetCache();
+                }
+            }
+                    
             TreeObject o = viewProvider.getRoot();
             if (o != null) {
                 updateRoot(new TreeParent(o.getFilePath(), 0));

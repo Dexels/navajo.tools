@@ -1,18 +1,30 @@
 package com.dexels.navajo.dev.dependency.decorator;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
+
 import com.dexels.navajo.dev.dependency.Activator;
 import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
 
 public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
     private EclipseDependencyAnalyzer depAnalyzer;
-
+    private Map<IResource, Boolean> cacheMap;
 
     public NavajoLightweightDecorator() {
         depAnalyzer = EclipseDependencyAnalyzer.getInstance();
+        resetCache();
+    }
+    
+    public void resetCache() {
+        cacheMap = new HashMap<IResource, Boolean>();
     }
 
     private String getScriptFromFilename(String filename) {
@@ -20,7 +32,7 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         String script = null;
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
-            // For clarity reasons, we actually include the 'workflows' part
+            // To prevent confusion with scripts, we actually include the 'workflows' part
             scriptFilePath = "workflows" + scriptFilePath;
             script = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
         } else {
@@ -34,18 +46,65 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
 
     @Override
     public void decorate(Object element, IDecoration decoration) {
+        if (! (element instanceof IResource)) {
+            return;
+        }
+       
         if (element instanceof IFile) {
             IFile file = (IFile) element;
-            String filePath = file.getLocation().toString();
-            if ((filePath.contains("scripts") || filePath.contains("workflows")) && filePath.contains(".xml")) {
-                if (depAnalyzer.containsBrokenDependencies(getScriptFromFilename(filePath))) {
-                    decoration.addOverlay(Activator.getImageDescriptor("icons/broken.gif"), IDecoration.TOP_RIGHT);
+            if (fileContainsBrokenDependencies( file)) {
+                decoration.addOverlay(Activator.getImageDescriptor("icons/broken.gif"), IDecoration.BOTTOM_LEFT);
+            }
+        } else if (element instanceof IFolder) {
+            IFolder folder = (IFolder) element;
+            try {
+                if (folderContainsBrokenDependencies(folder)) {
+                    decoration.addOverlay(Activator.getImageDescriptor("icons/broken.gif"), IDecoration.BOTTOM_LEFT);
                 }
-
+            } catch (CoreException e) {
+                
             }
         }
-
     }
+
+    private boolean fileContainsBrokenDependencies(IFile file) {
+        String filePath = file.getLocation().toString();
+        if (cacheMap.get(file) != null) {
+            return cacheMap.get(file);
+        }
+        
+        if ((filePath.contains("scripts") || filePath.contains("workflows")) && filePath.contains(".xml")) {
+            if (depAnalyzer.containsBrokenDependencies(getScriptFromFilename(filePath))) {
+                cacheMap.put(file, true);
+                return true;
+            }
+        }
+        cacheMap.put(file, false);
+        return false;
+    }
+    
+    private boolean folderContainsBrokenDependencies(IFolder folder) throws CoreException {
+        if (cacheMap.get(folder) != null) {
+            return cacheMap.get(folder);
+        }
+        
+        for (IResource folderMemeber : folder.members()) {
+            if (folderMemeber instanceof IFile) {
+               if (fileContainsBrokenDependencies((IFile) folderMemeber)) {
+                   cacheMap.put(folder, true);
+                   return true;
+               }
+            } else if (folderMemeber instanceof IFolder) {
+                if (folderContainsBrokenDependencies((IFolder) folderMemeber)) {
+                    cacheMap.put(folder, true);
+                    return true;
+                }
+            }
+        }
+        cacheMap.put(folder, false);
+        return false;
+    }
+    
 
     @Override
     public void dispose() {
