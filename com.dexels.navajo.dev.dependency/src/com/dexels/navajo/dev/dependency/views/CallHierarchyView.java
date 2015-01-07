@@ -65,13 +65,14 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         // Register to get notifications of changed files
         resourceListener = new MyResourceChangeReporter();
         ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceListener, IResourceChangeEvent.POST_CHANGE);
-        
+
         // Register to get notifications of opened files
         window.getPartService().addPartListener(resourceListener);
-        
+
         // Add Navajo Decorator
         try {
-            PlatformUI.getWorkbench().getDecoratorManager().setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
+            PlatformUI.getWorkbench().getDecoratorManager()
+                    .setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
         } catch (CoreException e) {
             // Forget it...
         }
@@ -82,10 +83,11 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         window.getSelectionService().removeSelectionListener(this);
         ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceListener);
         window.getPartService().removePartListener(resourceListener);
-       
+
         // remove Navajo Decorator
         try {
-            PlatformUI.getWorkbench().getDecoratorManager().setEnabled("com.dexels.navajo.dev.dependency.decorator", false);
+            PlatformUI.getWorkbench().getDecoratorManager()
+                    .setEnabled("com.dexels.navajo.dev.dependency.decorator", false);
         } catch (CoreException e) {
             // Forget it...
         }
@@ -105,7 +107,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
+        PlatformUI.getWorkbench().getHelpSystem()
+                .setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
         makeActions();
         hookContextMenu();
         hookDoubleClickAction();
@@ -138,10 +141,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillContextMenu(IMenuManager manager) {
-       
 
         manager.add(new Separator());
-       // drillDownAdapter.addNavigationActions(manager);
+        // drillDownAdapter.addNavigationActions(manager);
         // Other plug-ins can contribute there actions here
         manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
     }
@@ -150,9 +152,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         manager.add(callerHierarchy);
         manager.add(calleeHierarchy);
         manager.add(rebuildAction);
-        //manager.add(cancelAction);
+        // manager.add(cancelAction);
         manager.add(new Separator());
-        //drillDownAdapter.addNavigationActions(manager);
+        // drillDownAdapter.addNavigationActions(manager);
     }
 
     private void makeActions() {
@@ -161,39 +163,39 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 viewProvider.setReverseMode(true);
                 callerHierarchy.setChecked(true);
                 calleeHierarchy.setChecked(false);
-                updateRoot((TreeParent)viewProvider.getRoot());                
+                updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
         callerHierarchy.setText("Show Caller Hierarchy");
         callerHierarchy.setToolTipText("Show Caller Hierarchy");
         callerHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callers.gif"));
         callerHierarchy.setChecked(true);
-        
+
         calleeHierarchy = new Action() {
             public void run() {
                 viewProvider.setReverseMode(false);
                 callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(true);
-                updateRoot((TreeParent)viewProvider.getRoot());                
+                updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
         calleeHierarchy.setText("Show Callee Hierarchy");
         calleeHierarchy.setToolTipText("Show Callee Hierarchy");
         calleeHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callees.gif"));
         calleeHierarchy.setChecked(false);
-        
+
         rebuildAction = new Action() {
             public void run() {
-                rebuild();             
+                rebuild();
             }
         };
         rebuildAction.setText("Rebuild dependency tree");
         rebuildAction.setToolTipText("Rebuild dependency tree");
         rebuildAction.setImageDescriptor(Activator.getImageDescriptor("icons/refresh.gif"));
-        
+
         cancelAction = new Action() {
             public void run() {
-                cancelJob();             
+                cancelJob();
             }
         };
         cancelAction.setText("Cancel current search");
@@ -224,7 +226,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             }
         };
     }
-    
 
     private void hookDoubleClickAction() {
         viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -234,7 +235,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         });
     }
 
-    
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
         if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
@@ -251,14 +251,12 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     // Non-script file selected
                     updateRoot(viewProvider.getAbsoluteRoot());
                 }
-            } else if(selectedObject instanceof IFolder ) {
+            } else if (selectedObject instanceof IFolder) {
                 updateRoot(viewProvider.getAbsoluteRoot());
             }
         }
     }
 
-    
-    
     protected void updateRoot(final TreeParent treeParent) {
         viewProvider.setRoot(treeParent);
 
@@ -274,13 +272,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 // If the NavajoDecorator is enabled, then trigger update
                 IDecoratorManager decoratorManager = PlatformUI.getWorkbench().getDecoratorManager();
                 if (decoratorManager != null) {
-                    IBaseLabelProvider dec = decoratorManager.getBaseLabelProvider("com.dexels.navajo.dev.dependency.decorator");
-                    if (dec != null) {
-                        decoratorManager.update("com.dexels.navajo.dev.dependency.decorator");
-                    }
+                    decoratorManager.update("com.dexels.navajo.dev.dependency.decorator");
                 }
-
             }
+
         });
 
     }
@@ -288,13 +283,14 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private void rebuild() {
         TreeParent root = (TreeParent) viewProvider.getRoot();
         viewProvider.rebuild();
+        resetNavajoDependencyDecorator();
         updateRoot(root);
     }
 
     private void cancelJob() {
         //
     }
-    
+
     class MyResourceChangeReporter implements IResourceChangeListener, IPartListener {
 
         @Override
@@ -344,18 +340,18 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 FileEditorInput fileInput = (FileEditorInput) input;
                 String filePath = fileInput.getFile().getLocation().toString();
                 if (filePath.contains("scripts") || filePath.contains("workflows")) {
-                    if (viewProvider.getRoot() == null || ! viewProvider.getRoot().getFilePath().equals(filePath)) {
+                    if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
                         updateRoot(new TreeParent(filePath, 0));
                     }
                     return;
                 }
                 updateRoot(viewProvider.getAbsoluteRoot());
-                
+
             }
         }
 
     }
-    
+
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
@@ -381,26 +377,36 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         private void refreshRoot() {
-            
-            // If the NavajoDecorator is enabled, then reset cache
-            IDecoratorManager decoratorManager = PlatformUI.getWorkbench().getDecoratorManager();
-            if (decoratorManager != null) {
-                IBaseLabelProvider dec = decoratorManager.getBaseLabelProvider("com.dexels.navajo.dev.dependency.decorator");
-                if (dec != null) {
-                    ((NavajoLightweightDecorator) dec).resetCache();
-                }
-            }
-                    
+
+            resetNavajoDependencyDecorator();
+
             TreeObject o = viewProvider.getRoot();
             if (o != null) {
                 updateRoot(new TreeParent(o.getFilePath(), 0));
             }
         }
+
     }
 
     @Override
     public void setFocus() {
-        
+
+    }
+
+    private IBaseLabelProvider getNavajoDependencyDecorator() {
+        IDecoratorManager decoratorManager = PlatformUI.getWorkbench().getDecoratorManager();
+        if (decoratorManager != null) {
+            return decoratorManager.getBaseLabelProvider("com.dexels.navajo.dev.dependency.decorator");
+        }
+        return null;
+    }
+
+    protected void resetNavajoDependencyDecorator() {
+        // If the NavajoDecorator is enabled, then reset cache
+        IBaseLabelProvider dec = getNavajoDependencyDecorator();
+        if (dec != null) {
+            ((NavajoLightweightDecorator) dec).resetCache();
+        }
     }
 
 }

@@ -182,6 +182,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     }
 
     public void triggerTreeRefresh() {
+        parent.resetNavajoDependencyDecorator();
         parent.updateRoot((TreeParent) this.getRoot());
         
     }
