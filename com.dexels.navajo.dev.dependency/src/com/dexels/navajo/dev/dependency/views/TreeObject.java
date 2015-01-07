@@ -33,8 +33,8 @@ public class TreeObject implements IAdaptable {
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
             // For clarity reasons, we actually include the 'workflows' part
-            scriptFilePath = "workflows" + scriptFilePath;
-            script = scriptFilePath.substring(0, scriptFilePath.indexOf("."));
+            //scriptFilePath = "workflows" + scriptFilePath;
+            script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         } else {
             scriptFilePath = filename.split("scripts")[1];
             script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));

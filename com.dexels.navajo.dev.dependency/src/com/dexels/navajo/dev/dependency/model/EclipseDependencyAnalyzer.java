@@ -30,7 +30,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
     private static final int WORKFLOW_WORKCOUNT = 500;
     private final static Logger logger = LoggerFactory.getLogger(EclipseDependencyAnalyzer.class);
-
+    private String rootFolder;
+    
     private Job initializeJob;
 
     private CodeSearch codeSearch;
@@ -48,8 +49,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public void initialize(String aScript, final ViewContentProvider callback) {
-        String newScriptFolder = aScript.split("scripts")[0] + "scripts";
-        if (scriptFolder != null && !scriptFolder.equals(newScriptFolder)) {
+        if (rootFolder != null && ! aScript.contains(rootFolder)) {  
+            // Opened a script in another root folder than the current dependency tree
             rebuild();
         }
 
@@ -83,8 +84,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
             @Override
             protected IStatus run(IProgressMonitor monitor) {
-                String rootPath = script.split("scripts")[0];
-                scriptFolder = rootPath + "scripts";
+                rootFolder = null;
+                if (script.contains("scripts")) {
+                    rootFolder = script.split("scripts")[0];
+                } else if (script.contains("workflows")){
+                    rootFolder = script.split("workflows")[0];
+                } else {
+                    throw new RuntimeException("Unexpected script path - expecting 'scripts' or 'workflows' in path: " + script);
+                }
+                scriptFolder = rootFolder + "scripts";
 
                 // Read in existing dependencies
                 importPersistedDependencies(scriptFolder);
