@@ -58,6 +58,13 @@ public class CodeSearch {
                         continue;
                     }
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    
+                    // Check if exists
+                    if (!new File(scriptFullPath).exists()) {
+                        deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
+                        continue;
+                    }
+                    
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
 
@@ -65,6 +72,13 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    
+                     // Check if exists
+                    if (!new File(scriptFullPath).exists()) {
+                        deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
+                        continue;
+                    }
+                    
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath,  Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
             }
