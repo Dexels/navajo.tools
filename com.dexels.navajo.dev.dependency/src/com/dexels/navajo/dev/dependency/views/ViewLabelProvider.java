@@ -10,6 +10,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import com.dexels.navajo.dependency.Dependency;
+import com.dexels.navajo.dev.dependency.model.TreeObject;
+import com.dexels.navajo.dev.dependency.model.TreeParent;
 
 class ViewLabelProvider extends StyledCellLabelProvider {
     

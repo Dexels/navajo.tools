@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dependency.DependencyAnalyzer;
-import com.dexels.navajo.dev.dependency.views.TreeObject;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
 public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
@@ -162,21 +161,49 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     }
 
-    public void refresh(String scriptFile) {
+    public void refresh(String scriptFile, boolean recursive) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
-        removeReverseValues(dependencies.get(scriptName));
+        removeScriptFromReverseValues(scriptName);
         dependencies.remove(scriptName);
-
         addDependencies(scriptName);
+        
+        // Update the dependencies of all scripts that point(ed) to me
+        List<Dependency> deps = reverseDependencies.get(scriptName);
+      
+        if (deps != null && recursive) {
+            // The refresh action can trigger removing dependencies. Therefore make a copy
+            // of the list to prevent ConcurrentMod exceptions
+            List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
+            for (Dependency dep : depsCopy) {
+                if (!dep.getScriptFile().equals(scriptFile)) {
+                    refresh(dep.getScriptFile(), false);
+                }
+            }
+        }
+       
     }
 
     public void remove(String scriptFile) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
-        removeReverseValues(dependencies.get(scriptName));
+        removeScriptFromReverseValues(scriptName);
+        updatedReverseToBroken(scriptName);
+        dependencies.get(scriptName);
         dependencies.remove(scriptName);
     }
+    
+    private void updatedReverseToBroken(String scriptName) {
+        List<Dependency> deps = reverseDependencies.get(scriptName);
+        if (deps == null) {
+            return;
+        }
+        
+        for (Dependency dep : deps) {
+            dep.setType(Dependency.BROKEN_DEPENDENCY);
+        }
+    }
 
-    private void removeReverseValues(List<Dependency> deps) {
+    private void removeScriptFromReverseValues(String scriptName) {
+        List<Dependency> deps = dependencies.get(scriptName);
         if (deps == null) {
             return;
         }

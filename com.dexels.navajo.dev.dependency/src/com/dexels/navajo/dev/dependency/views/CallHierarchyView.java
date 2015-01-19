@@ -25,6 +25,8 @@ import org.eclipse.swt.SWT;
 
 import com.dexels.navajo.dev.dependency.Activator;
 import com.dexels.navajo.dev.dependency.decorator.NavajoLightweightDecorator;
+import com.dexels.navajo.dev.dependency.model.TreeObject;
+import com.dexels.navajo.dev.dependency.model.TreeParent;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 

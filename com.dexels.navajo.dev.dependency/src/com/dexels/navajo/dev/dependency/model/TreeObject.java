@@ -1,4 +1,4 @@
-package com.dexels.navajo.dev.dependency.views;
+package com.dexels.navajo.dev.dependency.model;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
@@ -18,7 +18,7 @@ public class TreeObject implements IAdaptable {
 
         this.filePath = filePath;
         this.type = type;
-        if (!filePath.equals(scriptName)) {
+        if (!filePath.equals(scriptName) && filePath.indexOf(".xml") > 0) {
             scriptName = getScriptFromFilename(filePath);
         }
 

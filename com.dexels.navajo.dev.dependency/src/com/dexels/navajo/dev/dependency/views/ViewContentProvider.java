@@ -9,6 +9,8 @@ import org.eclipse.ui.IViewSite;
 
 import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.model.TreeObject;
+import com.dexels.navajo.dev.dependency.model.TreeParent;
 
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
     private static int MAX_STACK_DEPTH = 2;
@@ -176,7 +178,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     }
 
     public void updateResource(String filePath) {
-        depAnalyzer.refresh(filePath);
+        depAnalyzer.refresh(filePath, true);
 
         
     }
