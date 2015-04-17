@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1419">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1424">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.thirdparty.feature.feature.group" version="1.9.16.RELEASE"/>
-<repository location="http://repo.dexels.com/eclipse/3rdparty_1.9.16"/>
+<unit id="com.dexels.thirdparty.feature.feature.group" version="1.9.33.RELEASE"/>
+<repository location="http://repo.dexels.com/eclipse/3rdparty_1.9.33"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.java7.feature.group" version="3.1.0.201310021548-r"/>
@@ -17,7 +17,7 @@
 <unit id="org.eclipse.equinox.server.core.feature.group" version="1.3.0.v20140909-1633"/>
 <unit id="org.eclipse.equinox.sdk.feature.group" version="3.10.0.v20140909-1633"/>
 <unit id="org.eclipse.equinox.server.jetty.feature.group" version="1.1.100.v20140416-1649"/>
-<repository location="http://repo.dexels.com/eclipse/equinox_luna"/>
+<repository location="http://repo.dexels.com/eclipse/equinox_luna_sr1"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jetty.bundles.f.feature.group" version="8.1.3.201305221702"/>
@@ -35,9 +35,9 @@
 <repository location="http://download.eclipse.org/releases/luna/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201502231118"/>
-<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201502231118"/>
-<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201502231118"/>
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201504171249"/>
+<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201504171249"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201504171249"/>
 <repository location="https://repo.dexels.com/eclipse/navajo/"/>
 </location>
 </locations>

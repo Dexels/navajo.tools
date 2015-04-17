@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>com.dexels.tools.target/</module>
 		<module>com.dexels.navajo.tools.dev.feature/allgit</module>	
 		<module>com.dexels.navajo.oda.feature/allgit</module>	
 		<module>com.dexels.navajo.workflow.editor.feature/allgit</module>	
