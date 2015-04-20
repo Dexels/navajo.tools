@@ -17,6 +17,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.*;
+import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.jface.action.*;
 import org.eclipse.ui.*;
@@ -218,16 +222,48 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
                         try {
                             IDE.openEditorOnFileStore(page, fileStore);
+                            goToLine(treeObj.getLinenr());
                         } catch (PartInitException e) {
                             // Put your exception handler here if you wish to
                         }
                     }
-
                 }
-
             }
         };
     }
+    
+	private void goToLine(int lineNumber) {
+
+		try {
+
+			IEditorPart editorPart = PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor();
+			if (!(editorPart instanceof ITextEditor) || lineNumber <= 0) {
+				return;
+			}
+			ITextEditor editor = (ITextEditor) editorPart;
+			IDocument document = editor.getDocumentProvider().getDocument(
+					editor.getEditorInput());
+			if (document != null) {
+				IRegion lineInfo = null;
+				try {
+					// line count internaly starts with 0, and not with 1 like in GUI
+					lineInfo = document.getLineInformation(lineNumber - 1);
+				} catch (BadLocationException e) {
+					// ignored because line number may not really exist in document
+				}
+				if (lineInfo != null) {
+					editor.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength());
+				}
+			}
+
+		} catch (Exception e) {
+			// Something went wrong in setting line number. Not all that
+			// important though
+		}
+
+	}
 
     private void hookDoubleClickAction() {
         viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -244,13 +280,17 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
             if (selectedObject instanceof IFile) {
                 String filePath = ((IFile) selectedObject).getLocation().toString();
+                System.err.println("FILEPATH = " + filePath);
                 if (filePath.contains("scripts") || filePath.contains("workflows")) {
+                	System.err.println("CHECKING TO UPDATE ");
                     if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                    	System.err.println("UPDATING ROOT FOR  " + filePath);
                         updateRoot(new TreeParent(filePath, 0));
                     }
                     return;
                 } else {
                     // Non-script file selected
+                	System.err.println("NO SCRIPT SELECTED - " + viewProvider.getAbsoluteRoot());
                     updateRoot(viewProvider.getAbsoluteRoot());
                 }
             } else if (selectedObject instanceof IFolder) {
@@ -348,10 +388,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     return;
                 }
                 updateRoot(viewProvider.getAbsoluteRoot());
-
             }
         }
-
     }
 
     class DeltaUpdater implements IResourceDeltaVisitor {
