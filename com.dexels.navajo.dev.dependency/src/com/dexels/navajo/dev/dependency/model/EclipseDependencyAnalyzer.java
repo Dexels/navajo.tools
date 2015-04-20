@@ -144,7 +144,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         }
 
         for (Dependency dep : myDependencies) {
-
+        	System.err.println("Dep getScript "  + dep.getScript() + " getDependee " + dep.getDependee());
             if (!dependencies.containsKey(dep.getScript())) {
                 dependencies.put(dep.getScript(), new ArrayList<Dependency>());
             }

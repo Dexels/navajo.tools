@@ -297,14 +297,12 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     protected void updateRoot(final TreeParent treeParent) {
         viewProvider.setRoot(treeParent);
-        System.err.println("Updated root for " + treeParent.getScriptName());
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 if (viewer != null && !viewer.getControl().isDisposed()) {
                     viewer.refresh();
                     viewer.refresh(getViewSite());
                     viewer.expandToLevel(2);
-                    System.err.println("Refreshed viewer and expanded");
                     
                 }
 

@@ -19,7 +19,6 @@ public class CodeSearch {
     	
         File rootDir = new File(scriptFolder).getParentFile();
         File workflowDir = new File(rootDir, "workflows");
-        System.err.println("ROOTDIR = " + rootDir + " workflow = " + workflowDir );
         searchScriptDependenciesInDir(workflowDir, deps, scriptFolder, monitor);
 
     }
@@ -54,7 +53,6 @@ public class CodeSearch {
                 linenr++;
                 while (m.find()) {
                     String scriptName = m.group(2);
-                    System.err.println("possible match: " + scriptName);
                     if (scriptName.indexOf(':') > 0) {
                         continue;
                     }
@@ -63,12 +61,9 @@ public class CodeSearch {
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     // Check if exists
                     if (!new File(scriptFullPath).exists()) {
-                    	System.err.println("Searching workflow " +workflowFile.getAbsolutePath() + " adding broken dep " + scriptFullPath);
                         deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
                         continue;
                     }
-                	System.err.println("Searching workflow " +workflowFile.getAbsolutePath() + " adding dep " + scriptFullPath);
-
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
 
@@ -89,9 +84,8 @@ public class CodeSearch {
             bf.close();
 
         } catch (IOException e) {
-        	System.err.println("EXCEPTION!!! " + e);
+        	System.err.println("EXCEPTION! " + e);
             e.printStackTrace();
         }
-        System.err.println(" DEPS SIZE : " + deps.size());
     }
 }
