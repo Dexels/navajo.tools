@@ -88,17 +88,14 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             invisibleRoot.removeChild(child);
         }
         if (node != null) {
-        	System.err.println("Updating root for " + node.getScriptName());
             // remove any existing children of the new root
             for (TreeObject child : node.getChildren()) {
                 node.removeChild(child);
             }
             
             if (node == invisibleRoot) {
-            	System.err.println("NOT VISIBLE ROOT");
                 return;
             }
-            System.err.println("Going to init depAnalyzer for " + node.getFilePath());
             depAnalyzer.initialize(node.getFilePath(), this);
             addDependencies(node, MAX_STACK_DEPTH);
             invisibleRoot.addChild(node);
@@ -157,7 +154,6 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         } else {
             List<Dependency>  deps = depAnalyzer.getDependencies(node.getScriptName());
             if (deps == null) {
-                System.err.println("NO deps for " + node.getScriptName());
                 return;
             }
             for (Dependency dep : deps) {

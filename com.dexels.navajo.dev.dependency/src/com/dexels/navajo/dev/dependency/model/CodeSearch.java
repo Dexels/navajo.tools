@@ -16,9 +16,10 @@ import com.dexels.navajo.dependency.Dependency;
 public class CodeSearch {
 
     public void addWorkflowDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
-
+    	
         File rootDir = new File(scriptFolder).getParentFile();
         File workflowDir = new File(rootDir, "workflows");
+        System.err.println("ROOTDIR = " + rootDir + " workflow = " + workflowDir );
         searchScriptDependenciesInDir(workflowDir, deps, scriptFolder, monitor);
 
     }
@@ -53,12 +54,14 @@ public class CodeSearch {
                 linenr++;
                 while (m.find()) {
                     String scriptName = m.group(2);
-                    
+                    System.err.println("possible match: " + scriptName);
                     if (scriptName.indexOf(':') > 0) {
                         continue;
                     }
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     
+                    
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    System.err.println("scriptFullPath " + scriptFullPath);
                     // Check if exists
                     if (!new File(scriptFullPath).exists()) {
                         deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
@@ -73,6 +76,7 @@ public class CodeSearch {
                     String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     
+                    System.err.println("another possible match " + scriptName + " - " + scriptFullPath);
                      // Check if exists
                     if (!new File(scriptFullPath).exists()) {
                         deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));

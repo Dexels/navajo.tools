@@ -280,17 +280,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
             if (selectedObject instanceof IFile) {
                 String filePath = ((IFile) selectedObject).getLocation().toString();
-                System.err.println("FILEPATH = " + filePath);
                 if (filePath.contains("scripts") || filePath.contains("workflows")) {
-                	System.err.println("CHECKING TO UPDATE ");
                     if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
-                    	System.err.println("UPDATING ROOT FOR  " + filePath);
                         updateRoot(new TreeParent(filePath, 0));
                     }
                     return;
                 } else {
                     // Non-script file selected
-                	System.err.println("NO SCRIPT SELECTED - " + viewProvider.getAbsoluteRoot());
                     updateRoot(viewProvider.getAbsoluteRoot());
                 }
             } else if (selectedObject instanceof IFolder) {
