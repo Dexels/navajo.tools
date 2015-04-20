@@ -233,18 +233,18 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
     
 	private void goToLine(int lineNumber) {
-
+		System.err.println("Going to line " + lineNumber);
 		try {
-
 			IEditorPart editorPart = PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getActivePage()
 					.getActiveEditor();
 			if (!(editorPart instanceof ITextEditor) || lineNumber <= 0) {
+				System.err.println("No sigar: editorPart = " + editorPart + " line = "  + lineNumber);
 				return;
 			}
 			ITextEditor editor = (ITextEditor) editorPart;
-			IDocument document = editor.getDocumentProvider().getDocument(
-					editor.getEditorInput());
+			IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
+			System.err.println("Editor = " + editor + " document = " + document);
 			if (document != null) {
 				IRegion lineInfo = null;
 				try {
@@ -252,10 +252,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 					lineInfo = document.getLineInformation(lineNumber - 1);
 				} catch (BadLocationException e) {
 					// ignored because line number may not really exist in document
+					System.err.println("Bad location exception");
+
 				}
 				if (lineInfo != null) {
+					System.err.println("Setting line info: " + lineInfo.getOffset() + " length " + lineInfo.getLength());
 					editor.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength());
 				}
+			} else {
+				System.err.println("null document");
+
 			}
 
 		} catch (Exception e) {
