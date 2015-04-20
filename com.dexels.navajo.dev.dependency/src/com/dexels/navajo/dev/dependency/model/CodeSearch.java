@@ -30,7 +30,7 @@ public class CodeSearch {
                 return;
             }
             if (dirEntry.isFile()) {
-                searchFiles(dirEntry, deps, scriptFolder);
+                searchWorkflowFile(dirEntry, deps, scriptFolder);
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
                 searchScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
@@ -39,7 +39,7 @@ public class CodeSearch {
 
     }
 
-    public void searchFiles(File workflowFile, List<Dependency> deps, String scriptFolder) {
+    public void searchWorkflowFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
