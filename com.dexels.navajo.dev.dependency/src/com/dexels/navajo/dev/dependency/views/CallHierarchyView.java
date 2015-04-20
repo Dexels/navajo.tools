@@ -21,6 +21,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.jface.action.*;
 import org.eclipse.ui.*;
@@ -47,7 +48,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private MyResourceChangeReporter resourceListener;
 
     private Action rebuildAction;
-
     private Action calleeHierarchy;
 
     /*
@@ -222,7 +222,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
                         try {
                             IDE.openEditorOnFileStore(page, fileStore);
-                            goToLine(treeObj.getLinenr());
+                            if (viewProvider.isReverseMode()) {
+                            	goToLine(treeObj.getLinenr());
+                            }
                         } catch (PartInitException e) {
                             // Put your exception handler here if you wish to
                         }
@@ -233,35 +235,41 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
     
 	private void goToLine(int lineNumber) {
-		System.err.println("Going to line " + lineNumber);
+		if (lineNumber <= 0) {
+			// no line info
+			return;
+		}
 		try {
 			IEditorPart editorPart = PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage()
-					.getActiveEditor();
-			if (!(editorPart instanceof ITextEditor) || lineNumber <= 0) {
-				System.err.println("No sigar: editorPart = " + editorPart + " line = "  + lineNumber);
-				return;
-			}
-			ITextEditor editor = (ITextEditor) editorPart;
-			IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
-			System.err.println("Editor = " + editor + " document = " + document);
-			if (document != null) {
+					.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+
+			if (editorPart instanceof MultiPageEditorPart) {
+				MultiPageEditorPart meditor = (MultiPageEditorPart) editorPart;
+				IDocument test = (IDocument) meditor.getAdapter(IDocument.class);
 				IRegion lineInfo = null;
 				try {
-					// line count internaly starts with 0, and not with 1 like in GUI
-					lineInfo = document.getLineInformation(lineNumber - 1);
+					lineInfo = test.getLineInformation(lineNumber - 1);
 				} catch (BadLocationException e) {
-					// ignored because line number may not really exist in document
-					System.err.println("Bad location exception");
-
 				}
-				if (lineInfo != null) {
-					System.err.println("Setting line info: " + lineInfo.getOffset() + " length " + lineInfo.getLength());
-					editor.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength());
+				
+				ISelection sel = new TextSelection(lineInfo.getOffset(), 0);
+				meditor.getEditorSite().getSelectionProvider().setSelection(sel);
+			} else if ((editorPart instanceof ITextEditor)) {
+				ITextEditor editor = (ITextEditor) editorPart;
+				IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
+				if (document != null) {
+					IRegion lineInfo = null;
+					try {
+						lineInfo = document.getLineInformation(lineNumber - 1);
+					} catch (BadLocationException e) {
+					}
+					if (lineInfo != null) {
+						editor.selectAndReveal(lineInfo.getOffset(), 0);
+					}
 				}
 			} else {
-				System.err.println("null document");
-
+				// Unsupported editor
+				return;
 			}
 
 		} catch (Exception e) {
