@@ -61,13 +61,14 @@ public class CodeSearch {
                     
                     
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    System.err.println("scriptFullPath " + scriptFullPath);
                     // Check if exists
                     if (!new File(scriptFullPath).exists()) {
+                    	System.err.println("Searching workflow " +workflowFile.getAbsolutePath() + " adding broken dep " + scriptFullPath);
                         deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
                         continue;
                     }
-                    
+                	System.err.println("Searching workflow " +workflowFile.getAbsolutePath() + " adding dep " + scriptFullPath);
+
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr));
                 }
 
@@ -76,7 +77,6 @@ public class CodeSearch {
                     String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     
-                    System.err.println("another possible match " + scriptName + " - " + scriptFullPath);
                      // Check if exists
                     if (!new File(scriptFullPath).exists()) {
                         deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.BROKEN_DEPENDENCY, linenr));
@@ -89,7 +89,9 @@ public class CodeSearch {
             bf.close();
 
         } catch (IOException e) {
+        	System.err.println("EXCEPTION!!! " + e);
             e.printStackTrace();
         }
+        System.err.println(" DEPS SIZE : " + deps.size());
     }
 }
