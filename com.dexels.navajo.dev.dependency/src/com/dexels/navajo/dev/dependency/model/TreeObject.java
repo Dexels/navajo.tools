@@ -20,6 +20,7 @@ public class TreeObject implements IAdaptable {
         this.type = type;
         if (!filePath.equals(scriptName) && filePath.indexOf(".xml") > 0) {
             scriptName = getScriptFromFilename(filePath);
+            System.err.println("scriptName = " + scriptName);
         }
 
     }
@@ -30,15 +31,20 @@ public class TreeObject implements IAdaptable {
     public static String getScriptFromFilename(String filename) {
         String scriptFilePath = null;
         String script = null;
+        System.err.println("getScriptFromFilename" + filename);
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
+            System.err.println("reading workflow - scriptFilePath = " + scriptFilePath);
             // For clarity reasons, we actually include the 'workflows' part
             //scriptFilePath = "workflows" + scriptFilePath;
             script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         } else {
             scriptFilePath = filename.split("scripts")[1];
+        	System.err.println("reading script - scriptFilePath = " + scriptFilePath);
+
             script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         }
+        System.err.println("script = " + script);
         
         // Replace win32 slashes to be consistent with Navajo script slashes        
         return script.replace("\\", "/");
