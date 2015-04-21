@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dependency.DependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
 public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
@@ -27,10 +28,9 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
-    private static final int WORKFLOW_WORKCOUNT = 500;
     private final static Logger logger = LoggerFactory.getLogger(EclipseDependencyAnalyzer.class);
     private String rootFolder;
-    
+
     private Job initializeJob;
 
     private CodeSearch codeSearch;
@@ -40,6 +40,9 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         precompiler = new EclipseTslPreCompiler();
         codeSearch = new CodeSearch();
         initialize();
+        IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
+        rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
+        
 
     }
 
@@ -47,17 +50,22 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         return Holder.INSTANCE;
     }
 
-    public void initialize(String aScript, final ViewContentProvider callback) {
-        if (rootFolder != null && ! aScript.contains(rootFolder)) {  
-            // Opened a script in another root folder than the current dependency tree
-            rebuild();
-        }
-
+    public void initialize(ViewContentProvider callback) {
         if (initialized || initializeJob != null) {
             return;
-        }
+        }  
+        rebuild(callback);
+     
+    }
 
-        initializeJob = createJob(aScript);
+    public void rebuild(final ViewContentProvider callback) {
+        // Resetting the following values will trigger a rebuild
+        initialized = false;
+        initializeJob = null;
+        dependencies = new HashMap<String, List<Dependency>>();
+        reverseDependencies = new HashMap<String, List<Dependency>>();
+        
+        initializeJob = createJob();
         initializeJob.schedule();
         initializeJob.addJobChangeListener(new JobChangeAdapter() {
             @Override
@@ -67,30 +75,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         });
     }
 
-    public void rebuild() {
-        // Resetting the following values will trigger a rebuild
-        initialized = false;
-        initializeJob = null;
-        dependencies = new HashMap<String, List<Dependency>>();
-        reverseDependencies = new HashMap<String, List<Dependency>>();
-    }
-
-    private Job createJob(final String aScript) {
+    private Job createJob() {
 
         return new Job(INIT_JOB_NAME) {
 
-            private String script = aScript;
-
             @Override
             protected IStatus run(IProgressMonitor monitor) {
-                rootFolder = null;
-                if (script.contains("scripts")) {
-                    rootFolder = script.split("scripts")[0];
-                } else if (script.contains("workflows")){
-                    rootFolder = script.split("workflows")[0];
-                } else {
-                    throw new RuntimeException("Unexpected script path - expecting 'scripts' or 'workflows' in path: " + script);
-                }
                 scriptFolder = rootFolder + "scripts";
 
                 // Read in existing dependencies
@@ -99,10 +89,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 // We missed changes, so re-read all files
                 String[] xmlExt = { "xml" };
                 Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
+                
+                Collection<File> workflowFiles = FileUtils.listFiles(new File( rootFolder + "workflows"), xmlExt, true);
 
                 try {
-                    // Files.size + 'fake' 100 for workflow progress
-                    monitor.beginTask("Calculating Navajo dependencies", files.size() + WORKFLOW_WORKCOUNT);
+                    // Files.size + 'fake' 500 for workflow progress
+                    monitor.beginTask("Calculating Navajo dependencies", files.size() + workflowFiles.size() + 500);
 
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
@@ -114,15 +106,18 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                             return Status.CANCEL_STATUS;
                         }
                     }
-                    addWorkflowDependencies(scriptFolder, new SubProgressMonitor(monitor, 500));
+                    addWorkflowDependencies(scriptFolder, monitor);
                     persistDependencies(scriptFolder);
+
+                    addExternalProjectDependencies(monitor);
 
                     if (monitor.isCanceled()) {
                         return Status.CANCEL_STATUS;
                     }
 
                     initialized = true;
-
+                } catch (Exception e) {
+                    initializeJob = null;
                 } finally {
                     monitor.done();
 
@@ -144,6 +139,45 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         }
 
         for (Dependency dep : myDependencies) {
+            try {
+                if (!dependencies.containsKey(dep.getScript())) {
+                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                }
+
+                dependencies.get(dep.getScript()).add(dep);
+
+                if (!reverseDependencies.containsKey(dep.getDependee())) {
+                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                }
+
+                reverseDependencies.get(dep.getDependee()).add(dep);
+            } catch (Exception e) {
+                logger.error("HE {}" + e);
+            }
+            ;
+        }
+
+        logger.debug("Done workflow dependencies");
+
+    }
+
+    private void addExternalProjectDependencies(IProgressMonitor monitor) {
+
+        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
+        List<IProject> projectsToSearch = pref.getTipiProjects();
+
+        for (IProject project : projectsToSearch) {
+            try {
+                codeSearch.addProjectDependencies(project, myDependencies, scriptFolder, monitor);
+            } catch (Exception e) {
+                logger.error("Exception on getting workflow depencencies for {}: {}", e);
+            }
+
+        }
+
+        for (Dependency dep : myDependencies) {
+
             if (!dependencies.containsKey(dep.getScript())) {
                 dependencies.put(dep.getScript(), new ArrayList<Dependency>());
             }
@@ -155,8 +189,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             }
 
             reverseDependencies.get(dep.getDependee()).add(dep);
+
         }
-        logger.debug("Done workflow dependencies");
 
     }
 
@@ -165,13 +199,14 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         removeScriptFromReverseValues(scriptName);
         dependencies.remove(scriptName);
         addDependencies(scriptName);
-        
+
         // Update the dependencies of all scripts that point(ed) to me
         List<Dependency> deps = reverseDependencies.get(scriptName);
-      
+
         if (deps != null && recursive) {
-            // The refresh action can trigger removing dependencies. Therefore make a copy
-            // of the list to prevent ConcurrentMod exceptions
+            // The refresh action can trigger removing dependencies.
+            // Therefore make a copy of the list to prevent ConcurrentMod
+            // exceptions
             List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
             for (Dependency dep : depsCopy) {
                 if (!dep.getScriptFile().equals(scriptFile)) {
@@ -179,7 +214,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 }
             }
         }
-       
+
     }
 
     public void remove(String scriptFile) {
@@ -189,15 +224,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         dependencies.get(scriptName);
         dependencies.remove(scriptName);
     }
-    
+
     private void updatedReverseToBroken(String scriptName) {
         List<Dependency> deps = reverseDependencies.get(scriptName);
         if (deps == null) {
             return;
         }
-        
+
         for (Dependency dep : deps) {
-            dep.setType(Dependency.BROKEN_DEPENDENCY);
+            dep.setBroken(true);
         }
     }
 
@@ -222,15 +257,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             reverseDependencies.put(dep.getDependee(), reverseDeps);
         }
     }
-    
+
     public boolean containsBrokenDependencies(String scriptPath) {
-        List<Dependency> deps =  getDependencies(scriptPath);
+        List<Dependency> deps = getDependencies(scriptPath);
         if (deps == null) {
             return false;
         }
-        
+
         for (Dependency dep : deps) {
-            if (dep.getType() == Dependency.BROKEN_DEPENDENCY) {
+            if (dep.isBroken()) {
                 return true;
             }
         }

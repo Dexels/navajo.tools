@@ -21,7 +21,9 @@ class ViewLabelProvider extends StyledCellLabelProvider {
     Image workflowDep;
     Image entityDep;
     Image brokenDep;
-
+    Image tipiDep;
+    Image unknownDep;
+    
     public ViewLabelProvider() {
         
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -43,6 +45,12 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         input = classLoader.getResourceAsStream("icons/brokenDep.gif");
         brokenDep = new Image(Display.getCurrent(), input);
         
+        input = classLoader.getResourceAsStream("icons/tipiDef.gif");
+        tipiDep = new Image(Display.getCurrent(), input);
+        
+        input = classLoader.getResourceAsStream("icons/unknownDep.gif");
+        unknownDep = new Image(Display.getCurrent(), input);
+        
     }
 
     public Image getImage(Object element) {
@@ -50,6 +58,10 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         if (element instanceof TreeObject) {
             TreeObject treeObj = (TreeObject) element;
 
+            if (treeObj.isBroken()) {
+                return brokenDep;
+            }
+            
             switch (treeObj.getType()) {
             case Dependency.INCLUDE_DEPENDENCY:
                 res = includeDep;
@@ -63,11 +75,14 @@ class ViewLabelProvider extends StyledCellLabelProvider {
             case Dependency.ENTITY_DEPENDENCY:
                 res = entityDep;
                 break;
-            case Dependency.BROKEN_DEPENDENCY:
-                res = brokenDep;
+            case Dependency.TIPI_DEPENDENCY:
+                res = tipiDep;
                 break;
-
+            case Dependency.UNKNOWN_TYPE:
+                res = unknownDep;
+                break;
             }
+            
 
         }
         return res;
@@ -103,12 +118,12 @@ class ViewLabelProvider extends StyledCellLabelProvider {
                 }
                 cell.setText(fullObjectString + seperator + dependencyType);
 
-                // The ' - ' part is always gray
-                StyleRange stylerange1 = new StyleRange(objectString.length(), (fullObjectString.length() - objectString.length()) + seperator.length(), Display.getCurrent()
+                // The '(line x) - ' part is always gray
+                StyleRange stylerange1 = new StyleRange(objectString.length(), (fullObjectString.length() - objectString.length()) +  seperator.length(), Display.getCurrent()
                         .getSystemColor(SWT.COLOR_DARK_GRAY), null);
 
                 // The dependency string can be overriden - e.g. red for broken
-                StyleRange stylerange2 = new StyleRange(objectString.length() + seperator.length(),
+                StyleRange stylerange2 = new StyleRange(fullObjectString.length() + seperator.length(),
                         dependencyType.length(), Display.getCurrent().getSystemColor(dependencyTextColor), null);
                 StyleRange[] range = { stylerange1, stylerange2 };
                 cell.setStyleRanges(range);

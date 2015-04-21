@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1434">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1449">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="com.dexels.thirdparty.feature.feature.group" version="1.9.33.RELEASE"/>
@@ -35,9 +35,9 @@
 <repository location="http://download.eclipse.org/releases/luna/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201504201038"/>
-<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201504201038"/>
-<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201504201038"/>
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201504211142"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201504211142"/>
+<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201504211142"/>
 <repository location="https://repo.dexels.com/eclipse/navajo/"/>
 </location>
 </locations>

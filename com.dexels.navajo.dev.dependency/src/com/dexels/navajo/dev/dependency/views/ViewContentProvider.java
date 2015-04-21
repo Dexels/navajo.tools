@@ -24,6 +24,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         this.viewSite = viewSite;
         this.parent = parent;
         depAnalyzer = EclipseDependencyAnalyzer.getInstance();
+        depAnalyzer.initialize(this);
     }
 
     private void initialize() {
@@ -96,14 +97,14 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             if (node == invisibleRoot) {
                 return;
             }
-            depAnalyzer.initialize(node.getFilePath(), this);
             addDependencies(node, MAX_STACK_DEPTH);
             invisibleRoot.addChild(node);
         }
       
      
     }
-    
+
+
     public TreeObject getRoot() {
         TreeObject[] children = invisibleRoot.getChildren();
         if (children != null && children.length > 0) {
@@ -125,7 +126,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     }
     
     public void rebuild() {
-        depAnalyzer.rebuild();
+        depAnalyzer.rebuild(this);
         
     
     }
@@ -144,7 +145,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 return;
             }
             for (Dependency dep : deps) {
-                TreeParent newChild = new TreeParent(dep.getScriptFile(), dep.getType());
+                TreeParent newChild = new TreeParent(dep.getScriptFile(), dep.getType(), dep.isBroken());
                 if (dep.getLinenr() > 0) {
                     newChild.setLinenr(dep.getLinenr());
                 }
@@ -157,7 +158,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 return;
             }
             for (Dependency dep : deps) {
-                TreeParent newChild = new TreeParent(dep.getDependeeFile(), dep.getType());
+                TreeParent newChild = new TreeParent(dep.getDependeeFile(), dep.getType(), dep.isBroken());
                 if (dep.getLinenr() > 0) {
                     newChild.setLinenr(dep.getLinenr());
                 }

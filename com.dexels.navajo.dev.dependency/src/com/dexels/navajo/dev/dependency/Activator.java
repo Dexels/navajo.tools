@@ -1,5 +1,6 @@
 package com.dexels.navajo.dev.dependency;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -8,7 +9,9 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
-
+  //The identifiers for the preferences   
+    public static final String PROJECTS_PREFERENCE = "Projects";
+    
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.dexels.navajo.dev.dependency"; //$NON-NLS-1$
 
@@ -58,4 +61,16 @@ public class Activator extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
+	
+	
+	/** 
+     * Initializes a preference store with default preference values 
+     * for this plug-in.
+     */
+    protected void initializeDefaultPreferences(IPreferenceStore store) {
+        store.setDefault(PROJECTS_PREFERENCE, null);
+
+        //PreferenceConverter.setDefault(store,  HIGHLIGHT_PREFERENCE, color.getRGB());
+
+    }
 }

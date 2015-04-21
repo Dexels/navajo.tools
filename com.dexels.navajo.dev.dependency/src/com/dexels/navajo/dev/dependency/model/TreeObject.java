@@ -12,10 +12,13 @@ public class TreeObject implements IAdaptable {
 	private TreeParent parent;
 	private int type;
 	private int linenr;
-
-	public TreeObject(String filePath, int type) {
+	private boolean isBroken;
+	
+	public TreeObject(String filePath, int type, boolean isBroken) {
 
 		this.filePath = filePath;
+		this.isBroken = isBroken;
+		
 		this.type = type;
 		if (!filePath.equals(scriptName) && filePath.indexOf(".xml") > 0) {
 			scriptName = getScriptFromFilename(filePath);
@@ -32,15 +35,12 @@ public class TreeObject implements IAdaptable {
 		String script = null;
 		if (filename.indexOf("workflows") > 0) {
 			scriptFilePath = filename.split("workflows")[1];
-			// For clarity reasons, we actually include the 'workflows' part
-			// scriptFilePath = "workflows" + scriptFilePath;
-			script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+		} else if (filename.indexOf("tipi") > 0) {
+			scriptFilePath = filename.split("tipi")[1];
 		} else {
-			scriptFilePath = filename.split("scripts")[1];
-
-			script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+		    scriptFilePath = filename.split("scripts")[1];
 		}
-
+		script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
 		// Replace win32 slashes to be consistent with Navajo script slashes
 		return script.replace("\\", "/");
 
@@ -87,9 +87,21 @@ public class TreeObject implements IAdaptable {
 		this.linenr = linenr;
 	}
 
-	public String getDependencyTypeString() {
-		String result;
+	public boolean isBroken() {
+        return isBroken;
+    }
 
+    public void setBroken(boolean isBroken) {
+        this.isBroken = isBroken;
+    }
+
+    public String getDependencyTypeString() {
+		String result;
+		String brokenString = "";
+		if (isBroken) {
+		    brokenString = "Broken ";
+		}
+		
 		switch (type) {
 		case Dependency.NAVAJO_DEPENDENCY:
 			result = "NavajoMap";
@@ -106,31 +118,34 @@ public class TreeObject implements IAdaptable {
 		case Dependency.ENTITY_DEPENDENCY:
 			result = "Entity";
 			break;
-		case Dependency.BROKEN_DEPENDENCY:
-			result = "Broken";
-			break;
+		case Dependency.TIPI_DEPENDENCY:
+            result = "Tipi";
+            break;
+//		case Dependency.BROKEN_DEPENDENCY:
+//			result = "Broken";
+//			break;
 		default:
 			result = "??";
 			break;
 		}
 
-		return result;
+		return brokenString + result;
 	}
 
-	public int getDependencyTextColor() {
-		int result;
+    public int getDependencyTextColor() {
+        int result;
+        if (isBroken) {
+            return SWT.COLOR_RED;
+        }
 
-		switch (type) {
-		case Dependency.BROKEN_DEPENDENCY:
-			result = SWT.COLOR_RED;
-			break;
-		case Dependency.UNKNOWN_TYPE:
-			result = SWT.COLOR_RED;
-			break;
-		default:
-			result = SWT.COLOR_DARK_GRAY;
-			break;
-		}
-		return result;
-	}
+        switch (type) {
+        case Dependency.UNKNOWN_TYPE:
+            result = SWT.COLOR_RED;
+            break;
+        default:
+            result = SWT.COLOR_DARK_GRAY;
+            break;
+        }
+        return result;
+    }
 }

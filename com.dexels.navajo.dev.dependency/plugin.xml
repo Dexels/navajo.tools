@@ -51,6 +51,19 @@
       		Adds an icon decoration to Navajo scripts that contain broken references
     	</description> 
       </decorator>
-</extension>
-
+    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferencePage"
+            id="com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferencePage"
+            name="Navajo Dependency Plugin">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.dexels.navajo.dev.dependency.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>

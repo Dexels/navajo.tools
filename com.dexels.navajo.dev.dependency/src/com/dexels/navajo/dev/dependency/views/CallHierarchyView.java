@@ -1,11 +1,13 @@
 package com.dexels.navajo.dev.dependency.views;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -13,6 +15,7 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ide.IDE;
@@ -32,6 +35,7 @@ import com.dexels.navajo.dev.dependency.Activator;
 import com.dexels.navajo.dev.dependency.decorator.NavajoLightweightDecorator;
 import com.dexels.navajo.dev.dependency.model.TreeObject;
 import com.dexels.navajo.dev.dependency.model.TreeParent;
+import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
@@ -291,17 +295,24 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
         if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
             Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
-
+            List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
+            if (allProjects.size() == 0) {
+                updateRoot(new TreeParent("Please set your Navajo Dependency Preferences!", 0));
+                return;
+            }
+            
             if (selectedObject instanceof IFile) {
-                String filePath = ((IFile) selectedObject).getLocation().toString();
-                if (filePath.contains("scripts") || filePath.contains("workflows")) {
-                    if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
-                        updateRoot(new TreeParent(filePath, 0));
+                // Check if this file is within one of our projects
+                for (IProject p : allProjects) {
+                    IPath path = ((IFile) selectedObject).getProjectRelativePath();
+                    if (p.exists(path)) {
+                        String filePath = ((IFile) selectedObject).getLocation().toString();
+                        if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                            updateRoot(new TreeParent(filePath, 0));
+                            
+                        }
+                        return;
                     }
-                    return;
-                } else {
-                    // Non-script file selected
-                    updateRoot(viewProvider.getAbsoluteRoot());
                 }
             } else if (selectedObject instanceof IFolder) {
                 updateRoot(viewProvider.getAbsoluteRoot());
@@ -317,7 +328,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     viewer.refresh();
                     viewer.refresh(getViewSite());
                     viewer.expandToLevel(2);
-                    
                 }
 
                 // If the NavajoDecorator is enabled, then trigger update
@@ -389,13 +399,24 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             IEditorInput input = ((IEditorPart) e).getEditorInput();
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
-                String filePath = fileInput.getFile().getLocation().toString();
-                if (filePath.contains("scripts") || filePath.contains("workflows")) {
-                    if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
-                        updateRoot(new TreeParent(filePath, 0));
-                    }
+                
+                List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
+                if (allProjects.size() == 0) {
+                    updateRoot(new TreeParent("Please set your Navajo Dependency Preferences!", 0));
                     return;
                 }
+                
+                IPath path = fileInput.getFile().getProjectRelativePath();
+                String filePath = fileInput.getFile().getLocation().toString();
+                    // Check if this file is within one of our projects
+                    for (IProject p : allProjects) {
+                        if (p.exists(path)) {
+                            if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                                updateRoot(new TreeParent(filePath, 0));
+                            }
+                            return;
+                        }
+                    }
                 updateRoot(viewProvider.getAbsoluteRoot());
             }
         }
@@ -404,8 +425,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
-            String filePath = res.getLocation().toFile().getAbsolutePath();
-            if (filePath.indexOf("scripts") > 0 && filePath.indexOf(".xml") > 0) {
+            IProject scriptProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
+            if (scriptProject.exists(res.getProjectRelativePath())) {
+                String filePath = res.getLocation().toFile().getAbsolutePath();
 
                 switch (delta.getKind()) {
                 case IResourceDelta.ADDED:
@@ -421,6 +443,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     refreshRoot();
                     break;
                 }
+
             }
             return true;
         }
