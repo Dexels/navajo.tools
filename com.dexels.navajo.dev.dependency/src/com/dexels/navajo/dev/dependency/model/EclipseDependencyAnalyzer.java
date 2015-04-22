@@ -96,8 +96,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                     for (File f : files) {
                         monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
-
-                        addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
+                        try {
+                            addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
+                        } catch (Exception e) {
+                            // Something went wrong in this file, going to try to continue
+                            logger.error("Exception in getting dependencies of {}: {}", f.getAbsolutePath(), e);
+                        }
                         monitor.worked(1);
 
                         if (monitor.isCanceled()) {
