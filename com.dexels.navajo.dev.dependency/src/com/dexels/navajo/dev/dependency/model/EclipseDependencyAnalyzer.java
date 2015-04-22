@@ -42,8 +42,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         initialize();
         IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
         rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
-        
-
     }
 
     public static EclipseDependencyAnalyzer getInstance() {
@@ -116,11 +114,11 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     }
 
                     initialized = true;
-                } catch (Exception e) {
-                    initializeJob = null;
                 } finally {
                     monitor.done();
-
+                    if (!initialized) {
+                        initializeJob = null;
+                    }
                 }
 
                 return Status.OK_STATUS;
