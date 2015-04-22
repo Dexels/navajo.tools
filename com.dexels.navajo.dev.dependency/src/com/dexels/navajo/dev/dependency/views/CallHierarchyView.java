@@ -305,6 +305,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 // Check if this file is within one of our projects
                 for (IProject p : allProjects) {
                     IPath path = ((IFile) selectedObject).getProjectRelativePath();
+                    if (!path.toString().contains("xml")) {
+                        return;
+                    }
+
                     if (p.exists(path)) {
                         String filePath = ((IFile) selectedObject).getLocation().toString();
                         if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
@@ -407,6 +411,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 }
                 
                 IPath path = fileInput.getFile().getProjectRelativePath();
+                if (!path.toString().contains("xml")) {
+                    return;
+                }
                 String filePath = fileInput.getFile().getLocation().toString();
                     // Check if this file is within one of our projects
                     for (IProject p : allProjects) {
@@ -425,6 +432,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
+            if (!res.getProjectRelativePath().toString().contains("xml")) {
+                return true;
+            }
             IProject scriptProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
             if (scriptProject.exists(res.getProjectRelativePath())) {
                 String filePath = res.getLocation().toFile().getAbsolutePath();
