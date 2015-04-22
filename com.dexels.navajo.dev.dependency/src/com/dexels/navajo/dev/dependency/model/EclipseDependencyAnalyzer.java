@@ -42,6 +42,11 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         initialize();
         IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
         rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
+        File cvsRoot = new File(rootFolder, "navajo-tester"+ File.separator+ "auxilary/");
+        
+        if (cvsRoot.exists()) {
+            rootFolder = cvsRoot.toString();
+        }
     }
 
     public static EclipseDependencyAnalyzer getInstance() {
