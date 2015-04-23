@@ -24,6 +24,8 @@ import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
 public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
+    private static final int JOB_START_DELAY = 1000;
+
     private static class Holder {
         static final EclipseDependencyAnalyzer INSTANCE = new EclipseDependencyAnalyzer();
     }
@@ -36,6 +38,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     private boolean initialized = false;
     
     protected Map<String, Map<String, List<Dependency>>> externaldependencies;
+    protected Map<String, Map<String, List<Dependency>>> reverseExternaldependencies;
 
     public EclipseDependencyAnalyzer() {
         precompiler = new EclipseTslPreCompiler();
@@ -70,11 +73,13 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         initialized = false;
         initializeJob = null;
         externaldependencies = new HashMap<String, Map<String, List<Dependency>>>();
+        reverseExternaldependencies = new HashMap<String, Map<String, List<Dependency>>>();
         dependencies = new HashMap<String, List<Dependency>>();
         reverseDependencies = new HashMap<String, List<Dependency>>();
         
         initializeJob = createJob();
-        initializeJob.schedule();
+        initializeJob.setPriority(Job.BUILD);
+        initializeJob.schedule(JOB_START_DELAY);
         initializeJob.addJobChangeListener(new JobChangeAdapter() {
             @Override
             public void done(IJobChangeEvent arg0) {
@@ -185,22 +190,33 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             if (projectDeps == null) {
                 projectDeps = new HashMap<String, List<Dependency>>();
             }
-            
+            Map<String, List<Dependency>> reverseProjectDeps = reverseExternaldependencies.get(project.getName());
+            if (reverseProjectDeps == null) {
+                reverseProjectDeps = new HashMap<String, List<Dependency>>();
+            }
+
             try {
                 codeSearch.addProjectDependencies(project, myDependencies, scriptFolder, monitor);
             } catch (Exception e) {
                 logger.error("Exception on getting workflow depencencies for {}: {}", e);
             }
-            
+
             for (Dependency dep : myDependencies) {
-                
+
                 if (!projectDeps.containsKey(dep.getScript())) {
                     projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
                 }
-
                 projectDeps.get(dep.getScript()).add(dep);
 
+                if (!reverseProjectDeps.containsKey(dep.getDependee())) {
+                    reverseProjectDeps.put(dep.getDependee(), new ArrayList<Dependency>());
+                }
+
+                reverseProjectDeps.get(dep.getDependee()).add(dep);
+
             }
+
+            reverseExternaldependencies.put(project.getName(), reverseProjectDeps);
             externaldependencies.put(project.getName(), projectDeps);
 
         }
@@ -285,13 +301,42 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             if (projectDeps != null) {
                 superDeps.addAll(projectDeps);
             }
+        }
+        return superDeps;
+    }
+    
+    @Override
+    public List<Dependency> getReverseDependencies(String scriptPath) {
+      
+        
+        List<Dependency> superDeps = super.getReverseDependencies(scriptPath);
+
+        
+        if (superDeps == null) {
+            superDeps = new ArrayList<Dependency>();
+        }
+        String script = scriptPath;
+        if (scriptPath.indexOf('_') > 0) {
+            // Remove tenant-specific part
+            script = scriptPath.substring(0, scriptPath.indexOf('_'));
+        }
+        for (Map<String, List<Dependency>> externalDeps : reverseExternaldependencies.values()) {
+            List<Dependency> projectDeps = externalDeps.get(script);
+            if (projectDeps != null) {
+                superDeps.addAll(projectDeps);
+            }
 
         }
         return superDeps;
-        
+
     }
 
+    // Includes some caching since this is used to draw the 'broken file' icons
+    // by the Navajo Decorator
     public boolean containsBrokenDependencies(String scriptPath) {
+        if (!initialized) {
+            return false;
+        }
         List<Dependency> deps = getDependencies(scriptPath);
         if (deps == null) {
             return false;
@@ -303,5 +348,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             }
         }
         return false;
+    }
+
+    
+    public synchronized void cancelJob() {
+        if (initializeJob != null) {
+            initializeJob.cancel();
+        }
     }
 }

@@ -127,8 +127,9 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     
     public void rebuild() {
         depAnalyzer.rebuild(this);
-        
-    
+    }
+    public void cancelJob() {
+        depAnalyzer.cancelJob();
     }
 
     private void addDependencies(TreeParent node, int ttl) {      

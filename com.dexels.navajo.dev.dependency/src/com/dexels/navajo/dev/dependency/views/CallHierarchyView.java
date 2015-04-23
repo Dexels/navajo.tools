@@ -357,7 +357,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void cancelJob() {
-        //
+        viewProvider.cancelJob();
     }
 
     class MyResourceChangeReporter implements IResourceChangeListener, IPartListener {

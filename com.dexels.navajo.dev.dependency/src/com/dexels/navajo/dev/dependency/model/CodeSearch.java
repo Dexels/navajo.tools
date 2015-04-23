@@ -131,14 +131,14 @@ public class CodeSearch {
         }
     }
     
-    public void searchTipiFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
+    public void searchTipiFile(File tipiFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
-            BufferedReader bf = new BufferedReader(new FileReader(workflowFile));
+            BufferedReader bf = new BufferedReader(new FileReader(tipiFile));
 
             Pattern p1 = Pattern.compile("\\b" + "callService(.*)service=\"'([a-zA-Z0-9/]*)'", Pattern.CASE_INSENSITIVE);
-
+            Pattern p2 = Pattern.compile("\\b" + "performMethod(.*)method=\"'([a-zA-Z0-9/]*)'", Pattern.CASE_INSENSITIVE);
             while ((line = bf.readLine()) != null) {
                 Matcher m = p1.matcher(line);
                 linenr++;
@@ -155,7 +155,21 @@ public class CodeSearch {
                         isBroken = true;
                     }
                    
-                    deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                    deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                }
+                m = p2.matcher(line);
+                while (m.find()) {
+                    String scriptName = m.group(2);
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                   
+
+                    deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
                 }
             }
             bf.close();
