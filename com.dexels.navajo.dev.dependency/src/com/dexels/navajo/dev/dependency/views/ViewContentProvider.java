@@ -68,7 +68,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
 
                 }
             } 
-            return ((TreeParent) parent).getChildren();
+            return children;
         }
         return new Object[0];
     }

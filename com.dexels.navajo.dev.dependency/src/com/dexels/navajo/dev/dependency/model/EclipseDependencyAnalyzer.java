@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.resources.IProject;
@@ -30,23 +31,18 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
     private final static Logger logger = LoggerFactory.getLogger(EclipseDependencyAnalyzer.class);
     private String rootFolder;
-
     private Job initializeJob;
-
     private CodeSearch codeSearch;
     private boolean initialized = false;
+    
+    protected Map<String, Map<String, List<Dependency>>> externaldependencies;
 
     public EclipseDependencyAnalyzer() {
         precompiler = new EclipseTslPreCompiler();
         codeSearch = new CodeSearch();
         initialize();
-        IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
-        rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
-        File cvsRoot = new File(rootFolder, "navajo-tester"+ File.separator+ "auxilary/");
         
-        if (cvsRoot.exists()) {
-            rootFolder = cvsRoot.toString();
-        }
+       
     }
 
     public static EclipseDependencyAnalyzer getInstance() {
@@ -63,8 +59,17 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     public void rebuild(final ViewContentProvider callback) {
         // Resetting the following values will trigger a rebuild
+        IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
+        rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
+        File cvsRoot = new File(rootFolder, "navajo-tester"+ File.separator+ "auxilary/");
+        
+        if (cvsRoot.exists()) {
+            rootFolder = cvsRoot.toString();
+        }
+        
         initialized = false;
         initializeJob = null;
+        externaldependencies = new HashMap<String, Map<String, List<Dependency>>>();
         dependencies = new HashMap<String, List<Dependency>>();
         reverseDependencies = new HashMap<String, List<Dependency>>();
         
@@ -100,7 +105,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     monitor.beginTask("Calculating Navajo dependencies", files.size() + workflowFiles.size() + 500);
 
                     for (File f : files) {
-                        monitor.subTask("Calculating dependencies of: " + f.getAbsolutePath());
+                        monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
                         try {
                             addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
                         } catch (Exception e) {
@@ -170,34 +175,37 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     private void addExternalProjectDependencies(IProgressMonitor monitor) {
 
-        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        
         NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
         List<IProject> projectsToSearch = pref.getTipiProjects();
 
         for (IProject project : projectsToSearch) {
+            List<Dependency> myDependencies = new ArrayList<Dependency>();
+            Map<String, List<Dependency>> projectDeps = externaldependencies.get(project.getName());
+            if (projectDeps == null) {
+                projectDeps = new HashMap<String, List<Dependency>>();
+            }
+            
             try {
                 codeSearch.addProjectDependencies(project, myDependencies, scriptFolder, monitor);
             } catch (Exception e) {
                 logger.error("Exception on getting workflow depencencies for {}: {}", e);
             }
+            
+            for (Dependency dep : myDependencies) {
+                
+                if (!projectDeps.containsKey(dep.getScript())) {
+                    projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
+                }
+
+                projectDeps.get(dep.getScript()).add(dep);
+
+            }
+            externaldependencies.put(project.getName(), projectDeps);
 
         }
 
-        for (Dependency dep : myDependencies) {
-
-            if (!dependencies.containsKey(dep.getScript())) {
-                dependencies.put(dep.getScript(), new ArrayList<Dependency>());
-            }
-
-            dependencies.get(dep.getScript()).add(dep);
-
-            if (!reverseDependencies.containsKey(dep.getDependee())) {
-                reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
-            }
-
-            reverseDependencies.get(dep.getDependee()).add(dep);
-
-        }
+        
 
     }
 
@@ -263,6 +271,24 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             reverseDeps.removeAll(toRemove);
             reverseDependencies.put(dep.getDependee(), reverseDeps);
         }
+    }
+    
+    @Override
+    public List<Dependency> getDependencies(String scriptName) { 
+        List<Dependency> superDeps = super.getDependencies(scriptName);
+        if (superDeps == null) {
+            superDeps = new ArrayList<Dependency>();
+        }
+        
+        for (Map<String, List<Dependency>> externalDeps : externaldependencies.values()) {
+            List<Dependency> projectDeps = externalDeps.get(scriptName);
+            if (projectDeps != null) {
+                superDeps.addAll(projectDeps);
+            }
+
+        }
+        return superDeps;
+        
     }
 
     public boolean containsBrokenDependencies(String scriptPath) {

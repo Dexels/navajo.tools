@@ -96,6 +96,8 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         workflowDep.dispose();
         entityDep.dispose();
         brokenDep.dispose();
+        tipiDep.dispose();
+        unknownDep.dispose();
         super.dispose();
     }
 

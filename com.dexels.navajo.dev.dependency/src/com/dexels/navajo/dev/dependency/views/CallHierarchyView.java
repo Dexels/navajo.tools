@@ -63,6 +63,14 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
      */
 
     class NameSorter extends ViewerSorter {
+        @Override
+        public int compare(Viewer viewer, Object e1, Object e2) {
+            TreeParent o1 = (TreeParent) e1;
+            TreeParent o2 = (TreeParent) e2;
+            Integer l1  = o1.getLinenr();
+            Integer l2  = o2.getLinenr();
+            return l1.compareTo(l2);
+        } 
     }
 
     /**
@@ -296,10 +304,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
             Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
             List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
-            if (allProjects.size() == 0) {
-                updateRoot(new TreeParent("Please set your Navajo Dependency Preferences!", 0));
-                return;
-            }
             
             if (selectedObject instanceof IFile) {
                 // Check if this file is within one of our projects

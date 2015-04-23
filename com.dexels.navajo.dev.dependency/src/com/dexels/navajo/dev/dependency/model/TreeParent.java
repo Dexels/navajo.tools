@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class TreeParent extends TreeObject {
     private ArrayList<TreeObject> children;
-
+    
     public TreeParent(String filePath, int type) {
         super(filePath, type, false);
         children = new ArrayList<TreeObject>();
@@ -37,8 +37,8 @@ public class TreeParent extends TreeObject {
     }
 
     public TreeObject[] getChildren() {
+        
        // List<TreeObject> children.toArray(new TreeObject[children.size()]);
-        Collections.sort(children, new CustomComparator());
         TreeObject[] array =  children.toArray(new TreeObject[children.size()]);
         
         return array;
@@ -49,11 +49,6 @@ public class TreeParent extends TreeObject {
         return children.size() > 0;
     }
    
-    public class CustomComparator implements Comparator<TreeObject> {
-        @Override
-        public int compare(TreeObject o1, TreeObject o2) {
-            return ((Integer) o1.getLinenr()).compareTo((Integer) o2.getLinenr());
-        }
-    }
+
     
 }
