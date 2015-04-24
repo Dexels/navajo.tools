@@ -64,10 +64,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         // Resetting the following values will trigger a rebuild
         IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
         rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
-        File cvsRoot = new File(rootFolder, "navajo-tester"+ File.separator+ "auxilary/");
+        File cvsRoot = new File(rootFolder, "navajo-tester" + File.separator + "auxilary/");
         
         if (cvsRoot.exists()) {
-            rootFolder = cvsRoot.toString();
+            rootFolder = cvsRoot.toString() + File.separator;
         }
         
         initialized = false;
@@ -224,7 +224,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         
 
     }
-
     public void refresh(String scriptFile, boolean recursive) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
         removeScriptFromReverseValues(scriptName);
