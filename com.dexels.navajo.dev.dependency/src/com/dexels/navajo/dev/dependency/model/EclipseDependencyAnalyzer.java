@@ -60,7 +60,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
      
     }
 
-    public void rebuild(final ViewContentProvider callback) {
+    public synchronized void rebuild(final ViewContentProvider callback) {
         // Resetting the following values will trigger a rebuild
         IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
         rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
@@ -69,7 +69,9 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         if (cvsRoot.exists()) {
             rootFolder = cvsRoot.toString() + File.separator;
         }
-        
+        if (initializeJob != null) {
+            initializeJob.cancel();
+        }
         initialized = false;
         initializeJob = null;
         externaldependencies = new HashMap<String, Map<String, List<Dependency>>>();
@@ -107,7 +109,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                 try {
                     // Files.size + 'fake' 500 for workflow progress
-                    monitor.beginTask("Calculating Navajo dependencies", files.size() + workflowFiles.size() + 500);
+                    monitor.beginTask("Calculating Navajo dependencies", files.size() + workflowFiles.size());
 
                     for (File f : files) {
                         monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
@@ -295,13 +297,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             superDeps = new ArrayList<Dependency>();
         }
         
+        List<Dependency> deps = new ArrayList<Dependency>(superDeps);
+        
         for (Map<String, List<Dependency>> externalDeps : externaldependencies.values()) {
             List<Dependency> projectDeps = externalDeps.get(scriptName);
             if (projectDeps != null) {
-                superDeps.addAll(projectDeps);
+                deps.addAll(projectDeps);
             }
         }
-        return superDeps;
+        return deps;
     }
     
     @Override
@@ -310,10 +314,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         
         List<Dependency> superDeps = super.getReverseDependencies(scriptPath);
 
-        
         if (superDeps == null) {
             superDeps = new ArrayList<Dependency>();
         }
+        
+        List<Dependency> reverseDeps = new ArrayList<Dependency>(superDeps);
+        
         String script = scriptPath;
         if (scriptPath.indexOf('_') > 0) {
             // Remove tenant-specific part
@@ -322,11 +328,11 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         for (Map<String, List<Dependency>> externalDeps : reverseExternaldependencies.values()) {
             List<Dependency> projectDeps = externalDeps.get(script);
             if (projectDeps != null) {
-                superDeps.addAll(projectDeps);
+                reverseDeps.addAll(projectDeps);
             }
 
         }
-        return superDeps;
+        return reverseDeps;
 
     }
 
