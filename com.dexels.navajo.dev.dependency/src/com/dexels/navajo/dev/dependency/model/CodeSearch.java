@@ -33,14 +33,14 @@ public class CodeSearch {
             int nrFiles = countFiles(tipiDir);
             IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
             for (File dirEntry : tipiDir.listFiles()) {
-                if (monitor.isCanceled()) {
+                if (submonitor.isCanceled()) {
                     return;
                 }
                 if (dirEntry.isFile()) {
                     searchTipiFile(dirEntry, deps, scriptFolder);
                     submonitor.worked(1);
                 } else if (dirEntry.isDirectory()) {
-                    searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+                    searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, submonitor);
                 }
             }
             

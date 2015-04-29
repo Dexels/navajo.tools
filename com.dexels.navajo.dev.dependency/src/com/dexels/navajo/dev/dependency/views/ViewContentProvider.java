@@ -2,6 +2,7 @@ package com.dexels.navajo.dev.dependency.views;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -172,14 +173,14 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     }
 
    
-    public void removeResource(String filePath) {
-        depAnalyzer.remove(filePath);
+    public void removeResource(String filePath, IProject project) {
+        depAnalyzer.remove(filePath, project);
 
                
     }
 
-    public void updateResource(String filePath) {
-        depAnalyzer.refresh(filePath, true);
+    public void updateResource(String filePath, IProject project) {
+        depAnalyzer.refresh(filePath, project, true);
 
         
     }

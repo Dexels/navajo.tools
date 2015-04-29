@@ -439,26 +439,30 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             if (!res.getProjectRelativePath().toString().contains("xml")) {
                 return true;
             }
-            IProject scriptProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
-            if (scriptProject.exists(res.getProjectRelativePath())) {
-                String filePath = res.getLocation().toFile().getAbsolutePath();
+            List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
+            for (IProject p : allProjects) {
+                if (p.exists(res.getProjectRelativePath())) {
+                    String filePath = res.getLocation().toFile().getAbsolutePath();
 
-                switch (delta.getKind()) {
-                case IResourceDelta.ADDED:
-                    viewProvider.updateResource(filePath);
-                    refreshRoot();
-                    break;
-                case IResourceDelta.REMOVED:
-                    viewProvider.removeResource(filePath);
-                    refreshRoot();
-                    break;
-                case IResourceDelta.CHANGED:
-                    viewProvider.updateResource(filePath);
-                    refreshRoot();
-                    break;
+                    switch (delta.getKind()) {
+                    case IResourceDelta.ADDED:
+                        viewProvider.updateResource(filePath, p);
+                        refreshRoot();
+                        break;
+                    case IResourceDelta.REMOVED:
+                        viewProvider.removeResource(filePath, p);
+                        refreshRoot();
+                        break;
+                    case IResourceDelta.CHANGED:
+                        viewProvider.updateResource(filePath, p);
+                        refreshRoot();
+                        break;
+                    }
+                    return true;
                 }
 
             }
+
             return true;
         }
 

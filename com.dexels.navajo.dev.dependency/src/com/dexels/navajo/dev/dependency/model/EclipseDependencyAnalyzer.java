@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
@@ -226,30 +227,40 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         
 
     }
-    public void refresh(String scriptFile, boolean recursive) {
-        String scriptName = TreeObject.getScriptFromFilename(scriptFile);
-        removeScriptFromReverseValues(scriptName);
-        dependencies.remove(scriptName);
-        addDependencies(scriptName);
+    public void refresh(String scriptFile, IProject project, boolean recursive) {
+        if (NavajoDependencyPreferences.getInstance().getScriptsProject().equals(project)) {
+            String scriptName = TreeObject.getScriptFromFilename(scriptFile);
+            removeScriptFromReverseValues(scriptName);
+            dependencies.remove(scriptName);
+            addDependencies(scriptName);
+            
+            // Update the dependencies of all scripts that point(ed) to me
+            List<Dependency> deps = reverseDependencies.get(scriptName);
 
-        // Update the dependencies of all scripts that point(ed) to me
-        List<Dependency> deps = reverseDependencies.get(scriptName);
-
-        if (deps != null && recursive) {
-            // The refresh action can trigger removing dependencies.
-            // Therefore make a copy of the list to prevent ConcurrentMod
-            // exceptions
-            List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
-            for (Dependency dep : depsCopy) {
-                if (!dep.getScriptFile().equals(scriptFile)) {
-                    refresh(dep.getScriptFile(), false);
+            if (deps != null && recursive) {
+                // The refresh action can trigger removing dependencies.
+                // Therefore make a copy of the list to prevent ConcurrentMod
+                // exceptions
+                List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
+                for (Dependency dep : depsCopy) {
+                    if (!dep.getScriptFile().equals(scriptFile)) {
+                        refresh(dep.getScriptFile(), project, false);
+                    }
                 }
             }
+            
+        } else {
+            externaldependencies.clear();
+            reverseExternaldependencies.clear();
+            addExternalProjectDependencies(new NullProgressMonitor());
         }
+       
+
+      
 
     }
 
-    public void remove(String scriptFile) {
+    public void remove(String scriptFile, IProject project) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
         removeScriptFromReverseValues(scriptName);
         updatedReverseToBroken(scriptName);
