@@ -64,19 +64,28 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     public synchronized void rebuild(final ViewContentProvider callback) {
         // Resetting the following values will trigger a rebuild
-        IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
-        if (scriptsProject == null) {
-            Activator.getDefault().log("ScriptProject is null!");
+        try {
+            IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
+            Activator.getDefault().log("ScriptProjects = " + scriptsProject.toString());
+            Activator.getDefault().log("Going to print locations...");
+            Activator.getDefault().log("getLocation: " + scriptsProject.getLocation());
+            Activator.getDefault().log("getLocationURI: "+ scriptsProject.getLocationURI());
+            Activator.getDefault().log("getRawLocation: "+ scriptsProject.getRawLocation());
+            Activator.getDefault().log("getRawLocationURI: "+ scriptsProject.getRawLocationURI());
+
+            rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
+            File cvsRoot = new File(rootFolder, "navajo-tester" + File.separator + "auxilary/");
+            
+            if (cvsRoot.exists()) {
+                rootFolder = cvsRoot.toString() + File.separator;
+                Activator.getDefault().log("Found CVS project: " + rootFolder);
+
+            }
+        } catch (Exception e) {
+            Activator.getDefault().log("Error on getting scripts folder! " + e);
             return;
         }
-        rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
-        File cvsRoot = new File(rootFolder, "navajo-tester" + File.separator + "auxilary/");
         
-        if (cvsRoot.exists()) {
-            rootFolder = cvsRoot.toString() + File.separator;
-            Activator.getDefault().log("Found CVS project: " + rootFolder);
-
-        }
         if (initializeJob != null) {
             initializeJob.cancel();
         }
