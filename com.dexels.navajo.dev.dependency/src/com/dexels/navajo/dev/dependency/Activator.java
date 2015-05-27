@@ -1,5 +1,6 @@
 package com.dexels.navajo.dev.dependency;
 
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -73,4 +74,14 @@ public class Activator extends AbstractUIPlugin {
         //PreferenceConverter.setDefault(store,  HIGHLIGHT_PREFERENCE, color.getRGB());
 
     }
+    
+    public void log(String msg) {
+        log(msg, null);
+     }
+    
+     public void log(String msg, Exception e) {
+        getLog().log(new Status(Status.INFO, PLUGIN_ID, Status.OK, msg, e));
+     }
+    
+    
 }

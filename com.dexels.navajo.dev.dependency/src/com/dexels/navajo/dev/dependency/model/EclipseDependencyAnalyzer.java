@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.dependency.Dependency;
 import com.dexels.navajo.dependency.DependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.Activator;
 import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 import com.dexels.navajo.dev.dependency.views.ViewContentProvider;
 
@@ -64,11 +65,17 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     public synchronized void rebuild(final ViewContentProvider callback) {
         // Resetting the following values will trigger a rebuild
         IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
+        if (scriptsProject == null) {
+            Activator.getDefault().log("ScriptProject is null!");
+            return;
+        }
         rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
         File cvsRoot = new File(rootFolder, "navajo-tester" + File.separator + "auxilary/");
         
         if (cvsRoot.exists()) {
             rootFolder = cvsRoot.toString() + File.separator;
+            Activator.getDefault().log("Found CVS project: " + rootFolder);
+
         }
         if (initializeJob != null) {
             initializeJob.cancel();
