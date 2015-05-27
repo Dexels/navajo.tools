@@ -49,7 +49,7 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         input = classLoader.getResourceAsStream("icons/tipiDef.gif");
         tipiDep = new Image(Display.getCurrent(), input);
         
-        input = classLoader.getResourceAsStream("icons/articleDef.gif");
+        input = classLoader.getResourceAsStream("icons/articleDep.gif");
         articleDep = new Image(Display.getCurrent(), input);
         
         input = classLoader.getResourceAsStream("icons/unknownDep.gif");
