@@ -215,7 +215,7 @@ public class CodeSearch {
                 Matcher m = p1.matcher(line);
                 linenr++;
                 while (m.find()) {
-                    String scriptName = m.group(2);
+                    String scriptName = m.group(1);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     // Check if exists
                     boolean isBroken = false;

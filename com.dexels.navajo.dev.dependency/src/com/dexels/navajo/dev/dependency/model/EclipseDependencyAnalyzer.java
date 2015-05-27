@@ -173,7 +173,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                 reverseDependencies.get(dep.getDependee()).add(dep);
             } catch (Exception e) {
-                logger.error("HE {}" + e);
+                logger.error("Error in processing Workflow dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
             }
             ;
         }
@@ -206,12 +206,11 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                 reverseDependencies.get(dep.getDependee()).add(dep);
             } catch (Exception e) {
-                logger.error("HE {}" + e);
+                logger.error("Error in processing Article dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
             }
-            ;
         }
 
-        logger.debug("Done workflow dependencies");
+        logger.debug("Done article dependencies");
 
     }
 
@@ -237,19 +236,23 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             } catch (Exception e) {
                 logger.error("Exception on getting workflow depencencies for {}: {}", e);
             }
-
+            
             for (Dependency dep : myDependencies) {
+                try {
+                    if (!projectDeps.containsKey(dep.getScript())) {
+                        projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
+                    }
+                    projectDeps.get(dep.getScript()).add(dep);
 
-                if (!projectDeps.containsKey(dep.getScript())) {
-                    projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
+                    if (!reverseProjectDeps.containsKey(dep.getDependee())) {
+                        reverseProjectDeps.put(dep.getDependee(), new ArrayList<Dependency>());
+                    }
+
+                    reverseProjectDeps.get(dep.getDependee()).add(dep);
+                }  catch (Exception e) {
+                    logger.error("Error in processing external project dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
                 }
-                projectDeps.get(dep.getScript()).add(dep);
-
-                if (!reverseProjectDeps.containsKey(dep.getDependee())) {
-                    reverseProjectDeps.put(dep.getDependee(), new ArrayList<Dependency>());
-                }
-
-                reverseProjectDeps.get(dep.getDependee()).add(dep);
+                
 
             }
 
