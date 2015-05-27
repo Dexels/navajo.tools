@@ -25,6 +25,14 @@ public class CodeSearch {
         searchWorkflowScriptDependenciesInDir(workflowDir, deps, scriptFolder, submonitor);
     }
     
+    public void addArticleDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
+        File rootDir = new File(scriptFolder).getParentFile();
+        File articleDir = new File(rootDir, "article");
+        int nrFiles = countFiles(articleDir);
+        IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
+        searchArticleScriptDependenciesInDir(articleDir, deps, scriptFolder, submonitor);
+    }
+    
     public void addProjectDependencies(IProject project, List<Dependency> deps,String scriptFolder, IProgressMonitor monitor) {
         IFolder s = project.getFolder("tipi");
         if ( s.exists()) { 
@@ -62,6 +70,21 @@ public class CodeSearch {
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
                 searchWorkflowScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+            }
+        }
+    }
+    
+
+    private void searchArticleScriptDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
+        for (File dirEntry : directory.listFiles()) {
+            if (monitor.isCanceled()) {
+                return;
+            }
+            if (dirEntry.isFile()) {
+                searchArticleFile(dirEntry, deps, scriptFolder);
+                monitor.worked(1);
+            } else if (dirEntry.isDirectory()) {
+                searchArticleScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
             }
         }
     }
@@ -178,6 +201,36 @@ public class CodeSearch {
             System.err.println("EXCEPTION! " + e);
             e.printStackTrace();
         } 
+    }
+    
+    public void searchArticleFile(File articleFile, List<Dependency> deps, String scriptFolder) {
+        String line;
+        int linenr = 0;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(articleFile));
+
+            Pattern p1 = Pattern.compile("\\b" + "service name=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
+
+            while ((line = bf.readLine()) != null) {
+                Matcher m = p1.matcher(line);
+                linenr++;
+                while (m.find()) {
+                    String scriptName = m.group(2);
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                    deps.add(new Dependency(articleFile.getAbsolutePath(), scriptFullPath, Dependency.ARTICLE_DEPENDENCY, linenr, isBroken));
+                }
+            }
+            bf.close();
+
+        } catch (IOException e) {
+            System.err.println("EXCEPTION! " + e);
+            e.printStackTrace();
+        }
     }
     
 

@@ -30,21 +30,23 @@ public class TreeObject implements IAdaptable {
 	 * Returns the script part from a full filepath. Supports scripts +
 	 * workflows
 	 */
-	public static String getScriptFromFilename(String filename) {
-		String scriptFilePath = null;
-		String script = null;
-		if (filename.indexOf("workflows") > 0) {
-			scriptFilePath = filename.split("workflows")[1];
-		} else if (filename.indexOf("tipi") > 0) {
-			scriptFilePath = filename.split("tipi")[1];
-		} else {
-		    scriptFilePath = filename.split("scripts")[1];
-		}
-		script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
-		// Replace win32 slashes to be consistent with Navajo script slashes
-		return script.replace("\\", "/");
+    public static String getScriptFromFilename(String filename) {
+        String scriptFilePath = null;
+        String script = null;
+        if (filename.indexOf("workflows") > 0) {
+            scriptFilePath = filename.split("workflows")[1];
+        } else if (filename.indexOf("tipi") > 0) {
+            scriptFilePath = filename.split("tipi")[1];
+        } else if (filename.indexOf("article") > 0) {
+            scriptFilePath = filename.split("article")[1];
+        } else {
+            scriptFilePath = filename.split("scripts")[1];
+        }
+        script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+        // Replace win32 slashes to be consistent with Navajo script slashes
+        return script.replace("\\", "/");
 
-	}
+    }
 
 	public String getScriptName() {
 		return scriptName;
@@ -121,9 +123,9 @@ public class TreeObject implements IAdaptable {
 		case Dependency.TIPI_DEPENDENCY:
             result = "Tipi";
             break;
-//		case Dependency.BROKEN_DEPENDENCY:
-//			result = "Broken";
-//			break;
+		case Dependency.ARTICLE_DEPENDENCY:
+            result = "Article";
+            break;
 		default:
 			result = "??";
 			break;

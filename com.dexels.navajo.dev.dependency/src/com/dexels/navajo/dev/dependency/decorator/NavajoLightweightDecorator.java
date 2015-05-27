@@ -32,9 +32,10 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         String script = null;
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
-            
         } else if (filename.indexOf("tipi") > 0) {
             scriptFilePath = filename.split("tipi")[1];
+        } else if (filename.indexOf("article") > 0) {
+            scriptFilePath = filename.split("article")[1];
         } else {
             scriptFilePath = filename.split("scripts")[1];
         }
@@ -73,7 +74,8 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
             return cacheMap.get(file);
         }
         
-        if ((filePath.contains("scripts") || filePath.contains("workflows") ||filePath.contains("tipi")) && filePath.contains(".xml")) {
+        if ((filePath.contains("scripts") || filePath.contains("workflows") || filePath.contains("article") || filePath.contains("tipi"))
+                && filePath.contains(".xml")) {
             if (depAnalyzer.containsBrokenDependencies(getScriptFromFilename(filePath))) {
                 cacheMap.put(file, true);
                 return true;
