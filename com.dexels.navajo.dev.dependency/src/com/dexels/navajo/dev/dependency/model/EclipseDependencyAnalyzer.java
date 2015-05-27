@@ -67,13 +67,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         try {
             IProject scriptsProject = NavajoDependencyPreferences.getInstance().getScriptsProject();
             Activator.getDefault().log("ScriptProjects = " + scriptsProject.toString());
-            Activator.getDefault().log("Going to print locations...");
-            Activator.getDefault().log("getLocation: " + scriptsProject.getLocation());
-            Activator.getDefault().log("getLocationURI: "+ scriptsProject.getLocationURI());
-            Activator.getDefault().log("getRawLocation: "+ scriptsProject.getRawLocation());
-            Activator.getDefault().log("getRawLocationURI: "+ scriptsProject.getRawLocationURI());
-
-            rootFolder = scriptsProject.getRawLocation().toString() + File.separator;
+            rootFolder = scriptsProject.getLocation().toString() + File.separator;
             File cvsRoot = new File(rootFolder, "navajo-tester" + File.separator + "auxilary/");
             
             if (cvsRoot.exists()) {
