@@ -405,6 +405,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         private void updateRootFromWorkbench(IWorkbenchPart e) {
             IEditorInput input = ((IEditorPart) e).getEditorInput();
+            if (viewProvider == null) {
+                return;
+            }
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
                 
@@ -422,7 +425,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     // Check if this file is within one of our projects
                     for (IProject p : allProjects) {
                         if (p.exists(path)) {
-                            if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                        if (viewProvider.getRoot() == null || viewProvider.getRoot().getFilePath() == null
+                                || !viewProvider.getRoot().getFilePath().equals(filePath)) {
                                 updateRoot(new TreeParent(filePath, 0));
                             }
                             return;

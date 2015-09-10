@@ -1,8 +1,6 @@
 package com.dexels.navajo.dev.dependency.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class TreeParent extends TreeObject {
     private ArrayList<TreeObject> children;

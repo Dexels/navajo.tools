@@ -72,7 +72,7 @@ public class TreeObject implements IAdaptable {
 		return getScriptName();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Class key) {
 		return null;
 	}

@@ -109,9 +109,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             protected IStatus run(IProgressMonitor monitor) {
                 scriptFolder = rootFolder + "scripts";
 
-                // Read in existing dependencies
-                importPersistedDependencies(scriptFolder);
-
                 // We missed changes, so re-read all files
                 String[] xmlExt = { "xml" };
                 Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
@@ -138,7 +135,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     }
                     addWorkflowDependencies(scriptFolder, monitor);
                     addArticleDependencies(scriptFolder, monitor);
-                    persistDependencies(scriptFolder);
 
                     addExternalProjectDependencies(monitor);
 
