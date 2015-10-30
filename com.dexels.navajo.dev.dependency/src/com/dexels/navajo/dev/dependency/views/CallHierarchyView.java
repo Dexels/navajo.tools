@@ -422,16 +422,16 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     return;
                 }
                 String filePath = fileInput.getFile().getLocation().toString();
-                    // Check if this file is within one of our projects
-                    for (IProject p : allProjects) {
-                        if (p.exists(path)) {
+                // Check if this file is within one of our projects
+                for (IProject p : allProjects) {
+                    if (p.exists(path)) {
                         if (viewProvider.getRoot() == null || viewProvider.getRoot().getFilePath() == null
                                 || !viewProvider.getRoot().getFilePath().equals(filePath)) {
-                                updateRoot(new TreeParent(filePath, 0));
-                            }
-                            return;
+                            updateRoot(new TreeParent(filePath, 0));
                         }
+                        return;
                     }
+                }
                 updateRoot(viewProvider.getAbsoluteRoot());
             }
         }

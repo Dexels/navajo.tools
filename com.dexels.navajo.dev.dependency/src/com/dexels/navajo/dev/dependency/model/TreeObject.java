@@ -27,8 +27,7 @@ public class TreeObject implements IAdaptable {
 	}
 
 	/**
-	 * Returns the script part from a full filepath. Supports scripts +
-	 * workflows
+	 * Returns the script part from a full file path
 	 */
     public static String getScriptFromFilename(String filename) {
         String scriptFilePath = null;
@@ -39,8 +38,10 @@ public class TreeObject implements IAdaptable {
             scriptFilePath = filename.split("tipi")[1];
         } else if (filename.indexOf("article") > 0) {
             scriptFilePath = filename.split("article")[1];
-        } else {
+        } else if (filename.indexOf("scripts") > 0) {
             scriptFilePath = filename.split("scripts")[1];
+        } else {
+            return "";
         }
         script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
         // Replace win32 slashes to be consistent with Navajo script slashes
@@ -72,7 +73,7 @@ public class TreeObject implements IAdaptable {
 		return getScriptName();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	public Object getAdapter(Class key) {
 		return null;
 	}
