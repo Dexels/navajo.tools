@@ -406,7 +406,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         private void updateRootFromWorkbench(IWorkbenchPart e) {
             IEditorInput input = ((IEditorPart) e).getEditorInput();
             if (viewProvider == null) {
-                return;
+                viewProvider = new ViewContentProvider(getViewSite(), CallHierarchyView.this);
+                viewer.setContentProvider(viewProvider);
             }
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
