@@ -30,9 +30,7 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
     private String getScriptFromFilename(String filename) {
         String scriptFilePath = null;
         String script = null;
-        if (filename.indexOf(".") < 1) {
-            return "";
-        }
+        
         
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
@@ -43,6 +41,10 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         } else if (filename.indexOf("scripts") > 0) {
             scriptFilePath = filename.split("scripts")[1];
         } else {
+            return "";
+        }
+        
+        if (scriptFilePath.length() < 1 || scriptFilePath.indexOf(".") < 1) {
             return "";
         }
         script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
