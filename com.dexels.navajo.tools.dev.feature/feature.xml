@@ -17,12 +17,9 @@
       By reading this licence, you give us a perpetual, irrevocable, worldwide, royalty-free, and non-exclusive license to reproduce, adapt, modify, translate, publish, publicly perform, publicly display and distribute any Content which you submit, post or display on or through, the Services.
    </license>
 
-   <plugin
-         id="slf4j.api"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="slf4j.api"/>
+   </requires>
 
    <plugin
          id="com.dexels.navajo.api"
@@ -39,8 +36,8 @@
          unpack="false"/>
 
    <plugin
-        id="com.dexels.navajo.birt.push"
-        download-size="0"
+         id="com.dexels.navajo.birt.push"
+         download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
