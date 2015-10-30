@@ -30,6 +30,10 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
     private String getScriptFromFilename(String filename) {
         String scriptFilePath = null;
         String script = null;
+        if (filename.indexOf(".") < 1) {
+            return "";
+        }
+        
         if (filename.indexOf("workflows") > 0) {
             scriptFilePath = filename.split("workflows")[1];
         } else if (filename.indexOf("tipi") > 0) {
