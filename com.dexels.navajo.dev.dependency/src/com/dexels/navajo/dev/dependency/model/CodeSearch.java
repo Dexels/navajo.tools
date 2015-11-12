@@ -182,7 +182,7 @@ public class CodeSearch {
             BufferedReader bf = new BufferedReader(new FileReader(tasksFile));
 
             Pattern p1 = Pattern.compile("\\b" + "name=\"webservice\" value=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
-
+            Pattern p2 = Pattern.compile("\\b" + "navajo:([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
             while ((line = bf.readLine()) != null) {
                 Matcher m = p1.matcher(line);
                 linenr++;
@@ -195,6 +195,21 @@ public class CodeSearch {
                     if (!new File(scriptFullPath).exists()) {
                         isBroken = true;
                     }
+                    deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
+                }
+                
+                m = p2.matcher(line);
+                while (m.find()) {
+                    String scriptName = m.group(1);
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                   
+                    // Should this be the other way around? Since this is really a trigger for a task, rather than a result of
                     deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
                 }
 

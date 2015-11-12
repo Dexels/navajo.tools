@@ -23,6 +23,7 @@ class ViewLabelProvider extends StyledCellLabelProvider {
     Image brokenDep;
     Image tipiDep;
     Image articleDep;
+    Image taskDep;
     Image unknownDep;
     
     public ViewLabelProvider() {
@@ -52,6 +53,9 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         input = classLoader.getResourceAsStream("icons/articleDep.gif");
         articleDep = new Image(Display.getCurrent(), input);
         
+        input = classLoader.getResourceAsStream("icons/taskDep.gif");
+        taskDep = new Image(Display.getCurrent(), input);
+
         input = classLoader.getResourceAsStream("icons/unknownDep.gif");
         unknownDep = new Image(Display.getCurrent(), input);
         
@@ -86,7 +90,7 @@ class ViewLabelProvider extends StyledCellLabelProvider {
                 res = articleDep;
                 break;
             case Dependency.TASK_DEPENDENCY:
-                res = workflowDep;
+                res = taskDep;
                 break;
             case Dependency.UNKNOWN_TYPE:
                 res = unknownDep;
@@ -109,6 +113,7 @@ class ViewLabelProvider extends StyledCellLabelProvider {
         tipiDep.dispose();
         articleDep.dispose();
         unknownDep.dispose();
+        taskDep.dispose();
         super.dispose();
     }
 

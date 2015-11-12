@@ -1,5 +1,6 @@
 package com.dexels.navajo.dev.dependency.decorator;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,8 +42,11 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         } else if (filename.indexOf("scripts") > 0) {
             scriptFilePath = filename.split("scripts")[1];
         } else if (filename.endsWith("tasks.xml")) {
-            int idx = filename.indexOf("tasks.xml");
-            scriptFilePath = filename.substring(idx);
+            // Tasks file as a bit special, since they don't have their own
+            // directory really. Hence we simulate this
+            String[] filenameParts = filename.split(File.separator);
+            String tenant = filenameParts[filenameParts.length - 3];
+            scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
         } else {
             return "";
         }
@@ -85,7 +89,7 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
             return cacheMap.get(file);
         }
         
-        if ((filePath.contains("scripts") || filePath.contains("workflows") || filePath.contains("article") || filePath.contains("tipi"))
+        if ((filePath.contains("scripts") || filePath.contains("workflows") || filePath.contains("article") || filePath.contains("tipi") || filePath.contains("tasks"))
                 && filePath.contains(".xml")) {
             if (depAnalyzer.containsBrokenDependencies(getScriptFromFilename(filePath))) {
                 cacheMap.put(file, true);
