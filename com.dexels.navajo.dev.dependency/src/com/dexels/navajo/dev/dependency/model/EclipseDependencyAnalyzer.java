@@ -135,7 +135,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     }
                     addWorkflowDependencies(scriptFolder, monitor);
                     addArticleDependencies(scriptFolder, monitor);
-
+                    addTasksDependencies(scriptFolder, monitor);
                     addExternalProjectDependencies(monitor);
 
                     if (monitor.isCanceled()) {
@@ -187,6 +187,41 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         logger.debug("Done workflow dependencies");
 
     }
+    
+    private void addTasksDependencies(String scriptFolder, IProgressMonitor monitor) {
+        logger.debug("Starting tasks dependencies");
+        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        try {
+            codeSearch.addTasksDependencies(scriptFolder, myDependencies, monitor);
+        } catch (Exception e) {
+            logger.error("Exception on getting tasks depencencies for {}: {}", e);
+            return;
+        }
+
+        for (Dependency dep : myDependencies) {
+            try {
+                if (!dependencies.containsKey(dep.getScript())) {
+                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                }
+
+                dependencies.get(dep.getScript()).add(dep);
+
+                if (!reverseDependencies.containsKey(dep.getDependee())) {
+                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                }
+
+                reverseDependencies.get(dep.getDependee()).add(dep);
+            } catch (Exception e) {
+                logger.error("Error in processing tasks dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+            }
+            ;
+        }
+
+        logger.debug("Done tasks dependencies");
+
+    }
+    
+    
     
     private void addArticleDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting article dependencies");

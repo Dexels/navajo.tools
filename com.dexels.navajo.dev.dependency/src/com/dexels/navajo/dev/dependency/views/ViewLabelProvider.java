@@ -85,6 +85,9 @@ class ViewLabelProvider extends StyledCellLabelProvider {
             case Dependency.ARTICLE_DEPENDENCY:
                 res = articleDep;
                 break;
+            case Dependency.TASK_DEPENDENCY:
+                res = workflowDep;
+                break;
             case Dependency.UNKNOWN_TYPE:
                 res = unknownDep;
                 break;

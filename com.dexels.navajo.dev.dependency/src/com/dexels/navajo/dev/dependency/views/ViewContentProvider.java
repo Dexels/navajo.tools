@@ -66,6 +66,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 if (child.isEmptyTreeObject()) {
                     parent.removeChild(child);
                     addDependencies(parent, MAX_STACK_DEPTH);
+                    children = parent.getChildren();
 
                 }
             } 

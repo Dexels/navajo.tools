@@ -16,6 +16,10 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ide.IDE;
@@ -363,12 +367,22 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     class MyResourceChangeReporter implements IResourceChangeListener, IPartListener {
 
         @Override
-        public void resourceChanged(IResourceChangeEvent event) {
-            try {
-                event.getDelta().accept(new DeltaUpdater());
-            } catch (CoreException e) {
-                // Something weird happened - lets just leave it at this
-            }
+        public void resourceChanged(final IResourceChangeEvent event) {
+
+            Job changeJob = new Job("RESOURCE_CHANGED") {
+
+                @Override
+                protected IStatus run(IProgressMonitor monitor) {
+                    try {
+                        event.getDelta().accept(new DeltaUpdater());
+                    } catch (CoreException e) {
+                        // Something weird happened - lets just leave it at this
+                    }
+                    return Status.OK_STATUS;
+                }
+            };
+            changeJob.setPriority(Job.BUILD);
+            changeJob.schedule(100);
         }
 
         @Override

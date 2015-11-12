@@ -35,10 +35,7 @@ public class TreeParent extends TreeObject {
     }
 
     public TreeObject[] getChildren() {
-        
-       // List<TreeObject> children.toArray(new TreeObject[children.size()]);
         TreeObject[] array =  children.toArray(new TreeObject[children.size()]);
-        
         return array;
         
     }

@@ -25,6 +25,13 @@ public class CodeSearch {
         searchWorkflowScriptDependenciesInDir(workflowDir, deps, scriptFolder, submonitor);
     }
     
+    public void addTasksDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
+        File rootDir = new File(scriptFolder).getParentFile();
+        File settingsDir = new File(rootDir, "settings");
+        IProgressMonitor submonitor = new SubProgressMonitor(monitor, 10);
+        searchTasksScriptDependenciesInDir(settingsDir, deps, scriptFolder, submonitor);
+    }
+    
     public void addArticleDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
         File rootDir = new File(scriptFolder).getParentFile();
         File articleDir = new File(rootDir, "article");
@@ -70,6 +77,20 @@ public class CodeSearch {
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
                 searchWorkflowScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+            }
+        }
+    }
+    
+    private void searchTasksScriptDependenciesInDir(File settingsDir, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
+        for (File dirEntry : settingsDir.listFiles()) {
+            if (monitor.isCanceled()) {
+                return;
+            }
+            if (dirEntry.isFile() && dirEntry.getName().equals("tasks.xml")) {
+                searchTasksFile(dirEntry, deps, scriptFolder);
+                monitor.worked(1);
+            } else if (dirEntry.isDirectory()) {
+                searchTasksScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
             }
         }
     }
@@ -150,6 +171,39 @@ public class CodeSearch {
 
         } catch (IOException e) {
             System.err.println("EXCEPTION! " + e);
+            e.printStackTrace();
+        }
+    }
+    
+    public void searchTasksFile(File tasksFile, List<Dependency> deps, String scriptFolder) {
+        String line;
+        int linenr = 0;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(tasksFile));
+
+            Pattern p1 = Pattern.compile("\\b" + "name=\"webservice\" value=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
+
+            while ((line = bf.readLine()) != null) {
+                Matcher m = p1.matcher(line);
+                linenr++;
+                while (m.find()) {
+                    String scriptName = m.group(1);
+
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                    deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
+                }
+
+               
+            }
+            bf.close();
+
+        } catch (IOException e) {
+            System.err.println("Error on reading taskfile ! " + e);
             e.printStackTrace();
         }
     }

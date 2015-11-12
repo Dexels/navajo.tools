@@ -40,6 +40,9 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
             scriptFilePath = filename.split("article")[1];
         } else if (filename.indexOf("scripts") > 0) {
             scriptFilePath = filename.split("scripts")[1];
+        } else if (filename.endsWith("tasks.xml")) {
+            int idx = filename.indexOf("tasks.xml");
+            scriptFilePath = filename.substring(idx);
         } else {
             return "";
         }

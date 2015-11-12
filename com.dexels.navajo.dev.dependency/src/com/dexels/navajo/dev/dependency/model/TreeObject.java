@@ -40,6 +40,9 @@ public class TreeObject implements IAdaptable {
             scriptFilePath = filename.split("article")[1];
         } else if (filename.indexOf("scripts") > 0) {
             scriptFilePath = filename.split("scripts")[1];
+        } else if (filename.endsWith("tasks.xml")) {
+            int idx = filename.indexOf("tasks.xml");
+            scriptFilePath = filename.substring(idx);
         } else {
             return "";
         }
@@ -126,6 +129,9 @@ public class TreeObject implements IAdaptable {
             break;
 		case Dependency.ARTICLE_DEPENDENCY:
             result = "Article";
+            break;
+		case Dependency.TASK_DEPENDENCY:
+            result = "Task";
             break;
 		default:
 			result = "??";
