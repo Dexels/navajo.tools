@@ -3,6 +3,7 @@ package com.dexels.navajo.dev.dependency.decorator;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -44,7 +45,8 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         } else if (filename.endsWith("tasks.xml")) {
             // Tasks file as a bit special, since they don't have their own
             // directory really. Hence we simulate this
-            String[] filenameParts = filename.split(File.separator);
+            String pattern = Pattern.quote(File.separator);
+            String[] filenameParts = filename.split(pattern);
             String tenant = filenameParts[filenameParts.length - 3];
             scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
         } else {

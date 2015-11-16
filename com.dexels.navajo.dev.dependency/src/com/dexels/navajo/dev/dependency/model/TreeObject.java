@@ -1,6 +1,7 @@
 package com.dexels.navajo.dev.dependency.model;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.swt.SWT;
@@ -45,7 +46,8 @@ public class TreeObject implements IAdaptable {
         } else if (filename.endsWith("tasks.xml")) {
             // Tasks file as a bit special, since they don't have their own
             // directory really. Hence we simulate this
-            String[] filenameParts = filename.split(File.separator);
+            String pattern = Pattern.quote(File.separator);
+            String[] filenameParts = filename.split(pattern);
             String tenant = filenameParts[filenameParts.length - 3];
             scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
 
