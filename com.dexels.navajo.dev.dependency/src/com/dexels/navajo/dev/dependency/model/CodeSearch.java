@@ -278,13 +278,13 @@ public class CodeSearch {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(articleFile));
 
-            Pattern p1 = Pattern.compile("\\b" + "service name=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
+            Pattern p1 = Pattern.compile("\\b" + "service(.*)name=\"([a-zA-Z0-9/]*)", Pattern.CASE_INSENSITIVE);
 
             while ((line = bf.readLine()) != null) {
                 Matcher m = p1.matcher(line);
                 linenr++;
                 while (m.find()) {
-                    String scriptName = m.group(1);
+                    String scriptName = m.group(2);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     // Check if exists
                     boolean isBroken = false;
