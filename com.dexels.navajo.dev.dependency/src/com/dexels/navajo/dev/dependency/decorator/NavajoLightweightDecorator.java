@@ -58,7 +58,7 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
                 return "";
             }
         } catch (Exception e) {
-            logger.error("Exception on retrieving scriptname from filename {}: ", filename, e);
+            logger.error("Exception on retrieving scriptname from filename {} : {} ", filename, e);
             return "";
         }
     
@@ -96,7 +96,7 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
     }
 
     private boolean fileContainsBrokenDependencies(IFile file) {
-        String filePath = file.getLocation().toString();
+        String filePath = file.getLocation().toOSString();
         if (cacheMap.get(file) != null) {
             return cacheMap.get(file);
         }

@@ -274,7 +274,7 @@ public class NavajoBuilder extends org.eclipse.core.resources.IncrementalProject
                     IPath packPath = scriptPackage.getFullPath().removeFirstSegments(scriptDirPath.segmentCount());
                     String script = null;
                     String packageName = null;
-                    packageName = packPath.toString();
+                    packageName = packPath.toOSString();
 
                     
                     if (element.getParent().equals(NavajoScriptPluginPlugin.getDefault().getScriptFolder(getProject()))) {

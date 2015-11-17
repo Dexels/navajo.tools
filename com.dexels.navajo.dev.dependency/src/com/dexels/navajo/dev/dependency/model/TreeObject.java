@@ -53,7 +53,6 @@ public class TreeObject implements IAdaptable {
                 // directory really. Hence we simulate this
                 String pattern = Pattern.quote(File.separator);
                 String[] filenameParts = filename.split(pattern);
-                
                 String tenant = filenameParts[filenameParts.length - 3];
                 scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
 
