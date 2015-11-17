@@ -53,6 +53,7 @@ public class TreeObject implements IAdaptable {
                 // directory really. Hence we simulate this
                 String pattern = Pattern.quote(File.separator);
                 String[] filenameParts = filename.split(pattern);
+                
                 String tenant = filenameParts[filenameParts.length - 3];
                 scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
 
@@ -60,7 +61,7 @@ public class TreeObject implements IAdaptable {
                 return "";
             }
         }catch (Exception e) {
-            logger.error("Exception on retrieving scriptname from filename {}: ", filename, e);
+            logger.error("Exception on retrieving scriptname from filename {}: {} ", filename, e);
             return "";
         }
        

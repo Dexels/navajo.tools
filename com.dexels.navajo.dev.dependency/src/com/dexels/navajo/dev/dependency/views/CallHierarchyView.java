@@ -313,12 +313,12 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 // Check if this file is within one of our projects
                 for (IProject p : allProjects) {
                     IPath path = ((IFile) selectedObject).getProjectRelativePath();
-                    if (!path.toString().contains("xml")) {
+                    if (!path.toOSString().contains("xml")) {
                         return;
                     }
 
                     if (p.exists(path)) {
-                        String filePath = ((IFile) selectedObject).getLocation().toString();
+                        String filePath = ((IFile) selectedObject).getLocation().toOSString();
                         if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
                             updateRoot(new TreeParent(filePath, 0));
                             
@@ -433,10 +433,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 }
                 
                 IPath path = fileInput.getFile().getProjectRelativePath();
-                if (!path.toString().contains("xml")) {
+                if (!path.toOSString().contains("xml")) {
                     return;
                 }
-                String filePath = fileInput.getFile().getLocation().toString();
+                String filePath = fileInput.getFile().getLocation().toOSString();
                 // Check if this file is within one of our projects
                 for (IProject p : allProjects) {
                     if (p.exists(path)) {
@@ -455,7 +455,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
-            if (!res.getProjectRelativePath().toString().contains("xml")) {
+            if (!res.getProjectRelativePath().toOSString().contains("xml")) {
                 return true;
             }
             List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
