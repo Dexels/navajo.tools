@@ -12,11 +12,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.dev.dependency.Activator;
 import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
 
+
 public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
+    private final static Logger logger = LoggerFactory.getLogger(NavajoLightweightDecorator.class);
+    
     private EclipseDependencyAnalyzer depAnalyzer;
     private Map<IResource, Boolean> cacheMap;
 
@@ -33,25 +38,30 @@ public class NavajoLightweightDecorator implements ILightweightLabelDecorator {
         String scriptFilePath = null;
         String script = null;
         
-        
-        if (filename.indexOf("workflows") > 0) {
-            scriptFilePath = filename.split("workflows")[1];
-        } else if (filename.indexOf("tipi") > 0) {
-            scriptFilePath = filename.split("tipi")[1];
-        } else if (filename.indexOf("article") > 0) {
-            scriptFilePath = filename.split("article")[1];
-        } else if (filename.indexOf("scripts") > 0) {
-            scriptFilePath = filename.split("scripts")[1];
-        } else if (filename.endsWith("tasks.xml")) {
-            // Tasks file as a bit special, since they don't have their own
-            // directory really. Hence we simulate this
-            String pattern = Pattern.quote(File.separator);
-            String[] filenameParts = filename.split(pattern);
-            String tenant = filenameParts[filenameParts.length - 3];
-            scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
-        } else {
+        try {
+            if (filename.indexOf("workflows") > 0) {
+                scriptFilePath = filename.split("workflows")[1];
+            } else if (filename.indexOf("tipi") > 0) {
+                scriptFilePath = filename.split("tipi")[1];
+            } else if (filename.indexOf("article") > 0) {
+                scriptFilePath = filename.split("article")[1];
+            } else if (filename.indexOf("scripts") > 0) {
+                scriptFilePath = filename.split("scripts")[1];
+            } else if (filename.endsWith("tasks.xml")) {
+                // Tasks file as a bit special, since they don't have their own
+                // directory really. Hence we simulate this
+                String pattern = Pattern.quote(File.separator);
+                String[] filenameParts = filename.split(pattern);
+                String tenant = filenameParts[filenameParts.length - 3];
+                scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            logger.error("Exception on retrieving scriptname from filename {}: ", filename, e);
             return "";
         }
+    
         
         if (scriptFilePath.length() < 1 || scriptFilePath.indexOf(".") < 1) {
             return "";
