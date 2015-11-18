@@ -298,7 +298,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         
 
     }
-    public void refresh(String scriptFile, IProject project, boolean recursive) {
+    public synchronized void refresh(String scriptFile, IProject project, boolean recursive) {
         if (NavajoDependencyPreferences.getInstance().getScriptsProject().equals(project)) {
             String scriptName = TreeObject.getScriptFromFilename(scriptFile);
             removeScriptFromReverseValues(scriptName);
@@ -310,8 +310,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
             if (deps != null && recursive) {
                 // The refresh action can trigger removing dependencies.
-                // Therefore make a copy of the list to prevent ConcurrentMod
-                // exceptions
+                // Therefore make a copy of the list to prevent ConcurrentMod exceptions
                 List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
                 for (Dependency dep : depsCopy) {
                     if (!dep.getScriptFile().equals(scriptFile)) {
@@ -325,17 +324,13 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             reverseExternaldependencies.clear();
             addExternalProjectDependencies(new NullProgressMonitor());
         }
-       
-
-      
 
     }
 
-    public void remove(String scriptFile, IProject project) {
+    public synchronized void remove(String scriptFile, IProject project) {
         String scriptName = TreeObject.getScriptFromFilename(scriptFile);
         removeScriptFromReverseValues(scriptName);
         updatedReverseToBroken(scriptName);
-        dependencies.get(scriptName);
         dependencies.remove(scriptName);
     }
 
@@ -350,7 +345,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         }
     }
 
-    private void removeScriptFromReverseValues(String scriptName) {
+    private synchronized void removeScriptFromReverseValues(String scriptName) {
         List<Dependency> deps = dependencies.get(scriptName);
         if (deps == null) {
             return;
