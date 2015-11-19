@@ -25,6 +25,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.*;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -42,6 +44,7 @@ import com.dexels.navajo.dev.dependency.model.TreeParent;
 import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
+    private final static Logger logger = LoggerFactory.getLogger(CallHierarchyView.class);
 
     /**
      * The ID of the view as specified by the extension.
@@ -96,7 +99,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             PlatformUI.getWorkbench().getDecoratorManager()
                     .setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
         } catch (CoreException e) {
-            // Forget it...
+            logger.warn("CoreException in enabling Navajo Decorator", e);
         }
     }
 
@@ -111,7 +114,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             PlatformUI.getWorkbench().getDecoratorManager()
                     .setEnabled("com.dexels.navajo.dev.dependency.decorator", false);
         } catch (CoreException e) {
-            // Forget it...
+            logger.warn("CoreException in removing Navajo Decorator", e);
         }
     }
 
@@ -242,7 +245,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                             	goToLine(treeObj.getLinenr());
                             }
                         } catch (PartInitException e) {
-                            // Put your exception handler here if you wish to
+                            logger.warn("PartInitException in opening file {}", fileToOpen, e);
+
                         }
                     }
                 }
@@ -256,8 +260,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 			return;
 		}
 		try {
-			IEditorPart editorPart = PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 
 			if (editorPart instanceof MultiPageEditorPart) {
 				MultiPageEditorPart meditor = (MultiPageEditorPart) editorPart;
@@ -266,6 +269,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 				try {
 					lineInfo = test.getLineInformation(lineNumber - 1);
 				} catch (BadLocationException e) {
+				    logger.warn("BadLocationException on getting lineinfo in MultiPageEditorPart", e);
 				}
 				
 				ISelection sel = new TextSelection(lineInfo.getOffset(), 0);
@@ -278,19 +282,22 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 					try {
 						lineInfo = document.getLineInformation(lineNumber - 1);
 					} catch (BadLocationException e) {
+					    logger.warn("BadLocationException on getting lineinfo in ITextEditor", e);
 					}
 					if (lineInfo != null) {
 						editor.selectAndReveal(lineInfo.getOffset(), 0);
+					} else {
+					    logger.info("Null lineInfo - ignoring");
 					}
 				}
 			} else {
+			    logger.info("Unsupported editor {} - cannot highlight linenumber", editorPart.getClass().getName() );
 				// Unsupported editor
 				return;
 			}
 
 		} catch (Exception e) {
-			// Something went wrong in setting line number. Not all that
-			// important though
+			logger.warn("Exception in setting line number {}", lineNumber, e);
 		}
 
 	}
@@ -371,7 +378,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
             IResource resource = event.getResource();
             if (resource != null && resource.getProjectRelativePath() != null) {
-                String path = resource.getProjectRelativePath().toOSString();
+                final String path = resource.getProjectRelativePath().toOSString();
                 if (!path.contains("xml")) {
                     return;
                 }
@@ -383,8 +390,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                         try {
                             event.getDelta().accept(new DeltaUpdater());
                         } catch (CoreException e) {
-                            // Something weird happened - lets just leave it at
-                            // this
+                            logger.warn("CoreException in calculating changed dependencies for {}", path, e);
                         }
                         return Status.OK_STATUS;
                     }
