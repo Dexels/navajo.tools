@@ -369,20 +369,29 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         @Override
         public void resourceChanged(final IResourceChangeEvent event) {
 
-            Job changeJob = new Job("RESOURCE_CHANGED") {
-
-                @Override
-                protected IStatus run(IProgressMonitor monitor) {
-                    try {
-                        event.getDelta().accept(new DeltaUpdater());
-                    } catch (CoreException e) {
-                        // Something weird happened - lets just leave it at this
-                    }
-                    return Status.OK_STATUS;
+            IResource resource = event.getResource();
+            if (resource != null && resource.getProjectRelativePath() != null) {
+                String path = resource.getProjectRelativePath().toOSString();
+                if (!path.contains("xml")) {
+                    return;
                 }
-            };
-            changeJob.setPriority(Job.SHORT);
-            changeJob.schedule();
+
+                Job changeJob = new Job("Calculating dependencies for " + path) {
+
+                    @Override
+                    protected IStatus run(IProgressMonitor monitor) {
+                        try {
+                            event.getDelta().accept(new DeltaUpdater());
+                        } catch (CoreException e) {
+                            // Something weird happened - lets just leave it at
+                            // this
+                        }
+                        return Status.OK_STATUS;
+                    }
+                };
+                changeJob.setPriority(Job.SHORT);
+                changeJob.schedule();
+            }
         }
 
         @Override
@@ -455,9 +464,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
             IResource res = delta.getResource();
-            if (!res.getProjectRelativePath().toOSString().contains("xml")) {
-                return true;
-            }
             List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
             for (IProject p : allProjects) {
                 if (p.exists(res.getProjectRelativePath())) {

@@ -38,16 +38,17 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     private Job initializeJob;
     private CodeSearch codeSearch;
     private boolean initialized = false;
-    
+
     protected Map<String, Map<String, List<Dependency>>> externaldependencies;
     protected Map<String, Map<String, List<Dependency>>> reverseExternaldependencies;
+
+    private Object externalLock = new Object();
 
     public EclipseDependencyAnalyzer() {
         precompiler = new EclipseTslPreCompiler();
         codeSearch = new CodeSearch();
         initialize();
-        
-       
+
     }
 
     public static EclipseDependencyAnalyzer getInstance() {
@@ -57,9 +58,9 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     public void initialize(ViewContentProvider callback) {
         if (initialized || initializeJob != null) {
             return;
-        }  
+        }
         rebuild(callback);
-     
+
     }
 
     public synchronized void rebuild(final ViewContentProvider callback) {
@@ -72,7 +73,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             Activator.getDefault().log("Error on getting scripts folder! " + e);
             return;
         }
-        
+
         if (initializeJob != null) {
             initializeJob.cancel();
         }
@@ -82,7 +83,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         reverseExternaldependencies = new HashMap<String, Map<String, List<Dependency>>>();
         dependencies = new HashMap<String, List<Dependency>>();
         reverseDependencies = new HashMap<String, List<Dependency>>();
-        
+
         initializeJob = createJob();
         initializeJob.setPriority(Job.BUILD);
         initializeJob.schedule(JOB_START_DELAY);
@@ -105,8 +106,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 // We missed changes, so re-read all files
                 String[] xmlExt = { "xml" };
                 Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
-                
-                Collection<File> workflowFiles = FileUtils.listFiles(new File( rootFolder + "workflows"), xmlExt, true);
+
+                Collection<File> workflowFiles = FileUtils.listFiles(new File(rootFolder + "workflows"), xmlExt, true);
 
                 try {
                     // Files.size + 'fake' 500 for workflow progress
@@ -117,7 +118,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                         try {
                             addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
                         } catch (Exception e) {
-                            // Something went wrong in this file, going to try to continue
+                            // Something went wrong in this file, going to try
+                            // to continue
                             logger.error("Exception in getting dependencies of {}: {}", f.getAbsolutePath(), e);
                         }
                         monitor.worked(1);
@@ -158,29 +160,32 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             return;
         }
 
-        for (Dependency dep : myDependencies) {
-            try {
-                if (!dependencies.containsKey(dep.getScript())) {
-                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+        synchronized (externalLock) {
+            for (Dependency dep : myDependencies) {
+
+                try {
+                    if (!dependencies.containsKey(dep.getScript())) {
+                        dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                    }
+
+                    dependencies.get(dep.getScript()).add(dep);
+
+                    if (!reverseDependencies.containsKey(dep.getDependee())) {
+                        reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                    }
+
+                    reverseDependencies.get(dep.getDependee()).add(dep);
+                } catch (Exception e) {
+                    logger.error("Error in processing Workflow dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
                 }
-
-                dependencies.get(dep.getScript()).add(dep);
-
-                if (!reverseDependencies.containsKey(dep.getDependee())) {
-                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
-                }
-
-                reverseDependencies.get(dep.getDependee()).add(dep);
-            } catch (Exception e) {
-                logger.error("Error in processing Workflow dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
             }
-            ;
+
         }
 
         logger.debug("Done workflow dependencies");
 
     }
-    
+
     private void addTasksDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting tasks dependencies");
         List<Dependency> myDependencies = new ArrayList<Dependency>();
@@ -191,31 +196,30 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             return;
         }
 
-        for (Dependency dep : myDependencies) {
-            try {
-                if (!dependencies.containsKey(dep.getScript())) {
-                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+        synchronized (externalLock) {
+            for (Dependency dep : myDependencies) {
+                try {
+                    if (!dependencies.containsKey(dep.getScript())) {
+                        dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                    }
+
+                    dependencies.get(dep.getScript()).add(dep);
+
+                    if (!reverseDependencies.containsKey(dep.getDependee())) {
+                        reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                    }
+
+                    reverseDependencies.get(dep.getDependee()).add(dep);
+                } catch (Exception e) {
+                    logger.error("Error in processing tasks dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
                 }
-
-                dependencies.get(dep.getScript()).add(dep);
-
-                if (!reverseDependencies.containsKey(dep.getDependee())) {
-                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
-                }
-
-                reverseDependencies.get(dep.getDependee()).add(dep);
-            } catch (Exception e) {
-                logger.error("Error in processing tasks dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+                ;
             }
-            ;
         }
-
         logger.debug("Done tasks dependencies");
 
     }
-    
-    
-    
+
     private void addArticleDependencies(String scriptFolder, IProgressMonitor monitor) {
         logger.debug("Starting article dependencies");
         List<Dependency> myDependencies = new ArrayList<Dependency>();
@@ -225,189 +229,204 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             logger.error("Exception on getting workflow depencencies for {}: {}", e);
             return;
         }
+        synchronized (externalLock) {
 
-        for (Dependency dep : myDependencies) {
-            try {
-                if (!dependencies.containsKey(dep.getScript())) {
-                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+            for (Dependency dep : myDependencies) {
+                try {
+                    if (!dependencies.containsKey(dep.getScript())) {
+                        dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                    }
+
+                    dependencies.get(dep.getScript()).add(dep);
+
+                    if (!reverseDependencies.containsKey(dep.getDependee())) {
+                        reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                    }
+
+                    reverseDependencies.get(dep.getDependee()).add(dep);
+                } catch (Exception e) {
+                    logger.error("Error in processing Article dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
                 }
-
-                dependencies.get(dep.getScript()).add(dep);
-
-                if (!reverseDependencies.containsKey(dep.getDependee())) {
-                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
-                }
-
-                reverseDependencies.get(dep.getDependee()).add(dep);
-            } catch (Exception e) {
-                logger.error("Error in processing Article dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
             }
-        }
 
+        }
         logger.debug("Done article dependencies");
 
     }
 
     private void addExternalProjectDependencies(IProgressMonitor monitor) {
 
-        
         NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
         List<IProject> projectsToSearch = pref.getTipiProjects();
 
         for (IProject project : projectsToSearch) {
             List<Dependency> myDependencies = new ArrayList<Dependency>();
-            Map<String, List<Dependency>> projectDeps = externaldependencies.get(project.getName());
-            if (projectDeps == null) {
-                projectDeps = new HashMap<String, List<Dependency>>();
-            }
-            Map<String, List<Dependency>> reverseProjectDeps = reverseExternaldependencies.get(project.getName());
-            if (reverseProjectDeps == null) {
-                reverseProjectDeps = new HashMap<String, List<Dependency>>();
-            }
 
             try {
                 codeSearch.addProjectDependencies(project, myDependencies, scriptFolder, monitor);
             } catch (Exception e) {
                 logger.error("Exception on getting workflow depencencies for {}: {}", e);
             }
-            
-            for (Dependency dep : myDependencies) {
-                try {
-                    if (!projectDeps.containsKey(dep.getScript())) {
-                        projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
-                    }
-                    projectDeps.get(dep.getScript()).add(dep);
 
-                    if (!reverseProjectDeps.containsKey(dep.getDependee())) {
-                        reverseProjectDeps.put(dep.getDependee(), new ArrayList<Dependency>());
-                    }
-
-                    reverseProjectDeps.get(dep.getDependee()).add(dep);
-                }  catch (Exception e) {
-                    logger.error("Error in processing external project dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+            synchronized (externalLock) {
+                Map<String, List<Dependency>> projectDeps = externaldependencies.get(project.getName());
+                if (projectDeps == null) {
+                    projectDeps = new HashMap<String, List<Dependency>>();
                 }
-                
+
+                Map<String, List<Dependency>> reverseProjectDeps = reverseExternaldependencies.get(project.getName());
+                if (reverseProjectDeps == null) {
+                    reverseProjectDeps = new HashMap<String, List<Dependency>>();
+                }
+                for (Dependency dep : myDependencies) {
+                    try {
+                        if (!projectDeps.containsKey(dep.getScript())) {
+                            projectDeps.put(dep.getScript(), new ArrayList<Dependency>());
+                        }
+                        projectDeps.get(dep.getScript()).add(dep);
+
+                        if (!reverseProjectDeps.containsKey(dep.getDependee())) {
+                            reverseProjectDeps.put(dep.getDependee(), new ArrayList<Dependency>());
+                        }
+
+                        reverseProjectDeps.get(dep.getDependee()).add(dep);
+                    } catch (Exception e) {
+                        logger.error("Error in processing external project dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+                    }
+
+                }
+
+                reverseExternaldependencies.put(project.getName(), reverseProjectDeps);
+                externaldependencies.put(project.getName(), projectDeps);
 
             }
 
-            reverseExternaldependencies.put(project.getName(), reverseProjectDeps);
-            externaldependencies.put(project.getName(), projectDeps);
-
         }
 
-        
+    }
+
+    public void refresh(String scriptFile, IProject project, boolean recursive) {
+        synchronized (externalLock) {
+            if (NavajoDependencyPreferences.getInstance().getScriptsProject().equals(project)) {
+                String scriptName = TreeObject.getScriptFromFilename(scriptFile);
+                removeScriptFromReverseValues(scriptName);
+                dependencies.remove(scriptName);
+                addDependencies(scriptName);
+
+                // Update the dependencies of all scripts that point(ed) to me
+                List<Dependency> deps = reverseDependencies.get(scriptName);
+
+                if (deps != null && recursive) {
+                    // The refresh action can trigger removing dependencies.
+                    // Therefore make a copy of the list to prevent
+                    // ConcurrentMod exceptions
+                    List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
+                    for (Dependency dep : depsCopy) {
+                        if (!dep.getScriptFile().equals(scriptFile)) {
+                            refresh(dep.getScriptFile(), project, false);
+                        }
+                    }
+                }
+
+            } else {
+                externaldependencies.clear();
+                reverseExternaldependencies.clear();
+                addExternalProjectDependencies(new NullProgressMonitor());
+            }
+        }
 
     }
-    public synchronized void refresh(String scriptFile, IProject project, boolean recursive) {
-        if (NavajoDependencyPreferences.getInstance().getScriptsProject().equals(project)) {
+
+    public void remove(String scriptFile, IProject project) {
+        synchronized (externalLock) {
             String scriptName = TreeObject.getScriptFromFilename(scriptFile);
             removeScriptFromReverseValues(scriptName);
+            updatedReverseToBroken(scriptName);
             dependencies.remove(scriptName);
-            addDependencies(scriptName);
-            
-            // Update the dependencies of all scripts that point(ed) to me
-            List<Dependency> deps = reverseDependencies.get(scriptName);
-
-            if (deps != null && recursive) {
-                // The refresh action can trigger removing dependencies.
-                // Therefore make a copy of the list to prevent ConcurrentMod exceptions
-                List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
-                for (Dependency dep : depsCopy) {
-                    if (!dep.getScriptFile().equals(scriptFile)) {
-                        refresh(dep.getScriptFile(), project, false);
-                    }
-                }
-            }
-            
-        } else {
-            externaldependencies.clear();
-            reverseExternaldependencies.clear();
-            addExternalProjectDependencies(new NullProgressMonitor());
         }
-
-    }
-
-    public synchronized void remove(String scriptFile, IProject project) {
-        String scriptName = TreeObject.getScriptFromFilename(scriptFile);
-        removeScriptFromReverseValues(scriptName);
-        updatedReverseToBroken(scriptName);
-        dependencies.remove(scriptName);
     }
 
     private void updatedReverseToBroken(String scriptName) {
-        List<Dependency> deps = reverseDependencies.get(scriptName);
-        if (deps == null) {
-            return;
-        }
+        synchronized (externalLock) {
+            List<Dependency> deps = reverseDependencies.get(scriptName);
+            if (deps == null) {
+                return;
+            }
 
-        for (Dependency dep : deps) {
-            dep.setBroken(true);
+            for (Dependency dep : deps) {
+                dep.setBroken(true);
+            }
         }
     }
 
-    private synchronized void removeScriptFromReverseValues(String scriptName) {
-        List<Dependency> deps = dependencies.get(scriptName);
-        if (deps == null) {
-            return;
+    private void removeScriptFromReverseValues(String scriptName) {
+        synchronized (externalLock) {
+            List<Dependency> deps = dependencies.get(scriptName);
+            if (deps == null) {
+                return;
+            }
+
+            for (Dependency dep : deps) {
+                List<Dependency> reverseDeps = reverseDependencies.get(dep.getDependee());
+                if (reverseDeps == null)
+                    continue; // nothing to do...
+
+                List<Dependency> toRemove = new ArrayList<Dependency>();
+                for (Dependency reverseDep : reverseDeps) {
+                    if (dep == reverseDep) {
+                        toRemove.add(reverseDep);
+                    }
+                }
+                reverseDeps.removeAll(toRemove);
+                reverseDependencies.put(dep.getDependee(), reverseDeps);
+            }
         }
+    }
 
-        for (Dependency dep : deps) {
-            List<Dependency> reverseDeps = reverseDependencies.get(dep.getDependee());
-            if (reverseDeps == null)
-                continue; // nothing to do...
+    @Override
+    public List<Dependency> getDependencies(String scriptName) {
+        synchronized (externalLock) {
+            List<Dependency> superDeps = super.getDependencies(scriptName);
+            if (superDeps == null) {
+                superDeps = new ArrayList<Dependency>();
+            }
 
-            List<Dependency> toRemove = new ArrayList<Dependency>();
-            for (Dependency reverseDep : reverseDeps) {
-                if (dep == reverseDep) {
-                    toRemove.add(reverseDep);
+            List<Dependency> deps = new ArrayList<Dependency>(superDeps);
+
+            for (Map<String, List<Dependency>> externalDeps : externaldependencies.values()) {
+                List<Dependency> projectDeps = externalDeps.get(scriptName);
+                if (projectDeps != null) {
+                    deps.addAll(projectDeps);
                 }
             }
-            reverseDeps.removeAll(toRemove);
-            reverseDependencies.put(dep.getDependee(), reverseDeps);
+            return deps;
         }
     }
-    
-    @Override
-    public List<Dependency> getDependencies(String scriptName) { 
-        List<Dependency> superDeps = super.getDependencies(scriptName);
-        if (superDeps == null) {
-            superDeps = new ArrayList<Dependency>();
-        }
-        
-        List<Dependency> deps = new ArrayList<Dependency>(superDeps);
-        
-        for (Map<String, List<Dependency>> externalDeps : externaldependencies.values()) {
-            List<Dependency> projectDeps = externalDeps.get(scriptName);
-            if (projectDeps != null) {
-                deps.addAll(projectDeps);
-            }
-        }
-        return deps;
-    }
-    
+
     @Override
     public List<Dependency> getReverseDependencies(String scriptPath) {
-      
-        
-        List<Dependency> superDeps = super.getReverseDependencies(scriptPath);
+        List<Dependency> reverseDeps = null;
+        synchronized (externalLock) {
+            List<Dependency> superDeps = super.getReverseDependencies(scriptPath);
 
-        if (superDeps == null) {
-            superDeps = new ArrayList<Dependency>();
-        }
-        
-        List<Dependency> reverseDeps = new ArrayList<Dependency>(superDeps);
-        
-        String script = scriptPath;
-        if (scriptPath.indexOf('_') > 0) {
-            // Remove tenant-specific part
-            script = scriptPath.substring(0, scriptPath.indexOf('_'));
-        }
-        for (Map<String, List<Dependency>> externalDeps : reverseExternaldependencies.values()) {
-            List<Dependency> projectDeps = externalDeps.get(script);
-            if (projectDeps != null) {
-                reverseDeps.addAll(projectDeps);
+            if (superDeps == null) {
+                superDeps = new ArrayList<Dependency>();
             }
 
+            reverseDeps = new ArrayList<Dependency>(superDeps);
+
+            String script = scriptPath;
+            if (scriptPath.indexOf('_') > 0) {
+                // Remove tenant-specific part
+                script = scriptPath.substring(0, scriptPath.indexOf('_'));
+            }
+            for (Map<String, List<Dependency>> externalDeps : reverseExternaldependencies.values()) {
+                List<Dependency> projectDeps = externalDeps.get(script);
+                if (projectDeps != null) {
+                    reverseDeps.addAll(projectDeps);
+                }
+
+            }
         }
         return reverseDeps;
 
@@ -432,7 +451,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         return false;
     }
 
-    
     public synchronized void cancelJob() {
         if (initializeJob != null) {
             initializeJob.cancel();
