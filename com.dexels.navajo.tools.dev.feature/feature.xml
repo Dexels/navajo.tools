@@ -19,6 +19,7 @@
 
    <requires>
       <import plugin="org.slf4j.api"/>
+      <import plugin="com.google.guava"/>
    </requires>
 
    <plugin
