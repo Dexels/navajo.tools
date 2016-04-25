@@ -375,29 +375,35 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         @Override
         public void resourceChanged(final IResourceChangeEvent event) {
-
-            IResource resource = event.getResource();
-            if (resource != null && resource.getProjectRelativePath() != null) {
-                final String path = resource.getProjectRelativePath().toOSString();
-                if (!path.contains("xml")) {
-                    return;
+            // Check if any of the change event are a project I am interested in. If so, 
+            // handle the update using a DeltaUpdater in a separate job.
+            
+            List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
+            IResourceDelta delta = event.getDelta();
+            for (final IProject p : allProjects) {
+                final IResourceDelta projectDelta = delta.findMember(p.getFullPath());
+                if (projectDelta == null) {
+                    continue;
                 }
-
-                Job changeJob = new Job("Calculating dependencies for " + path) {
+                
+                Job changeJob = new Job("Updating dependencies for " + p.getName()) {
 
                     @Override
                     protected IStatus run(IProgressMonitor monitor) {
                         try {
-                            event.getDelta().accept(new DeltaUpdater());
+                            projectDelta.accept(new DeltaUpdater());
                         } catch (CoreException e) {
-                            logger.warn("CoreException in calculating changed dependencies for {}", path, e);
+                            logger.warn("CoreException in calculating changed dependencies for {}", p.getName(), e);
                         }
                         return Status.OK_STATUS;
                     }
                 };
                 changeJob.setPriority(Job.SHORT);
                 changeJob.schedule();
+                
             }
+           
+          
         }
 
         @Override
@@ -440,13 +446,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             }
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
-                
+
                 List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
                 if (allProjects.size() == 0) {
                     updateRoot(new TreeParent("Please set your Navajo Dependency Preferences!", 0));
                     return;
                 }
-                
+
                 IPath path = fileInput.getFile().getProjectRelativePath();
                 if (!path.toOSString().contains("xml")) {
                     return;
@@ -469,32 +475,43 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     class DeltaUpdater implements IResourceDeltaVisitor {
         public boolean visit(IResourceDelta delta) {
-            IResource res = delta.getResource();
-            List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
-            for (IProject p : allProjects) {
-                if (p.exists(res.getProjectRelativePath())) {
-                    String filePath = res.getLocation().toFile().getAbsolutePath();
-
-                    switch (delta.getKind()) {
-                    case IResourceDelta.ADDED:
-                        viewProvider.updateResource(filePath, p);
-                        refreshRoot();
-                        break;
-                    case IResourceDelta.REMOVED:
-                        viewProvider.removeResource(filePath, p);
-                        refreshRoot();
-                        break;
-                    case IResourceDelta.CHANGED:
-                        viewProvider.updateResource(filePath, p);
-                        refreshRoot();
-                        break;
-                    }
-                    return true;
+            if (delta.getResource() instanceof IProject) {
+                for (IResourceDelta child : delta.getAffectedChildren()) {
+                    visit(child, (IProject) delta.getResource());
                 }
-
             }
-
             return true;
+           
+        }
+        
+        private boolean visit(IResourceDelta delta, IProject project) {
+            IResource res = delta.getResource();
+            if (res instanceof IFolder) {
+                for (IResourceDelta child : delta.getAffectedChildren()) {
+                    visit(child, project);
+                }
+                return true;
+            }
+            
+
+            String filePath = res.getLocation().toFile().getAbsolutePath();
+
+            switch (delta.getKind()) {
+            case IResourceDelta.ADDED:
+                viewProvider.updateResource(filePath, project);
+                refreshRoot();
+                break;
+            case IResourceDelta.REMOVED:
+                viewProvider.removeResource(filePath, project);
+                refreshRoot();
+                break;
+            case IResourceDelta.CHANGED:
+                viewProvider.updateResource(filePath, project);
+                refreshRoot();
+                break;
+            }
+            return true;
+            
         }
 
         private void refreshRoot() {
