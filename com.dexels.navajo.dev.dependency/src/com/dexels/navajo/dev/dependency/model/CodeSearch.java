@@ -61,8 +61,6 @@ public class CodeSearch {
             
             
         }
-        System.out.println(s);
-      // File tipiDir = new File(project.getFile("tipp"))
     }
     
     
