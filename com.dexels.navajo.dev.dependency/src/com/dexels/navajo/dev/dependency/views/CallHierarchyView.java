@@ -74,9 +74,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         public int compare(Viewer viewer, Object e1, Object e2) {
             TreeParent o1 = (TreeParent) e1;
             TreeParent o2 = (TreeParent) e2;
-            Integer l1  = o1.getLinenr();
-            Integer l2  = o2.getLinenr();
-            return l1.compareTo(l2);
+            
+            if (calleeHierarchy.isChecked()) {
+                Integer l1  = o1.getLinenr();
+                Integer l2  = o2.getLinenr();
+                return l1.compareTo(l2);
+            } else {
+                return o1.getScriptName().compareTo(o2.getScriptName());
+            }
+           
         } 
     }
 
@@ -495,6 +501,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             
 
             String filePath = res.getLocation().toFile().getAbsolutePath();
+            if (!filePath.contains("xml")) {
+                return true;
+            }
+            
 
             switch (delta.getKind()) {
             case IResourceDelta.ADDED:
