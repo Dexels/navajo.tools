@@ -53,12 +53,13 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     private ViewContentProvider viewProvider;
     private TreeViewer viewer;
-    private Action callerHierarchy;
-    private Action doubleClickAction;
-    private Action cancelAction;
     private MyResourceChangeReporter resourceListener;
 
     private Action rebuildAction;
+    private Action callerHierarchy;
+    private Action callHierarchy;
+    private Action doubleClickAction;
+    private Action cancelAction;
     private Action calleeHierarchy;
 
     /*
@@ -74,17 +75,28 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         public int compare(Viewer viewer, Object e1, Object e2) {
             TreeParent o1 = (TreeParent) e1;
             TreeParent o2 = (TreeParent) e2;
-            
+                   
             if (calleeHierarchy.isChecked()) {
                 Integer l1  = o1.getLinenr();
                 Integer l2  = o2.getLinenr();
                 return l1.compareTo(l2);
-            } else {
-                return o1.getScriptName().compareTo(o2.getScriptName());
             }
-           
+            
+            if (callHierarchy.isChecked()) {
+                // We have to check the parent of each object, to see if its an instance of
+                // ForwardNode or BackwardNode; This determines the sorting.
+                if (o1.isForwardNode()) {
+                    Integer l1 = o1.getLinenr();
+                    Integer l2 = o2.getLinenr();
+                    return l1.compareTo(l2);
+                }            
+            }
+            
+            return o1.getScriptName().compareTo(o2.getScriptName());
         } 
     }
+    
+
 
     /**
      * The constructor.
@@ -166,6 +178,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalPullDown(IMenuManager manager) {
+        manager.add(callHierarchy);
         manager.add(callerHierarchy);
         manager.add(calleeHierarchy);
         manager.add(new Separator());
@@ -180,6 +193,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     }
 
     private void fillLocalToolBar(IToolBarManager manager) {
+        manager.add(callHierarchy);
         manager.add(callerHierarchy);
         manager.add(calleeHierarchy);
         manager.add(rebuildAction);
@@ -192,8 +206,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         callerHierarchy = new Action() {
             public void run() {
                 viewProvider.setReverseMode(true);
+                viewProvider.setBothWays(false);
                 callerHierarchy.setChecked(true);
                 calleeHierarchy.setChecked(false);
+                callHierarchy.setChecked(false);
                 updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
@@ -205,8 +221,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         calleeHierarchy = new Action() {
             public void run() {
                 viewProvider.setReverseMode(false);
+                viewProvider.setBothWays(false);
                 callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(true);
+                callHierarchy.setChecked(false);
                 updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
@@ -214,6 +232,20 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         calleeHierarchy.setToolTipText("Show Callee Hierarchy");
         calleeHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callees.gif"));
         calleeHierarchy.setChecked(false);
+        
+        callHierarchy = new Action() {
+            public void run() {
+                viewProvider.setBothWays(true);
+                callerHierarchy.setChecked(false);
+                calleeHierarchy.setChecked(false);
+                callHierarchy.setChecked(true);
+                updateRoot((TreeParent) viewProvider.getRoot());
+            }
+        };
+        callHierarchy.setText("Show call Hierarchy");
+        callHierarchy.setToolTipText("Show Call Hierarchy");
+        callHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/call.gif"));
+        callHierarchy.setChecked(false);
 
         rebuildAction = new Action() {
             public void run() {

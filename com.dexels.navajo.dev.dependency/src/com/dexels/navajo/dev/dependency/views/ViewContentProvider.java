@@ -9,7 +9,9 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IViewSite;
 
 import com.dexels.navajo.dependency.Dependency;
+import com.dexels.navajo.dev.dependency.model.TreeBackwardNode;
 import com.dexels.navajo.dev.dependency.model.EclipseDependencyAnalyzer;
+import com.dexels.navajo.dev.dependency.model.TreeForwardNode;
 import com.dexels.navajo.dev.dependency.model.TreeObject;
 import com.dexels.navajo.dev.dependency.model.TreeParent;
 
@@ -19,6 +21,8 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     private IViewSite viewSite;
     private EclipseDependencyAnalyzer depAnalyzer;
     private boolean reverseMode = true;
+    private boolean bothWays = false;
+    
     private CallHierarchyView parent;
 
     public ViewContentProvider(IViewSite viewSite, CallHierarchyView parent) {
@@ -65,7 +69,13 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 TreeObject child = (TreeObject) children[0];
                 if (child.isEmptyTreeObject()) {
                     parent.removeChild(child);
-                    addDependencies(parent, MAX_STACK_DEPTH);
+                    if (parent.isForwardNode()) {
+                        addDependencies(parent, MAX_STACK_DEPTH, false);
+                    } else if (parent.isBackwardNode()) {
+                        addDependencies(parent, MAX_STACK_DEPTH, true);
+                    } else {
+                        addDependencies(parent, MAX_STACK_DEPTH, reverseMode);
+                    }
                     children = parent.getChildren();
 
                 }
@@ -99,8 +109,31 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
             if (node == invisibleRoot) {
                 return;
             }
-            addDependencies(node, MAX_STACK_DEPTH);
-            invisibleRoot.addChild(node);
+            if (bothWays) {
+                TreeForwardNode nodeforward = new TreeForwardNode();
+              
+
+                addDependencies(node, MAX_STACK_DEPTH, false);
+                for (TreeObject child:  node.getChildren()) {
+                    nodeforward.addChild(child);
+                }
+                invisibleRoot.addChild(nodeforward);
+                
+                TreeBackwardNode nodebackward = new TreeBackwardNode();
+                TreeParent node2 = new TreeParent(node.getFilePath(), 0);
+
+                addDependencies(node2, MAX_STACK_DEPTH, true);
+                for (TreeObject child:  node2.getChildren()) {
+                    nodebackward.addChild(child);
+                }
+
+                invisibleRoot.addChild(nodebackward);
+
+            } else {
+                addDependencies(node, MAX_STACK_DEPTH, reverseMode);
+                invisibleRoot.addChild(node);
+            }
+           
         }
       
      
@@ -127,6 +160,16 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         this.reverseMode = reverseMode;
     }
     
+    
+    
+    public boolean isBothWays() {
+        return bothWays;
+    }
+
+    public void setBothWays(boolean bothWays) {
+        this.bothWays = bothWays;
+    }
+
     public void rebuild() {
         depAnalyzer.rebuild(this);
     }
@@ -134,7 +177,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         depAnalyzer.cancelJob();
     }
 
-    private void addDependencies(TreeParent node, int ttl) {      
+    private void addDependencies(TreeParent node, int ttl, boolean reverseMode) {      
         if (ttl < 1) { 
             TreeParent newChild = new TreeParent("", 0);
             node.addChild(newChild);
@@ -152,7 +195,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 if (dep.getLinenr() > 0) {
                     newChild.setLinenr(dep.getLinenr());
                 }
-                addDependencies(newChild, ttl);
+                addDependencies(newChild, ttl, reverseMode);
                 node.addChild(newChild);
             }
         } else {
@@ -165,7 +208,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 if (dep.getLinenr() > 0) {
                     newChild.setLinenr(dep.getLinenr());
                 }
-                addDependencies(newChild, ttl);
+                addDependencies(newChild, ttl, reverseMode);
                 node.addChild(newChild);
             }
         }

@@ -12,7 +12,10 @@ import com.dexels.navajo.dependency.Dependency;
 
 public class TreeObject implements IAdaptable {
     private final static Logger logger = LoggerFactory.getLogger(TreeObject.class);
-
+    
+    // By default, the direction is determined by the viewprovider
+    private Boolean backwardNode = null;
+    private Boolean forwardNode = null;
 	private String scriptName = "";
 	private String filePath;
 	private TreeParent parent;
@@ -174,5 +177,36 @@ public class TreeObject implements IAdaptable {
             break;
         }
         return result;
+    }
+    
+    public boolean isBackwardNode() {
+        if (backwardNode != null) {
+            return backwardNode;
+        }
+        if (this instanceof TreeBackwardNode) {
+            backwardNode = true;
+            return true;
+        }
+        if (this.getParent() == null) {
+            backwardNode = false;
+            return false;
+        }
+        backwardNode = this.getParent().isBackwardNode();
+        return backwardNode;
+    }
+    public boolean isForwardNode() {
+        if (forwardNode != null) {
+            return forwardNode;
+        }
+        if (this instanceof TreeForwardNode) {
+            forwardNode = true;
+            return true;
+        }
+        if (this.getParent() == null) {
+            forwardNode = false;
+            return false;
+        }
+        forwardNode = this.getParent().isForwardNode();
+        return forwardNode;
     }
 }
