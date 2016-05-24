@@ -67,7 +67,13 @@ public class TreeObject implements IAdaptable {
             return "";
         }
        
-        script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+        try {
+            script = scriptFilePath.substring(1, scriptFilePath.indexOf("."));
+        } catch (Exception e) {
+            System.out.println("Error on removing extension on " + scriptFilePath + " - " + e.getMessage());
+            script = scriptFilePath.substring(1);
+        }
+       
         // Replace win32 slashes to be consistent with Navajo script slashes
         return script.replace("\\", "/");
 
