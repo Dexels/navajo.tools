@@ -114,8 +114,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         // Add Navajo Decorator
         try {
-            PlatformUI.getWorkbench().getDecoratorManager()
-                    .setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
+            PlatformUI.getWorkbench().getDecoratorManager().setEnabled("com.dexels.navajo.dev.dependency.decorator", true);
         } catch (CoreException e) {
             logger.warn("CoreException in enabling Navajo Decorator", e);
         }
@@ -150,8 +149,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem()
-                .setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
         makeActions();
         hookContextMenu();
         hookDoubleClickAction();
@@ -478,10 +476,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
         private void updateRootFromWorkbench(IWorkbenchPart e) {
             IEditorInput input = ((IEditorPart) e).getEditorInput();
-            if (viewProvider == null) {
-                viewProvider = new ViewContentProvider(getViewSite(), CallHierarchyView.this);
-                viewer.setContentProvider(viewProvider);
-            }
             if (input instanceof FileEditorInput) {
                 FileEditorInput fileInput = (FileEditorInput) input;
 
