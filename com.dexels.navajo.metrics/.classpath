@@ -2,7 +2,23 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.mongodb.mongo-java-driver_3.0.1.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.mongodb.mongo-java-driver_3.0.1.jar">
+	<classpathentry kind="lib" path="/com.dexels.navajo.version/target/com.dexels.navajo.version-1.2.15-SNAPSHOT.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.dexels.navajo.api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.dexels.navajo.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.dexels.navajo.document"/>
+	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/slf4j.api_1.7.21.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/slf4j.api_1.7.21.jar">
+		<accessrules>
+			<accessrule kind="accessible" pattern="org/slf4j/*"/>
+			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.5.0.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.5.0.jar">
+		<accessrules>
+			<accessrule kind="accessible" pattern="org/apache/commons/io/*"/>
+			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
+		</accessrules>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.mongodb.mongo-java-driver_3.3.0.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.mongodb.mongo-java-driver_3.3.0.jar">
 		<accessrules>
 			<accessrule kind="accessible" pattern="com/mongodb/*"/>
 			<accessrule kind="accessible" pattern="com/mongodb/client/*"/>
@@ -11,14 +27,7 @@
 			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.4.0.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.apache.commons.io_2.4.0.jar">
-		<accessrules>
-			<accessrule kind="accessible" pattern="org/apache/commons/io/*"/>
-			<accessrule kind="accessible" pattern="org/apache/commons/io/filefilter/*"/>
-			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
-		</accessrules>
-	</classpathentry>
-	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.jgit_4.1.0.201509280440-r.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.jgit_4.1.0.201509280440-r.jar">
+	<classpathentry kind="lib" path="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.jgit_4.5.0.201609210915-r.jar" sourcepath="/home/chris/eclipse/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.eclipse.jgit_4.5.0.201609210915-r.jar">
 		<accessrules>
 			<accessrule kind="accessible" pattern="org/eclipse/jgit/api/*"/>
 			<accessrule kind="accessible" pattern="org/eclipse/jgit/api/errors/*"/>
@@ -32,15 +41,5 @@
 			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/chris/eclipse/workspace_plugin/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.ops4j.pax.logging.pax-logging-api_1.7.4.jar" sourcepath="/home/chris/eclipse/workspace_plugin/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/org.ops4j.pax.logging.pax-logging-api_1.7.4.jar">
-		<accessrules>
-			<accessrule kind="accessible" pattern="org/slf4j/*"/>
-			<accessrule ignoreifbetter="true" kind="nonaccessible" pattern="**/*"/>
-		</accessrules>
-	</classpathentry>
-	<classpathentry kind="lib" path="/com.dexels.navajo.api/target/com.dexels.navajo.api-2.3.3-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/com.dexels.navajo.core/target/com.dexels.navajo.core-4.0.19-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/com.dexels.navajo.document/target/com.dexels.navajo.document-3.0.31-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/com.dexels.navajo.version/target/com.dexels.navajo.version-1.2.15-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

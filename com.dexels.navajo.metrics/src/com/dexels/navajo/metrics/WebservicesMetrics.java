@@ -42,50 +42,50 @@ public class WebservicesMetrics {
     private DependencyAnalyzer depanaylzer;
     private Git git;
     private Date lastCommitThreshold;
-    
+
     public WebservicesMetrics() {
         List<String> unused = new ArrayList<>();
-        
+
         depanaylzer = new DependencyAnalyzer();
         depanaylzer.activate();
-        
+
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -4);
         lastCommitThreshold = cal.getTime();
-        
+
         MongoClient mc = new MongoClient("mongostorage2.sportlink-infra.net:27018");
         db = mc.getDatabase("metrics");
-        
+
         File sportlink = new File("/home/chris/git/sportlink");
         File sportlinkScripts = new File(sportlink, "scripts");
-        
+
         // Set up git
         git = new Git(getRepository(sportlink));
-        
+
         Set<String> tenants = getTenants();
         Map<String, Date> scriptsMetrics = getScriptsMetrics(tenants);
 
         List<File> files = getScripts(sportlinkScripts);
-        
+
         // First add dependencies
         for (File f : files) {
             String path = f.getAbsolutePath();
-            String  script = path.split("scripts")[1];
-            script =  script.substring(1, script.lastIndexOf(FilenameUtils.getExtension(path)) -1);
+            String script = path.split("scripts")[1];
+            script = script.substring(1, script.lastIndexOf(FilenameUtils.getExtension(path)) - 1);
             script = script.replace("\\", "/");
             depanaylzer.addDependencies(script);
         }
-       
+
         for (File f : files) {
             String path = f.getAbsolutePath();
-            String  script = path.split("scripts")[1];
-            script =  script.substring(1, script.lastIndexOf(FilenameUtils.getExtension(path)) -1);
+            String script = path.split("scripts")[1];
+            script = script.substring(1, script.lastIndexOf(FilenameUtils.getExtension(path)) - 1);
             script = script.replace("\\", "/");
             String tenantlessScript = script;
 
             if (script.indexOf('_') > 0) {
                 int slashIndex = script.lastIndexOf("/");
-                
+
                 if (slashIndex != -1) {
                     // Check if the last '_' is after the / part, since a _ might occur in a directory name
                     String bareScript = script.substring(slashIndex + 1);
@@ -96,19 +96,20 @@ public class WebservicesMetrics {
                     tenantlessScript = script.substring(0, script.lastIndexOf('_'));
                 }
             }
-            
+
             if (tenantlessScript.contains("Init")) {
                 // skip Init scripts
                 continue;
             }
-            
+
             // Get last commit
-            Long lastCommit = getLastCommitTimestamp(f.getAbsolutePath());
+            Long lastCommit = getLastCommitTimestamp("scripts/" + script + ".xml");
             Date lastCommitDate = new Date(lastCommit);
             if (lastCommitDate.after(lastCommitThreshold)) {
-                // Skip due to recent commit
+                // Skip due to too recent commit
+                continue;
             }
-            
+
             if (!scriptsMetrics.containsKey(tenantlessScript)) {
                 // if any thing depends on us, we cannot be removed
                 List<Dependency> deps = depanaylzer.getReverseDependencies(tenantlessScript);
@@ -120,20 +121,18 @@ public class WebservicesMetrics {
                 }
                 if (hasIncludes) {
                     continue;
-                } 
+                }
                 unused.add(script);
             }
-            
+
         }
         Collections.sort(unused);
-        for (String script: unused) {
+        for (String script : unused) {
             System.out.println(script);
         }
         mc.close();
     }
 
-    
-    
     private Repository getRepository(File basePath) {
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
         Repository repository = null;
@@ -145,7 +144,6 @@ public class WebservicesMetrics {
         }
         return repository;
     }
-    
 
     /**
      * Returns the last commit timestamp in ms since epoch
@@ -164,39 +162,36 @@ public class WebservicesMetrics {
         }
         return new Long(lastFileCommit.getCommitTime()) * 1000;
     }
-    
 
     private RevCommit getLastCommit(String file) throws NoHeadException, GitAPIException {
         LogCommand log = git.log().addPath(file);
         return log.call().iterator().next();
     }
-    
+
     private Map<String, Date> getScriptsMetrics(Set<String> tenants) {
         Map<String, Date> result = new HashMap<>();
         for (String tenant : tenants) {
             MongoCollection<Document> coll = db.getCollection("metrics." + tenant);
 
-            List<Document> pipeline =  new ArrayList<>();
-            
+            List<Document> pipeline = new ArrayList<>();
+
             DBObject group = new BasicDBObject();
-            group.put("_id",  "$service");
-            group.put("lastCall",  new BasicDBObject("$last", "$date"));
-            pipeline.add(new Document("$group", group));;
-            AggregateIterable<Document> out =coll.aggregate(pipeline);
+            group.put("_id", "$service");
+            group.put("lastCall", new BasicDBObject("$last", "$date"));
+            pipeline.add(new Document("$group", group));
             
+            AggregateIterable<Document> out = coll.aggregate(pipeline);
+
             for (Document doc : out) {
                 String script = doc.getString("_id");
                 Date lastDate = doc.getDate("lastCall");
                 if (!result.containsKey(script) || lastDate.after(result.get(script))) {
-                    result.put(script,  lastDate);
+                    result.put(script, lastDate);
                 }
             }
         }
         return result;
     }
-
-
-
 
     private List<File> getScripts(File folder) {
         List<File> result = new ArrayList<>();
@@ -221,12 +216,10 @@ public class WebservicesMetrics {
         }
         return result;
     }
-    
-    
-    
+
     private Set<String> getTenants() {
         Set<String> tenants = new HashSet<>();
-        
+
         MongoIterable<String> collectionNames = db.listCollectionNames();
         for (String coll : collectionNames) {
             if (coll.startsWith("metrics")) {
@@ -234,12 +227,13 @@ public class WebservicesMetrics {
                 if (lastDot < 1) {
                     continue;
                 }
-                tenants.add(coll.substring(lastDot + 1, coll.length()));
+                String tenant = coll.substring(lastDot + 1, coll.length());
+                tenants.add(tenant);
             }
         }
         return tenants;
     }
-    
+
     public static void main(String[] args) {
         new WebservicesMetrics();
     }
