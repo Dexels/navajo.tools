@@ -370,7 +370,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                     }
                 }
             } else if (selectedObject instanceof IFolder) {
-                updateRoot(viewProvider.getAbsoluteRoot());
+                //updateRoot(viewProvider.getAbsoluteRoot());
             }
         }
     }
