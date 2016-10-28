@@ -204,10 +204,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         callerHierarchy = new Action() {
             public void run() {
                 viewProvider.setReverseMode(true);
-                viewProvider.setBothWays(false);
-                callerHierarchy.setChecked(true);
+                viewProvider.setBothWays(true);
+                callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(false);
-                callHierarchy.setChecked(false);
+                callHierarchy.setChecked(true);
                 updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
