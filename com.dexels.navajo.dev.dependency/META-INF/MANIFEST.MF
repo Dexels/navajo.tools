@@ -11,14 +11,15 @@ Import-Package: com.dexels.navajo.dependency,
  com.dexels.navajo.script.api;version="1.0.0",
  org.apache.commons.io;version="1.4.0",
  org.eclipse.jface.text,
+ org.osgi.framework;version="1.7.0",
  org.slf4j;version="[1.6.1,1.8.0)"
 Require-Bundle: org.eclipse.core.filesystem,
  org.eclipse.jface,
  org.eclipse.core.resources,
  org.eclipse.ui.ide,
- org.eclipse.core.runtime,
  org.eclipse.ui.workbench,
  org.eclipse.ui.editors,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.eclipse.core.runtime;bundle-version="3.12.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
