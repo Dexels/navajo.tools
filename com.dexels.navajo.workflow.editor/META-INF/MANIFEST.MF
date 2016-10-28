@@ -14,7 +14,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.gef,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.change,
- org.junit;resolution:=optional,
  org.eclipse.ui.workbench,
  org.eclipse.jface
 Bundle-ClassPath: .
@@ -25,5 +24,5 @@ Import-Package: com.dexels.navajo.document;version="2.2.0",
  junit.framework;version="4.10.0",
  org.eclipse.ui.views.contentoutline,
  org.eclipse.ui.views.properties,
- org.junit;version="4.10.0",
+ org.junit;resolution:=optional,
  org.slf4j;version="[1.6.1,1.8.0)"
