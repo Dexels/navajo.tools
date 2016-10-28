@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1907">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1911">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.http.apache.feature.group" version="4.5.0.201609210915-r"/>
@@ -209,6 +209,7 @@
 <plugin id="org.eclipse.emf.common"/>
 <plugin id="org.eclipse.emf.ecore"/>
 <plugin id="org.eclipse.emf.ecore.change"/>
+<plugin id="org.eclipse.equinox.app"/>
 <plugin id="org.eclipse.equinox.cm"/>
 <plugin id="org.eclipse.equinox.cm.source"/>
 <plugin id="org.eclipse.equinox.common" version="3.8.0.v20160509-1230"/>
