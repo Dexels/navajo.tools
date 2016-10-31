@@ -208,7 +208,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 callerHierarchy.setChecked(true);
                 calleeHierarchy.setChecked(false);
                 callHierarchy.setChecked(false);
-                updateRoot((TreeParent) viewProvider.getRoot());
+                updateRoot();
             }
         };
         callerHierarchy.setText("Show Caller Hierarchy");
@@ -223,7 +223,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(true);
                 callHierarchy.setChecked(false);
-                updateRoot((TreeParent) viewProvider.getRoot());
+                updateRoot();
             }
         };
         calleeHierarchy.setText("Show Callee Hierarchy");
@@ -237,7 +237,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 callerHierarchy.setChecked(false);
                 calleeHierarchy.setChecked(false);
                 callHierarchy.setChecked(true);
-                updateRoot((TreeParent) viewProvider.getRoot());
+                updateRoot();
             }
         };
         callHierarchy.setText("Show call Hierarchy");
@@ -373,6 +373,19 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 //updateRoot(viewProvider.getAbsoluteRoot());
             }
         }
+    }
+    
+    protected void updateRoot() {
+        viewProvider.refreshRoot();
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run() {
+                if (viewer != null && !viewer.getControl().isDisposed()) {
+                    viewer.refresh();
+                    viewer.refresh(getViewSite());
+                    viewer.expandToLevel(2);
+                }
+            }
+        });
     }
 
     protected void updateRoot(final TreeParent treeParent) {

@@ -18,6 +18,7 @@ import com.dexels.navajo.dev.dependency.model.TreeParent;
 public class ViewContentProvider implements IStructuredContentProvider, ITreeContentProvider {
     private static int MAX_STACK_DEPTH = 2;
     private TreeParent invisibleRoot;
+    private TreeParent currentRoot;
     private IViewSite viewSite;
     private EclipseDependencyAnalyzer depAnalyzer;
     private boolean reverseMode = true;
@@ -91,36 +92,45 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
         return false;
     }
 
-    public synchronized void setRoot(TreeParent node) {
+    public void setRoot(TreeParent node) {
         if (invisibleRoot == null) {
             initialize();
         }
+        if (node != null ) {
+            currentRoot = node;
+            refreshRoot();
+        }
+          
+    }
+    
+    public synchronized void refreshRoot() {
+     
           
         // Remove any existing root
         for (TreeObject child : invisibleRoot.getChildren()) {
             invisibleRoot.removeChild(child);
         }
-        if (node != null) {
+        if (currentRoot != null) {
             // remove any existing children of the new root
-            for (TreeObject child : node.getChildren()) {
-                node.removeChild(child);
+            for (TreeObject child : currentRoot.getChildren()) {
+                currentRoot.removeChild(child);
             }
             
-            if (node == invisibleRoot) {
+            if (currentRoot == invisibleRoot) {
                 return;
             }
             if (bothWays) {
                 TreeForwardNode nodeforward = new TreeForwardNode();
               
 
-                addDependencies(node, MAX_STACK_DEPTH, false);
-                for (TreeObject child:  node.getChildren()) {
+                addDependencies(currentRoot, MAX_STACK_DEPTH, false);
+                for (TreeObject child:  currentRoot.getChildren()) {
                     nodeforward.addChild(child);
                 }
                 invisibleRoot.addChild(nodeforward);
                 
                 TreeBackwardNode nodebackward = new TreeBackwardNode();
-                TreeParent node2 = new TreeParent(node.getFilePath(), 0);
+                TreeParent node2 = new TreeParent(currentRoot.getFilePath(), 0);
 
                 addDependencies(node2, MAX_STACK_DEPTH, true);
                 for (TreeObject child:  node2.getChildren()) {
@@ -130,8 +140,8 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
                 invisibleRoot.addChild(nodebackward);
 
             } else {
-                addDependencies(node, MAX_STACK_DEPTH, reverseMode);
-                invisibleRoot.addChild(node);
+                addDependencies(currentRoot, MAX_STACK_DEPTH, reverseMode);
+                invisibleRoot.addChild(currentRoot);
             }
            
         }
