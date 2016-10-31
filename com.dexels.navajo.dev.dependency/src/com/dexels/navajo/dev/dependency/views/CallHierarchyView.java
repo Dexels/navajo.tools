@@ -70,7 +70,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
      * example).
      */
 
-    class NameSorter extends ViewerSorter {
+    class NameSorter extends ViewerComparator {
         @Override
         public int compare(Viewer viewer, Object e1, Object e2) {
             TreeParent o1 = (TreeParent) e1;
@@ -145,7 +145,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
         viewer.setLabelProvider(new ViewLabelProvider());
         viewer.setContentProvider(viewProvider);
-        viewer.setSorter(new NameSorter());
+        viewer.setComparator(new NameSorter());
         viewer.setInput(getViewSite());
 
         // Create the help context id for the viewer's control
@@ -204,10 +204,10 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         callerHierarchy = new Action() {
             public void run() {
                 viewProvider.setReverseMode(true);
-                viewProvider.setBothWays(true);
-                callerHierarchy.setChecked(false);
+                viewProvider.setBothWays(false);
+                callerHierarchy.setChecked(true);
                 calleeHierarchy.setChecked(false);
-                callHierarchy.setChecked(true);
+                callHierarchy.setChecked(false);
                 updateRoot((TreeParent) viewProvider.getRoot());
             }
         };
