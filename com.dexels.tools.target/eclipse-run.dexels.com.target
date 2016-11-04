@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="2170">
+<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2170">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.http.apache.feature.group" version="4.5.0.201609210915-r"/>

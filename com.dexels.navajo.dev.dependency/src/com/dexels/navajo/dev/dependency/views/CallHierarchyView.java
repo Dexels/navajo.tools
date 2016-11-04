@@ -564,13 +564,8 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         }
 
         private void refreshRoot() {
-
             resetNavajoDependencyDecorator();
-
-            TreeObject o = viewProvider.getRoot();
-            if (o != null) {
-                updateRoot(new TreeParent(o.getFilePath(), 0));
-            }
+            updateRoot();
         }
 
     }
