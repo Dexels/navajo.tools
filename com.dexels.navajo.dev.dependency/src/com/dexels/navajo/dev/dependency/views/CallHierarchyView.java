@@ -214,7 +214,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         callerHierarchy.setText("Show Caller Hierarchy");
         callerHierarchy.setToolTipText("Show Caller Hierarchy");
         callerHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/callers.gif"));
-        callerHierarchy.setChecked(true);
+        callerHierarchy.setChecked(false);
 
         calleeHierarchy = new Action() {
             public void run() {
@@ -243,7 +243,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         callHierarchy.setText("Show call Hierarchy");
         callHierarchy.setToolTipText("Show Call Hierarchy");
         callHierarchy.setImageDescriptor(Activator.getImageDescriptor("icons/call.gif"));
-        callHierarchy.setChecked(false);
+        callHierarchy.setChecked(true);
 
         rebuildAction = new Action() {
             public void run() {

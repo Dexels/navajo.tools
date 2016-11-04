@@ -22,7 +22,7 @@ public class ViewContentProvider implements IStructuredContentProvider, ITreeCon
     private IViewSite viewSite;
     private EclipseDependencyAnalyzer depAnalyzer;
     private boolean reverseMode = true;
-    private boolean bothWays = false;
+    private boolean bothWays = true;
     
     private CallHierarchyView parent;
 
