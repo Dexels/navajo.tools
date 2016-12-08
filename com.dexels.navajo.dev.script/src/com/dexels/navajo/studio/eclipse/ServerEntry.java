@@ -89,13 +89,13 @@ public class ServerEntry {
         System.err.println("username: "+username+" pass: "+password);
         NavajoClientFactory.resetClient();
         if ("http".equals(protocol)) {
-            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoClient", null,null);
+            nc = NavajoClientFactory.createClient();
         }
         if ("socket".equals(protocol)) {
-            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoSocketClient", null,null);
+            nc = NavajoClientFactory.createClient();
         }
         if ("local".equals(protocol)) {
-            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoSocketClient", null,null);
+            nc = NavajoClientFactory.createClient();
         }
         if(nc==null) {
         	throw new ClientException(-1, -1, "Unknown protocol: "+protocol);
@@ -112,28 +112,7 @@ public class ServerEntry {
     }
     
 	public Binary getArrayMessageReport(Message m, String[] propertyNames, String[] propertyTitles, int[] columnWidths, String format, String orientation, int[] margins) throws NavajoException {
-	       ClientInterface nc = null;
-	        System.setProperty(NavajoScriptPluginPlugin.DOC_IMPL,NavajoScriptPluginPlugin.QDSAX);
-	        NavajoFactory.resetImplementation();
-	     NavajoClientFactory.resetClient();
-	        if ("http".equals(protocol)) {
-	            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoClient", null,null);
-	        }
-	        if ("socket".equals(protocol)) {
-	            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoSocketClient", null,null);
-	        }
-	        if ("local".equals(protocol)) {
-	            nc = NavajoClientFactory.createClient("com.dexels.navajo.client.NavajoSocketClient", null,null);
-	        }
-	        if(nc==null) {
-	        	throw NavajoFactory.getInstance().createNavajoException("Unknown protocol: "+protocol);
-	        }
-	        nc.setLocaleCode(NavajoScriptPluginPlugin.getDefault().getSelectedLocale());
-	        nc.setServerUrl(server);
-	        nc.setUsername(username);
-	        nc.setPassword(password);
-	        Binary b = nc.getArrayMessageReport(m,propertyNames,propertyTitles,columnWidths,format,orientation,margins);
-	        return b;
+	return null;
 	}
     
     @Override
