@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources
 Import-Package: com.dexels.navajo.birt,
  com.dexels.navajo.client,
- com.dexels.navajo.client.context,
  com.dexels.navajo.document;version="2.2.0",
  com.dexels.navajo.document.nanoimpl;version="2.2.0",
  com.dexels.navajo.document.types;version="2.2.0",

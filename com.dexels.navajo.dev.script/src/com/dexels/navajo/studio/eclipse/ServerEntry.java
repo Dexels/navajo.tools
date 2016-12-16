@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import com.dexels.navajo.client.ClientException;
 import com.dexels.navajo.client.ClientInterface;
+import com.dexels.navajo.client.NavajoClient;
 import com.dexels.navajo.client.NavajoClientFactory;
 import com.dexels.navajo.document.Message;
 import com.dexels.navajo.document.Navajo;
@@ -100,7 +101,7 @@ public class ServerEntry {
         if(nc==null) {
         	throw new ClientException(-1, -1, "Unknown protocol: "+protocol);
         }
-        nc.setLocaleCode(NavajoScriptPluginPlugin.getDefault().getSelectedLocale());
+        nc.setNavajoHeader(NavajoClient.LOCALE_HEADER_KEY, NavajoScriptPluginPlugin.getDefault().getSelectedLocale());
         nc.setServerUrl(server);
         nc.setUsername(username);
         nc.setPassword(password);
