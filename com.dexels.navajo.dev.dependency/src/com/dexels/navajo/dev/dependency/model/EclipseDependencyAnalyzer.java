@@ -130,6 +130,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     }
                     addWorkflowDependencies(scriptFolder, monitor);
                     addArticleDependencies(scriptFolder, monitor);
+                    addEntityMappingDependencies(scriptFolder, monitor);
                     addTasksDependencies(scriptFolder, monitor);
                     addExternalProjectDependencies(monitor);
 
@@ -225,6 +226,40 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         List<Dependency> myDependencies = new ArrayList<Dependency>();
         try {
             codeSearch.addArticleDependencies(scriptFolder, myDependencies, monitor);
+        } catch (Exception e) {
+            logger.error("Exception on getting workflow depencencies for {}: {}", e);
+            return;
+        }
+        synchronized (externalLock) {
+
+            for (Dependency dep : myDependencies) {
+                try {
+                    if (!dependencies.containsKey(dep.getScript())) {
+                        dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                    }
+
+                    dependencies.get(dep.getScript()).add(dep);
+
+                    if (!reverseDependencies.containsKey(dep.getDependee())) {
+                        reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                    }
+
+                    reverseDependencies.get(dep.getDependee()).add(dep);
+                } catch (Exception e) {
+                    logger.error("Error in processing Article dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+                }
+            }
+
+        }
+        logger.debug("Done article dependencies");
+
+    }
+    
+    private void addEntityMappingDependencies(String scriptFolder, IProgressMonitor monitor) {
+        logger.debug("Starting entity mapping dependencies");
+        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        try {
+            codeSearch.addEntityMappingDependencies(scriptFolder, myDependencies, monitor);
         } catch (Exception e) {
             logger.error("Exception on getting workflow depencencies for {}: {}", e);
             return;

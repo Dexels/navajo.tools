@@ -40,6 +40,16 @@ public class CodeSearch {
         searchArticleScriptDependenciesInDir(articleDir, deps, scriptFolder, submonitor);
     }
     
+    public void addEntityMappingDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
+        File rootDir = new File(scriptFolder).getParentFile();
+        File articleDir = new File(rootDir, "entity");
+        int nrFiles = countFiles(articleDir);
+        IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
+        searchEntityMappingDependenciesInDir(articleDir, deps, scriptFolder, submonitor);
+    }
+    
+    
+    
     public void addProjectDependencies(IProject project, List<Dependency> deps,String scriptFolder, IProgressMonitor monitor) {
         IFolder s = project.getFolder("tipi");
         if ( s.exists()) { 
@@ -108,6 +118,21 @@ public class CodeSearch {
         }
     }
     
+    private void searchEntityMappingDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
+        for (File dirEntry : directory.listFiles()) {
+            if (monitor.isCanceled()) {
+                return;
+            }
+            if (dirEntry.isFile() && dirEntry.toString().endsWith("entitymapping.xml")) {
+                searchEntityMappingFile(dirEntry, deps, scriptFolder);
+                monitor.worked(1);
+            } else if (dirEntry.isDirectory()) {
+                searchArticleScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+            }
+        }
+    }
+    
+    
     private void searchExternalProjectScriptDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
         for (File dirEntry : directory.listFiles()) {
             if (monitor.isCanceled()) {
@@ -123,7 +148,7 @@ public class CodeSearch {
     }
 
 
-    public void searchWorkflowFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
+    private void searchWorkflowFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
@@ -173,7 +198,7 @@ public class CodeSearch {
         }
     }
     
-    public void searchTasksFile(File tasksFile, List<Dependency> deps, String scriptFolder) {
+    private void searchTasksFile(File tasksFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
@@ -270,7 +295,7 @@ public class CodeSearch {
         } 
     }
     
-    public void searchArticleFile(File articleFile, List<Dependency> deps, String scriptFolder) {
+    private void searchArticleFile(File articleFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
@@ -290,6 +315,37 @@ public class CodeSearch {
                         isBroken = true;
                     }
                     deps.add(new Dependency(articleFile.getAbsolutePath(), scriptFullPath, Dependency.ARTICLE_DEPENDENCY, linenr, isBroken));
+                }
+            }
+            bf.close();
+
+        } catch (IOException e) {
+            System.err.println("EXCEPTION! " + e);
+            e.printStackTrace();
+        }
+    }
+    
+    public void searchEntityMappingFile(File entityMappingFile, List<Dependency> deps, String scriptFolder) {
+        String line;
+        int linenr = 0;
+        
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(entityMappingFile));
+
+            Pattern p1 = Pattern.compile("<property(?=.*name=\"entity\")(?=.*value=\"([a-zA-Z0-9/]*))");
+            while ((line = bf.readLine()) != null) {
+                linenr++;
+                
+                Matcher m = p1.matcher(line);
+                while (m.find()) {
+                    String entityName = m.group(1);
+                    String scriptFullPath = scriptFolder + File.separator + "entity" + File.separator + entityName + ".xml";
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                    deps.add(new Dependency(entityMappingFile.getAbsolutePath(), scriptFullPath, Dependency.ENTITY_DEPENDENCY, linenr, isBroken));
                 }
             }
             bf.close();
