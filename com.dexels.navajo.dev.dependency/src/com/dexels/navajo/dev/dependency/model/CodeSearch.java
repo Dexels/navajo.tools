@@ -180,7 +180,7 @@ public class CodeSearch {
         }
     }
     
-    private void searchTasksFile(File tasksFile, List<Dependency> deps, String scriptFolder) {
+    protected void searchTasksFile(File tasksFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {

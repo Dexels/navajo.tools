@@ -152,12 +152,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     @Override
     public void addDependencies(String script) {
-
         super.addDependencies(script);
         List<Dependency> myDependencies = new ArrayList<Dependency>();
-        if (script.startsWith("entity") && script.endsWith("entitymapping.xml")) {
-            File entityMapping = new File(rootFolder, script);
-
+        if (script.startsWith("entity") && script.endsWith("entitymapping")) {
+            File entityMapping = new File(rootFolder + File.separator + "scripts",script + ".xml");
             try {
                 codeSearch.searchEntityMappingDependenciesInDir(entityMapping, myDependencies, scriptFolder);
             } catch (Exception e) {
@@ -336,17 +334,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     addDependencies(scriptName);
                 } else {
                     List<Dependency> myDependencies = new ArrayList<Dependency>();
-                    File f = new File(rootFolder, filename);
+                    File f = new File(filename);
                     if (filename.contains("workflows")) {
                         codeSearch.searchWorkflowFile(f, myDependencies, scriptFolder);
                     } else if (filename.contains("article")) {
                         codeSearch.searchArticleFile(f, myDependencies, scriptFolder);
 
                     } else if (filename.contains("tasks.xml")) {
-                        codeSearch.searchArticleFile(f, myDependencies, scriptFolder);
-
+                        codeSearch.searchTasksFile(f, myDependencies, scriptFolder);
                     }
-
                     updateDependencies(myDependencies);
 
                 }
