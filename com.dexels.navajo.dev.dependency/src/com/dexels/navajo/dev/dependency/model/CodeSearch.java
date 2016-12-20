@@ -123,7 +123,7 @@ public class CodeSearch {
             if (monitor.isCanceled()) {
                 return;
             }
-            if (dirEntry.isFile() && dirEntry.toString().endsWith("entitymapping.xml")) {
+            if (dirEntry.isFile() && dirEntry.getName().endsWith("entitymapping.xml")) {
                 searchEntityMappingFile(dirEntry, deps, scriptFolder);
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
@@ -368,5 +368,23 @@ public class CodeSearch {
             count++;
         }
         return count;
+    }
+    
+    public static void main(String[] args) {
+        String line = "<property name=\"entity\" value=\"common\binary\" ";
+        Pattern p1 = Pattern.compile("<property(?=.*name=\"entity\")(?=.*value=\"([a-zA-Z0-9/]*))");
+            
+        Matcher m = p1.matcher(line);
+        while (m.find()) {
+            String entityName = m.group(1);
+            String scriptFullPath = "/home/chris/scripts" + File.separator + "entity" + File.separator + entityName + ".xml";
+            // Check if exists
+            boolean isBroken = false;
+            if (!new File(scriptFullPath).exists()) {
+                isBroken = true;
+            }
+            System.out.println("found dep from fake to " + scriptFullPath );
+        }
+        
     }
 }
