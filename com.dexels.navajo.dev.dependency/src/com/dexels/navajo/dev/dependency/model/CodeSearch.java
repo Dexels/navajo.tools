@@ -126,7 +126,7 @@ public class CodeSearch {
                 searchEntityMappingFile(dirEntry, deps, scriptFolder);
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
-                searchArticleScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+                searchEntityMappingDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
             }
         }
     }

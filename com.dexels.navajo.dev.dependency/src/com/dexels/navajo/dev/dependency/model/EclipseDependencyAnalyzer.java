@@ -280,12 +280,12 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
                     reverseDependencies.get(dep.getDependee()).add(dep);
                 } catch (Exception e) {
-                    logger.error("Error in processing Article dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+                    logger.error("Error in processing Entity dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
                 }
             }
 
         }
-        logger.debug("Done article dependencies");
+        logger.debug("Done entity mapping dependencies");
 
     }
 
