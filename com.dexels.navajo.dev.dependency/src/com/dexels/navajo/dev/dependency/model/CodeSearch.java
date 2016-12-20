@@ -41,11 +41,10 @@ public class CodeSearch {
     }
     
     public void addEntityMappingDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
-        File rootDir = new File(scriptFolder).getParentFile();
-        File articleDir = new File(rootDir, "entity");
-        int nrFiles = countFiles(articleDir);
+        File entityDir = new File(scriptFolder, "entity");
+        int nrFiles = countFiles(entityDir);
         IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
-        searchEntityMappingDependenciesInDir(articleDir, deps, scriptFolder, submonitor);
+        searchEntityMappingDependenciesInDir(entityDir, deps, scriptFolder, submonitor);
     }
     
     
