@@ -39,16 +39,7 @@ public class CodeSearch {
         IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
         searchArticleScriptDependenciesInDir(articleDir, deps, scriptFolder, submonitor);
     }
-    
-    public void addEntityMappingDependencies(String scriptFolder, List<Dependency> deps, IProgressMonitor monitor) {
-        File entityDir = new File(scriptFolder, "entity");
-        int nrFiles = countFiles(entityDir);
-        IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
-        searchEntityMappingDependenciesInDir(entityDir, deps, scriptFolder, submonitor);
-    }
-    
-    
-    
+
     public void addProjectDependencies(IProject project, List<Dependency> deps,String scriptFolder, IProgressMonitor monitor) {
         IFolder s = project.getFolder("tipi");
         if ( s.exists()) { 
@@ -117,17 +108,9 @@ public class CodeSearch {
         }
     }
     
-    private void searchEntityMappingDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
-        for (File dirEntry : directory.listFiles()) {
-            if (monitor.isCanceled()) {
-                return;
-            }
-            if (dirEntry.isFile() && dirEntry.getName().endsWith("entitymapping.xml")) {
-                searchEntityMappingFile(dirEntry, deps, scriptFolder);
-                monitor.worked(1);
-            } else if (dirEntry.isDirectory()) {
-                searchEntityMappingDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
-            }
+    public void searchEntityMappingDependenciesInDir(File dirEntry, List<Dependency> deps, String scriptFolder) {
+        if (dirEntry.isFile() && dirEntry.getName().endsWith("entitymapping.xml")) {
+            searchEntityMappingFile(dirEntry, deps, scriptFolder);
         }
     }
     
@@ -147,7 +130,7 @@ public class CodeSearch {
     }
 
 
-    private void searchWorkflowFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
+    protected void searchWorkflowFile(File workflowFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
@@ -294,7 +277,7 @@ public class CodeSearch {
         } 
     }
     
-    private void searchArticleFile(File articleFile, List<Dependency> deps, String scriptFolder) {
+    protected void searchArticleFile(File articleFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         try {
@@ -324,7 +307,7 @@ public class CodeSearch {
         }
     }
     
-    public void searchEntityMappingFile(File entityMappingFile, List<Dependency> deps, String scriptFolder) {
+    private void searchEntityMappingFile(File entityMappingFile, List<Dependency> deps, String scriptFolder) {
         String line;
         int linenr = 0;
         

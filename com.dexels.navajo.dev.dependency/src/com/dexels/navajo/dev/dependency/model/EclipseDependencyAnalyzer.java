@@ -130,7 +130,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     }
                     addWorkflowDependencies(scriptFolder, monitor);
                     addArticleDependencies(scriptFolder, monitor);
-                    addEntityMappingDependencies(scriptFolder, monitor);
                     addTasksDependencies(scriptFolder, monitor);
                     addExternalProjectDependencies(monitor);
 
@@ -149,6 +148,29 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 return Status.OK_STATUS;
             }
         };
+    }
+    
+    
+
+    @Override
+    public void addDependencies(String script) {
+
+        super.addDependencies(script);
+        List<Dependency> myDependencies = new ArrayList<Dependency>();
+        if (script.startsWith("entity") && script.endsWith("entitymapping.xml")) {
+            File entityMapping = new File(rootFolder, script);
+
+            try {
+                codeSearch.searchEntityMappingDependenciesInDir(entityMapping, myDependencies, scriptFolder);
+            } catch (Exception e) {
+                logger.error("Exception on getting entity depencencies for {}: {}", e);
+                return;
+            }
+        }
+        synchronized (externalLock) {
+            updateDependencies(myDependencies);
+        }
+
     }
 
     private void addWorkflowDependencies(String scriptFolder, IProgressMonitor monitor) {
@@ -255,40 +277,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     }
     
-    private void addEntityMappingDependencies(String scriptFolder, IProgressMonitor monitor) {
-        logger.debug("Starting entity mapping dependencies");
-        List<Dependency> myDependencies = new ArrayList<Dependency>();
-        try {
-            codeSearch.addEntityMappingDependencies(scriptFolder, myDependencies, monitor);
-        } catch (Exception e) {
-            logger.error("Exception on getting workflow depencencies for {}: {}", e);
-            return;
-        }
-        synchronized (externalLock) {
-
-            for (Dependency dep : myDependencies) {
-                try {
-                    if (!dependencies.containsKey(dep.getScript())) {
-                        dependencies.put(dep.getScript(), new ArrayList<Dependency>());
-                    }
-
-                    dependencies.get(dep.getScript()).add(dep);
-
-                    if (!reverseDependencies.containsKey(dep.getDependee())) {
-                        reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
-                    }
-
-                    reverseDependencies.get(dep.getDependee()).add(dep);
-                } catch (Exception e) {
-                    logger.error("Error in processing Entity dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
-                }
-            }
-
-        }
-        logger.debug("Done entity mapping dependencies");
-
-    }
-
+   
     private void addExternalProjectDependencies(IProgressMonitor monitor) {
 
         NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
@@ -340,24 +329,42 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 
     }
 
-    public void refresh(String scriptFile, IProject project, boolean recursive) {
+    public void refresh(String filename, IProject project, boolean recursive) {
         synchronized (externalLock) {
             if (NavajoDependencyPreferences.getInstance().getScriptsProject().equals(project)) {
-                String scriptName = TreeObject.getScriptFromFilename(scriptFile);
+                String scriptName = TreeObject.getScriptFromFilename(filename);
                 removeScriptFromReverseValues(scriptName);
                 dependencies.remove(scriptName);
-                addDependencies(scriptName);
+                if (filename.contains("scripts")) {
+                    addDependencies(scriptName);
+                } else {
+                    List<Dependency> myDependencies = new ArrayList<Dependency>();
+                    File f = new File(rootFolder, filename);
+                    if (filename.contains("workflows")) {
+                        codeSearch.searchWorkflowFile(f,  myDependencies,  scriptFolder);
+                    } else if (filename.contains("article")) {
+                        codeSearch.searchArticleFile(f,  myDependencies,  scriptFolder);
+
+                    }else if (filename.contains("tasks.xml")) {
+                        codeSearch.searchArticleFile(f,  myDependencies,  scriptFolder);
+
+                    }
+
+                    updateDependencies(myDependencies);
+
+                }
+                
 
                 // Update the dependencies of all scripts that point(ed) to me
-                List<Dependency> deps = reverseDependencies.get(scriptName);
+                List<Dependency> reverseDeps = reverseDependencies.get(scriptName);
 
-                if (deps != null && recursive) {
+                if (reverseDeps != null && recursive) {
                     // The refresh action can trigger removing dependencies.
                     // Therefore make a copy of the list to prevent
                     // ConcurrentMod exceptions
-                    List<Dependency> depsCopy = new ArrayList<Dependency>(deps);
+                    List<Dependency> depsCopy = new ArrayList<Dependency>(reverseDeps);
                     for (Dependency dep : depsCopy) {
-                        if (!dep.getScriptFile().equals(scriptFile)) {
+                        if (!dep.getScriptFile().equals(filename)) {
                             refresh(dep.getScriptFile(), project, false);
                         }
                     }
@@ -370,6 +377,26 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             }
         }
 
+    }
+
+    private void updateDependencies(List<Dependency> myDependencies) {
+        for (Dependency dep : myDependencies) {
+            try {
+                if (!dependencies.containsKey(dep.getScript())) {
+                    dependencies.put(dep.getScript(), new ArrayList<Dependency>());
+                }
+
+                dependencies.get(dep.getScript()).add(dep);
+
+                if (!reverseDependencies.containsKey(dep.getDependee())) {
+                    reverseDependencies.put(dep.getDependee(), new ArrayList<Dependency>());
+                }
+
+                reverseDependencies.get(dep.getDependee()).add(dep);
+            } catch (Exception e) {
+                logger.error("Error in processing Entity dependency {} to {}:  {}", dep.getScriptFile(), dep.getDependeeFile(), e);
+            }
+        }
     }
 
     public void remove(String scriptFile, IProject project) {
