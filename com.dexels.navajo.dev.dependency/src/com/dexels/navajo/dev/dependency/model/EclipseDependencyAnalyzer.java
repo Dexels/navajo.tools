@@ -149,8 +149,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             }
         };
     }
-    
-    
 
     @Override
     public void addDependencies(String script) {
@@ -276,8 +274,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         logger.debug("Done article dependencies");
 
     }
-    
-   
+
     private void addExternalProjectDependencies(IProgressMonitor monitor) {
 
         NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
@@ -341,19 +338,18 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     List<Dependency> myDependencies = new ArrayList<Dependency>();
                     File f = new File(rootFolder, filename);
                     if (filename.contains("workflows")) {
-                        codeSearch.searchWorkflowFile(f,  myDependencies,  scriptFolder);
+                        codeSearch.searchWorkflowFile(f, myDependencies, scriptFolder);
                     } else if (filename.contains("article")) {
-                        codeSearch.searchArticleFile(f,  myDependencies,  scriptFolder);
+                        codeSearch.searchArticleFile(f, myDependencies, scriptFolder);
 
-                    }else if (filename.contains("tasks.xml")) {
-                        codeSearch.searchArticleFile(f,  myDependencies,  scriptFolder);
+                    } else if (filename.contains("tasks.xml")) {
+                        codeSearch.searchArticleFile(f, myDependencies, scriptFolder);
 
                     }
 
                     updateDependencies(myDependencies);
 
                 }
-                
 
                 // Update the dependencies of all scripts that point(ed) to me
                 List<Dependency> reverseDeps = reverseDependencies.get(scriptName);
