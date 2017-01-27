@@ -30,6 +30,9 @@ public class TreeBackwardNode extends TreeParent {
     }
 
     public TreeObject[] getChildren() {
+        if (children.size() < 1) {
+            return new TreeObject[]{};
+        }
         TreeObject[] array =  children.toArray(new TreeObject[children.size()]);
         return array;
         
