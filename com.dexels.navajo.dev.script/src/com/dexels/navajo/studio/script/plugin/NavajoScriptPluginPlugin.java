@@ -329,7 +329,11 @@ public class NavajoScriptPluginPlugin extends AbstractUIPlugin {
     @Override
 	public void start(BundleContext context) throws Exception {
         super.start(context);
-        context.getBundle("com.dexels.navajo.client.impl.javanet");
+        try {
+            context.getBundle("com.dexels.navajo.client.impl.javanet").start();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
         setup();
     }
 
