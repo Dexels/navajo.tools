@@ -99,19 +99,6 @@ public class TmlBrowser extends BaseNavajoView implements INavajoScriptListener,
   
     @Override
 	public void createPartControl(Composite parent) {
-    	
-        try {
-            Class<ClientInterface> clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
-            NavajoClientFactory.setDefaultClient(clazz.newInstance());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 //        myParent = parent;
         NavajoScriptPluginPlugin.getDefault().setTmlBrowser(this);
         Control[] c = parent.getChildren();
