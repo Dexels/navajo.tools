@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2180">
+<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2184">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.http.apache.feature.group" version="4.5.0.201609210915-r"/>
@@ -55,6 +55,7 @@
 <plugin id="com.dexels.navajo.birt.push"/>
 <plugin id="com.dexels.navajo.client"/>
 <plugin id="com.dexels.navajo.client.async"/>
+<plugin id="com.dexels.navajo.client.impl.javanet"/>
 <plugin id="com.dexels.navajo.core"/>
 <plugin id="com.dexels.navajo.document"/>
 <plugin id="com.dexels.navajo.function"/>

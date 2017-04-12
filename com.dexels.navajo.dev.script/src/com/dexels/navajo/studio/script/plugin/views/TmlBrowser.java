@@ -49,6 +49,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dexels.navajo.client.ClientException;
+import com.dexels.navajo.client.ClientInterface;
+import com.dexels.navajo.client.NavajoClientFactory;
 import com.dexels.navajo.document.Navajo;
 import com.dexels.navajo.document.NavajoFactory;
 import com.dexels.navajo.parser.DefaultExpressionEvaluator;
@@ -98,7 +100,18 @@ public class TmlBrowser extends BaseNavajoView implements INavajoScriptListener,
     @Override
 	public void createPartControl(Composite parent) {
     	
-    	
+        try {
+            Class<ClientInterface> clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
+            NavajoClientFactory.setDefaultClient(clazz.newInstance());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 //        myParent = parent;
         NavajoScriptPluginPlugin.getDefault().setTmlBrowser(this);
         Control[] c = parent.getChildren();

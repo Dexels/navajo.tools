@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1989">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="1997">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jgit.http.apache.feature.group" version="4.6.0.201612231935-r"/>
-<unit id="org.eclipse.jgit.lfs.feature.group" version="4.6.0.201612231935-r"/>
-<unit id="org.eclipse.jgit.source.feature.group" version="4.6.0.201612231935-r"/>
-<unit id="org.eclipse.jgit.feature.group" version="4.6.0.201612231935-r"/>
+<unit id="org.eclipse.jgit.http.apache.feature.group" version="4.7.0.201704051617-r"/>
+<unit id="org.eclipse.jgit.lfs.feature.group" version="4.7.0.201704051617-r"/>
+<unit id="org.eclipse.jgit.source.feature.group" version="4.7.0.201704051617-r"/>
+<unit id="org.eclipse.jgit.feature.group" version="4.7.0.201704051617-r"/>
 <repository location="http://mirrorservice.org/sites/download.eclipse.org/eclipseMirror/egit/updates/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -34,10 +34,10 @@
 <repository location="http://download.eclipse.org/releases/neon/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201701261336"/>
-<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201701261336"/>
-<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201701261336"/>
-<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201701261336"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201704110855"/>
+<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201704110855"/>
+<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201704110855"/>
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201704110855"/>
 <repository location="https://repo.dexels.com/eclipse/navajo/"/>
 </location>
 </locations>
