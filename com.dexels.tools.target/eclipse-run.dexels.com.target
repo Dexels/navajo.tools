@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2193">
+<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2197">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jgit.feature.group" version="4.7.0.201704051617-r"/>
-<unit id="org.eclipse.jgit.http.apache.feature.group" version="4.7.0.201704051617-r"/>
-<unit id="org.eclipse.jgit.lfs.feature.group" version="4.7.0.201704051617-r"/>
-<unit id="org.eclipse.jgit.source.feature.group" version="4.7.0.201704051617-r"/>
-<repository location="http://mirrorservice.org/sites/download.eclipse.org/eclipseMirror/egit/updates/"/>
+<unit id="org.eclipse.jgit.feature.group" version="4.8.0.201706111038-r"/>
+<unit id="org.eclipse.jgit.http.apache.feature.group" version="4.8.0.201706111038-r"/>
+<unit id="org.eclipse.jgit.lfs.feature.group" version="4.8.0.201706111038-r"/>
+<repository location="http://download.eclipse.org/egit/updates/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201704121126"/>
-<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201704121126"/>
-<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201704121126"/>
-<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201704121126"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201709250957"/>
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201709250957"/>
+<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201709250957"/>
+<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201709250957"/>
 <repository location="https://repo.dexels.com/eclipse/navajo/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.thirdparty.feature.feature.group" version="1.9.160.RELEASE"/>
-<repository location="http://repo.dexels.com/eclipse/3rdparty_1.9.160"/>
+<unit id="com.dexels.thirdparty.feature.feature.group" version="1.10.19.RELEASE"/>
+<repository location="http://repo.dexels.com/eclipse/3rdparty_1.10.19"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.swt.dummyfragments.feature.group" version="1.0.0.v20160907-0248"/>
@@ -86,9 +85,7 @@
 <plugin id="com.springsource.org.json"/>
 <plugin id="com.vaadin"/>
 <plugin id="edtftpj.3rdpartywrap"/>
-<plugin id="jackson-core-lgpl"/>
-<plugin id="jackson-mapper-lgpl"/>
-<plugin id="javaewah" version="0.7.9.v201401101600"/>
+<plugin id="javaewah"/>
 <plugin id="javax.el"/>
 <plugin id="javax.el.source"/>
 <plugin id="javax.inject" version="1.0.0.v20091030"/>
@@ -127,11 +124,10 @@
 <plugin id="org.apache.commons.pool"/>
 <plugin id="org.apache.felix.bundlerepository"/>
 <plugin id="org.apache.felix.framework"/>
-<plugin id="org.apache.felix.framework.security"/>
 <plugin id="org.apache.felix.gogo.command" version="0.10.0.v201209301215"/>
 <plugin id="org.apache.felix.gogo.command.source"/>
 <plugin id="org.apache.felix.gogo.runtime" version="0.10.0.v201209301036"/>
-<plugin id="org.apache.felix.gogo.runtime.source" version="0.10.0.v201209301036"/>
+<plugin id="org.apache.felix.gogo.runtime.source"/>
 <plugin id="org.apache.felix.gogo.shell" version="0.10.0.v201212101605"/>
 <plugin id="org.apache.felix.gogo.shell.source"/>
 <plugin id="org.apache.felix.inventory"/>
@@ -152,8 +148,8 @@
 <plugin id="org.apache.felix.webconsole.plugins.packageadmin"/>
 <plugin id="org.apache.felix.webconsole.plugins.scriptconsole"/>
 <plugin id="org.apache.felix.webconsole.plugins.upnp"/>
-<plugin id="org.apache.httpcomponents.httpclient" version="4.4.1"/>
-<plugin id="org.apache.httpcomponents.httpcore" version="4.4.3"/>
+<plugin id="org.apache.httpcomponents.httpclient" version="4.5.3"/>
+<plugin id="org.apache.httpcomponents.httpcore" version="4.4.6"/>
 <plugin id="org.apache.james.protocols.api"/>
 <plugin id="org.apache.james.protocols.netty"/>
 <plugin id="org.apache.james.protocols.smtp"/>
@@ -432,7 +428,6 @@
 <plugin id="org.ops4j.pax.url.cache"/>
 <plugin id="org.ops4j.pax.url.classpath"/>
 <plugin id="org.ops4j.pax.url.commons"/>
-<plugin id="org.ops4j.pax.url.dir"/>
 <plugin id="org.ops4j.pax.url.link"/>
 <plugin id="org.ops4j.pax.url.mvn"/>
 <plugin id="org.ops4j.pax.url.obr"/>
@@ -449,9 +444,7 @@
 <plugin id="org.sat4j.core"/>
 <plugin id="org.sat4j.pb"/>
 <plugin id="org.scala-lang.modules.scala-xml"/>
-<plugin id="org.scala-lang.plugins.scala-continuations-library"/>
 <plugin id="org.scala-lang.plugins.scala-continuations-plugin"/>
-<plugin id="org.scala-lang.scala-actors"/>
 <plugin id="org.scala-lang.scala-compiler"/>
 <plugin id="org.scala-lang.scala-library"/>
 <plugin id="org.scala-lang.scala-reflect"/>
