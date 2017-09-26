@@ -32,8 +32,11 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dexels.navajo.client.ClientInterface;
+import com.dexels.navajo.client.NavajoClientFactory;
 import com.dexels.navajo.document.Message;
 import com.dexels.navajo.document.Navajo;
+import com.dexels.navajo.document.NavajoFactory;
 import com.dexels.navajo.document.Property;
 import com.dexels.navajo.studio.eclipse.ServerEntry;
 import com.dexels.navajo.studio.script.plugin.NavajoScriptPluginPlugin;
@@ -175,6 +178,28 @@ public class NavajoPreferencePage extends PreferencePage implements IWorkbenchPr
 //                IStructuredSelection sel2 = (IStructuredSelection)defaultProjectSelector.getCombo().getSelection();
                 currentDefaultProject = (IProject)sel.getFirstElement();
             }});
+        
+        if (NavajoFactory.getInstance() == null) {
+            Class<ClientInterface> clazz = null;
+            try {
+                clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (clazz != null) {
+                try {
+                    System.err.println("Setting " + clazz + " as default instance");
+                    ClientInterface clientInterface = clazz.newInstance();
+                    NavajoClientFactory.setDefaultClient(clientInterface);
+                    
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                } 
+            } else {
+                System.err.println("missing client impl");
+            }
+           
+        }
      }
     
     private void createTmlBrowserParts() {

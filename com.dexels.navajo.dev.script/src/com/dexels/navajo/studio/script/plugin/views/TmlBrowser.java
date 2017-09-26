@@ -274,7 +274,32 @@ public class TmlBrowser extends BaseNavajoView implements INavajoScriptListener,
                 System.err.println("Prefs changed. Ouwe: "+event.getOldValue()+" new: "+event.getNewValue());
                 refreshFromPrefs();
             }});
+       
+    
+        
+        if (NavajoFactory.getInstance() == null) {
+            Class<ClientInterface> clazz = null;
+            try {
+                clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (clazz != null) {
+                try {
+                    System.err.println("Setting " + clazz + " as default instance");
+                    ClientInterface clientInterface = clazz.newInstance();
+                    NavajoClientFactory.setDefaultClient(clientInterface);
+                    
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                } 
+            } else {
+                System.err.println("missing client impl");
+            }
+           
         }
+    
+    }
 
 
 	protected void showSource() {

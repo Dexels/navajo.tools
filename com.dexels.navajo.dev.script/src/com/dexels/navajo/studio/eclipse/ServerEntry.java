@@ -36,27 +36,6 @@ public class ServerEntry {
         this.server = server;
         this.username = username;
         this.password = password;
-        
-        if (NavajoFactory.getInstance() == null) {
-            Class<ClientInterface> clazz = null;
-            try {
-                clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (clazz != null) {
-                try {
-                    ClientInterface clientInterface = clazz.newInstance();
-                    NavajoClientFactory.setDefaultClient(clientInterface);
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                } 
-            } else {
-                System.err.println("missing client impl");
-            }
-           
-        }
-        
     }
 
     public ServerEntry(String data) {
