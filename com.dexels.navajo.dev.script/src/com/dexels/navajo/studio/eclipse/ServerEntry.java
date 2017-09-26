@@ -101,7 +101,9 @@ public class ServerEntry {
         if(nc==null) {
         	throw new ClientException(-1, -1, "Unknown protocol: "+protocol);
         }
-        nc.setNavajoHeader(NavajoClient.LOCALE_HEADER_KEY, NavajoScriptPluginPlugin.getDefault().getSelectedLocale());
+        if (NavajoScriptPluginPlugin.getDefault().getSelectedLocale() != null) {
+            nc.setNavajoHeader(NavajoClient.LOCALE_HEADER_KEY, NavajoScriptPluginPlugin.getDefault().getSelectedLocale());
+        }
         nc.setServerUrl(server);
         nc.setUsername(username);
         nc.setPassword(password);

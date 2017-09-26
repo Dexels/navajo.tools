@@ -19,6 +19,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
+import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -37,6 +38,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,14 +59,14 @@ import com.dexels.navajo.studio.script.plugin.views.TmlBrowser;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class NavajoScriptPluginPlugin extends AbstractUIPlugin {
+public class NavajoScriptPluginPlugin extends AbstractUIPlugin implements BundleActivator {
     //The shared instance.
     private static NavajoScriptPluginPlugin plugin;
 
     
 	private final static Logger logger = LoggerFactory
 			.getLogger(NavajoScriptPluginPlugin.class);
-    
+
     //Resource bundle.
     private ResourceBundle resourceBundle = null;
 
@@ -187,6 +189,11 @@ public class NavajoScriptPluginPlugin extends AbstractUIPlugin {
      */
     public NavajoScriptPluginPlugin() {
         super();
+        try {
+            InternalPlatform.getDefault().getBundleContext().getBundle("com.dexels.navajo.client.impl.javanet").start();
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
          System.err.println("Started NavajoScriptPlugin at: " + new Date());
         System.setProperty("com.dexels.navajo.DocumentImplementation", "com.dexels.navajo.document.base.BaseNavajoFactoryImpl");
 //        System.setProperty("com.dexels.navajo.DocumentImplementation", "com.dexels.navajo.document.nanoimpl.NavajoFactoryImpl");
@@ -329,11 +336,7 @@ public class NavajoScriptPluginPlugin extends AbstractUIPlugin {
     @Override
 	public void start(BundleContext context) throws Exception {
         super.start(context);
-        try {
-            context.getBundle("com.dexels.navajo.client.impl.javanet").start();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
+       
         setup();
     }
 
