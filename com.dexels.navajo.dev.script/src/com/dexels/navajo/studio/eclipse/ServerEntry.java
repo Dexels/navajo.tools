@@ -27,6 +27,7 @@ public class ServerEntry {
     private final String username;
     private final String password;
     private final String name;
+    private ClientInterface clientInterface;
 
     public static final char SEP_CHAR = '|';
 
@@ -38,11 +39,28 @@ public class ServerEntry {
         this.password = password;
         
         if (NavajoFactory.getInstance() == null) {
+            Class<ClientInterface> clazz = null;
             try {
-                InternalPlatform.getDefault().getBundleContext().getBundle("com.dexels.navajo.client.impl.javanet").start();
-            } catch (Throwable t) {
-                t.printStackTrace();
+                clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
+            if (clazz != null) {
+                try {
+                    clientInterface = clazz.newInstance();
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                } 
+            } else {
+                System.err.println("missing client impl");
+            }
+         
+        } else {
+            try {
+                clientInterface = NavajoClientFactory.createClient().getClass().newInstance();
+            } catch (Throwable e) {
+                e.printStackTrace();
+            } 
         }
     }
 

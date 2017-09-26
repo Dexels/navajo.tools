@@ -40,6 +40,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -190,7 +191,7 @@ public class NavajoScriptPluginPlugin extends AbstractUIPlugin implements Bundle
     public NavajoScriptPluginPlugin() {
         super();
         try {
-            InternalPlatform.getDefault().getBundleContext().getBundle("com.dexels.navajo.client.impl.javanet").start();
+             InternalPlatform.getDefault().getBundleContext().getBundle("com.dexels.navajo.client.impl.javanet").start();
         } catch (Throwable t) {
             t.printStackTrace();
         }
