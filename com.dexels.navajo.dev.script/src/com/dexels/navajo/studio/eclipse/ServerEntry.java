@@ -27,7 +27,6 @@ public class ServerEntry {
     private final String username;
     private final String password;
     private final String name;
-    private ClientInterface clientInterface;
 
     public static final char SEP_CHAR = '|';
 
@@ -47,21 +46,17 @@ public class ServerEntry {
             }
             if (clazz != null) {
                 try {
-                    clientInterface = clazz.newInstance();
+                    ClientInterface clientInterface = clazz.newInstance();
+                    NavajoClientFactory.setDefaultClient(clientInterface);
                 } catch (Throwable e) {
                     e.printStackTrace();
                 } 
             } else {
                 System.err.println("missing client impl");
             }
-         
-        } else {
-            try {
-                clientInterface = NavajoClientFactory.createClient().getClass().newInstance();
-            } catch (Throwable e) {
-                e.printStackTrace();
-            } 
+           
         }
+        
     }
 
     public ServerEntry(String data) {
