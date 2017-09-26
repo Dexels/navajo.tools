@@ -277,7 +277,7 @@ public class TmlBrowser extends BaseNavajoView implements INavajoScriptListener,
        
     
         
-        if (NavajoFactory.getInstance() == null) {
+        if (NavajoClientFactory.getClient() == null) {
             Class<ClientInterface> clazz = null;
             try {
                 clazz = (Class<ClientInterface>) Class.forName( "com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
