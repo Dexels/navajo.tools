@@ -8,6 +8,8 @@ package com.dexels.navajo.studio.eclipse;
 
 import java.util.StringTokenizer;
 
+import org.eclipse.core.internal.runtime.InternalPlatform;
+
 import com.dexels.navajo.client.ClientException;
 import com.dexels.navajo.client.ClientInterface;
 import com.dexels.navajo.client.NavajoClient;
@@ -34,6 +36,14 @@ public class ServerEntry {
         this.server = server;
         this.username = username;
         this.password = password;
+        
+        if (NavajoFactory.getInstance() == null) {
+            try {
+                InternalPlatform.getDefault().getBundleContext().getBundle("com.dexels.navajo.client.impl.javanet").start();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
     }
 
     public ServerEntry(String data) {
