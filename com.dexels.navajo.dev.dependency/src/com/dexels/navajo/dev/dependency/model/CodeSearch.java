@@ -369,4 +369,44 @@ public class CodeSearch {
         }
         
     }
+
+    public void addScalaDependencies(File f, List<Dependency> deps, String scriptFolder) {
+        String line;
+        int linenr = 0;
+        
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(f));
+
+            Pattern p1 = Pattern.compile("callScript\\(\"([a-zA-Z0-9/]*)\"");
+            while ((line = bf.readLine()) != null) {
+                linenr++;
+                
+                Matcher m = p1.matcher(line);
+                while (m.find()) {
+                    String script = m.group(1);
+                    String scriptPath = scriptFolder + File.separator + script;
+                    String scriptFullPath = scriptPath + ".xml";
+                    
+                   
+                    boolean isBroken = true;
+                    if (new File(scriptFullPath).exists()) {
+                        isBroken = false;
+                    }
+                    if (isBroken) {
+                        scriptFullPath = scriptPath + ".scala";
+                        if (new File(scriptFullPath).exists()) {
+                            isBroken = false;
+                        }
+                    }
+                    
+                    deps.add(new Dependency(f.getAbsolutePath(), scriptFullPath, Dependency.NAVAJO_DEPENDENCY, linenr, isBroken));
+                }
+            }
+            bf.close();
+
+        } catch (IOException e) {
+            System.err.println("EXCEPTION! " + e);
+            e.printStackTrace();
+        }
+    }
 }

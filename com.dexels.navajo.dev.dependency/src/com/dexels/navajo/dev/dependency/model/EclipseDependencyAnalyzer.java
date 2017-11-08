@@ -48,7 +48,14 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         precompiler = new EclipseTslPreCompiler();
         codeSearch = new CodeSearch();
         initialize();
-
+    }
+    
+    public EclipseDependencyAnalyzer(Boolean init) {
+        codeSearch = new CodeSearch();
+        if (init) {
+            precompiler = new EclipseTslPreCompiler();
+           
+        }
     }
 
     public static EclipseDependencyAnalyzer getInstance() {
@@ -104,14 +111,17 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 scriptFolder = rootFolder + "scripts";
 
                 // We missed changes, so re-read all files
-                String[] xmlExt = { "xml" };
+                String[] xmlExt = { "xml" , };
                 Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
+                
+                String[] scalaExt = { "scala" , };
+                Collection<File> scalaFiles = FileUtils.listFiles(new File(scriptFolder), scalaExt, true);
 
                 Collection<File> workflowFiles = FileUtils.listFiles(new File(rootFolder + "workflows"), xmlExt, true);
 
                 try {
-                    // Files.size + 'fake' 500 for workflow progress
-                    monitor.beginTask("Calculating Navajo dependencies", files.size() + workflowFiles.size());
+
+                    monitor.beginTask("Calculating Navajo dependencies", files.size() + scalaFiles.size() + workflowFiles.size());
 
                     for (File f : files) {
                         monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
@@ -127,6 +137,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                         if (monitor.isCanceled()) {
                             return Status.CANCEL_STATUS;
                         }
+                    }
+                    for (File f : scalaFiles) {
+                        addScalaDependencies(f);
+                        monitor.worked(1);
                     }
                     addWorkflowDependencies(scriptFolder, monitor);
                     addArticleDependencies(scriptFolder, monitor);
@@ -163,6 +177,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 return;
             }
         }
+        synchronized (externalLock) {
+            updateDependencies(myDependencies);
+        }
+
+    }
+    
+    public void addScalaDependencies(File f) {
+        List<Dependency> myDependencies = new ArrayList<>();
+        codeSearch.addScalaDependencies(f, myDependencies, scriptFolder);
         synchronized (externalLock) {
             updateDependencies(myDependencies);
         }
@@ -509,5 +532,13 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
         if (initializeJob != null) {
             initializeJob.cancel();
         }
+    }
+    
+    public static void main(String[] args) {
+        EclipseDependencyAnalyzer instance = new EclipseDependencyAnalyzer(false);
+        File f= new File ("/home/chris/git/sportlink/scripts/scala/example/ProcessQueryMatchTeamMembers.scala");
+        instance.addScalaDependencies(f);
+        
+        
     }
 }
