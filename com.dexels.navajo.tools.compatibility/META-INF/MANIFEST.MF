@@ -1,0 +1,5 @@
+Export-Package: sun.misc
+Fragment-Host: system.bundle; extension:=framework
+Bundle-SymbolicName: com.dexels.navajo.tools.compatibility
+Bundle-ManifestVersion: 2
+Manifest-Version: 1.0

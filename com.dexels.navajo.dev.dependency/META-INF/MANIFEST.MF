@@ -23,3 +23,4 @@ Require-Bundle: org.eclipse.core.filesystem,
  org.eclipse.core.runtime;bundle-version="3.12.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: sun.misc

@@ -12,7 +12,7 @@
 		<module>../../com.dexels.navajo.tipi.swt.client</module>
 		<module>../../com.dexels.navajo.dev.script</module>
                 <module>../../com.dexels.navajo.dev.dependency</module>
-
+                <module>../../com.dexels.navajo.tools.compatibility</module>
 		<module>../</module>
 
 	</modules>
