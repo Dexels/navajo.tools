@@ -126,7 +126,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                     for (File f : files) {
                         monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
                         try {
-                            addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()));
+                            addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()), f);
                         } catch (Exception e) {
                             // Something went wrong in this file, going to try
                             // to continue
@@ -165,8 +165,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     @Override
-    public void addDependencies(String script) {
-        super.addDependencies(script);
+    public void addDependencies(String script, File scriptFile) {
+        super.addDependencies(script, scriptFile);
         List<Dependency> myDependencies = new ArrayList<Dependency>();
         if (script.startsWith("entity") && script.endsWith("entitymapping")) {
             File entityMapping = new File(rootFolder + File.separator + "scripts",script + ".xml");
@@ -354,7 +354,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 removeScriptFromReverseValues(scriptName);
                 dependencies.remove(scriptName);
                 if (filename.contains("scripts")) {
-                    addDependencies(scriptName);
+                    addDependencies(scriptName, new File(filename));
                 } else {
                     List<Dependency> myDependencies = new ArrayList<Dependency>();
                     File f = new File(filename);

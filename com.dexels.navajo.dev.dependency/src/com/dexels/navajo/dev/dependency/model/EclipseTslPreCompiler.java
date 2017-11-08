@@ -42,31 +42,30 @@ public class EclipseTslPreCompiler extends TslPreCompiler {
 
     
     @Override
-    public void getAllDependencies(String script, String scriptFolder, List<Dependency> deps, String scriptTenant)
+    public void getAllDependencies(File fullScriptPath, String scriptFolder, List<Dependency> deps, String scriptTenant)
             throws XPathExpressionException, UserException {
         
-        String fullScriptPath = scriptFolder + File.separator + script + ".xml";
         Document tslDoc = null;
         InputStream is = null;
 
         try {
             // Check for metascript.
-            if (MapMetaData.isMetaScript(fullScriptPath)) {
+            if (MapMetaData.isMetaScript(fullScriptPath.getAbsolutePath())) {
                 MapMetaData mmd = MapMetaData.getInstance();
-                FileInputStream metais = new FileInputStream(new File(fullScriptPath));
+                FileInputStream metais = new FileInputStream(fullScriptPath);
 
-                String intermed = mmd.parse(fullScriptPath, metais);
+                String intermed = mmd.parse(fullScriptPath.getAbsolutePath(), metais);
                 metais.close();
                 is = new ByteArrayInputStream(intermed.getBytes());
             } else {
-                is = new FileInputStream(new File(fullScriptPath));
+                is = new FileInputStream(fullScriptPath);
             }
 
             tslDoc = newDocumentFromInputStream(is);
-            getAllDependencies(fullScriptPath, scriptTenant, scriptFolder, deps, tslDoc);
+            getAllDependencies(fullScriptPath.getAbsolutePath(), scriptTenant, scriptFolder, deps, tslDoc);
 
         } catch (Exception e) {
-            logger.error("Exception in reading XML of {}: {}", script,e.getMessage(), e);
+            logger.error("Exception in reading XML of {}: {}", fullScriptPath.getAbsolutePath() ,e.getMessage(), e);
         }
 
     }
