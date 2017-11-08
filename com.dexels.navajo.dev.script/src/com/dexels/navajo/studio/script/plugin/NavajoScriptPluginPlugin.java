@@ -38,6 +38,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -328,7 +329,10 @@ public class NavajoScriptPluginPlugin extends AbstractUIPlugin implements Bundle
     @Override
     public void start(BundleContext context) throws Exception {
         super.start(context);
-
+        Bundle bundle = context.getBundle("com.dexels.navajo.client.impl.javanet");
+        if (bundle != null) {
+            bundle.start();
+        }
         setup();
     }
 
