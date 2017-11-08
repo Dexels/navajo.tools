@@ -19,6 +19,7 @@
 
    <requires>
       <import plugin="org.slf4j.api"/>
+      <import plugin="io.reactivex.rxjava"/>
    </requires>
 
    <plugin
@@ -245,13 +246,6 @@
          unpack="false"/>
 
    <plugin
-         id="io.reactivex.rxjava"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="io.reactivex.rxjava-joins"
          download-size="0"
          install-size="0"
@@ -291,14 +285,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.diffplug.osgi.extension.sun.misc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
          unpack="false"/>
 
 </feature>
