@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="2035">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="2039">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.feature.group" version="4.9.0.201710071750-r"/>
@@ -95,6 +95,13 @@
 <plugin id="com.springsource.org.json"/>
 <plugin id="com.vaadin"/>
 <plugin id="edtftpj.3rdpartywrap"/>
+<plugin id="io.reactivex.rxjava"/>
+<plugin id="io.reactivex.rxjava-joins"/>
+<plugin id="io.reactivex.rxjava-string"/>
+<plugin id="io.reactivex.rxjava2.rxjava"/>
+<plugin id="io.reactivex.rxnetty-common"/>
+<plugin id="io.reactivex.rxnetty-http"/>
+<plugin id="io.reactivex.rxnetty-tcp"/>
 <plugin id="javaewah"/>
 <plugin id="javax.el"/>
 <plugin id="javax.el.source"/>
