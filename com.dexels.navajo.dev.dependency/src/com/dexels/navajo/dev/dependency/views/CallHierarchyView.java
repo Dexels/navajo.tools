@@ -356,7 +356,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 // Check if this file is within one of our projects
                 for (IProject p : allProjects) {
                     IPath path = ((IFile) selectedObject).getProjectRelativePath();
-                    if (!path.toOSString().contains("xml")) {
+                    if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
                         return;
                     }
 
@@ -499,7 +499,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 }
 
                 IPath path = fileInput.getFile().getProjectRelativePath();
-                if (!path.toOSString().contains("xml")) {
+                if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
                     return;
                 }
                 String filePath = fileInput.getFile().getLocation().toOSString();
@@ -540,7 +540,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             
 
             String filePath = res.getLocation().toFile().getAbsolutePath();
-            if (!filePath.contains("xml")) {
+            if (! (filePath.contains(".xml") || filePath.contains("scala") ) ) {
                 return true;
             }
             
