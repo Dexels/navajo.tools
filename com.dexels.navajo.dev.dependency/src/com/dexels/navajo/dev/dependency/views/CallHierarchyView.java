@@ -348,31 +348,46 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-        if (sourcepart != CallHierarchyView.this && selection instanceof IStructuredSelection) {
-            Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
-            List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
-            
-            if (selectedObject instanceof IFile) {
-                // Check if this file is within one of our projects
-                for (IProject p : allProjects) {
-                    IPath path = ((IFile) selectedObject).getProjectRelativePath();
-                    if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
-                        return;
-                    }
-
-                    if (p.exists(path)) {
-                        String filePath = ((IFile) selectedObject).getLocation().toOSString();
-                        if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
-                            updateRoot(new TreeParent(filePath, 0));
-                            
-                        }
-                        return;
-                    }
+    		if (sourcepart == CallHierarchyView.this) {
+    			return;
+    		}
+    		Object selectedObject = null;
+    		if (selection instanceof IStructuredSelection) {
+            selectedObject = ((IStructuredSelection) selection).getFirstElement();
+        } else if (selection instanceof IEditorPart) {
+        	
+	        	IEditorInput editorInput = ((IEditorPart) selection).getEditorInput();
+	        	if (editorInput instanceof FileEditorInput) {
+	        		selectedObject = ((FileEditorInput) editorInput).getFile();
+	        	}
+        } 
+    		if (selectedObject == null) {
+    			return;
+    		}
+        
+        List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
+        
+        if (selectedObject instanceof IFile) {
+            // Check if this file is within one of our projects
+            for (IProject p : allProjects) {
+                IPath path = ((IFile) selectedObject).getProjectRelativePath();
+                if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
+                    return;
                 }
-            } else if (selectedObject instanceof IFolder) {
-                //updateRoot(viewProvider.getAbsoluteRoot());
+
+                if (p.exists(path)) {
+                    String filePath = ((IFile) selectedObject).getLocation().toOSString();
+                    if (viewProvider.getRoot() == null || !viewProvider.getRoot().getFilePath().equals(filePath)) {
+                        updateRoot(new TreeParent(filePath, 0));
+                        
+                    }
+                    return;
+                }
             }
+        } else if (selectedObject instanceof IFolder) {
+            //updateRoot(viewProvider.getAbsoluteRoot());
         }
+    
     }
     
     protected void updateRoot() {
