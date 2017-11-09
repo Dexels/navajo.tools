@@ -351,4 +351,11 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="io.netty.transport-native-epoll"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
