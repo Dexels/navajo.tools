@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2279">
+<?pde version="3.8"?><target name="Eclipse Run Navajo Repo" sequenceNumber="2283">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.swt.dummyfragments.feature.group" version="1.0.0.v20160907-0248"/>
@@ -84,8 +84,8 @@
 <plugin id="com.ibm.icu" version="58.2.0.v20170418-1837"/>
 <plugin id="com.ibm.icu.source"/>
 <plugin id="com.jcraft.jsch" version="0.1.53.v201508180515"/>
-<plugin id="com.jcraft.jsch.source" version="0.1.54.v20170116-1932"/>
 <plugin id="com.jcraft.jsch.source" version="0.1.53.v201508180515"/>
+<plugin id="com.jcraft.jsch.source" version="0.1.54.v20170116-1932"/>
 <plugin id="com.mysql.jdbc"/>
 <plugin id="com.oracle.jdbc.driver"/>
 <plugin id="com.springsource.javax.transaction"/>
@@ -196,6 +196,8 @@
 <plugin id="org.apache.xbean.bundleutils"/>
 <plugin id="org.apache.xbean.finder"/>
 <plugin id="org.apache.xerces" version="2.9.0.v201101211617"/>
+<plugin id="org.apache.xml.resolver"/>
+<plugin id="org.apache.xml.serializer"/>
 <plugin id="org.eclipse.ant.core" version="3.5.0.v20170509-2149"/>
 <plugin id="org.eclipse.ant.core.source"/>
 <plugin id="org.eclipse.ant.launching" version="1.2.0.v20170509-2157"/>
@@ -230,7 +232,7 @@
 <plugin id="org.eclipse.core.net.source"/>
 <plugin id="org.eclipse.core.resources" version="3.12.0.v20170417-1558"/>
 <plugin id="org.eclipse.core.resources.source"/>
-<plugin id="org.eclipse.core.runtime" version="3.12.0.v20160606-1342"/>
+<plugin id="org.eclipse.core.runtime" version="3.13.0.v20170207-1030"/>
 <plugin id="org.eclipse.core.runtime.source"/>
 <plugin id="org.eclipse.core.variables" version="3.4.0.v20170113-2056"/>
 <plugin id="org.eclipse.core.variables.source"/>
@@ -563,11 +565,10 @@
 <plugin id="org.junit" version="4.12.0.v201504281640"/>
 <plugin id="org.junit.source"/>
 <plugin id="org.mongodb.mongo-java-driver"/>
-<plugin id="org.objectweb.asm" version="5.0.3"/>
-<plugin id="org.objectweb.asm.commons" version="5.0.3"/>
+<plugin id="org.objectweb.asm" version="5.2.0.v20170126-0011"/>
 <plugin id="org.objectweb.asm.commons" version="5.2.0.v20170126-0011"/>
 <plugin id="org.objectweb.asm.source"/>
-<plugin id="org.objectweb.asm.tree" version="5.0.3"/>
+<plugin id="org.objectweb.asm.tree" version="5.2.0.v20170126-0011"/>
 <plugin id="org.objectweb.asm.tree.source"/>
 <plugin id="org.ops4j.base"/>
 <plugin id="org.ops4j.base.io"/>
@@ -622,6 +623,7 @@
 <plugin id="org.w3c.dom.svg" version="1.1.0.v201011041433"/>
 <plugin id="org.w3c.dom.svg.source"/>
 <plugin id="rssutils.3rdpartywrap"/>
+<plugin id="slf4j.api"/>
 <plugin id="slf4j.simple"/>
 <plugin id="tidy.3rdpartywrap"/>
 <plugin id="wsdl4j.3rdpartywrap"/>
