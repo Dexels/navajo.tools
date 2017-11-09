@@ -29,10 +29,13 @@ public class TreeObject implements IAdaptable {
 		this.isBroken = isBroken;
 		
 		this.type = type;
-		if (!filePath.equals(scriptName) && filePath.indexOf(".xml") > 0) {
-			scriptName = getScriptFromFilename(filePath);
+		if (!filePath.equals(scriptName)) {
+			if (filePath.endsWith(".xml") || filePath.endsWith(".scala") ) {
+				scriptName = getScriptFromFilename(filePath);
+			
+			}
+				
 		}
-
 	}
 
 	/**
