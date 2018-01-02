@@ -41,10 +41,11 @@ public class CodeSearch {
     }
 
     public void addProjectDependencies(IProject project, List<Dependency> deps,String scriptFolder, IProgressMonitor monitor) {
-        IFolder s = project.getFolder("tipi");
-        if ( s.exists()) { 
+        IFolder tipisrc = project.getFolder("tipi");
+        IFolder src = project.getFolder("src");
+        if ( tipisrc.exists()) { 
            
-            File tipiDir = s.getRawLocation().makeAbsolute().toFile();
+            File tipiDir = tipisrc.getRawLocation().makeAbsolute().toFile();
             int nrFiles = countFiles(tipiDir);
             IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
             for (File dirEntry : tipiDir.listFiles()) {
@@ -55,10 +56,26 @@ public class CodeSearch {
                     searchTipiFile(dirEntry, deps, scriptFolder);
                     submonitor.worked(1);
                 } else if (dirEntry.isDirectory()) {
-                    searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, submonitor);
+                    searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, true, submonitor);
                 }
             }
+        } else if (src.exists()) {
+            // Navajo client project?
             
+            File srcDir = src.getRawLocation().makeAbsolute().toFile();
+            int nrFiles = countFiles(srcDir);
+            IProgressMonitor submonitor = new SubProgressMonitor(monitor, nrFiles);
+            for (File dirEntry : srcDir.listFiles()) {
+                if (submonitor.isCanceled()) {
+                    return;
+                }
+                if (dirEntry.isFile()) {
+                    searchJavaFile(dirEntry, deps, scriptFolder);
+                    submonitor.worked(1);
+                } else if (dirEntry.isDirectory()) {
+                    searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, false, submonitor);
+                }
+            }
             
         }
     }
@@ -115,16 +132,20 @@ public class CodeSearch {
     }
     
     
-    private void searchExternalProjectScriptDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, IProgressMonitor monitor) {
+    private void searchExternalProjectScriptDependenciesInDir(File directory, List<Dependency> deps, String scriptFolder, boolean isTipi, IProgressMonitor monitor) {
         for (File dirEntry : directory.listFiles()) {
             if (monitor.isCanceled()) {
                 return;
             }
             if (dirEntry.isFile()) {
-                searchTipiFile(dirEntry, deps, scriptFolder);
+                if (isTipi) {
+                    searchTipiFile(dirEntry, deps, scriptFolder);
+                } else {
+                    searchJavaFile(dirEntry, deps, scriptFolder);
+                }
                 monitor.worked(1);
             } else if (dirEntry.isDirectory()) {
-                searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, monitor);
+                searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, isTipi, monitor);
             }
         }
     }
@@ -226,6 +247,53 @@ public class CodeSearch {
             System.err.println("Error on reading taskfile ! " + e);
             e.printStackTrace();
         }
+    }
+    
+    public void searchJavaFile(File javaFile, List<Dependency> deps, String scriptFolder) {
+        String line;
+        int linenr = 0;
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(javaFile));
+
+            Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+            Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);            
+            
+            while ((line = bf.readLine()) != null) {
+                Matcher m = p1.matcher(line);
+                linenr++;
+                while (m.find()) {
+                    String scriptName = m.group(3);
+ 
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                   
+                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                }
+                m = p2.matcher(line);
+                while (m.find()) {
+                    String scriptName = m.group(3);
+                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
+
+                    // Check if exists
+                    boolean isBroken = false;
+                    if (!new File(scriptFullPath).exists()) {
+                        isBroken = true;
+                    }
+                   
+
+                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                }
+            }
+            bf.close();
+
+        } catch (IOException e) {
+            System.err.println("EXCEPTION! " + e);
+            e.printStackTrace();
+        } 
     }
     
     public void searchTipiFile(File tipiFile, List<Dependency> deps, String scriptFolder) {
@@ -353,21 +421,38 @@ public class CodeSearch {
     }
     
     public static void main(String[] args) {
-        String line = "<property name=\"entity\" value=\"common\binary\" ";
-        Pattern p1 = Pattern.compile("<property(?=.*name=\"entity\")(?=.*value=\"([a-zA-Z0-9/]*))");
-            
-        Matcher m = p1.matcher(line);
-        while (m.find()) {
-            String entityName = m.group(1);
-            String scriptFullPath = "/home/chris/scripts" + File.separator + "entity" + File.separator + entityName + ".xml";
-            // Check if exists
-            boolean isBroken = false;
-            if (!new File(scriptFullPath).exists()) {
-                isBroken = true;
-            }
-            System.out.println("found dep from fake to " + scriptFullPath );
-        }
+//        String line = "<property name=\"entity\" value=\"common\binary\" ";
+//        Pattern p1 = Pattern.compile("<property(?=.*name=\"entity\")(?=.*value=\"([a-zA-Z0-9/]*))");
+//            
+//        Matcher m = p1.matcher(line);
+//        while (m.find()) {
+//            String entityName = m.group(1);
+//            String scriptFullPath = "/home/chris/scripts" + File.separator + "entity" + File.separator + entityName + ".xml";
+//            // Check if exists
+//            boolean isBroken = false;
+//            if (!new File(scriptFullPath).exists()) {
+//                isBroken = true;
+//            }
+//            System.out.println("found dep from fake to " + scriptFullPath );
+//        }
         
+      String line = "NavajoClientFactory.getClient().doAsyncSend(loadnva, \"relations/communications/ProcessSearchOrganizations\", this, \"search\");";
+      
+      Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+      Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);
+
+      Matcher m = p2.matcher(line);
+      while (m.find()) {
+          String entityName = m.group(3);
+          String scriptFullPath = "/home/chris/scripts" + File.separator + entityName + ".xml";
+          // Check if exists
+          boolean isBroken = false;
+          if (!new File(scriptFullPath).exists()) {
+              isBroken = true;
+          }
+          System.out.println("found dep from fake to " + scriptFullPath );
+      }
+  
     }
 
     public void addScalaDependencies(File f, List<Dependency> deps, String scriptFolder) {

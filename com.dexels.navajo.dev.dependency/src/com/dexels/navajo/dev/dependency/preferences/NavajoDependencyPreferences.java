@@ -33,7 +33,8 @@ public class NavajoDependencyPreferences {
         List<IProject> result = new ArrayList<IProject>();
 
         for (String projectName : projects) {
-            result.add(getProjectNamed(projectName));
+            IProject proj = getProjectNamed(projectName);
+            if (proj != null) result.add(proj);
         }
         return result;
     }
