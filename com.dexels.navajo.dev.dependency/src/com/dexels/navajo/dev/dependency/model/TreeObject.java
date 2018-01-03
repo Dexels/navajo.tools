@@ -52,6 +52,8 @@ public class TreeObject implements IAdaptable {
                 scriptFilePath = filename.split("workflows")[1];
             } else if (filename.indexOf("tipi") > 0) {
                 scriptFilePath = filename.split("tipi")[1];
+            } else if (filename.indexOf("src") > 0 && filename.endsWith(".java")) {
+                scriptFilePath = filename.split("src")[1];
             } else if (filename.indexOf("article") > 0) {
                 scriptFilePath = filename.split("article")[1];
             } else if (filename.indexOf("scripts") > 0) {
@@ -63,7 +65,6 @@ public class TreeObject implements IAdaptable {
                 String[] filenameParts = filename.split(pattern);
                 String tenant = filenameParts[filenameParts.length - 3];
                 scriptFilePath = File.separator + tenant + File.separator + "tasks.xml";
-
             } else {
                 return "";
             }
