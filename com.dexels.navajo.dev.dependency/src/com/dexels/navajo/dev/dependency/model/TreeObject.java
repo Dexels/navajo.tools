@@ -12,7 +12,8 @@ import com.dexels.navajo.dependency.Dependency;
 
 public class TreeObject implements IAdaptable {
     private final static Logger logger = LoggerFactory.getLogger(TreeObject.class);
-    
+    private final static String[] extensions = {".xml", ".scala", ".java"};
+
     // By default, the direction is determined by the viewprovider
     private Boolean backwardNode = null;
     private Boolean forwardNode = null;
@@ -30,11 +31,12 @@ public class TreeObject implements IAdaptable {
 		
 		this.type = type;
 		if (!filePath.equals(scriptName)) {
-			if (filePath.endsWith(".xml") || filePath.endsWith(".scala") ) {
-				scriptName = getScriptFromFilename(filePath);
-			
-			}
-				
+		    for (String ext : extensions) {
+		        if (filePath.endsWith(ext)) {
+		            scriptName = getScriptFromFilename(filePath);
+		            break;
+		        }
+		    }	
 		}
 	}
 

@@ -45,6 +45,7 @@ import com.dexels.navajo.dev.dependency.preferences.NavajoDependencyPreferences;
 
 public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private final static Logger logger = LoggerFactory.getLogger(CallHierarchyView.class);
+    private final static String[] extensions = {".xml", ".scala", ".java"};
 
     /**
      * The ID of the view as specified by the extension.
@@ -371,7 +372,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             // Check if this file is within one of our projects
             for (IProject p : allProjects) {
                 IPath path = ((IFile) selectedObject).getProjectRelativePath();
-                if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
+                boolean supported = false;
+                for (String ext : extensions) {
+                    if (path.toOSString().contains(ext)) {
+                        supported = true;
+                        break;
+                    }
+                }
+                
+                if (! supported) {
                     return;
                 }
 
@@ -514,7 +523,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 }
 
                 IPath path = fileInput.getFile().getProjectRelativePath();
-                if (! (path.toOSString().contains(".xml") || path.toOSString().contains("scala") ) ) {
+                boolean supported = false;
+                for (String ext : extensions) {
+                    if (path.toOSString().contains(ext)) {
+                        supported = true;
+                        break;
+                    }
+                }
+                
+                if (! supported) {
                     return;
                 }
                 String filePath = fileInput.getFile().getLocation().toOSString();
@@ -555,7 +572,15 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
             
 
             String filePath = res.getLocation().toFile().getAbsolutePath();
-            if (! (filePath.contains(".xml") || filePath.contains("scala") ) ) {
+            boolean supported = false;
+            for (String ext : extensions) {
+                if (filePath.contains(ext)) {
+                    supported = true;
+                    break;
+                }
+            }
+            
+            if (! supported) {
                 return true;
             }
             
