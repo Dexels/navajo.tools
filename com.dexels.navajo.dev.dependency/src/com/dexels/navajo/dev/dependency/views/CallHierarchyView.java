@@ -349,22 +349,21 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
     @Override
     public void selectionChanged(IWorkbenchPart sourcepart, ISelection selection) {
-    		if (sourcepart == CallHierarchyView.this) {
-    			return;
-    		}
-    		Object selectedObject = null;
-    		if (selection instanceof IStructuredSelection) {
+		if (sourcepart == CallHierarchyView.this) {
+			return;
+		}
+		Object selectedObject = null;
+		if (selection instanceof IStructuredSelection) {
             selectedObject = ((IStructuredSelection) selection).getFirstElement();
         } else if (selection instanceof IEditorPart) {
-        	
-	        	IEditorInput editorInput = ((IEditorPart) selection).getEditorInput();
-	        	if (editorInput instanceof FileEditorInput) {
-	        		selectedObject = ((FileEditorInput) editorInput).getFile();
-	        	}
+        	IEditorInput editorInput = ((IEditorPart) selection).getEditorInput();
+        	if (editorInput instanceof FileEditorInput) {
+        		selectedObject = ((FileEditorInput) editorInput).getFile();
+        	}
         } 
-    		if (selectedObject == null) {
-    			return;
-    		}
+		if (selectedObject == null) {
+			return;
+		}
         
         List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
         
