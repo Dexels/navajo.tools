@@ -255,8 +255,8 @@ public class CodeSearch {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(javaFile));
 
-            Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
-            Pattern p2 = Pattern.compile("doAsyncSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);            
+            Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(\\s*([^\"]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+            Pattern p2 = Pattern.compile("doAsyncSend\\(\\s*([^\"]*,\\s*)?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);            
             
             while ((line = bf.readLine()) != null) {
                 Matcher m = p1.matcher(line);
@@ -436,9 +436,9 @@ public class CodeSearch {
 //            System.out.println("found dep from fake to " + scriptFullPath );
 //        }
         
-      String line = "myLoadMsg = NavajoClientFactory.getClient().doSimpleSend(abc ,\"course/ProcessQueryActivity\", \"ActivityUpdateData\" );";
+      String line = "   Message init = NavajoClientFactory.getClient().doSimpleSend(abc, \"activities/InitUpdateActivity\", \"ActivityUpdateContext\" );";
       
-      Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+      Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(\\s*([^\"]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
 //      Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);
 
       Matcher m = p1.matcher(line);
