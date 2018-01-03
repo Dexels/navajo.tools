@@ -255,14 +255,14 @@ public class CodeSearch {
         try {
             BufferedReader bf = new BufferedReader(new FileReader(javaFile));
 
-            Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
-            Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);            
+            Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+            Pattern p2 = Pattern.compile("doAsyncSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);            
             
             while ((line = bf.readLine()) != null) {
                 Matcher m = p1.matcher(line);
                 linenr++;
                 while (m.find()) {
-                    String scriptName = m.group(3);
+                    String scriptName = m.group(2);
  
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
                     // Check if exists
@@ -275,7 +275,7 @@ public class CodeSearch {
                 }
                 m = p2.matcher(line);
                 while (m.find()) {
-                    String scriptName = m.group(3);
+                    String scriptName = m.group(2);
                     String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
 
                     // Check if exists
@@ -436,14 +436,14 @@ public class CodeSearch {
 //            System.out.println("found dep from fake to " + scriptFullPath );
 //        }
         
-      String line = "NavajoClientFactory.getClient().doAsyncSend(loadnva, \"relations/communications/ProcessSearchOrganizations\", this, \"search\");";
+      String line = "myLoadMsg = NavajoClientFactory.getClient().doSimpleSend(abc ,\"course/ProcessQueryActivity\", \"ActivityUpdateData\" );";
       
-      Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
-      Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);
+      Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(([^,]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
+//      Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);
 
-      Matcher m = p2.matcher(line);
+      Matcher m = p1.matcher(line);
       while (m.find()) {
-          String entityName = m.group(3);
+          String entityName = m.group(2);
           String scriptFullPath = "/home/chris/scripts" + File.separator + entityName + ".xml";
           // Check if exists
           boolean isBroken = false;
