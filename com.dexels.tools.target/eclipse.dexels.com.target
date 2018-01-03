@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="2066">
+<?pde version="3.8"?><target name="Eclipse Navajo Repo" sequenceNumber="2074">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.swt.dummyfragments.feature.group" version="1.0.0.v20160907-0248"/>
 <repository location="https://eclipseguru.github.io/missing-swt-fragments/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.thirdparty.feature.feature.group" version="1.10.21.RELEASE"/>
-<repository location="http://repo.dexels.com/eclipse/3rdparty_1.10.21"/>
+<unit id="com.dexels.thirdparty.feature.feature.group" version="1.11.10.RELEASE"/>
+<repository location="http://repo.dexels.com/eclipse/3rdparty_1.11.10"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jgit.feature.group" version="4.10.0.201712302008-r"/>
@@ -16,10 +16,10 @@
 <repository location="http://download.eclipse.org/egit/updates/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201801021232"/>
-<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201801021232"/>
-<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201801021232"/>
-<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201801021232"/>
+<unit id="com.dexels.navajo.core.feature.feature.group" version="1.0.9.201801030753"/>
+<unit id="com.dexels.navajo.dev.feature.feature.group" version="2.0.7.201801030753"/>
+<unit id="com.dexels.navajo.server.feature.feature.group" version="1.0.7.201801030753"/>
+<unit id="com.dexels.navajo.tipi.feature.feature.group" version="1.1.16.201801030753"/>
 <repository location="http://repo.dexels.com/eclipse/navajo/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -52,6 +52,8 @@
 <plugin id="com.dexels.appstore.core"/>
 <plugin id="com.dexels.appstore.server"/>
 <plugin id="com.dexels.hazelcast"/>
+<plugin id="com.dexels.immutable.api"/>
+<plugin id="com.dexels.immutable.impl"/>
 <plugin id="com.dexels.logback.redis"/>
 <plugin id="com.dexels.navajo.api"/>
 <plugin id="com.dexels.navajo.authentication.api"/>
@@ -82,6 +84,7 @@
 <plugin id="com.fasterxml.jackson.dataformat.jackson-dataformat-xml"/>
 <plugin id="com.fasterxml.jackson.dataformat.jackson-dataformat-yaml"/>
 <plugin id="com.fasterxml.jackson.module.jackson-module-jaxb-annotations"/>
+<plugin id="com.github.akarnokd.rxjava2-interop"/>
 <plugin id="com.google.guava"/>
 <plugin id="com.google.inject"/>
 <plugin id="com.hazelcast"/>

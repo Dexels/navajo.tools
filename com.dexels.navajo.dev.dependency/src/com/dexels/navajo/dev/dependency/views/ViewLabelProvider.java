@@ -86,6 +86,9 @@ class ViewLabelProvider extends StyledCellLabelProvider {
             case Dependency.TIPI_DEPENDENCY:
                 res = tipiDep;
                 break;
+            case Dependency.JAVA_DEPENDENCY:
+                res = tipiDep;
+                break;
             case Dependency.ARTICLE_DEPENDENCY:
                 res = articleDep;
                 break;

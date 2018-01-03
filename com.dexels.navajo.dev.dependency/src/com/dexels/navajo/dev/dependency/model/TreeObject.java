@@ -159,6 +159,9 @@ public class TreeObject implements IAdaptable {
 		case Dependency.TIPI_DEPENDENCY:
             result = "Tipi";
             break;
+		case Dependency.JAVA_DEPENDENCY:
+            result = "Java";
+            break;
 		case Dependency.ARTICLE_DEPENDENCY:
             result = "Article";
             break;

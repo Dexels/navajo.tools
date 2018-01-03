@@ -271,7 +271,7 @@ public class CodeSearch {
                         isBroken = true;
                     }
                    
-                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
                 m = p2.matcher(line);
                 while (m.find()) {
@@ -285,7 +285,7 @@ public class CodeSearch {
                     }
                    
 
-                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
+                    deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
             }
             bf.close();
