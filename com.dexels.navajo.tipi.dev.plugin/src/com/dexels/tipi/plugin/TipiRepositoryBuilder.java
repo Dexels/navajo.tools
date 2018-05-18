@@ -28,8 +28,6 @@ import org.eclipse.ui.PlatformUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tipiplugin.views.TipiHelpView;
-
 import com.dexels.navajo.tipi.dev.core.projectbuilder.ClasspathBuilder;
 import com.dexels.navajo.tipi.dev.core.projectbuilder.ClientActions;
 import com.dexels.navajo.tipi.dev.core.projectbuilder.LocalJnlpBuilder;
@@ -37,9 +35,9 @@ import com.dexels.navajo.tipi.dev.core.projectbuilder.ProjectBuilder;
 import com.dexels.navajo.tipi.dev.core.projectbuilder.TipiProjectBuilder;
 import com.dexels.navajo.tipi.dev.core.projectbuilder.VersionResolver;
 import com.dexels.navajo.tipi.dev.core.projectbuilder.XsdBuilder;
-import com.dexels.navajo.tipi.dev.core.projectbuilder.impl.TipiLocalJnlpProjectBuilder;
-import com.dexels.navajo.tipi.dev.core.projectbuilder.impl.TipiRemoteJnlpProjectBuilder;
 import com.dexels.navajo.tipi.dev.core.util.XMLElement;
+
+import tipiplugin.views.TipiHelpView;
 
 public class TipiRepositoryBuilder extends IncrementalProjectBuilder {
 
@@ -307,14 +305,14 @@ private void buildClassPath(IProject project, String repository, String extensio
 				String version = versionMap.get("version");
 				XMLElement extensionXml = ClientActions.getExtensionXml(ext, version, repository);
 				TipiProjectBuilder tpb = null;
-					if (onlyProxy) {
-						tpb = new TipiRemoteJnlpProjectBuilder();
-					} else {
-						tpb = new TipiLocalJnlpProjectBuilder();
-					}
+//					if (onlyProxy) {
+//						tpb = new TipiRemoteJnlpProjectBuilder();
+//					} else {
+//						tpb = new TipiLocalJnlpProjectBuilder();
+//					}
 					
-				tpb.setUseVersioning(useVersioning);
-				tpb.downloadExtensionJars(ext, version, new URL(repository+vr.resultVersionPath(token)+"/"), extensionXml, projectPath, clean,false);
+//				tpb.setUseVersioning(useVersioning);
+//				tpb.downloadExtensionJars(ext, version, new URL(repository+vr.resultVersionPath(token)+"/"), extensionXml, projectPath, clean,false);
 			} catch (IOException e) {
 				logger.error("Error: ",e);
 			}

@@ -9,9 +9,7 @@ Bundle-ClassPath: lib/catalina-ant.jar,
  lib/p200ant.jar,
  .
 Bundle-Activator: com.dexels.tipi.plugin.TipiPluginActivator
-Import-Package: com.dexels.navajo.tipi.dev.ant;version="1.0.0",
- com.dexels.navajo.tipi.dev.core.projectbuilder;version="1.0.0",
- com.dexels.navajo.tipi.dev.core.projectbuilder.impl;version="1.0.0",
+Import-Package: com.dexels.navajo.tipi.dev.core.projectbuilder;version="1.0.0",
  com.dexels.navajo.tipi.dev.core.util;version="1.0.0",
  org.apache.tools.ant,
  org.apache.tools.ant.types,
