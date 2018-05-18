@@ -373,7 +373,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 IPath path = ((IFile) selectedObject).getProjectRelativePath();
                 boolean supported = false;
                 for (String ext : extensions) {
-                    if (path.toOSString().contains(ext)) {
+                    if (path.toOSString().endsWith(ext)) {
                         supported = true;
                         break;
                     }
@@ -524,7 +524,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 IPath path = fileInput.getFile().getProjectRelativePath();
                 boolean supported = false;
                 for (String ext : extensions) {
-                    if (path.toOSString().contains(ext)) {
+                    if (path.toOSString().endsWith(ext)) {
                         supported = true;
                         break;
                     }
