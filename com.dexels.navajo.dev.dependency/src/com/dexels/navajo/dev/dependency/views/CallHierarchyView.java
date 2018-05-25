@@ -119,6 +119,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         } catch (CoreException e) {
             logger.warn("CoreException in enabling Navajo Decorator", e);
         }
+        
+        // Set derived
+        SetDerived.setDerived();
     }
 
     public void dispose() {
