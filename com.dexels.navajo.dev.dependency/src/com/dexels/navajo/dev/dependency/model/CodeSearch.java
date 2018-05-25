@@ -54,7 +54,6 @@ public class CodeSearch {
                 }
                 if (dirEntry.isFile()) {
                     searchTipiFile(dirEntry, deps, scriptFolder);
-                    submonitor.worked(1);
                 } else if (dirEntry.isDirectory()) {
                     searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, true, submonitor);
                 }
@@ -71,7 +70,6 @@ public class CodeSearch {
                 }
                 if (dirEntry.isFile()) {
                     searchJavaFile(dirEntry, deps, scriptFolder);
-                    submonitor.worked(1);
                 } else if (dirEntry.isDirectory()) {
                     searchExternalProjectScriptDependenciesInDir(dirEntry, deps, scriptFolder, false, submonitor);
                 }

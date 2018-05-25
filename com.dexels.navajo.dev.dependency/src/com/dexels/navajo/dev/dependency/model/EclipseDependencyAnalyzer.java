@@ -31,11 +31,15 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     private static class Holder {
         static final EclipseDependencyAnalyzer INSTANCE = new EclipseDependencyAnalyzer();
     }
-
+    
     public static final String INIT_JOB_NAME = "Calculating Navajo Dependencies";
+    public static final String EXT_DEPS_JOB_NAME = "Calculating External Project Dependencies";
+    
     private final static Logger logger = LoggerFactory.getLogger(EclipseDependencyAnalyzer.class);
+    
     private String rootFolder;
     private Job initializeJob;
+    private Job extProjectJob;
     private CodeSearch codeSearch;
     private boolean initialized = false;
 
@@ -43,6 +47,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     protected Map<String, Map<String, List<Dependency>>> reverseExternaldependencies;
 
     private Object externalLock = new Object();
+    private Object externalProjLock = new Object();
 
     public EclipseDependencyAnalyzer() {
         precompiler = new EclipseTslPreCompiler();
@@ -100,67 +105,108 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 callback.triggerTreeRefresh();
             }
         });
+        
+        extProjectJob = createExternalDepJob();
+        extProjectJob.setPriority(Job.BUILD);
+        extProjectJob.schedule(JOB_START_DELAY);
+        extProjectJob.addJobChangeListener(new JobChangeAdapter() {
+            @Override
+            public void done(IJobChangeEvent arg0) {
+                callback.triggerTreeRefresh();
+            }
+        });
     }
+    
+	private Job createExternalDepJob() {
+		return new Job(EXT_DEPS_JOB_NAME) {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				scriptFolder = rootFolder + "scripts";
+
+				try {
+			        NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
+					List<IProject> tipiProjects = pref.getTipiProjects();
+					monitor.beginTask("Calculating external project dependencies", tipiProjects.size());
+
+					addExternalProjectDependencies(monitor);
+
+					if (monitor.isCanceled()) {
+						return Status.CANCEL_STATUS;
+					}
+
+				} finally {
+					monitor.done();
+					extProjectJob = null;
+				}
+				
+				return Status.OK_STATUS;
+
+			}
+		};
+	}
 
     private Job createJob() {
 
         return new Job(INIT_JOB_NAME) {
 
             @Override
-            protected IStatus run(IProgressMonitor monitor) {
-                scriptFolder = rootFolder + "scripts";
+			protected IStatus run(IProgressMonitor monitor) {
 
-                // We missed changes, so re-read all files
-                String[] xmlExt = { "xml" , };
-                Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
-                
-                String[] scalaExt = { "scala" , };
-                Collection<File> scalaFiles = FileUtils.listFiles(new File(scriptFolder), scalaExt, true);
+				scriptFolder = rootFolder + "scripts";
 
-                Collection<File> workflowFiles = FileUtils.listFiles(new File(rootFolder + "workflows"), xmlExt, true);
+				// We missed changes, so re-read all files
+				String[] xmlExt = { "xml", };
+				Collection<File> files = FileUtils.listFiles(new File(scriptFolder), xmlExt, true);
 
-                try {
+				String[] scalaExt = { "scala", };
+				Collection<File> scalaFiles = FileUtils.listFiles(new File(scriptFolder), scalaExt, true);
 
-                    monitor.beginTask("Calculating Navajo dependencies", files.size() + scalaFiles.size() + workflowFiles.size());
+				Collection<File> workflowFiles = FileUtils.listFiles(new File(rootFolder + "workflows"), xmlExt, true);
 
-                    for (File f : files) {
-                        monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
-                        try {
-                            addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()), f);
-                        } catch (Exception e) {
-                            // Something went wrong in this file, going to try
-                            // to continue
-                            logger.error("Exception in getting dependencies of {}: {}", f.getAbsolutePath(), e);
-                        }
-                        monitor.worked(1);
+				try {
 
-                        if (monitor.isCanceled()) {
-                            return Status.CANCEL_STATUS;
-                        }
-                    }
-                    for (File f : scalaFiles) {
-                        addScalaDependencies(f);
-                        monitor.worked(1);
-                    }
-                    addWorkflowDependencies(scriptFolder, monitor);
-                    addArticleDependencies(scriptFolder, monitor);
-                    addTasksDependencies(scriptFolder, monitor);
-                    addExternalProjectDependencies(monitor);
+					monitor.beginTask("Calculating Navajo dependencies",
+							files.size() + scalaFiles.size() + workflowFiles.size());
 
-                    if (monitor.isCanceled()) {
-                        return Status.CANCEL_STATUS;
-                    }
+					for (File f : files) {
+						monitor.subTask(" Calculating dependencies of: " + f.getAbsolutePath());
+						try {
+							addDependencies(TreeObject.getScriptFromFilename(f.getAbsolutePath()), f);
+						} catch (Exception e) {
+							// Something went wrong in this file, going to try
+							// to continue
+							logger.error("Exception in getting dependencies of {}: {}", f.getAbsolutePath(), e);
+						}
+						monitor.worked(1);
 
-                    initialized = true;
-                } finally {
-                    monitor.done();
-                    if (!initialized) {
-                        initializeJob = null;
-                    }
-                }
+						if (monitor.isCanceled()) {
+							return Status.CANCEL_STATUS;
+						}
+					}
+					for (File f : scalaFiles) {
+						addScalaDependencies(f);
+						monitor.worked(1);
+					}
+					addWorkflowDependencies(scriptFolder, monitor);
+					addArticleDependencies(scriptFolder, monitor);
+					addTasksDependencies(scriptFolder, monitor);
 
-                return Status.OK_STATUS;
-            }
+					if (monitor.isCanceled()) {
+						return Status.CANCEL_STATUS;
+					}
+
+					initialized = true;
+				} finally {
+					monitor.done();
+					if (!initialized) {
+						initializeJob = null;
+					}
+				}
+
+				return Status.OK_STATUS;
+
+			}
         };
     }
 
@@ -297,7 +343,8 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     }
 
     private void addExternalProjectDependencies(IProgressMonitor monitor) {
-
+    	
+    	
         NavajoDependencyPreferences pref = NavajoDependencyPreferences.getInstance();
         List<IProject> projectsToSearch = pref.getTipiProjects();
 
@@ -307,10 +354,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             try {
                 codeSearch.addProjectDependencies(project, myDependencies, scriptFolder, monitor);
             } catch (Exception e) {
-                logger.error("Exception on getting workflow depencencies for {}: {}", e);
+                logger.error("Exception on getting project depencencies for {}", project, e);
             }
 
-            synchronized (externalLock) {
+            synchronized (externalProjLock) {
                 Map<String, List<Dependency>> projectDeps = externaldependencies.get(project.getName());
                 if (projectDeps == null) {
                     projectDeps = new HashMap<String, List<Dependency>>();
@@ -342,7 +389,7 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                 externaldependencies.put(project.getName(), projectDeps);
 
             }
-
+            monitor.worked(1);
         }
 
     }
@@ -362,7 +409,6 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
                         codeSearch.searchWorkflowFile(f, myDependencies, scriptFolder);
                     } else if (filename.contains("article")) {
                         codeSearch.searchArticleFile(f, myDependencies, scriptFolder);
-
                     } else if (filename.contains("tasks.xml")) {
                         codeSearch.searchTasksFile(f, myDependencies, scriptFolder);
                     }
@@ -388,7 +434,16 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
             } else {
                 externaldependencies.clear();
                 reverseExternaldependencies.clear();
-                addExternalProjectDependencies(new NullProgressMonitor());
+                
+                if (extProjectJob == null) {
+                	extProjectJob = createExternalDepJob();
+                    extProjectJob.setPriority(Job.BUILD);
+                    extProjectJob.schedule(JOB_START_DELAY);
+                    
+                }
+                
+                
+                //addExternalProjectDependencies(new NullProgressMonitor());
             }
         }
 
@@ -531,6 +586,9 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
     public synchronized void cancelJob() {
         if (initializeJob != null) {
             initializeJob.cancel();
+        }
+        if (extProjectJob != null) {
+        	extProjectJob.cancel();
         }
     }
     
