@@ -473,7 +473,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                         return Status.OK_STATUS;
                     }
                 };
-                changeJob.setPriority(Job.SHORT);
+                changeJob.setPriority(Job.BUILD);
                 changeJob.schedule();
                 
             }
