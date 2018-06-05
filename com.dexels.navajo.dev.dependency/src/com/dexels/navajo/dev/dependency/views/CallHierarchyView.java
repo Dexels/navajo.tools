@@ -62,6 +62,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private Action doubleClickAction;
     private Action cancelAction;
     private Action calleeHierarchy;
+    
+    // Used to prevent running multiple update jobs at the same time
+    private MutexRule changeJobMutexRule = new MutexRule();
 
     /*
      * The content provider class is responsible for providing objects to the
@@ -473,6 +476,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                         return Status.OK_STATUS;
                     }
                 };
+                changeJob.setRule(changeJobMutexRule);
                 changeJob.setPriority(Job.BUILD);
                 changeJob.schedule();
                 
