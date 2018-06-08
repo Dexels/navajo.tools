@@ -186,6 +186,10 @@ public class EclipseDependencyAnalyzer extends DependencyAnalyzer {
 					for (File f : scalaFiles) {
 						addScalaDependencies(f);
 						monitor.worked(1);
+						
+						if (monitor.isCanceled()) {
+							return Status.CANCEL_STATUS;
+						}
 					}
 					addWorkflowDependencies(scriptFolder, monitor);
 					addArticleDependencies(scriptFolder, monitor);

@@ -486,24 +486,39 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
 
               @Override
               protected IStatus run(IProgressMonitor monitor) {
-            	  // Clone maps
-            	  Map<String, IProject> updates = null;
-            	  Map<String, IProject> removes = null;
-            	  synchronized(lockScheduledChanges) {
-            		  updates = new HashMap<>(scheduledUpdates);
-                	  scheduledUpdates.clear();
-                	  removes = new HashMap<>(scheduledRemoves);
-                	  scheduledRemoves.clear();
+            	  try {
+            		// Clone maps
+                	  Map<String, IProject> updates = null;
+                	  Map<String, IProject> removes = null;
+                	  synchronized(lockScheduledChanges) {
+                		  updates = new HashMap<>(scheduledUpdates);
+                    	  scheduledUpdates.clear();
+                    	  removes = new HashMap<>(scheduledRemoves);
+                    	  scheduledRemoves.clear();
+                	  }
+                	  monitor.beginTask("Calculating Navajo dependencies", updates.size() + removes.size());
+                	  for (Entry<String, IProject> entry : updates.entrySet()) {
+                		  monitor.subTask(" Calculating dependencies of: " + entry.getKey());
+                		  viewProvider.updateResource(entry.getKey(), entry.getValue());
+                		  monitor.worked(1);
+                		  
+                		  if (monitor.isCanceled()) {
+      						return Status.CANCEL_STATUS;
+      					}
+                	  }
+                	  
+                	  for (Entry<String, IProject> entry : removes.entrySet()) {
+                		  monitor.subTask(" Updating removed dependencies of: " + entry.getKey());
+                		  viewProvider.updateResource(entry.getKey(), entry.getValue());
+                		  monitor.worked(1);
+                		  
+                		  if (monitor.isCanceled()) {
+      						return Status.CANCEL_STATUS;
+      					}
+                	  }
+            	  } finally {
+            		  monitor.done();
             	  }
-            	  
-            	  for (Entry<String, IProject> entry : updates.entrySet()) {
-            		  viewProvider.updateResource(entry.getKey(), entry.getValue());
-            	  }
-            	  
-            	  for (Entry<String, IProject> entry : removes.entrySet()) {
-            		  viewProvider.updateResource(entry.getKey(), entry.getValue());
-            	  }
-                  
                   return Status.OK_STATUS;
               }
           };
