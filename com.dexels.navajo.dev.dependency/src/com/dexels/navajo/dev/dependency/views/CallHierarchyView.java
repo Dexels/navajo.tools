@@ -1,7 +1,11 @@
 package com.dexels.navajo.dev.dependency.views;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
@@ -62,6 +66,11 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
     private Action doubleClickAction;
     private Action cancelAction;
     private Action calleeHierarchy;
+    
+    // Change detection maps
+	private Map<String, IProject> scheduledUpdates;  // path -> IProject
+	private Map<String, IProject> scheduledRemoves;  // path -> IProject
+	private Object lockScheduledChanges = new Object();
     
     // Used to prevent running multiple update jobs at the same time
     private MutexRule changeJobMutexRule = new MutexRule();
@@ -154,6 +163,9 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         viewer.setContentProvider(viewProvider);
         viewer.setComparator(new NameSorter());
         viewer.setInput(getViewSite());
+        
+        scheduledUpdates = new ConcurrentHashMap<>();
+        scheduledRemoves = new ConcurrentHashMap<>();
 
         // Create the help context id for the viewer's control
         PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "com.dexels.navajo.dev.dependency.viewer");
@@ -455,7 +467,6 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
         public void resourceChanged(final IResourceChangeEvent event) {
             // Check if any of the change event are a project I am interested in. If so, 
             // handle the update using a DeltaUpdater in a separate job.
-            
             List<IProject> allProjects = NavajoDependencyPreferences.getInstance().getAllProjects();
             IResourceDelta delta = event.getDelta();
             for (final IProject p : allProjects) {
@@ -463,26 +474,42 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 if (projectDelta == null) {
                     continue;
                 }
-                
-                Job changeJob = new Job("Updating dependencies for " + p.getName()) {
+                try {
+                    projectDelta.accept(new DeltaUpdater());
+                } catch (CoreException e) {
+                    logger.warn("CoreException in calculating changed dependencies for {}", p.getName(), e);
+                }
 
-                    @Override
-                    protected IStatus run(IProgressMonitor monitor) {
-                        try {
-                            projectDelta.accept(new DeltaUpdater());
-                        } catch (CoreException e) {
-                            logger.warn("CoreException in calculating changed dependencies for {}", p.getName(), e);
-                        }
-                        return Status.OK_STATUS;
-                    }
-                };
-                changeJob.setRule(changeJobMutexRule);
-                changeJob.setPriority(Job.BUILD);
-                changeJob.schedule();
-                
             }
            
-          
+          Job changeJob = new Job("Updating dependencies") {
+
+              @Override
+              protected IStatus run(IProgressMonitor monitor) {
+            	  // Clone maps
+            	  Map<String, IProject> updates = null;
+            	  Map<String, IProject> removes = null;
+            	  synchronized(lockScheduledChanges) {
+            		  updates = new HashMap<>(scheduledUpdates);
+                	  scheduledUpdates.clear();
+                	  removes = new HashMap<>(scheduledRemoves);
+                	  scheduledRemoves.clear();
+            	  }
+            	  
+            	  for (Entry<String, IProject> entry : updates.entrySet()) {
+            		  viewProvider.updateResource(entry.getKey(), entry.getValue());
+            	  }
+            	  
+            	  for (Entry<String, IProject> entry : removes.entrySet()) {
+            		  viewProvider.updateResource(entry.getKey(), entry.getValue());
+            	  }
+                  
+                  return Status.OK_STATUS;
+              }
+          };
+          changeJob.setRule(changeJobMutexRule);
+          changeJob.setPriority(Job.BUILD);
+          changeJob.schedule();
         }
 
         @Override
@@ -590,30 +617,21 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 return true;
             }
             
-
-            switch (delta.getKind()) {
-            case IResourceDelta.ADDED:
-                viewProvider.updateResource(filePath, project);
-                refreshRoot();
-                break;
-            case IResourceDelta.REMOVED:
-                viewProvider.removeResource(filePath, project);
-                refreshRoot();
-                break;
-            case IResourceDelta.CHANGED:
-                viewProvider.updateResource(filePath, project);
-                refreshRoot();
-                break;
+            synchronized(lockScheduledChanges) {
+	            switch (delta.getKind()) {
+		            case IResourceDelta.ADDED:
+		            	scheduledUpdates.put(filePath, project);
+		                break;
+		            case IResourceDelta.REMOVED:
+		            	scheduledRemoves.put(filePath, project);
+		                break;
+		            case IResourceDelta.CHANGED:
+		            	scheduledUpdates.put(filePath, project);
+		                break;
+		            }
             }
             return true;
-            
         }
-
-        private void refreshRoot() {
-            resetNavajoDependencyDecorator();
-            updateRoot();
-        }
-
     }
 
     @Override
