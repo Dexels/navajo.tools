@@ -167,27 +167,18 @@ public class CodeSearch {
                         continue;
                     }
 
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr, isBroken));
+                    
                 }
 
                 m = p2.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(1);
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
-                   
-
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+                    
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr, isBroken));
                 }
             }
@@ -212,26 +203,17 @@ public class CodeSearch {
                 linenr++;
                 while (m.find()) {
                     String scriptName = m.group(1);
-
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+                    
                     deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
                 }
                 
                 m = p2.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(1);
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
                    
                     // Should this be the other way around? Since this is really a trigger for a task, rather than a result of
                     deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
@@ -261,28 +243,17 @@ public class CodeSearch {
                 linenr++;
                 while (m.find()) {
                     String scriptName = m.group(2);
- 
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
-                   
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+                    
                     deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
                 m = p2.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(2);
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
-                   
-
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+ 
                     deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
             }
@@ -310,28 +281,17 @@ public class CodeSearch {
                     if (scriptName.indexOf(':') > 0) {
                         continue;
                     }
-
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
                    
                     deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
                 }
                 m = p2.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(2);
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
-                   
-
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+                    
                     deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
                 }
             }
@@ -356,12 +316,9 @@ public class CodeSearch {
                 Matcher m = p1.matcher(line);
                 while (m.find()) {
                     String scriptName = m.group(1);
-                    String scriptFullPath = scriptFolder + File.separator + scriptName + ".xml";
-                    // Check if exists
-                    boolean isBroken = false;
-                    if (!new File(scriptFullPath).exists()) {
-                        isBroken = true;
-                    }
+                    String scriptFullPath = resolveScript(scriptFolder, scriptName);
+                    boolean isBroken = new File(scriptFullPath).exists();
+
                     deps.add(new Dependency(articleFile.getAbsolutePath(), scriptFullPath, Dependency.ARTICLE_DEPENDENCY, linenr, isBroken));
                 }
             }
@@ -466,22 +423,10 @@ public class CodeSearch {
                 
                 Matcher m = p1.matcher(line);
                 while (m.find()) {
-                    String script = m.group(1);
-                    String scriptPath = scriptFolder + File.separator + script;
-                    String scriptFullPath = scriptPath + ".xml";
-                    
-                   
-                    boolean isBroken = true;
-                    if (new File(scriptFullPath).exists()) {
-                        isBroken = false;
-                    }
-                    if (isBroken) {
-                        scriptFullPath = scriptPath + ".scala";
-                        if (new File(scriptFullPath).exists()) {
-                            isBroken = false;
-                        }
-                    }
-                    
+                	String script = m.group(1);
+                	String scriptFullPath = resolveScript(scriptFolder, script);
+                    boolean isBroken = new File(scriptFullPath).exists();
+
                     deps.add(new Dependency(f.getAbsolutePath(), scriptFullPath, Dependency.NAVAJO_DEPENDENCY, linenr, isBroken));
                 }
             }
@@ -492,4 +437,21 @@ public class CodeSearch {
             e.printStackTrace();
         }
     }
+    
+    private String resolveScript(String scriptFolder, String script) {
+    	 String scriptPath = scriptFolder + File.separator + script;
+         String scriptFullPathXml = scriptPath + ".xml";
+         if (new File(scriptFullPathXml).exists()) {
+             return scriptFullPathXml;
+         }
+         // Attempt scala
+         if (new File(scriptPath + ".scala").exists()) {
+             return scriptPath + ".scala";
+         }
+         // No scala version either - return default XML file
+         return scriptFullPathXml;
+        
+    }
+    
+    
 }

@@ -509,7 +509,7 @@ public class CallHierarchyView extends ViewPart implements ISelectionListener {
                 	  
                 	  for (Entry<String, IProject> entry : removes.entrySet()) {
                 		  monitor.subTask(" Updating removed dependencies of: " + entry.getKey());
-                		  viewProvider.updateResource(entry.getKey(), entry.getValue());
+                		  viewProvider.removeResource(entry.getKey(), entry.getValue());
                 		  monitor.worked(1);
                 		  
                 		  if (monitor.isCanceled()) {
