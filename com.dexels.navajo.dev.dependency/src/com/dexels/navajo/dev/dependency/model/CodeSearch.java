@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -168,7 +169,7 @@ public class CodeSearch {
                     }
 
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr, isBroken));
                     
                 }
@@ -177,7 +178,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                     
                     deps.add(new Dependency(workflowFile.getAbsolutePath(), scriptFullPath, Dependency.WORKFLOW_DEPENDENCY, linenr, isBroken));
                 }
@@ -204,7 +205,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                     
                     deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
                 }
@@ -213,7 +214,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                    
                     // Should this be the other way around? Since this is really a trigger for a task, rather than a result of
                     deps.add(new Dependency(tasksFile.getAbsolutePath(), scriptFullPath, Dependency.TASK_DEPENDENCY, linenr, isBroken));
@@ -244,7 +245,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(2);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                     
                     deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
@@ -252,7 +253,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(2);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
  
                     deps.add(new Dependency(javaFile.getAbsolutePath(), scriptFullPath, Dependency.JAVA_DEPENDENCY, linenr, isBroken));
                 }
@@ -282,7 +283,7 @@ public class CodeSearch {
                         continue;
                     }
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                    
                     deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
                 }
@@ -290,7 +291,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(2);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
                     
                     deps.add(new Dependency(tipiFile.getAbsolutePath(), scriptFullPath, Dependency.TIPI_DEPENDENCY, linenr, isBroken));
                 }
@@ -317,7 +318,7 @@ public class CodeSearch {
                 while (m.find()) {
                     String scriptName = m.group(1);
                     String scriptFullPath = resolveScript(scriptFolder, scriptName);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
 
                     deps.add(new Dependency(articleFile.getAbsolutePath(), scriptFullPath, Dependency.ARTICLE_DEPENDENCY, linenr, isBroken));
                 }
@@ -391,23 +392,31 @@ public class CodeSearch {
 //            System.out.println("found dep from fake to " + scriptFullPath );
 //        }
         
-      String line = "   Message init = NavajoClientFactory.getClient().doSimpleSend(abc, \"activities/InitUpdateActivity\", \"ActivityUpdateContext\" );";
+//      String line = "   Message init = NavajoClientFactory.getClient().doSimpleSend(abc, \"activities/InitUpdateActivity\", \"ActivityUpdateContext\" );";
       
       Pattern p1 = Pattern.compile("\\b" + "doSimpleSend\\(\\s*([^\"]*,\\s*)?\"([a-zA-Z0-9/]*)\"", Pattern.CASE_INSENSITIVE);
 //      Pattern p2 = Pattern.compile("doAsyncSend\\(((.*),)?\\s?\"([a-zA-Z0-9/]*)\",", Pattern.CASE_INSENSITIVE);
 
-      Matcher m = p1.matcher(line);
-      while (m.find()) {
-          String entityName = m.group(2);
-          String scriptFullPath = "/home/chris/scripts" + File.separator + entityName + ".xml";
-          // Check if exists
-          boolean isBroken = false;
-          if (!new File(scriptFullPath).exists()) {
-              isBroken = true;
-          }
-          System.out.println("found dep from fake to " + scriptFullPath );
+//      Matcher m = p1.matcher(line);
+//      while (m.find()) {
+//          String entityName = m.group(2);
+//          String scriptFullPath = "/home/chris/scripts" + File.separator + entityName + ".xml";
+//          // Check if exists
+//          boolean isBroken = false;
+//          if (!new File(scriptFullPath).exists()) {
+//              isBroken = true;
+//          }
+//          System.out.println("found dep from fake to " + scriptFullPath );
+//      }
+      CodeSearch s = new CodeSearch();
+      File workflowFile = new File("/Users/chris/git/sportlink/workflows/common/syncaccountsmysql.xml");
+      List<Dependency> deps= new ArrayList<>();
+      String scriptFolder = "/Users/chris/git/sportlink/scripts";
+      s.searchWorkflowFile(workflowFile, deps, scriptFolder);
+      for (Dependency d : deps) {
+    	  System.out.println(d);
       }
-  
+//  
     }
 
     public void addScalaDependencies(File f, List<Dependency> deps, String scriptFolder) {
@@ -425,7 +434,7 @@ public class CodeSearch {
                 while (m.find()) {
                 	String script = m.group(1);
                 	String scriptFullPath = resolveScript(scriptFolder, script);
-                    boolean isBroken = new File(scriptFullPath).exists();
+                    boolean isBroken = !new File(scriptFullPath).exists();
 
                     deps.add(new Dependency(f.getAbsolutePath(), scriptFullPath, Dependency.NAVAJO_DEPENDENCY, linenr, isBroken));
                 }
