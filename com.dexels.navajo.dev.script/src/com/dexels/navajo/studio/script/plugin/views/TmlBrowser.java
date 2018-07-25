@@ -51,6 +51,7 @@ import org.slf4j.LoggerFactory;
 import com.dexels.navajo.client.ClientException;
 import com.dexels.navajo.client.ClientInterface;
 import com.dexels.navajo.client.NavajoClientFactory;
+import com.dexels.navajo.client.impl.activator.JavaNetNavajoClientActivator;
 import com.dexels.navajo.document.Navajo;
 import com.dexels.navajo.document.NavajoFactory;
 import com.dexels.navajo.parser.DefaultExpressionEvaluator;
@@ -280,24 +281,8 @@ public class TmlBrowser extends BaseNavajoView implements INavajoScriptListener,
         });
 
         if (NavajoClientFactory.getClient() == null) {
-            Class<ClientInterface> clazz = null;
-            try {
-                clazz = (Class<ClientInterface>) Class.forName("com.dexels.navajo.client.impl.javanet.JavaNetNavajoClientImpl");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (clazz != null) {
-                try {
-                    System.err.println("Setting " + clazz + " as default instance");
-                    ClientInterface clientInterface = clazz.newInstance();
-                    NavajoClientFactory.setDefaultClient(clientInterface);
-
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.err.println("missing client impl");
-            }
+    		// Instantiating this class should start the impl bundle, which should set the default client
+        	new JavaNetNavajoClientActivator();
 
         }
 
